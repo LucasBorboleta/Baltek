@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+		<title>Baltek</title>
+	</head>
+
+	<style>
+		.buttonGroup{
+			display:inline;
+			margin:4px;
+			padding:4px;
+			background-color:white;
+		}
+	</style>
+
+	<body onload="Baltek.init();">
+
+		<div id="Baltek_ButtonZone" style="background-color:white; color:black; margin:4px; padding:4px;">
+
+			<!-- Game -->
+			<div class="buttonGroup">
+				
+				<button id="Baltek_ButtonZone_NewGame">Nouvelle partie</button>
+
+				<select id="Baltek_ButtonZone_BlueKind"
+						onchange="Baltek.View.ButtonZone.blueKind.change();"
+						style="background-color:blue; color:white;">
+						<!-- The options are created dynamically using JavaScript -->
+				</select>
+
+				<select id="Baltek_ButtonZone_RedKind"
+						onchange="Baltek.View.ButtonZone.redKind.change();"
+						style="background-color:red; color:white;">
+						<!-- The options are created dynamically using JavaScript -->
+				</select>
+
+				<button id="Baltek_ButtonZone_KickOff">Engager</button>
+
+				<select id="Baltek_ButtonZone_UseBonus">
+					<option value="no">Utiliser mon bonus : non</option>
+					<option value="yes">Utiliser mon bonus : oui</option>
+				</select>
+
+				<button id="Baltek_ButtonZone_EndTurn">Finir mon tour</button>
+				<button id="Baltek_ButtonZone_ResumeGame">Continuer la partie</button>
+				<button id="Baltek_ButtonZone_QuitGame">Quitter la partie</button>
+			</div>
+
+			<!-- Peferences -->
+			<div class="buttonGroup">
+				<select id="Baltek_ButtonZone_Language" onchange="Baltek.View.ButtonZone.Language.change();">
+					<!-- The options are created dynamically using JavaScript -->
+				</select>
+
+				<select id="Baltek_ButtonZone_Coordinates" onchange="Baltek.View.ButtonZone.Coordinates.change();">
+					<!-- The options are created dynamically using JavaScript -->
+	        	</select>
+			</div>
+
+			<!-- Help -->
+			<div class="buttonGroup">
+	        	<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="Baltek.View.ButtonZone.rules.openWindow();"></button>
+	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="Baltek.View.ButtonZone.help.openWindow();"></button>
+	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="Baltek.View.ButtonZone.about.openWindow();"></button>
+			</div>
+		</div>
+
+		<div id="Baltek_CanvasZone" style="background-color:grey; color:black; margin:2px; padding:2px;">
+			<canvas id="Baltek_CanvasZone_Canvas" width="1200" height="500"  style="background-color:black margin:0px; padding:0px;" </canvas>
+		</div>
+
+		<div id="Baltek_DebugZone" style="background-color:lightgrey; color:black; margin:2px; padding:2px;">
+			<span>Debug zone:</span>
+
+			<button id="Baltek_DebugZone_Disable" type="button"  onclick="Baltek.View.DebugZone.disable()">Disable</button>
+			<button id="Baltek_DebugZone_Enable"  type="button"  onclick="Baltek.View.DebugZone.enable()">Enable</button>
+			<button id="Baltek_DebugZone_Hide"    type="button"  onclick="Baltek.View.DebugZone.hide()">Hide</button>
+			<button id="Baltek_DebugZone_Show"    type="button"  onclick="Baltek.View.DebugZone.show()">Show</button>
+
+			<button id="Baltek_DebugZone_Clear"  type="button"  onclick="Baltek.View.DebugZone.clearMessages()">Clear messages</button>
+			<span id="Baltek_DebugZone_Mouse" style="background-color:white;">Mouse(x,y) = (?,?)</span>
+			<p id="Baltek_DebugZone_Messages"></p>
+		</div>
+
+		<script src="Baltek.js"></script>
+	</body>
+</html>
