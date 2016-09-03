@@ -22,7 +22,7 @@ The name of the game is inspired by the sounds of "ball" (BAL) and "tactical" (T
 
 During year 2015, the rules of the game have been tested within the limited circle of my family and office colleagues. The rules have been found balanced and fun.
 
-Such tests were performed using handcrafted material (paper sheet and wooden pieces). See also <http://lucas.borboleta.blog.free.fr/>.
+Such tests were performed using handcrafted material (paper sheet and wooden pieces). See also the [pictures](http://lucas.borboleta.blog.free.fr/public/Baltek/2016-01--Baltek-Prototype-2/Diaporama.htm) from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr)
 
 Right now the rules are only written in French. I would like them to be translated in English, Esperanto and Portuguese. For such translations, I would appreciate contributions. Rules can be found in [./lang/fr](./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf) or at <http://lucas.borboleta.blog.free.fr/>.
 
