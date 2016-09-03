@@ -225,60 +225,13 @@ Baltek.View.ButtonZone.init = function(){
                                                                     [ "human", "ai1", "ai2", "ai3" ] );
 
         Baltek.View.ButtonZone.Language.init();
-        Baltek.View.ButtonZone.Coordinates.init();
+
+        Baltek.View.ButtonZone.coordinates = new Baltek.View.Selector( "Baltek_ButtonZone_Coordinates",
+                                                                        [ "no", "yes" ] );
 
         Baltek.View.ButtonZone.rules = new Baltek.View.FilerButton( "Baltek_ButtonZone_Rules" );
         Baltek.View.ButtonZone.help = new Baltek.View.FilerButton( "Baltek_ButtonZone_Help" );
         Baltek.View.ButtonZone.about = new Baltek.View.FilerButton( "Baltek_ButtonZone_About" );
-    }
-}
-///////////////////////////////////////////////////////////////////////////////
-Baltek.View.ButtonZone.Coordinates = { initCalled: false };
-
-Baltek.View.ButtonZone.Coordinates.change = function(){
-
-    if ( Baltek.View.ButtonZone.Coordinates.selector.value === Baltek.View.ButtonZone.Coordinates.noKey) {
-        Baltek.View.ButtonZone.Coordinates.showEnabled = false;
-    } else {
-        Baltek.View.ButtonZone.Coordinates.showEnabled = true;
-    }
-
-    Baltek.View.DebugZone.writeMessage( "Baltek.View.ButtonZone.Coordinates.change(): showEnabled = " +
-        Baltek.View.ButtonZone.Coordinates.showEnabled );
-}
-
-Baltek.View.ButtonZone.Coordinates.changeI18n = function(){
-
-    var noText = Baltek.View.I18n.getText( "Baltek_ButtonZone_Coordinates_no" );
-    var yesText = Baltek.View.I18n.getText( "Baltek_ButtonZone_Coordinates_yes" );
-
-    Baltek.View.ButtonZone.Coordinates.selector.innerHTML = "" ;
-
-    Baltek.View.ButtonZone.Coordinates.selector.innerHTML +=
-        "<option value=" + "\"" +  Baltek.View.ButtonZone.Coordinates.noKey + "\"" + ">" + noText + "</option>" ;
-
-    Baltek.View.ButtonZone.Coordinates.selector.innerHTML +=
-        "<option value=" + "\"" +  Baltek.View.ButtonZone.Coordinates.yesKey + "\"" + ">" + yesText + "</option>" ;
-
-    if ( Baltek.View.ButtonZone.Coordinates.showEnabled ) {
-        Baltek.View.ButtonZone.Coordinates.selector.value = Baltek.View.ButtonZone.Coordinates.yesKey;
-    } else {
-        Baltek.View.ButtonZone.Coordinates.selector.value = Baltek.View.ButtonZone.Coordinates.noKey;
-    }
-}
-
-Baltek.View.ButtonZone.Coordinates.init = function(){
-    if ( ! Baltek.View.ButtonZone.Coordinates.initCalled ) {
-        Baltek.View.ButtonZone.Coordinates.initCalled = true;
-
-        Baltek.View.ButtonZone.Coordinates.selector = document.getElementById( "Baltek_ButtonZone_Coordinates" );
-        Baltek.View.I18n.addListener(Baltek.View.ButtonZone.Coordinates.changeI18n);
-
-        Baltek.View.ButtonZone.Coordinates.noKey = "no";
-        Baltek.View.ButtonZone.Coordinates.yesKey = "yes";
-        Baltek.View.ButtonZone.Coordinates.showEnabled = false;
-
-        Baltek.View.ButtonZone.Coordinates.changeI18n();
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
