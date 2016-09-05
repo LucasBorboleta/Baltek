@@ -97,6 +97,14 @@ Baltek.View.Element.prototype.enable = function(condition){
     this.element.disabled = ( ! condition );
 }
 
+Baltek.View.Element.prototype.setBackgroundColor  = function(color){
+    this.element.style.backgroundColor = color ;
+}
+
+Baltek.View.Element.prototype.setColor = function(color){
+    this.element.style.color = color ;
+}
+
 Baltek.View.Element.prototype.show = function(condition){
     Baltek.Utils.assert( condition === true || condition === false, "Baltek.View.Element.prototype.show(): condition" );
 
@@ -358,6 +366,8 @@ Baltek.View.DebugZone.hide = function(){
 Baltek.View.DebugZone.show = function(){
     Baltek.View.DebugZone.writeMessage( "Show");
     Baltek.View.ButtonZone.newGame.show(true);
+    Baltek.View.ButtonZone.newGame.setColor( "white" );
+    Baltek.View.ButtonZone.newGame.setBackgroundColor( "blue" );
 }
 
 Baltek.View.DebugZone.writeMessage = function(text){
