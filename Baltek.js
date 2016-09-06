@@ -81,14 +81,7 @@ Baltek.View.Element.prototype.$init = function(id){
 
     this.i18nKeyPrefix = id;
     this.i18nManager = Baltek.View.I18n;
-
-    var thisSaved = this;
-    var listner = function (){ thisSaved.changeI18n(); };
-    this.i18nManager.addListener(listner);
-}
-
-Baltek.View.Element.prototype.changeI18n = function(){
-    Baltek.Utils.assert( false, "Baltek.View.Element.prototype.changeI18n(): must not be called" );
+    this.i18nManager.registerObserver(this);
 }
 
 Baltek.View.Element.prototype.enable = function(condition){
@@ -114,6 +107,11 @@ Baltek.View.Element.prototype.show = function(condition){
         this.element.style.display = "none";
     }
 }
+
+Baltek.View.Element.prototype.updateI18n = function(){
+    Baltek.Utils.assert( false, "Baltek.View.Element.prototype.updateI18n(): must not be called" );
+}
+
 //----------------------------------------------------------------------------
 Baltek.View.Button = function(id){
     this.$init(id);
@@ -125,16 +123,16 @@ Baltek.View.Button.prototype.$init = function(id){
     Baltek.View.FileButton.super.$init.call(this,id);
 
     // Finalize the construction regarding I18n.
-    this.changeI18n();
+    this.updateI18n();
 }
 
-Baltek.View.Button.prototype.changeI18n = function(){
-    this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
-}
-
-Baltek.View.Button.prototype.onclick = function(){
-    Baltek.View.DebugZone.writeMessage( "Baltek.View.Button.onclick(): " +
+Baltek.View.Button.prototype.change = function(){
+    Baltek.View.DebugZone.writeMessage( "Baltek.View.Button.change(): " +
                                         this.element.id + " clicked." );
+}
+
+Baltek.View.Button.prototype.updateI18n = function(){
+    this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
 }
 //----------------------------------------------------------------------------
 Baltek.View.FileButton = function(id){
@@ -142,11 +140,6 @@ Baltek.View.FileButton = function(id){
 };
 
 Baltek.Utils.inheritPrototype(Baltek.View.FileButton, Baltek.View.Element)
-
-Baltek.View.FileButton.prototype.changeI18n = function(){
-    this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
-    this.file = this.i18nManager.getText( this.i18nKeyPrefix + "_file" );
-}
 
 Baltek.View.FileButton.prototype.$init = function(id){
     Baltek.View.FileButton.super.$init.call(this,id);
@@ -156,7 +149,7 @@ Baltek.View.FileButton.prototype.$init = function(id){
     this.window = null;
 
     // Finalize the construction regarding I18n.
-    this.changeI18n();
+    this.updateI18n();
 }
 
 Baltek.View.FileButton.prototype.openFile = function(){
@@ -171,6 +164,11 @@ Baltek.View.FileButton.prototype.openFile = function(){
     } else {
         this.window.focus();
     }
+}
+
+Baltek.View.FileButton.prototype.updateI18n = function(){
+    this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
+    this.file = this.i18nManager.getText( this.i18nKeyPrefix + "_file" );
 }
 //----------------------------------------------------------------------------
 Baltek.View.LanguageSelector = function(id){
@@ -188,10 +186,6 @@ Baltek.View.LanguageSelector.prototype.change = function(){
     this.i18nManager.setLanguage(this.element.value);
 }
 
-Baltek.View.LanguageSelector.prototype.changeI18n = function(){
-    // Nothing to do.
-}
-
 Baltek.View.LanguageSelector.prototype.createSelectorOptions = function(){
     this.element.innerHTML = "" ;
 
@@ -206,6 +200,10 @@ Baltek.View.LanguageSelector.prototype.createSelectorOptions = function(){
     }
 
     this.element.value = this.i18nManager.getLanguage();
+}
+
+Baltek.View.LanguageSelector.prototype.updateI18n = function(){
+    // Nothing to do.
 }
 //----------------------------------------------------------------------------
 Baltek.View.Selector = function(id, values){
@@ -222,7 +220,7 @@ Baltek.View.Selector.prototype.$init = function(id, values){
     this.selection = values[0];
 
     // Finalize the construction regarding I18n.
-    this.changeI18n();
+    this.updateI18n();
 }
 
 Baltek.View.Selector.prototype.change = function(){
@@ -231,7 +229,7 @@ Baltek.View.Selector.prototype.change = function(){
                                         this.element.id + ".selection = " + this.selection);
 }
 
-Baltek.View.Selector.prototype.changeI18n = function(){
+Baltek.View.Selector.prototype.updateI18n = function(){
     this.element.innerHTML = "" ;
 
     var n = this.values.length;
@@ -393,19 +391,7 @@ Baltek.View.I18n.$init = function(){
             Baltek.View.I18n.language = Baltek.View.I18n.fallbackLanguage;
         }
 
-        Baltek.View.I18n.listners = [];
-    }
-}
-
-Baltek.View.I18n.addListener = function(listner){
-    Baltek.View.I18n.listners.push(listner);
-}
-
-Baltek.View.I18n.callListners = function(){
-    var n = Baltek.View.I18n.listners.length;
-    var i = 0;
-    for (i=0; i < n ; i++){
-        Baltek.View.I18n.listners[i]();
+        Baltek.View.I18n.observerCollection = [];
     }
 }
 
@@ -430,11 +416,23 @@ Baltek.View.I18n.getText = function(key){
     return text;
 }
 
+Baltek.View.I18n.notifyObservers = function(){
+    var n = Baltek.View.I18n.observerCollection.length;
+    var i = 0;
+    for (i=0; i < n ; i++){
+        Baltek.View.I18n.observerCollection[i].updateI18n();
+    }
+}
+
 Baltek.View.I18n.setLanguage = function(language){
     Baltek.Utils.assert( Baltek.Utils.hasValue(Baltek.View.I18n.availableLanguages, language),
                             "Baltek.View.I18n.setLanguage(): language");
     Baltek.View.I18n.language = language;
-    Baltek.View.I18n.callListners();
+    Baltek.View.I18n.notifyObservers();
+}
+
+Baltek.View.I18n.registerObserver = function(observer){
+    Baltek.View.I18n.observerCollection.push(observer);
 }
 
 Baltek.View.I18n.translations = {};
