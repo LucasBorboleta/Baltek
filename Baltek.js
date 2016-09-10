@@ -67,6 +67,29 @@ Baltek.Utils.inheritPrototype = function(childConstructor, parentConstructor){
     // statement.
     childConstructor.super = parentConstructor.prototype;
 }
+//----------------------------------------------------------------------------
+Baltek.Utils.Observable = function(){
+    this.$init();
+};
+
+Baltek.Utils.inheritPrototype(Baltek.Utils.Observable, Object);
+
+Baltek.Utils.Observable.prototype.$init = function(){
+    this.observerCollection = [];
+}
+
+Baltek.Utils.Observable.prototype.notifyObservers = function(){
+    var n = this.observerCollection.length;
+    var i = 0;
+    for (i=0; i < n ; i++){
+        this.observerCollection[i].updateFromObservable(this);
+    }
+}
+
+Baltek.Utils.Observable.prototype.registerObserver = function(observer){
+    this.observerCollection.push(observer);
+}
+//----------------------------------------------------------------------------
 ///////////////////////////////////////////////////////////////////////////////
 Baltek.View = { initCalled: false };
 //----------------------------------------------------------------------------
@@ -81,7 +104,7 @@ Baltek.View.Element.prototype.$init = function(id, i18nManager){
 
     this.i18nKeyPrefix = id;
     this.i18nManager = i18nManager;
-    this.i18nManager.registerI18nObserver(this);
+    this.i18nManager.registerObserver(this);
 }
 
 Baltek.View.Element.prototype.enable = function(condition){
@@ -109,10 +132,17 @@ Baltek.View.Element.prototype.show = function(condition){
     }
 }
 
-Baltek.View.Element.prototype.updateI18nAspect = function(){
-    Baltek.Utils.assert( false, "Baltek.View.Element.prototype.updateI18nAspect(): must not be called" );
+Baltek.View.Element.prototype.updateFromI18n = function(){
+    Baltek.Utils.assert( false, "Baltek.View.Element.prototype.updateFromI18n(): must not be called" );
 }
 
+Baltek.View.Element.prototype.updateFromObservable = function(observable){
+    if ( observable === this.i18nManager ) {
+        this.updateFromI18n();
+    } else {
+        Baltek.Utils.assert( false, "Baltek.View.Element.prototype.updateFromObservable(): observable not managed" );
+    }
+}
 //----------------------------------------------------------------------------
 Baltek.View.Button = function(id, i18nManager){
     this.$init(id, i18nManager);
@@ -124,7 +154,7 @@ Baltek.View.Button.prototype.$init = function(id, i18nManager){
     Baltek.View.FileButton.super.$init.call(this, id, i18nManager);
 
     // Finalize the construction regarding I18n.
-    this.updateI18nAspect();
+    this.updateFromI18n();
 }
 
 Baltek.View.Button.prototype.notify = function(){
@@ -132,7 +162,7 @@ Baltek.View.Button.prototype.notify = function(){
                                         this.element.id + " clicked." );
 }
 
-Baltek.View.Button.prototype.updateI18nAspect = function(){
+Baltek.View.Button.prototype.updateFromI18n = function(){
     this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
 }
 //----------------------------------------------------------------------------
@@ -150,7 +180,7 @@ Baltek.View.FileButton.prototype.$init = function(id, i18nManager){
     this.window = null;
 
     // Finalize the construction regarding I18n.
-    this.updateI18nAspect();
+    this.updateFromI18n();
 }
 
 Baltek.View.FileButton.prototype.openFile = function(){
@@ -167,7 +197,7 @@ Baltek.View.FileButton.prototype.openFile = function(){
     }
 }
 
-Baltek.View.FileButton.prototype.updateI18nAspect = function(){
+Baltek.View.FileButton.prototype.updateFromI18n = function(){
     this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
     this.file = this.i18nManager.getText( this.i18nKeyPrefix + "_file" );
 }
@@ -176,9 +206,11 @@ Baltek.View.I18n = function(translations, fallbackLanguage){
     this.$init(translations, fallbackLanguage);
 };
 
-Baltek.Utils.inheritPrototype(Baltek.View.I18n, Object);
+Baltek.Utils.inheritPrototype(Baltek.View.I18n, Baltek.Utils.Observable);
 
 Baltek.View.I18n.prototype.$init = function(translations, fallbackLanguage){
+    Baltek.View.I18n.super.$init.call(this);
+
     this.translations = translations;
     this.availableLanguages = Baltek.Utils.getOwnProperties(this.translations);
 
@@ -190,8 +222,6 @@ Baltek.View.I18n.prototype.$init = function(translations, fallbackLanguage){
     if( ! Baltek.Utils.hasValue(this.availableLanguages, this.language) ) {
         this.language = this.fallbackLanguage;
     }
-
-    this.observerCollection = [];
 }
 
 Baltek.View.I18n.prototype.getDefaultLanguage = function(){
@@ -215,23 +245,11 @@ Baltek.View.I18n.prototype.getText = function(key){
     return text;
 }
 
-Baltek.View.I18n.prototype.notifyI18nObservers = function(){
-    var n = this.observerCollection.length;
-    var i = 0;
-    for (i=0; i < n ; i++){
-        this.observerCollection[i].updateI18nAspect();
-    }
-}
-
 Baltek.View.I18n.prototype.setLanguage = function(language){
     Baltek.Utils.assert( Baltek.Utils.hasValue(this.availableLanguages, language),
                             "Baltek.View.I18n.prototype.setLanguage(): language");
     this.language = language;
-    this.notifyI18nObservers();
-}
-
-Baltek.View.I18n.prototype.registerI18nObserver = function(observer){
-    this.observerCollection.push(observer);
+    this.notifyObservers();
 }
 //----------------------------------------------------------------------------
 Baltek.View.LanguageSelector = function(id, i18nManager){
@@ -265,7 +283,7 @@ Baltek.View.LanguageSelector.prototype.createSelectorOptions = function(){
     this.element.value = this.i18nManager.getLanguage();
 }
 
-Baltek.View.LanguageSelector.prototype.updateI18nAspect = function(){
+Baltek.View.LanguageSelector.prototype.updateFromI18n = function(){
     // Nothing to do.
 }
 //----------------------------------------------------------------------------
@@ -283,7 +301,7 @@ Baltek.View.Selector.prototype.$init = function(id, i18nManager, values){
     this.selection = values[0];
 
     // Finalize the construction regarding I18n.
-    this.updateI18nAspect();
+    this.updateFromI18n();
 }
 
 Baltek.View.Selector.prototype.notify = function(){
@@ -292,7 +310,7 @@ Baltek.View.Selector.prototype.notify = function(){
                                         this.element.id + ".selection = " + this.selection);
 }
 
-Baltek.View.Selector.prototype.updateI18nAspect = function(){
+Baltek.View.Selector.prototype.updateFromI18n = function(){
     this.element.innerHTML = "" ;
 
     var n = this.values.length;
@@ -436,163 +454,4 @@ Baltek.View.DebugZone.writeMessage = function(text){
         Baltek.View.DebugZone.messages.innerHTML += "<li>" + text + "</li>" ;
     }
 }
-///////////////////////////////////////////////////////////////////////////////
-
-Baltek.View.I18n.translations = {};
-
-Baltek.View.I18n.translations.eo = {
-    "Baltek_ButtonZone_About_button"      : "Pri" ,
-    "Baltek_ButtonZone_About_file"        : "./lang/eo/Baltek-about-eo.html" ,
-
-    "Baltek_ButtonZone_BlueKind_human"    : "Homo" ,
-    "Baltek_ButtonZone_BlueKind_ai1"      : "*(eo)AI1" ,
-    "Baltek_ButtonZone_BlueKind_ai2"      : "*(eo)AI2" ,
-    "Baltek_ButtonZone_BlueKind_ai3"      : "*(eo)AI3" ,
-
-    "Baltek_ButtonZone_Coordinates_no"    : "Koordinatoj: ne",
-    "Baltek_ButtonZone_Coordinates_yes"   : "Koordinatoj: jes",
-
-    "Baltek_ButtonZone_EndTurn_button"    : "*(eo)End my turn" ,
-
-    "Baltek_ButtonZone_Help_button"       : "Helpo" ,
-    "Baltek_ButtonZone_Help_file"         : "./lang/eo/Baltek-help-eo.html" ,
-
-    "Baltek_ButtonZone_Kickoff_button"    : "*(eo)Kickoff" ,
-
-    "Baltek_ButtonZone_Language_name"     : "Esperanto" ,
-
-    "Baltek_ButtonZone_NewGame_button"    : "*(eo)New game" ,
-
-    "Baltek_ButtonZone_QuitGame_button"   : "*(eo)Quit game" ,
-
-    "Baltek_ButtonZone_RedKind_human"     : "Homo" ,
-    "Baltek_ButtonZone_RedKind_ai1"       : "*(eo)AI1" ,
-    "Baltek_ButtonZone_RedKind_ai2"       : "*(eo)AI2" ,
-    "Baltek_ButtonZone_RedKind_ai3"       : "*(eo)AI3" ,
-
-    "Baltek_ButtonZone_ResumeGame_button" : "*(eo)Resume game" ,
-
-    "Baltek_ButtonZone_Rules_button"      : "Reguloj" ,
-    "Baltek_ButtonZone_Rules_file"        : "./lang/eo/Baltek-rules-eo.html",
-
-    "Baltek_ButtonZone_UseBonus_no"       : "*(eo)Use my bonus: ne",
-    "Baltek_ButtonZone_UseBonus_yes"      : "*(eo)Use my bonus: jes"
-};
-
-Baltek.View.I18n.translations.en = {
-    "Baltek_ButtonZone_About_button"      : "About" ,
-    "Baltek_ButtonZone_About_file"        : "./lang/en/Baltek-about-en.html" ,
-
-    "Baltek_ButtonZone_BlueKind_human"    : "Human" ,
-    "Baltek_ButtonZone_BlueKind_ai1"      : "AI1" ,
-    "Baltek_ButtonZone_BlueKind_ai2"      : "AI2" ,
-    "Baltek_ButtonZone_BlueKind_ai3"      : "AI3" ,
-
-    "Baltek_ButtonZone_Coordinates_no"    : "Coordinates: no",
-    "Baltek_ButtonZone_Coordinates_yes"   : "Coordinates: yes",
-
-    "Baltek_ButtonZone_EndTurn_button"    : "End my turn" ,
-
-    "Baltek_ButtonZone_Help_button"       : "Help" ,
-    "Baltek_ButtonZone_Help_file"         : "./lang/en/Baltek-help-en.html" ,
-
-    "Baltek_ButtonZone_Kickoff_button"    : "Kickoff" ,
-
-    "Baltek_ButtonZone_Language_name"     : "English" ,
-
-    "Baltek_ButtonZone_NewGame_button"    : "New game" ,
-
-    "Baltek_ButtonZone_QuitGame_button"   : "Quit game" ,
-
-    "Baltek_ButtonZone_RedKind_human"     : "Human" ,
-    "Baltek_ButtonZone_RedKind_ai1"       : "AI1" ,
-    "Baltek_ButtonZone_RedKind_ai2"       : "AI2" ,
-    "Baltek_ButtonZone_RedKind_ai3"       : "AI3" ,
-
-    "Baltek_ButtonZone_ResumeGame_button" : "Resume game" ,
-
-    "Baltek_ButtonZone_Rules_button"      : "Rules" ,
-    "Baltek_ButtonZone_Rules_file"        : "./lang/en/Baltek-rules-en.html",
-
-    "Baltek_ButtonZone_UseBonus_no"       : "Use my bonus: no",
-    "Baltek_ButtonZone_UseBonus_yes"      : "Use my bonus: yes"
-};
-
-Baltek.View.I18n.translations.fr = {
-    "Baltek_ButtonZone_About_button"      : "A propos" ,
-    "Baltek_ButtonZone_About_file"        : "./lang/fr/Baltek-about-fr.html" ,
-
-    "Baltek_ButtonZone_BlueKind_human"    : "Humain" ,
-    "Baltek_ButtonZone_BlueKind_ai1"      : "IA1" ,
-    "Baltek_ButtonZone_BlueKind_ai2"      : "IA2" ,
-    "Baltek_ButtonZone_BlueKind_ai3"      : "IA3" ,
-
-    "Baltek_ButtonZone_Coordinates_no"    : "Coordonnées : non",
-    "Baltek_ButtonZone_Coordinates_yes"   : "Coordonnées : oui",
-
-    "Baltek_ButtonZone_EndTurn_button"    : "Finir mon tour" ,
-
-    "Baltek_ButtonZone_Help_button"       : "Aide" ,
-    "Baltek_ButtonZone_Help_file"         : "./lang/fr/Baltek-help-fr.html" ,
-
-    "Baltek_ButtonZone_Kickoff_button"    : "Engager" ,
-
-    "Baltek_ButtonZone_Language_name"     : "Français" ,
-
-    "Baltek_ButtonZone_NewGame_button"    : "Nouvelle partie" ,
-
-    "Baltek_ButtonZone_QuitGame_button"   : "Quitter la partie" ,
-
-    "Baltek_ButtonZone_RedKind_human"     : "Humain" ,
-    "Baltek_ButtonZone_RedKind_ai1"       : "IA1" ,
-    "Baltek_ButtonZone_RedKind_ai2"       : "IA2" ,
-    "Baltek_ButtonZone_RedKind_ai3"       : "IA3" ,
-
-    "Baltek_ButtonZone_ResumeGame_button" : "Continuer le jeu" ,
-
-    "Baltek_ButtonZone_Rules_button"      : "Règles" ,
-    "Baltek_ButtonZone_Rules_file"        : "./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf" ,
-
-    "Baltek_ButtonZone_UseBonus_no"       : "Utiliser mon bonus: non",
-    "Baltek_ButtonZone_UseBonus_yes"      : "Utiliser mon bonus: oui"
-};
-
-Baltek.View.I18n.translations.pt = {
-    "Baltek_ButtonZone_About_button"      : "Acerca" ,
-    "Baltek_ButtonZone_About_file"        : "./lang/pt/Baltek-about-pt.html" ,
-
-    "Baltek_ButtonZone_BlueKind_human"    : "*(pt)Human" ,
-    "Baltek_ButtonZone_BlueKind_ai1"      : "*(pt)AI1" ,
-    "Baltek_ButtonZone_BlueKind_ai2"      : "*(pt)AI2" ,
-    "Baltek_ButtonZone_BlueKind_ai3"      : "*(pt)AI3" ,
-
-    "Baltek_ButtonZone_Coordinates_no"    : "Coordenadas: não",
-    "Baltek_ButtonZone_Coordinates_yes"   : "Coordenadas: sim",
-
-    "Baltek_ButtonZone_EndTurn_button"    : "*(eo)End my turn" ,
-
-    "Baltek_ButtonZone_Help_button"       : "Ajuda" ,
-    "Baltek_ButtonZone_Help_file"         : "./lang/pt/Baltek-help-pt.html" ,
-
-    "Baltek_ButtonZone_Kickoff_button"    : "*(pt)Kickoff" ,
-
-    "Baltek_ButtonZone_Language_name"     : "Português" ,
-
-    "Baltek_ButtonZone_NewGame_button"    : "*(pt)New game" ,
-
-    "Baltek_ButtonZone_QuitGame_button"   : "*(pt)Quit game" ,
-
-    "Baltek_ButtonZone_RedKind_human"     : "*(pt)Human" ,
-    "Baltek_ButtonZone_RedKind_ai1"       : "*(pt)AI1" ,
-    "Baltek_ButtonZone_RedKind_ai2"       : "*(pt)AI2" ,
-    "Baltek_ButtonZone_RedKind_ai3"       : "*(pt)AI3" ,
-
-    "Baltek_ButtonZone_ResumeGame_button" : "*(pt)Resume game" ,
-
-    "Baltek_ButtonZone_Rules_button"      : "Regras" ,
-    "Baltek_ButtonZone_Rules_file"        : "./lang/pt/Baltek-rules-pt.html" ,
-
-    "Baltek_ButtonZone_UseBonus_no"       : "Use my bonus: no",
-    "Baltek_ButtonZone_UseBonus_yes"      : "Use my bonus: yes"
-};
 ///////////////////////////////////////////////////////////////////////////////
