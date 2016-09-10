@@ -33,10 +33,10 @@ Baltek.Utils.assert = function(condition, message){
 
 Baltek.Utils.getOwnProperties = function(anObject){
     var properties = [];
-    var p;
-    for (p in anObject) {
-        if ( anObject.hasOwnProperty(p) ) {
-            properties.push(p);
+    var aProperty;
+    for (aProperty in anObject) {
+        if ( anObject.hasOwnProperty(aProperty) ) {
+            properties.push(aProperty);
         }
     }
     properties.sort();
@@ -87,24 +87,34 @@ Baltek.Utils.Observable.prototype.notifyObservers = function(){
 }
 
 Baltek.Utils.Observable.prototype.registerObserver = function(observer){
-    this.observerCollection.push(observer);
+    var observerIndex = this.observerCollection.indexOf(observer);
+    if ( ! ( observerIndex > -1 ) ) {
+        this.observerCollection.push(observer);
+    }
+}
+
+Baltek.Utils.Observable.prototype.unregisterObserver = function(observer){
+    var observerIndex = this.observerCollection.indexOf(observer);
+    if ( observerIndex > -1 ) {
+        this.observerCollection.splice(observerIndex, 1);
+    }
 }
 //----------------------------------------------------------------------------
 ///////////////////////////////////////////////////////////////////////////////
 Baltek.View = { initCalled: false };
 //----------------------------------------------------------------------------
-Baltek.View.Element = function(id, i18nManager){
-    this.$init(id, i18nManager);
+Baltek.View.Element = function(id, i18nTranslater){
+    this.$init(id, i18nTranslater);
 };
 
 Baltek.Utils.inheritPrototype(Baltek.View.Element, Object);
 
-Baltek.View.Element.prototype.$init = function(id, i18nManager){
+Baltek.View.Element.prototype.$init = function(id, i18nTranslater){
     this.element = document.getElementById(id);
 
     this.i18nKeyPrefix = id;
-    this.i18nManager = i18nManager;
-    this.i18nManager.registerObserver(this);
+    this.i18nTranslater = i18nTranslater;
+    this.i18nTranslater.registerObserver(this);
 }
 
 Baltek.View.Element.prototype.enable = function(condition){
@@ -112,6 +122,11 @@ Baltek.View.Element.prototype.enable = function(condition){
                             "Baltek.View.Element.prototype.enable(): condition" );
 
     this.element.disabled = ( ! condition );
+}
+
+Baltek.View.Element.prototype.getI18nValueForKeySuffix = function(i18nKeySuffix){
+    var translatedText = this.i18nTranslater.getValueForKey( this.i18nKeyPrefix, i18nKeySuffix );
+    return translatedText;
 }
 
 Baltek.View.Element.prototype.setBackgroundColor  = function(color){
@@ -137,21 +152,21 @@ Baltek.View.Element.prototype.updateFromI18n = function(){
 }
 
 Baltek.View.Element.prototype.updateFromObservable = function(observable){
-    if ( observable === this.i18nManager ) {
+    if ( observable === this.i18nTranslater ) {
         this.updateFromI18n();
     } else {
         Baltek.Utils.assert( false, "Baltek.View.Element.prototype.updateFromObservable(): observable not managed" );
     }
 }
 //----------------------------------------------------------------------------
-Baltek.View.Button = function(id, i18nManager){
-    this.$init(id, i18nManager);
+Baltek.View.Button = function(id, i18nTranslater){
+    this.$init(id, i18nTranslater);
 };
 
 Baltek.Utils.inheritPrototype(Baltek.View.Button, Baltek.View.Element);
 
-Baltek.View.Button.prototype.$init = function(id, i18nManager){
-    Baltek.View.FileButton.super.$init.call(this, id, i18nManager);
+Baltek.View.Button.prototype.$init = function(id, i18nTranslater){
+    Baltek.View.FileButton.super.$init.call(this, id, i18nTranslater);
 
     // Finalize the construction regarding I18n.
     this.updateFromI18n();
@@ -163,17 +178,17 @@ Baltek.View.Button.prototype.notify = function(){
 }
 
 Baltek.View.Button.prototype.updateFromI18n = function(){
-    this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
+    this.element.innerHTML = this.getI18nValueForKeySuffix( "button" );
 }
 //----------------------------------------------------------------------------
-Baltek.View.FileButton = function(id, i18nManager){
-    this.$init(id, i18nManager);
+Baltek.View.FileButton = function(id, i18nTranslater){
+    this.$init(id, i18nTranslater);
 };
 
 Baltek.Utils.inheritPrototype(Baltek.View.FileButton, Baltek.View.Element);
 
-Baltek.View.FileButton.prototype.$init = function(id, i18nManager){
-    Baltek.View.FileButton.super.$init.call(this, id, i18nManager);
+Baltek.View.FileButton.prototype.$init = function(id, i18nTranslater){
+    Baltek.View.FileButton.super.$init.call(this, id, i18nTranslater);
 
     this.file = undefined;
     this.openedFile = undefined;
@@ -198,8 +213,8 @@ Baltek.View.FileButton.prototype.openFile = function(){
 }
 
 Baltek.View.FileButton.prototype.updateFromI18n = function(){
-    this.element.innerHTML = this.i18nManager.getText( this.i18nKeyPrefix + "_button" );
-    this.file = this.i18nManager.getText( this.i18nKeyPrefix + "_file" );
+    this.element.innerHTML = this.getI18nValueForKeySuffix( "button" );
+    this.file = this.getI18nValueForKeySuffix( "file" );
 }
 //----------------------------------------------------------------------------
 Baltek.View.I18n = function(translations, fallbackLanguage){
@@ -210,6 +225,8 @@ Baltek.Utils.inheritPrototype(Baltek.View.I18n, Baltek.Utils.Observable);
 
 Baltek.View.I18n.prototype.$init = function(translations, fallbackLanguage){
     Baltek.View.I18n.super.$init.call(this);
+
+    this.keySeparator = "_" ;
 
     this.translations = translations;
     this.availableLanguages = Baltek.Utils.getOwnProperties(this.translations);
@@ -237,12 +254,14 @@ Baltek.View.I18n.prototype.getLanguage = function(){
     return this.language;
 }
 
-Baltek.View.I18n.prototype.getText = function(key){
-    Baltek.Utils.assert( this.translations[this.language].hasOwnProperty(key),
-                            "Baltek.View.I18n.prototype.getText(): key");
+Baltek.View.I18n.prototype.getValueForKey = function(keyPrefix, keySuffix){
+    var key = keyPrefix + this.keySeparator + keySuffix;
 
-    var text = this.translations[this.language][key];
-    return text;
+    Baltek.Utils.assert( this.translations[this.language].hasOwnProperty(key),
+                            "Baltek.View.I18n.prototype.getValueForKey(): key");
+
+    var value = this.translations[this.language][key];
+    return value;
 }
 
 Baltek.View.I18n.prototype.setLanguage = function(language){
@@ -252,49 +271,49 @@ Baltek.View.I18n.prototype.setLanguage = function(language){
     this.notifyObservers();
 }
 //----------------------------------------------------------------------------
-Baltek.View.LanguageSelector = function(id, i18nManager){
-    this.$init(id, i18nManager);
+Baltek.View.LanguageSelector = function(id, i18nTranslater){
+    this.$init(id, i18nTranslater);
 };
 
 Baltek.Utils.inheritPrototype(Baltek.View.LanguageSelector, Baltek.View.Element);
 
-Baltek.View.LanguageSelector.prototype.$init = function(id, i18nManager){
-    Baltek.View.LanguageSelector.super.$init.call(this, id, i18nManager);
+Baltek.View.LanguageSelector.prototype.$init = function(id, i18nTranslater){
+    Baltek.View.LanguageSelector.super.$init.call(this, id, i18nTranslater);
     this.createSelectorOptions();
 }
 
 Baltek.View.LanguageSelector.prototype.notify = function(){
-    this.i18nManager.setLanguage(this.element.value);
+    this.i18nTranslater.setLanguage(this.element.value);
 }
 
 Baltek.View.LanguageSelector.prototype.createSelectorOptions = function(){
     this.element.innerHTML = "" ;
 
-    var n = this.i18nManager.availableLanguages.length;
+    var n = this.i18nTranslater.availableLanguages.length;
     var i = 0;
     for (i=0; i < n ; i++) {
-        var languageCode = this.i18nManager.availableLanguages[i];
-        var languageName = this.i18nManager.translations[languageCode]["Baltek_ButtonZone_Language_name"];
+        var languageCode = this.i18nTranslater.availableLanguages[i];
+        var languageName = this.i18nTranslater.translations[languageCode]["Baltek_ButtonZone_Language_name"];
 
         this.element.innerHTML +=
             "<option value=" + "\"" +  languageCode + "\"" + ">" + languageName + "</option>" ;
     }
 
-    this.element.value = this.i18nManager.getLanguage();
+    this.element.value = this.i18nTranslater.getLanguage();
 }
 
 Baltek.View.LanguageSelector.prototype.updateFromI18n = function(){
     // Nothing to do.
 }
 //----------------------------------------------------------------------------
-Baltek.View.Selector = function(id, i18nManager, values){
-    this.$init(id, i18nManager, values);
+Baltek.View.Selector = function(id, i18nTranslater, values){
+    this.$init(id, i18nTranslater, values);
 };
 
 Baltek.Utils.inheritPrototype(Baltek.View.Selector, Baltek.View.Element);
 
-Baltek.View.Selector.prototype.$init = function(id, i18nManager, values){
-    Baltek.View.Selector.super.$init.call(this, id, i18nManager);
+Baltek.View.Selector.prototype.$init = function(id, i18nTranslater, values){
+    Baltek.View.Selector.super.$init.call(this, id, i18nTranslater);
 
     Baltek.Utils.assert( (values.length >= 2), "Baltek.View.Selector.prototype.$init(): values.length");
     this.values = values;
@@ -317,7 +336,7 @@ Baltek.View.Selector.prototype.updateFromI18n = function(){
     var i = 0;
     for (i=0; i < n ; i++) {
         var value = this.values[i];
-        var text = this.i18nManager.getText( this.i18nKeyPrefix + "_" + value );
+        var text = this.getI18nValueForKeySuffix( value );
 
         this.element.innerHTML +=
             "<option value=" + "\"" +  value + "\"" + ">" + text + "</option>" ;
@@ -343,37 +362,37 @@ Baltek.View.ButtonZone.$init = function(){
     if ( ! Baltek.View.ButtonZone.initCalled ) {
         Baltek.View.ButtonZone.initCalled = true;
 
-        var i18nManager = new Baltek.View.I18n(Baltek.View.I18n.translations , "fr");
+        var i18nTranslater = new Baltek.View.I18n(Baltek.View.I18n.translations , "fr");
 
-        Baltek.View.ButtonZone.newGame = new Baltek.View.Button( "Baltek_ButtonZone_NewGame" , i18nManager);
+        Baltek.View.ButtonZone.newGame = new Baltek.View.Button( "Baltek_ButtonZone_NewGame" , i18nTranslater);
 
-        Baltek.View.ButtonZone.blueKind = new Baltek.View.Selector( "Baltek_ButtonZone_BlueKind", i18nManager,
+        Baltek.View.ButtonZone.blueKind = new Baltek.View.Selector( "Baltek_ButtonZone_BlueKind", i18nTranslater,
                                                                     [ "human", "ai1", "ai2", "ai3" ] );
 
-        Baltek.View.ButtonZone.redKind = new Baltek.View.Selector( "Baltek_ButtonZone_RedKind", i18nManager,
+        Baltek.View.ButtonZone.redKind = new Baltek.View.Selector( "Baltek_ButtonZone_RedKind", i18nTranslater,
                                                                     [ "human", "ai1", "ai2", "ai3" ] );
 
-        Baltek.View.ButtonZone.kickoff = new Baltek.View.Button( "Baltek_ButtonZone_Kickoff" , i18nManager);
+        Baltek.View.ButtonZone.kickoff = new Baltek.View.Button( "Baltek_ButtonZone_Kickoff" , i18nTranslater);
 
-        Baltek.View.ButtonZone.useBonus = new Baltek.View.Selector( "Baltek_ButtonZone_UseBonus", i18nManager,
+        Baltek.View.ButtonZone.useBonus = new Baltek.View.Selector( "Baltek_ButtonZone_UseBonus", i18nTranslater,
                                                                     [ "no", "yes" ] );
 
-        Baltek.View.ButtonZone.endTurn = new Baltek.View.Button( "Baltek_ButtonZone_EndTurn" , i18nManager);
+        Baltek.View.ButtonZone.endTurn = new Baltek.View.Button( "Baltek_ButtonZone_EndTurn" , i18nTranslater);
 
-        Baltek.View.ButtonZone.resumeGame = new Baltek.View.Button( "Baltek_ButtonZone_ResumeGame" , i18nManager );
+        Baltek.View.ButtonZone.resumeGame = new Baltek.View.Button( "Baltek_ButtonZone_ResumeGame" , i18nTranslater );
 
-        Baltek.View.ButtonZone.quitGame = new Baltek.View.Button( "Baltek_ButtonZone_QuitGame" , i18nManager);
+        Baltek.View.ButtonZone.quitGame = new Baltek.View.Button( "Baltek_ButtonZone_QuitGame" , i18nTranslater);
 
-        Baltek.View.ButtonZone.language = new Baltek.View.LanguageSelector( "Baltek_ButtonZone_Language" , i18nManager);
+        Baltek.View.ButtonZone.language = new Baltek.View.LanguageSelector( "Baltek_ButtonZone_Language" , i18nTranslater);
 
-        Baltek.View.ButtonZone.coordinates = new Baltek.View.Selector( "Baltek_ButtonZone_Coordinates", i18nManager,
+        Baltek.View.ButtonZone.coordinates = new Baltek.View.Selector( "Baltek_ButtonZone_Coordinates", i18nTranslater,
                                                                         [ "no", "yes" ] );
 
-        Baltek.View.ButtonZone.rules = new Baltek.View.FileButton( "Baltek_ButtonZone_Rules" , i18nManager);
+        Baltek.View.ButtonZone.rules = new Baltek.View.FileButton( "Baltek_ButtonZone_Rules" , i18nTranslater);
 
-        Baltek.View.ButtonZone.help = new Baltek.View.FileButton( "Baltek_ButtonZone_Help" , i18nManager);
+        Baltek.View.ButtonZone.help = new Baltek.View.FileButton( "Baltek_ButtonZone_Help" , i18nTranslater);
 
-        Baltek.View.ButtonZone.about = new Baltek.View.FileButton( "Baltek_ButtonZone_About" , i18nManager);
+        Baltek.View.ButtonZone.about = new Baltek.View.FileButton( "Baltek_ButtonZone_About" , i18nTranslater);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
