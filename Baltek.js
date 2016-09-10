@@ -8,6 +8,7 @@ Baltek.$init = function(){
 
         Baltek.Utils.$init();
         Baltek.View.$init();
+        Baltek.presenter = new Baltek.Presenter();
 
         Baltek.View.DebugZone.writeMessage( "Baltek.$init(): done" );
     }
@@ -107,9 +108,11 @@ Baltek.View.Element = function(id, i18nTranslater){
     this.$init(id, i18nTranslater);
 };
 
-Baltek.Utils.inheritPrototype(Baltek.View.Element, Object);
+Baltek.Utils.inheritPrototype(Baltek.View.Element, Baltek.Utils.Observable);
 
 Baltek.View.Element.prototype.$init = function(id, i18nTranslater){
+    Baltek.View.Element.super.$init.call(this);
+
     this.element = document.getElementById(id);
 
     this.i18nKeyPrefix = id;
@@ -170,11 +173,6 @@ Baltek.View.Button.prototype.$init = function(id, i18nTranslater){
 
     // Finalize the construction regarding I18n.
     this.updateFromI18n();
-}
-
-Baltek.View.Button.prototype.notify = function(){
-    Baltek.View.DebugZone.writeMessage( "Baltek.View.Button.notify(): " +
-                                        this.element.id + " clicked." );
 }
 
 Baltek.View.Button.prototype.updateFromI18n = function(){
@@ -282,10 +280,6 @@ Baltek.View.LanguageSelector.prototype.$init = function(id, i18nTranslater){
     this.createSelectorOptions();
 }
 
-Baltek.View.LanguageSelector.prototype.notify = function(){
-    this.i18nTranslater.setLanguage(this.element.value);
-}
-
 Baltek.View.LanguageSelector.prototype.createSelectorOptions = function(){
     this.element.innerHTML = "" ;
 
@@ -300,6 +294,10 @@ Baltek.View.LanguageSelector.prototype.createSelectorOptions = function(){
     }
 
     this.element.value = this.i18nTranslater.getLanguage();
+}
+
+Baltek.View.LanguageSelector.prototype.getSelection = function(){
+    return this.element.value;
 }
 
 Baltek.View.LanguageSelector.prototype.updateFromI18n = function(){
@@ -317,16 +315,13 @@ Baltek.View.Selector.prototype.$init = function(id, i18nTranslater, values){
 
     Baltek.Utils.assert( (values.length >= 2), "Baltek.View.Selector.prototype.$init(): values.length");
     this.values = values;
-    this.selection = values[0];
 
     // Finalize the construction regarding I18n.
     this.updateFromI18n();
 }
 
-Baltek.View.Selector.prototype.notify = function(){
-    this.selection = this.element.value;
-    Baltek.View.DebugZone.writeMessage( "Baltek.View.Selector.notify(): " +
-                                        this.element.id + ".selection = " + this.selection);
+Baltek.View.Selector.prototype.getSelection = function(){
+    return this.element.value;
 }
 
 Baltek.View.Selector.prototype.updateFromI18n = function(){
@@ -336,13 +331,11 @@ Baltek.View.Selector.prototype.updateFromI18n = function(){
     var i = 0;
     for (i=0; i < n ; i++) {
         var value = this.values[i];
-        var text = this.getI18nValueForKeySuffix( value );
+        var text = this.getI18nValueForKeySuffix(value);
 
         this.element.innerHTML +=
             "<option value=" + "\"" +  value + "\"" + ">" + text + "</option>" ;
     }
-
-    this.element.value = this.selection;
 }
 //----------------------------------------------------------------------------
 Baltek.View.$init = function(){
@@ -363,6 +356,8 @@ Baltek.View.ButtonZone.$init = function(){
         Baltek.View.ButtonZone.initCalled = true;
 
         var i18nTranslater = new Baltek.View.I18n(Baltek.View.I18n.translations , "fr");
+
+        Baltek.View.ButtonZone.i18nTranslater = i18nTranslater;
 
         Baltek.View.ButtonZone.newGame = new Baltek.View.Button( "Baltek_ButtonZone_NewGame" , i18nTranslater);
 
@@ -473,4 +468,46 @@ Baltek.View.DebugZone.writeMessage = function(text){
         Baltek.View.DebugZone.messages.innerHTML += "<li>" + text + "</li>" ;
     }
 }
+///////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------------------
+Baltek.Presenter = function(){
+    this.$init();
+};
+
+Baltek.Utils.inheritPrototype(Baltek.Presenter, Object);
+
+Baltek.Presenter.prototype.$init = function(){
+    this.i18nTranslater =  Baltek.View.ButtonZone.i18nTranslater ;
+
+    this.newGame = Baltek.View.ButtonZone.newGame;
+    this.newGame.registerObserver(this);
+
+    this.language = Baltek.View.ButtonZone.language;
+    this.language.registerObserver(this);
+}
+
+Baltek.Presenter.prototype.updateFromNewGame = function(){
+    Baltek.View.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromNewGame: " +
+                                        this.newGame.element.id + " has notified me." );
+}
+
+Baltek.Presenter.prototype.updateFromLanguage = function(){
+    this.i18nTranslater.setLanguage(this.language.getSelection());
+
+    Baltek.View.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromLanguage: " +
+                                        this.language.element.id + " has notified me." );
+}
+
+Baltek.Presenter.prototype.updateFromObservable = function(observable){
+    if ( observable === this.newGame ) {
+        this.updateFromNewGame();
+
+    } else if ( observable === this.language ) {
+        this.updateFromLanguage();
+        
+    } else {
+        Baltek.Utils.assert( false, "Baltek.Presenter.prototype.updateFromObservable(): observable not managed" );
+    }
+}
+//----------------------------------------------------------------------------
 ///////////////////////////////////////////////////////////////////////////////
