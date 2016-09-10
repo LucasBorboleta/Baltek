@@ -22,48 +22,48 @@
 			<div class="buttonGroup">
 
 				<button id="Baltek_ButtonZone_NewGame"
-						onclick="Baltek.View.ButtonZone.newGame.change();"
+						onclick="Baltek.View.ButtonZone.newGame.notify();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<select id="Baltek_ButtonZone_BlueKind"
-						onchange="Baltek.View.ButtonZone.blueKind.change();"
+						onchange="Baltek.View.ButtonZone.blueKind.notify();"
 						style="background-color:blue; color:white;">
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<select id="Baltek_ButtonZone_RedKind"
-						onchange="Baltek.View.ButtonZone.redKind.change();"
+						onchange="Baltek.View.ButtonZone.redKind.notify();"
 						style="background-color:red; color:white;">
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<button id="Baltek_ButtonZone_Kickoff"
-						onclick="Baltek.View.ButtonZone.kickoff.change();"
+						onclick="Baltek.View.ButtonZone.kickoff.notify();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<select id="Baltek_ButtonZone_UseBonus"
-						onchange="Baltek.View.ButtonZone.useBonus.change();"
+						onchange="Baltek.View.ButtonZone.useBonus.notify();"
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<button id="Baltek_ButtonZone_EndTurn"
-						onclick="Baltek.View.ButtonZone.endTurn.change();"
+						onclick="Baltek.View.ButtonZone.endTurn.notify();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<button id="Baltek_ButtonZone_ResumeGame"
-						onclick="Baltek.View.ButtonZone.resumeGame.change();"
+						onclick="Baltek.View.ButtonZone.resumeGame.notify();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<button id="Baltek_ButtonZone_QuitGame"
-						onclick="Baltek.View.ButtonZone.quitGame.change();"
+						onclick="Baltek.View.ButtonZone.quitGame.notify();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
@@ -72,11 +72,11 @@
 
 			<!-- Peferences -->
 			<div class="buttonGroup">
-				<select id="Baltek_ButtonZone_Language" onchange="Baltek.View.ButtonZone.language.change();">
+				<select id="Baltek_ButtonZone_Language" onchange="Baltek.View.ButtonZone.language.notify();">
 					<!-- The options are created dynamically using JavaScript -->
 				</select>
 
-				<select id="Baltek_ButtonZone_Coordinates" onchange="Baltek.View.ButtonZone.coordinates.change();">
+				<select id="Baltek_ButtonZone_Coordinates" onchange="Baltek.View.ButtonZone.coordinates.notify();">
 					<!-- The options are created dynamically using JavaScript -->
 	        	</select>
 			</div>
@@ -107,5 +107,6 @@
 		</div>
 
 		<script src="Baltek.js"></script>
+		<script src="Baltek.View.I18n.translations.js"></script>
 	</body>
 </html>
