@@ -22,48 +22,48 @@
 			<div class="buttonGroup">
 
 				<button id="Baltek_ButtonZone_NewGame"
-						onclick="Baltek.View.ButtonZone.newGame.notifyObservers();"
+						onclick="Baltek.presenter.newGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<select id="Baltek_ButtonZone_BlueKind"
-						onchange="Baltek.View.ButtonZone.blueKind.notifyObservers();"
+						onchange="Baltek.presenter.blueKind.notifyObservers();"
 						style="background-color:blue; color:white;">
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<select id="Baltek_ButtonZone_RedKind"
-						onchange="Baltek.View.ButtonZone.redKind.notifyObservers();"
+						onchange="Baltek.presenter.redKind.notifyObservers();"
 						style="background-color:red; color:white;">
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<button id="Baltek_ButtonZone_Kickoff"
-						onclick="Baltek.View.ButtonZone.kickoff.notifyObservers();"
+						onclick="Baltek.presenter.kickoff.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<select id="Baltek_ButtonZone_UseBonus"
-						onchange="Baltek.View.ButtonZone.useBonus.notifyObservers();"
+						onchange="Baltek.presenter.useBonus.notifyObservers();"
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<button id="Baltek_ButtonZone_EndTurn"
-						onclick="Baltek.View.ButtonZone.endTurn.notifyObservers();"
+						onclick="Baltek.presenter.endTurn.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<button id="Baltek_ButtonZone_ResumeGame"
-						onclick="Baltek.View.ButtonZone.resumeGame.notifyObservers();"
+						onclick="Baltek.presenter.resumeGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<button id="Baltek_ButtonZone_QuitGame"
-						onclick="Baltek.View.ButtonZone.quitGame.notifyObservers();"
+						onclick="Baltek.presenter.quitGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
@@ -72,20 +72,20 @@
 
 			<!-- Peferences -->
 			<div class="buttonGroup">
-				<select id="Baltek_ButtonZone_Language" onchange="Baltek.View.ButtonZone.language.notifyObservers();">
+				<select id="Baltek_ButtonZone_Language" onchange="Baltek.presenter.language.notifyObservers();">
 					<!-- The options are created dynamically using JavaScript -->
 				</select>
 
-				<select id="Baltek_ButtonZone_Coordinates" onchange="Baltek.View.ButtonZone.coordinates.notifyObservers();">
+				<select id="Baltek_ButtonZone_Coordinates" onchange="Baltek.presenter.coordinates.notifyObservers();">
 					<!-- The options are created dynamically using JavaScript -->
 	        	</select>
 			</div>
 
 			<!-- Help -->
 			<div class="buttonGroup">
-	        	<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="Baltek.View.ButtonZone.rules.openFile();"></button>
-	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="Baltek.View.ButtonZone.help.openFile();"></button>
-	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="Baltek.View.ButtonZone.about.openFile();"></button>
+	        	<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="Baltek.presenter.rules.openFile();"></button>
+	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="Baltek.presenter.help.openFile();"></button>
+	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="Baltek.presenter.about.openFile();"></button>
 			</div>
 		</div>
 

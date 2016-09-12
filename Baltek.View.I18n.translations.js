@@ -22,6 +22,10 @@ Baltek.View.I18n.translations.eo = {
     "Baltek_ButtonZone_Kickoff_button"    : "*(eo)Kickoff" ,
 
     "Baltek_ButtonZone_Language_name"     : "Esperanto" ,
+    "Baltek_ButtonZone_Language_eo"       : "Esperanto" ,
+    "Baltek_ButtonZone_Language_en"       : "English" ,
+    "Baltek_ButtonZone_Language_fr"       : "Français" ,
+    "Baltek_ButtonZone_Language_pt"       : "Português" ,
 
     "Baltek_ButtonZone_NewGame_button"    : "*(eo)New game" ,
 
@@ -61,6 +65,10 @@ Baltek.View.I18n.translations.en = {
     "Baltek_ButtonZone_Kickoff_button"    : "Kickoff" ,
 
     "Baltek_ButtonZone_Language_name"     : "English" ,
+    "Baltek_ButtonZone_Language_eo"       : "Esperanto" ,
+    "Baltek_ButtonZone_Language_en"       : "English" ,
+    "Baltek_ButtonZone_Language_fr"       : "Français" ,
+    "Baltek_ButtonZone_Language_pt"       : "Português" ,
 
     "Baltek_ButtonZone_NewGame_button"    : "New game" ,
 
@@ -100,6 +108,10 @@ Baltek.View.I18n.translations.fr = {
     "Baltek_ButtonZone_Kickoff_button"    : "Engager" ,
 
     "Baltek_ButtonZone_Language_name"     : "Français" ,
+    "Baltek_ButtonZone_Language_eo"       : "Esperanto" ,
+    "Baltek_ButtonZone_Language_en"       : "English" ,
+    "Baltek_ButtonZone_Language_fr"       : "Français" ,
+    "Baltek_ButtonZone_Language_pt"       : "Português" ,
 
     "Baltek_ButtonZone_NewGame_button"    : "Nouvelle partie" ,
 
@@ -139,6 +151,10 @@ Baltek.View.I18n.translations.pt = {
     "Baltek_ButtonZone_Kickoff_button"    : "*(pt)Kickoff" ,
 
     "Baltek_ButtonZone_Language_name"     : "Português" ,
+    "Baltek_ButtonZone_Language_eo"       : "Esperanto" ,
+    "Baltek_ButtonZone_Language_en"       : "English" ,
+    "Baltek_ButtonZone_Language_fr"       : "Français" ,
+    "Baltek_ButtonZone_Language_pt"       : "Português" ,
 
     "Baltek_ButtonZone_NewGame_button"    : "*(pt)New game" ,
 
