@@ -1,8 +1,8 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.View.I18n.translations = {};
+Baltek.I18nTranslations = {};
 
-Baltek.View.I18n.translations.eo = {
+Baltek.I18nTranslations.eo = {
     "Baltek_ButtonZone_About_button"      : "Pri" ,
     "Baltek_ButtonZone_About_file"        : "./lang/eo/Baltek-about-eo.html" ,
 
@@ -45,7 +45,7 @@ Baltek.View.I18n.translations.eo = {
     "Baltek_ButtonZone_UseBonus_yes"      : "*(eo)Use my bonus: jes"
 };
 
-Baltek.View.I18n.translations.en = {
+Baltek.I18nTranslations.en = {
     "Baltek_ButtonZone_About_button"      : "About" ,
     "Baltek_ButtonZone_About_file"        : "./lang/en/Baltek-about-en.html" ,
 
@@ -88,7 +88,7 @@ Baltek.View.I18n.translations.en = {
     "Baltek_ButtonZone_UseBonus_yes"      : "Use my bonus: yes"
 };
 
-Baltek.View.I18n.translations.fr = {
+Baltek.I18nTranslations.fr = {
     "Baltek_ButtonZone_About_button"      : "A propos" ,
     "Baltek_ButtonZone_About_file"        : "./lang/fr/Baltek-about-fr.html" ,
 
@@ -131,7 +131,7 @@ Baltek.View.I18n.translations.fr = {
     "Baltek_ButtonZone_UseBonus_yes"      : "Utiliser mon bonus: oui"
 };
 
-Baltek.View.I18n.translations.pt = {
+Baltek.I18nTranslations.pt = {
     "Baltek_ButtonZone_About_button"      : "Acerca" ,
     "Baltek_ButtonZone_About_file"        : "./lang/pt/Baltek-about-pt.html" ,
 
