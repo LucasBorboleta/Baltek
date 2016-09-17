@@ -21,8 +21,26 @@
 			<!-- Game -->
 			<div class="buttonGroup">
 
-				<button id="Baltek_ButtonZone_NewGame"
-						onclick="Baltek.presenter.newGame.notifyObservers();"
+				<button id="Baltek_ButtonZone_StartGame"
+						onclick="Baltek.presenter.startGame.notifyObservers();"
+						>
+						<!-- The text is created dynamically using JavaScript -->
+				</button>
+
+				<button id="Baltek_ButtonZone_RestartGame"
+						onclick="Baltek.presenter.restartGame.notifyObservers();"
+						>
+						<!-- The text is created dynamically using JavaScript -->
+				</button>
+				
+				<button id="Baltek_ButtonZone_ResumeGame"
+						onclick="Baltek.presenter.resumeGame.notifyObservers();"
+						>
+						<!-- The text is created dynamically using JavaScript -->
+				</button>
+
+				<button id="Baltek_ButtonZone_QuitGame"
+						onclick="Baltek.presenter.quitGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
@@ -52,18 +70,6 @@
 
 				<button id="Baltek_ButtonZone_EndTurn"
 						onclick="Baltek.presenter.endTurn.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
-
-				<button id="Baltek_ButtonZone_ResumeGame"
-						onclick="Baltek.presenter.resumeGame.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
-
-				<button id="Baltek_ButtonZone_QuitGame"
-						onclick="Baltek.presenter.quitGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
