@@ -393,7 +393,7 @@ Baltek.DebugZone.show = function(){
 
 Baltek.DebugZone.writeMessage = function(text){
     if ( Baltek.DebugZone.isEnabled ) {
-        Baltek.DebugZone.messages.innerHTML += "<li>" + text + "</li>" ;
+        Baltek.DebugZone.messages.innerHTML = "<li>" + text + "</li>" + Baltek.DebugZone.messages.innerHTML;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -451,11 +451,122 @@ Baltek.Presenter.prototype.$init = function(){
 
     this.about = new Baltek.FileButton( "Baltek_ButtonZone_About" , this.i18nator);
     //this.about.registerObserver(this);
+
+    this.initState();
+    this.updateState();
+}
+
+Baltek.Presenter.prototype.initState = function(){
+    this.state = {};
+
+    this.state.blueGoals = 0;
+    this.state.redGoals = 0;
+
+    this.state.isBlueToMove = true;
+    this.state.isRedToMove = false;
+
+    this.state.blueUsedBonus = false;
+    this.state.redUsedBonus = false;
+
+    this.state.newGameHasBeenStarted = false;
+
+    this.state.newSetHasBeenStarted = false;
+
+}
+
+Baltek.Presenter.prototype.updateState = function(){
+    this.hideAllGameButtons();
+    this.disableAllGameButtons();
+
+    if ( ! this.state.newGameHasBeenStarted ) {
+        this.newGame.show(true);
+        this.blueKind.show(true);
+        this.redKind.show(true);
+
+        this.newGame.enable(true);
+        this.blueKind.enable(true);
+        this.redKind.enable(true);
+    } else {
+        this.blueKind.show(true);
+        this.redKind.show(true);
+    }
+}
+
+Baltek.Presenter.prototype.hideAllGameButtons = function(){
+    this.newGame.show(false);
+    this.blueKind.show(false);
+    this.redKind.show(false);
+    this.kickoff.show(false);
+    this.useBonus.show(false);
+    this.endTurn.show(false);
+    this.resumeGame.show(false);
+    this.quitGame.show(false);
+}
+
+Baltek.Presenter.prototype.disableAllGameButtons = function(){
+    this.newGame.enable(false);
+    this.blueKind.enable(false);
+    this.redKind.enable(false);
+    this.kickoff.enable(false);
+    this.useBonus.enable(false);
+    this.endTurn.enable(false);
+    this.resumeGame.enable(false);
+    this.quitGame.enable(false);
 }
 
 Baltek.Presenter.prototype.updateFromNewGame = function(){
-    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromNewGame: " +
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromBlueKind: " +
                                         this.newGame.element.id + " has notified me." );
+
+    Baltek.Utils.assert( ! this.newGameHasBeenStarted, "Baltek.Presenter.prototype.updateFromNewGame(): newGameHasBeenStarted" );
+    this.state.blueKind = this.blueKind.getSelection();
+    this.state.redKind = this.redKind.getSelection();
+    this.state.newGameHasBeenStarted = true;
+    this.updateState();
+
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromBlueKind:" +
+                                        " this.state.blueKind=" + this.state.blueKind +
+                                        " this.state.redKind=" + this.state.redKind );
+}
+
+Baltek.Presenter.prototype.updateFromBlueKind = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromBlueKind: " +
+                                        this.blueKind.element.id + " has notified me." );
+
+    Baltek.Utils.assert( ! this.newGameHasBeenStarted, "Baltek.Presenter.prototype.updateFromBlueKind(): newGameHasBeenStarted" );
+    this.state.blueKind = this.blueKind.getSelection();
+}
+
+Baltek.Presenter.prototype.updateFromRedKind = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromRedKind: " +
+                                        this.redKind.element.id + " has notified me." );
+    Baltek.Utils.assert( ! this.newGameHasBeenStarted, "Baltek.Presenter.prototype.updateFromRedKind(): newGameHasBeenStarted" );
+    this.state.redKind = this.redKind.getSelection();
+}
+
+Baltek.Presenter.prototype.updateFromKickoff = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromKickoff: " +
+                                        this.kickoff.element.id + " has notified me." );
+}
+
+Baltek.Presenter.prototype.updateFromUseBonus = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromUseBonus: " +
+                                        this.useBonus.element.id + " has notified me." );
+}
+
+Baltek.Presenter.prototype.updateFromEndTurn = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromEndTurn: " +
+                                        this.endTurn.element.id + " has notified me." );
+}
+
+Baltek.Presenter.prototype.updateFromResumeGame = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromResumeGame: " +
+                                        this.resumeGame.element.id + " has notified me." );
+}
+
+Baltek.Presenter.prototype.updateFromQuitGame = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromQuitGame: " +
+                                        this.quitGame.element.id + " has notified me." );
 }
 
 Baltek.Presenter.prototype.updateFromLanguage = function(){
@@ -465,12 +576,41 @@ Baltek.Presenter.prototype.updateFromLanguage = function(){
                                         this.language.element.id + " has notified me." );
 }
 
+Baltek.Presenter.prototype.updateFromCoordinates = function(){
+    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromCoordinates: " +
+                                        this.coordinates.element.id + " has notified me." );
+}
+
 Baltek.Presenter.prototype.updateFromObservable = function(observable){
     if ( observable === this.newGame ) {
         this.updateFromNewGame();
 
+    } else if ( observable === this.blueKind ) {
+        this.updateFromBlueKind();
+
+    } else if ( observable === this.redKind ) {
+        this.updateFromRedKind();
+
+    } else if ( observable === this.kickoff ) {
+        this.updateFromKickoff();
+
+    } else if ( observable === this.useBonus ) {
+        this.updateFromUseBonus();
+
+    } else if ( observable === this.endTurn ) {
+        this.updateFromEndTurn();
+
+    } else if ( observable === this.resumeGame ) {
+        this.updateFromResumeGame();
+
+    } else if ( observable === this.quitGame ) {
+        this.updateFromQuitGame();
+
     } else if ( observable === this.language ) {
         this.updateFromLanguage();
+
+    } else if ( observable === this.coordinates ) {
+        this.updateFromCoordinates();
 
     } else {
         Baltek.Utils.assert( false, "Baltek.Presenter.prototype.updateFromObservable(): observable not managed" );
