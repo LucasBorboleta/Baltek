@@ -400,6 +400,226 @@ Baltek.DebugZone.writeMessage = function(text){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
+Baltek.Config = function(){
+    this.$init();
+};
+
+Baltek.Utils.inheritPrototype(Baltek.Config, Object);
+
+Baltek.Config.prototype.$init = function(){
+}
+
+Baltek.Config.prototype.switch = function(presenter, config){
+    presenter.config = config;
+    presenter.config.setup(presenter);
+}
+
+Baltek.Config.prototype.setup = function(presenter){
+    presenter.hideAllGameButtons();
+    presenter.disableAllGameButtons();
+}
+
+Baltek.Config.prototype.updateFromStartGame = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromStartGame(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromRestartGame = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromRestartGame(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromResumeGame = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromResumeGame(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromQuitGame = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromQuitGame(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromBlueKind = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromBlueKind(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromRedKind = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromRedKind(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromKickoff = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromKickoff(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromUseBonus = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromUseBonus(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromEndTurn = function(presenter){
+    Baltek.Utils.assert( false, "Baltek.Config.prototype.updateFromEndTurn(): unexpected call" );
+}
+
+Baltek.Config.prototype.updateFromLanguage = function(presenter){
+    presenter.i18nator.setLanguage(presenter.language.getSelection());
+}
+
+Baltek.Config.prototype.updateFromCoordinates = function(presenter){
+    Baltek.DebugZone.writeMessage( "Baltek.Config.prototype.updateFromCoordinates: " +
+                                        presenter.coordinates.element.id + " has notified me." );
+}
+///////////////////////////////////////////////////////////////////////////////
+Baltek.ConfigGameIsReadyToStart = function(){
+    this.$init();
+};
+
+Baltek.ConfigGameIsReadyToStart.singleton_ = null;
+
+Baltek.ConfigGameIsReadyToStart.getSingleton = function(){
+    if ( Baltek.ConfigGameIsReadyToStart.singleton_ === null ) {
+        Baltek.ConfigGameIsReadyToStart.singleton_ = new Baltek.ConfigGameIsReadyToStart();
+    }
+    return Baltek.ConfigGameIsReadyToStart.singleton_;
+}
+
+Baltek.Utils.inheritPrototype(Baltek.ConfigGameIsReadyToStart, Baltek.Config);
+
+Baltek.ConfigGameIsReadyToStart.prototype.$init = function(){
+    Baltek.ConfigGameIsReadyToStart.super.$init.call(this);
+}
+
+Baltek.ConfigGameIsReadyToStart.prototype.setup = function(presenter){
+    presenter.hideAllGameButtons();
+    presenter.startGame.show(true);
+    presenter.blueKind.show(true);
+    presenter.redKind.show(true);
+
+    presenter.disableAllGameButtons();
+    presenter.startGame.enable(true);
+    presenter.blueKind.enable(true);
+    presenter.redKind.enable(true);
+}
+
+Baltek.ConfigGameIsReadyToStart.prototype.updateFromStartGame = function(presenter){
+    presenter.state.blueKind = presenter.blueKind.getSelection();
+    presenter.state.redKind = presenter.redKind.getSelection();
+    this.switch(presenter, Baltek.ConfigGameIsRunning.getSingleton());
+}
+
+Baltek.ConfigGameIsReadyToStart.prototype.updateFromBlueKind = function(presenter){
+    presenter.state.blueKind = presenter.blueKind.getSelection();
+    this.switch(presenter, Baltek.ConfigGameIsReadyToStart.getSingleton());
+}
+
+Baltek.ConfigGameIsReadyToStart.prototype.updateFromRedKind = function(presenter){
+    presenter.state.redKind = presenter.redKind.getSelection();
+    this.switch(presenter, Baltek.ConfigGameIsReadyToStart.getSingleton());
+}
+///////////////////////////////////////////////////////////////////////////////
+Baltek.ConfigGameIsRunning = function(){
+    this.$init();
+};
+
+Baltek.ConfigGameIsRunning.singleton_ = null;
+
+Baltek.ConfigGameIsRunning.getSingleton = function(){
+    if ( Baltek.ConfigGameIsRunning.singleton_ === null ) {
+        Baltek.ConfigGameIsRunning.singleton_ = new Baltek.ConfigGameIsRunning();
+    }
+    return Baltek.ConfigGameIsRunning.singleton_;
+}
+
+Baltek.Utils.inheritPrototype(Baltek.ConfigGameIsRunning, Baltek.Config);
+
+Baltek.ConfigGameIsRunning.prototype.$init = function(){
+    Baltek.ConfigGameIsRunning.super.$init.call(this);
+}
+
+Baltek.ConfigGameIsRunning.prototype.setup = function(presenter){
+    presenter.hideAllGameButtons();
+    presenter.quitGame.show(true);
+    presenter.blueKind.show(true);
+    presenter.redKind.show(true);
+
+    presenter.disableAllGameButtons();
+    presenter.quitGame.enable(true);
+}
+
+Baltek.ConfigGameIsRunning.prototype.updateFromQuitGame = function(presenter){
+    this.switch(presenter, Baltek.ConfigGameIsReadyToQuit.getSingleton());
+}
+///////////////////////////////////////////////////////////////////////////////
+Baltek.ConfigGameIsReadyToQuit = function(){
+    this.$init();
+};
+
+Baltek.ConfigGameIsReadyToQuit.singleton_ = null;
+
+Baltek.ConfigGameIsReadyToQuit.getSingleton = function(){
+    if ( Baltek.ConfigGameIsReadyToQuit.singleton_ === null ) {
+        Baltek.ConfigGameIsReadyToQuit.singleton_ = new Baltek.ConfigGameIsReadyToQuit();
+    }
+    return Baltek.ConfigGameIsReadyToQuit.singleton_;
+}
+
+Baltek.Utils.inheritPrototype(Baltek.ConfigGameIsReadyToQuit, Baltek.Config);
+
+Baltek.ConfigGameIsReadyToQuit.prototype.$init = function(){
+    Baltek.ConfigGameIsReadyToQuit.super.$init.call(this);
+}
+
+Baltek.ConfigGameIsReadyToQuit.prototype.setup = function(presenter){
+    presenter.hideAllGameButtons();
+    presenter.resumeGame.show(true);
+    presenter.quitGame.show(true);
+    presenter.blueKind.show(true);
+    presenter.redKind.show(true);
+
+    presenter.disableAllGameButtons();
+    presenter.resumeGame.enable(true);
+    presenter.quitGame.enable(true);
+}
+
+Baltek.ConfigGameIsReadyToQuit.prototype.updateFromResumeGame = function(presenter){
+    this.switch(presenter, Baltek.ConfigGameIsRunning.getSingleton());
+}
+
+Baltek.ConfigGameIsReadyToQuit.prototype.updateFromQuitGame = function(presenter){
+    this.switch(presenter, Baltek.ConfigGameIsFinished.getSingleton());
+}
+///////////////////////////////////////////////////////////////////////////////
+Baltek.ConfigGameIsFinished = function(){
+    this.$init();
+};
+
+Baltek.ConfigGameIsFinished.singleton_ = null;
+
+Baltek.ConfigGameIsFinished.getSingleton = function(){
+    if ( Baltek.ConfigGameIsFinished.singleton_ === null ) {
+        Baltek.ConfigGameIsFinished.singleton_ = new Baltek.ConfigGameIsFinished();
+    }
+    return Baltek.ConfigGameIsFinished.singleton_;
+}
+
+Baltek.Utils.inheritPrototype(Baltek.ConfigGameIsFinished, Baltek.Config);
+
+Baltek.ConfigGameIsFinished.prototype.$init = function(){
+    Baltek.ConfigGameIsFinished.super.$init.call(this);
+}
+
+Baltek.ConfigGameIsFinished.prototype.setup = function(presenter){
+    presenter.hideAllGameButtons();
+    presenter.restartGame.show(true);
+    presenter.blueKind.show(true);
+    presenter.redKind.show(true);
+
+    presenter.disableAllGameButtons();
+    presenter.restartGame.enable(true);
+}
+
+Baltek.ConfigGameIsFinished.prototype.updateFromRestartGame = function(presenter){
+    this.switch(presenter, Baltek.ConfigGameIsReadyToStart.getSingleton());
+}
+
+Baltek.ConfigGameIsFinished.prototype.updateFromQuitGame = function(presenter){
+    this.switch(presenter, Baltek.ConfigGameIsFinished.getSingleton());
+}
+///////////////////////////////////////////////////////////////////////////////
 Baltek.Presenter = function(){
     this.$init();
 };
@@ -407,6 +627,9 @@ Baltek.Presenter = function(){
 Baltek.Utils.inheritPrototype(Baltek.Presenter, Object);
 
 Baltek.Presenter.prototype.$init = function(){
+
+    this.initState();
+
     this.i18nator = new Baltek.I18nator(Baltek.I18nTranslations, "fr");
 
     this.startGame = new Baltek.Button( "Baltek_ButtonZone_StartGame" , this.i18nator);
@@ -457,21 +680,11 @@ Baltek.Presenter.prototype.$init = function(){
     this.about = new Baltek.FileButton( "Baltek_ButtonZone_About" , this.i18nator);
     //this.about.registerObserver(this);
 
-    this.defineStates();
-    this.initState();
-    this.updateState();
-}
-
-Baltek.Presenter.prototype.defineStates = function(){
-    this.GAME_IS_READY_TO_START = 1000;
-    this.GAME_IS_RUNNING = 2000;
-    this.GAME_IS_READY_TO_QUIT = 3000;
-    this.GAME_IS_FINISHED = 4000;
+    this.config = Baltek.ConfigGameIsReadyToStart.getSingleton();
+    this.config.setup(this);
 }
 
 Baltek.Presenter.prototype.initState = function(){
-
-    this.gameState = this.GAME_IS_READY_TO_START;
 
     this.state = {};
 
@@ -487,47 +700,6 @@ Baltek.Presenter.prototype.initState = function(){
     this.state.newGameHasBeenStarted = false;
 
     this.state.newSetHasBeenStarted = false;
-}
-
-Baltek.Presenter.prototype.updateState = function(){
-    this.hideAllGameButtons();
-    this.disableAllGameButtons();
-
-    if ( this.gameState === this.GAME_IS_READY_TO_START ) {
-        this.startGame.show(true);
-        this.blueKind.show(true);
-        this.redKind.show(true);
-
-        this.startGame.enable(true);
-        this.blueKind.enable(true);
-        this.redKind.enable(true);
-
-    } else if ( this.gameState === this.GAME_IS_RUNNING ) {
-        this.quitGame.show(true);
-        this.blueKind.show(true);
-        this.redKind.show(true);
-
-        this.quitGame.enable(true);
-
-    } else if ( this.gameState === this.GAME_IS_READY_TO_QUIT ) {
-        this.resumeGame.show(true);
-        this.quitGame.show(true);
-        this.blueKind.show(true);
-        this.redKind.show(true);
-
-        this.resumeGame.enable(true);
-        this.quitGame.enable(true);
-
-    } else if ( this.gameState === this.GAME_IS_FINISHED ) {
-        this.restartGame.show(true);
-        this.blueKind.show(true);
-        this.redKind.show(true);
-
-        this.restartGame.enable(true);
-
-    } else {
-        Baltek.Utils.assert( false, "Baltek.Presenter.prototype.updateState(): this.gameState" );
-    }
 }
 
 Baltek.Presenter.prototype.hideAllGameButtons = function(){
@@ -554,112 +726,39 @@ Baltek.Presenter.prototype.disableAllGameButtons = function(){
     this.quitGame.enable(false);
 }
 
-Baltek.Presenter.prototype.updateFromStartGame = function(){
-    Baltek.Utils.assert( this.gameState === this.GAME_IS_READY_TO_START,
-                         "Baltek.Presenter.prototype.updateFromStartGame(): this.gameState" );
-    this.state.blueKind = this.blueKind.getSelection();
-    this.state.redKind = this.redKind.getSelection();
-    this.gameState = this.GAME_IS_RUNNING;
-    this.updateState();
-}
-
-Baltek.Presenter.prototype.updateFromRestartGame = function(){
-    Baltek.Utils.assert( this.gameState === this.GAME_IS_FINISHED,
-                         "Baltek.Presenter.prototype.updateFromRestartGame(): this.gameState" );
-    this.gameState = this.GAME_IS_READY_TO_START;
-    this.updateState();
-}
-
-Baltek.Presenter.prototype.updateFromResumeGame = function(){
-    Baltek.Utils.assert( this.gameState === this.GAME_IS_READY_TO_QUIT,
-                        "Baltek.Presenter.prototype.updateFromResumeGame(): this.gameState" );
-    this.gameState = this.GAME_IS_RUNNING;
-    this.updateState();
-}
-
-Baltek.Presenter.prototype.updateFromQuitGame = function(){
-    if ( this.gameState === this.GAME_IS_RUNNING ) {
-        this.gameState = this.GAME_IS_READY_TO_QUIT;
-
-    } else if ( this.gameState === this.GAME_IS_READY_TO_QUIT ) {
-        this.gameState = this.GAME_IS_FINISHED;
-
-    } else {
-        Baltek.Utils.assert( false,
-                            "Baltek.Presenter.prototype.updateFromResumeGame(): this.gameState" );
-    }
-    this.updateState();
-}
-
-Baltek.Presenter.prototype.updateFromBlueKind = function(){
-    Baltek.Utils.assert( this.gameState === this.GAME_IS_READY_TO_START,
-                         "Baltek.Presenter.prototype.updateFromBlueKind(): this.gameState" );
-    this.state.blueKind = this.blueKind.getSelection();
-}
-
-Baltek.Presenter.prototype.updateFromRedKind = function(){
-    Baltek.Utils.assert( this.gameState === this.GAME_IS_READY_TO_START,
-                         "Baltek.Presenter.prototype.updateFromRedKind(): this.gameState" );
-    this.state.redKind = this.redKind.getSelection();
-}
-
-Baltek.Presenter.prototype.updateFromKickoff = function(){
-    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromKickoff: " +
-                                        this.kickoff.element.id + " has notified me." );
-}
-
-Baltek.Presenter.prototype.updateFromUseBonus = function(){
-    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromUseBonus: " +
-                                        this.useBonus.element.id + " has notified me." );
-}
-
-Baltek.Presenter.prototype.updateFromEndTurn = function(){
-    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromEndTurn: " +
-                                        this.endTurn.element.id + " has notified me." );
-}
-
-Baltek.Presenter.prototype.updateFromLanguage = function(){
-    this.i18nator.setLanguage(this.language.getSelection());
-}
-
-Baltek.Presenter.prototype.updateFromCoordinates = function(){
-    Baltek.DebugZone.writeMessage( "Baltek.Presenter.prototype.updateFromCoordinates: " +
-                                        this.coordinates.element.id + " has notified me." );
-}
-
 Baltek.Presenter.prototype.updateFromObservable = function(observable){
     if ( observable === this.startGame ) {
-        this.updateFromStartGame();
+        this.config.updateFromStartGame(this);
 
     } else if ( observable === this.restartGame ) {
-        this.updateFromRestartGame();
+        this.config.updateFromRestartGame(this);
 
     } else if ( observable === this.resumeGame ) {
-        this.updateFromResumeGame();
+        this.config.updateFromResumeGame(this);
 
     } else if ( observable === this.quitGame ) {
-        this.updateFromQuitGame();
+        this.config.updateFromQuitGame(this);
 
     } else if ( observable === this.blueKind ) {
-        this.updateFromBlueKind();
+        this.config.updateFromBlueKind(this);
 
     } else if ( observable === this.redKind ) {
-        this.updateFromRedKind();
+        this.config.updateFromRedKind(this);
 
     } else if ( observable === this.kickoff ) {
-        this.updateFromKickoff();
+        this.config.updateFromKickoff(this);
 
     } else if ( observable === this.useBonus ) {
-        this.updateFromUseBonus();
+        this.config.updateFromUseBonus(this);
 
     } else if ( observable === this.endTurn ) {
-        this.updateFromEndTurn();
+        this.config.updateFromEndTurn(this);
 
     } else if ( observable === this.language ) {
-        this.updateFromLanguage();
+        this.config.updateFromLanguage(this);
 
     } else if ( observable === this.coordinates ) {
-        this.updateFromCoordinates();
+        this.config.updateFromCoordinates(this);
 
     } else {
         Baltek.Utils.assert( false, "Baltek.Presenter.prototype.updateFromObservable(): observable not managed" );
