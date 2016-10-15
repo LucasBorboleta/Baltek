@@ -24,7 +24,7 @@ Baltek.Utils.$init = function(){
 }
 
 Baltek.Utils.assert = function(condition, message){
-    if( ! condition ){
+    if( ! condition ) {
         var text = "Baltek.Utils.assert(): failure: " + message;
         console.log(text);
         Baltek.DebugZone.writeMessage(text);
@@ -36,7 +36,7 @@ Baltek.Utils.assert = function(condition, message){
 Baltek.Utils.getOwnProperties = function(anObject){
     var properties = [];
     var aProperty;
-    for (aProperty in anObject) {
+    for ( aProperty in anObject ) {
         if ( anObject.hasOwnProperty(aProperty) ) {
             properties.push(aProperty);
         }
@@ -83,7 +83,7 @@ Baltek.Observable.prototype.$init = function(){
 Baltek.Observable.prototype.notifyObservers = function(){
     var n = this.observerCollection.length;
     var i = 0;
-    for (i=0; i < n ; i++){
+    for ( i=0; i < n ; i++ ) {
         this.observerCollection[i].updateFromObservable(this);
     }
 }
@@ -117,11 +117,11 @@ Baltek.I18nator.prototype.$init = function(translations, fallbackLanguage){
     this.availableLanguages = Baltek.Utils.getOwnProperties(this.translations);
 
     Baltek.Utils.assert( Baltek.Utils.hasValue(this.availableLanguages, fallbackLanguage),
-                         "Baltek.I18nator.prototype.$init(): fallbackLanguage");
+                         "Baltek.I18nator.prototype.$init(): fallbackLanguage" );
     this.fallbackLanguage = fallbackLanguage ;
 
     this.language = this.getDefaultLanguage();
-    if( ! Baltek.Utils.hasValue(this.availableLanguages, this.language) ) {
+    if ( ! Baltek.Utils.hasValue(this.availableLanguages, this.language) ) {
         this.language = this.fallbackLanguage;
     }
 }
@@ -147,7 +147,7 @@ Baltek.I18nator.prototype.getValueForKey = function(i18nKeyPrefix, i18nKeySuffix
     var i18nKey = i18nKeyPrefix + this.keySeparator + i18nKeySuffix;
 
     Baltek.Utils.assert( this.translations[this.language].hasOwnProperty(i18nKey),
-                         "Baltek.I18nator.prototype.getValueForKey(): i18nKey");
+                         "Baltek.I18nator.prototype.getValueForKey(): i18nKey" );
 
     var value = this.translations[this.language][i18nKey];
     return value;
@@ -155,7 +155,7 @@ Baltek.I18nator.prototype.getValueForKey = function(i18nKeyPrefix, i18nKeySuffix
 
 Baltek.I18nator.prototype.setLanguage = function(language){
     Baltek.Utils.assert( Baltek.Utils.hasValue(this.availableLanguages, language),
-                         "Baltek.I18nator.prototype.setLanguage(): language");
+                         "Baltek.I18nator.prototype.setLanguage(): language" );
     this.language = language;
     this.notifyObservers();
 }
@@ -184,7 +184,7 @@ Baltek.Widget.prototype.enable = function(condition){
 }
 
 Baltek.Widget.prototype.getI18nValueForKeySuffix = function(i18nKeySuffix){
-    var translatedText = this.i18nator.getValueForKey( this.i18nKeyPrefix, i18nKeySuffix );
+    var translatedText = this.i18nator.getValueForKey(this.i18nKeyPrefix, i18nKeySuffix);
     return translatedText;
 }
 
@@ -246,7 +246,7 @@ Baltek.Utils.inheritPrototype(Baltek.Selector, Baltek.Widget);
 Baltek.Selector.prototype.$init = function(id, i18nator, values){
     Baltek.Selector.super.$init.call(this, id, i18nator);
 
-    Baltek.Utils.assert( (values.length >= 2), "Baltek.Selector.prototype.$init(): values.length");
+    Baltek.Utils.assert( (values.length >= 2), "Baltek.Selector.prototype.$init(): values.length" );
     this.values = values;
 
     // Finalize the construction regarding I18n.
@@ -259,7 +259,7 @@ Baltek.Selector.prototype.getSelection = function(){
 
 Baltek.Selector.prototype.setSelection = function(selection){
     Baltek.Utils.assert( Baltek.Utils.hasValue(this.values, selection),
-                         "Baltek.Selector.prototype.setSelection(): selection");
+                         "Baltek.Selector.prototype.setSelection(): selection" );
     this.element.value = selection;
 }
 
@@ -273,7 +273,7 @@ Baltek.Selector.prototype.updateFromI18n = function(){
 
     var n = this.values.length;
     var i = 0;
-    for (i=0; i < n ; i++) {
+    for ( i=0; i < n ; i++ ) {
         var value = this.values[i];
         var text = this.getI18nValueForKeySuffix(value);
 
@@ -343,6 +343,7 @@ Baltek.DebugZone = { initCalled: false };
 Baltek.DebugZone.$init = function(){
     if ( ! Baltek.DebugZone.initCalled ) {
         Baltek.DebugZone.initCalled = true;
+        Baltek.DebugZone.messageCount = 0;
 
         Baltek.DebugZone.isEnabled = ( document.getElementById( "Baltek_DebugZone" ) !== null ) ;
         Baltek.DebugZone.messages = document.getElementById( "Baltek_DebugZone_Messages" );
@@ -360,8 +361,7 @@ Baltek.DebugZone.$init = function(){
                 false);
         }
 
-        Baltek.DebugZone.writeMessage( "Baltek.DebugZone.$init(): Ready to debug." );
-        Baltek.DebugZone.writeMessage( "Baltek.DebugZone.$init(): Do you see these 2 lines?" );
+        Baltek.DebugZone.writeMessage( "Baltek.DebugZone.$init(): done" );
     }
 }
 
@@ -372,22 +372,22 @@ Baltek.DebugZone.clearMessages = function(){
 }
 
 Baltek.DebugZone.enable = function(){
-    Baltek.DebugZone.writeMessage( "Enable");
+    Baltek.DebugZone.writeMessage( "Enable" );
     Baltek.presenter.startGame.enable(true);
 }
 
 Baltek.DebugZone.disable = function(){
-    Baltek.DebugZone.writeMessage( "Disable");
+    Baltek.DebugZone.writeMessage( "Disable" );
     Baltek.presenter.startGame.enable(false);
 }
 
 Baltek.DebugZone.hide = function(){
-    Baltek.DebugZone.writeMessage( "Hide");
+    Baltek.DebugZone.writeMessage( "Hide" );
     Baltek.presenter.startGame.show(false);
 }
 
 Baltek.DebugZone.show = function(){
-    Baltek.DebugZone.writeMessage( "Show");
+    Baltek.DebugZone.writeMessage( "Show" );
     Baltek.presenter.startGame.show(true);
     Baltek.presenter.startGame.setColor( "white" );
     Baltek.presenter.startGame.setBackgroundColor( "blue" );
@@ -395,8 +395,10 @@ Baltek.DebugZone.show = function(){
 
 Baltek.DebugZone.writeMessage = function(text){
     if ( Baltek.DebugZone.isEnabled ) {
-        Baltek.DebugZone.messages.innerHTML = "<li>" + text + "</li>" +
-                                              Baltek.DebugZone.messages.innerHTML;
+        Baltek.DebugZone.messageCount += 1 ;
+
+        Baltek.DebugZone.messages.innerHTML = Baltek.DebugZone.messageCount + ":" +
+                                              text + "<br/>" + Baltek.DebugZone.messages.innerHTML;
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -496,18 +498,18 @@ Baltek.PresenterStateIsReadyToStart.prototype.enter = function(presenter){
 }
 
 Baltek.PresenterStateIsReadyToStart.prototype.updateFromStartGame = function(presenter){
-    presenter.gameModel.blueKind = presenter.blueKind.getSelection();
-    presenter.gameModel.redKind = presenter.redKind.getSelection();
+    presenter.blueAgent.kind = presenter.blueKind.getSelection();
+    presenter.redAgent.kind = presenter.redKind.getSelection();
     this.setState(presenter, Baltek.PresenterStateIsRunning.getInstance());
 }
 
 Baltek.PresenterStateIsReadyToStart.prototype.updateFromBlueKind = function(presenter){
-    presenter.gameModel.blueKind = presenter.blueKind.getSelection();
+    presenter.blueAgent.kind = presenter.blueKind.getSelection();
     this.setState(presenter, Baltek.PresenterStateIsReadyToStart.getInstance());
 }
 
 Baltek.PresenterStateIsReadyToStart.prototype.updateFromRedKind = function(presenter){
-    presenter.gameModel.redKind = presenter.redKind.getSelection();
+    presenter.redAgent.kind = presenter.redKind.getSelection();
     this.setState(presenter, Baltek.PresenterStateIsReadyToStart.getInstance());
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -628,9 +630,17 @@ Baltek.Utils.inheritPrototype(Baltek.Presenter, Object);
 
 Baltek.Presenter.prototype.$init = function(){
 
+    // TODO: refactor that as a class
     this.initGameModel();
 
-    this.i18nator = new Baltek.I18nator(Baltek.I18nTranslations, "fr");
+    // TODO: the Presenter has to interact with agents to retrieve decisions;
+    // TODO: this design is suggested from IA or remote human configurations.
+    // TODO: decision is retrieved from either view events or IA/remote events.
+    // TODO: Project priorities: 1) human/human; 2) human/IA ; 3) IA/IA ; 4) human/remote-human.
+    this.blueAgent = { kind: "" };
+    this.redAgent = { kind: "" };
+
+    this.i18nator = new Baltek.I18nator(Baltek.I18nTranslations, "fr" );
 
     this.startGame = new Baltek.Button( "Baltek_ButtonZone_StartGame" , this.i18nator);
     this.startGame.registerObserver(this);
@@ -698,7 +708,6 @@ Baltek.Presenter.prototype.initGameModel = function(){
     this.gameModel.redUsedBonus = false;
 
     this.gameModel.newGameHasBeenStarted = false;
-
     this.gameModel.newSetHasBeenStarted = false;
 }
 
