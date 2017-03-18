@@ -88,3 +88,15 @@ These classes are responsible for:
 
 - Initializing the remote connection.
 - Transforming local event into remote event, and vice versa.
+
+# The game phases
+
+Hereafter are the phases that are relevant and useful for organizing the software
+
+- 1 match is composed of n >= 1 rounds
+- 1 round begins after each kickoff
+- 1 round ends after a goal by one player
+- 1 round is composed of n >= 1 turns
+- 1 turn is devoted to a given player
+- 1 turn is composed of n >= 0 moves
+- 1 move is the smallest action that a player can decide
