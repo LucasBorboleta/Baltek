@@ -43,6 +43,8 @@ Baltek.Player.prototype.buildMove = function(move){
     var destinationBox = null;
     // TODO: decision of human or AI.
     move.setDestinationBox(destinationBox);
+
+    move.commit();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
