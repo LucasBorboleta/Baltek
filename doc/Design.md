@@ -172,13 +172,13 @@ Let us determine a bound for the possible moves:
 - Only click a box, no attempt to click on the ball or the player inside the box.
 - If the box only contains the footballer:
 
-  - the first click selects the source box for a "run"
-  - the second click selects the source box for a "sprint" if it is possible
-  - the third click unselect the source box.
+  - the first click selects the footballer for a "run"
+  - the second click selects the footballer for a "sprint" if it is possible
+  - the third click unselect the footballer.
 
 - If the box only contains the footballer and the ball:
 
-  - the first click selects the source box for a "kick" if it is possible
-  - the second click selects the source box for a "run"
-  - the third click selects the source box for a "sprint" if it is possible
-  - the fourth click unselect the source box.
+  - the first click selects the ball for a "kick" if it is possible
+  - the second click selects the footballer for a "run"
+  - the third click selects the footballer for a "sprint" if it is possible
+  - the fourth click unselect the footballer.
