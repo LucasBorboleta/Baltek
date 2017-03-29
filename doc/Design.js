@@ -21,6 +21,17 @@ var rulesEngine = new Baltek.RulesEngine();
 rulesEngine.connectBluePlayer(bluePlayer);
 rulesEngine.connectBluePlayer(redPlayer);
 
+//TODO: implement blueTeam and redTeam inside RulesEngine
+//TODO: bluePlayer controls the blueTeam
+//TODO: redPlayer controls the redTeam
+//TODO: this.blueTeam.score
+//TODO: this.blueTeam.footballers
+//TODO: this.blueTeam.goalBox
+//TODO: this.blueTeam.player = bluePlayer
+//TODO: this.activeTeam = this.blueTeam
+//TODO: this.passiveTeam
+
+
 // Init the match
 rulesEngine.matchInit();
 
@@ -35,8 +46,8 @@ Baltek.RulesEngine.prototype.matchInit = function(){
     // The blue player always starts the first trun
     this.activePlayer = this.bluePlayer;
     this.passivePlayer = this.redPlayer;
-    this.blueScore = 0;
-    this.redScore = 0;
+    this.match.blueScore = 0;
+    this.match.redScore = 0;
     this.match.isActive = true;
     this.roundInit();
 }
@@ -44,35 +55,68 @@ Baltek.RulesEngine.prototype.matchInit = function(){
 Baltek.RulesEngine.prototype.roundInit = function(){
     // Prepare the footballers and the ball for the kickoff
 
-    this.goal = false;
+    this.round.goal = false;
     this.round.isActive = true;
     this.turnInit();
 }
 
 Baltek.RulesEngine.prototype.turnInit = function(){
+    var CREDIT_MAX = 3;
     this.turn.credit = CREDIT_MAX;
     this.turn.isActive = true;
+    this.moveInit();
 }
 
 Baltek.RulesEngine.prototype.moveInit = function(){
     this.move.isActive = true;
+
+    this.move.sourceIsSelected = false;
+    this.move.sources = null;
+    this.move.selectedSource = null;
+
+    this.move.kindIsSelected = false;
+    this.move.kinds = null;
+    this.move.selectedKind = null;
+
+    this.move.destinationIsSelected = false;
+    this.move.destinations = null;
+    this.move.selectedDestination = null;
+}
+
+Baltek.RulesEngine.prototype.moveFindSources = function(){
+    // ... and update this.move.sources
+}
+
+Baltek.RulesEngine.prototype.selectSource = function(source){
+    // check source in this.move.sources
+    this.move.selectedSource = source;
+    this.move.sourceIsSelected = true;
+    this.update();
+}
+
+Baltek.RulesEngine.prototype.moveFindKinds = function(){
+    // ... and update this.move.kinds
+}
+
+Baltek.RulesEngine.prototype.selectKind = function(kind){
+    // check kind in this.move.kinds
+    this.move.selectedKind = kind;
+    this.move.kindIsSelected = true;
+    this.update();
+}
+
+Baltek.RulesEngine.prototype.moveFindDestinations = function(){
+    // ... and update this.move.destinations
+}
+
+Baltek.RulesEngine.prototype.selectDestination = function(destination){
+    // check destination in this.move.destinations
+    this.move.selectedDestination = destination;
+    this.move.destinationIsSelected = true;
+    this.update();
 }
 
 Baltek.RulesEngine.prototype.update = function(){
-    var SCORE_MAX = 2;
-    var CREDIT_MAX = 3;
-
-    if ( this.blueScore >= SCORE_MAX or this.redScore >= SCORE_MAX ) {
-        this.match.isActive = false;
-    }
-
-    if ( this.goal !== null ) {
-        this.round.isActive = false;
-    }
-
-    if ( this.turn.credit <= 0 ) {
-        this.turn.isActive = false;
-    }
 
     if ( this.match.isActive ) {
 
@@ -81,8 +125,48 @@ Baltek.RulesEngine.prototype.update = function(){
             if ( this.turn.isActive ) {
 
                 if ( this.move.isActive ) {
-                    // Update the possible moves, broken in three steps
-                    // Notify the activePlayer
+
+                    if ( this.move.sourceIsSelected ) {
+
+                        if ( this.move.kindIsSelected ) {
+
+                            if ( this.move.destinationIsSelected ) {
+                                this.move.isActive = false;
+
+                                // Compute the cost of the move
+                                this.turn.credit -= this.move.cost;
+                                this.turn.isActive = ( this.turn.credit <= 0 );
+
+                                // Check goal
+                                if ( this.round.goal ) {
+                                    this.round.isActive = false;
+
+                                    // update the scores
+
+                                    // check the scores
+                                    var SCORE_MAX = 2;
+
+                                    if ( this.match.blueScore >= SCORE_MAX or this.match.redScore >= SCORE_MAX ) {
+                                        this.match.isActive = false;
+                                    }
+                                }
+
+                            } else {
+                                // this.move.destinationIsSelected === false
+                                this.moveFindDestinations();
+                                // notify the activePlayer
+                            }
+
+                        } else {
+                            // this.move.kindIsSelected === false
+                            this.moveFindKinds();
+                            // notify the activePlayer
+                        }
+                    } else {
+                        // this.move.sourceIsSelected === false
+                        this.moveFindSources();
+                        // notify the activePlayer
+                    }
 
                 } else {
                     // this.move.isActive === false
@@ -123,36 +207,6 @@ Baltek.RulesEngine.prototype.setPassivePlayer = function(passivePlayer){
     if ( passivePlayer !== this.passivePlayer ) {
         this.switchActiveAndPassivePlayers();
     }
-}
-
-Baltek.RulesEngine.prototype.requestMove = function(player){
-    var move = new Baltek.RulesEngine.Move();
-    // etc
-    player.buildMove(move);
-}
-///////////////////////////////////////////////////////////////////////////////
-Baltek.Player.prototype.playTurn = function(){
-
-
-}
-
-Baltek.Player.prototype.buildMove = function(move){
-    var selectableSourceBoxes = move.getSelectableSourcesBoxes();
-    var sourceBox = null;
-    // TODO: decision of human or AI.
-    move.setSourceBox(sourceBox);
-
-    var selectableMoveKinds = move.getSelectableMoveKinds();
-    var moveKind = null;
-    // TODO: decision of human or AI.
-    move.setMoveKind(moveKind);
-
-    var selectableDestinationBoxes = move.getSelectableDestinationBoxes();
-    var destinationBox = null;
-    // TODO: decision of human or AI.
-    move.setDestinationBox(destinationBox);
-
-    move.commit();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
