@@ -30,7 +30,7 @@ rulesEngine.matchUpdate();
 ///////////////////////////////////////////////////////////////////////////////
 
 Baltek.RulesEngine.Team.prototype.$init = function(){
-    this.color = ... ; // Blue or Red
+    this.side = ... ; // Blue or Red
     this.footballers = null;
     this.goalDestination = null;
     this.player = null;
@@ -246,7 +246,7 @@ Baltek.RulesEngine.prototype.moveSelectSource = function(source){
 }
 
 //TODO: moveUnselectSource
-//TODO: moveUnselectDestination
+//TODO: moveUnselectKind
 
 Baltek.RulesEngine.prototype.moveSelectKind = function(kind){
     // Triggered by a Player
