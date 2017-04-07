@@ -28,9 +28,15 @@ rulesEngine.matchInit();
 rulesEngine.matchUpdate();
 
 ///////////////////////////////////////////////////////////////////////////////
+Baltek.RulesEngine.Footballer.prototype.$init = function(force){
+    this.force = force;
+    this.canKick = false;
+    this.canRun = false;
+    this.position = null;
+}
 
-Baltek.RulesEngine.Team.prototype.$init = function(){
-    this.side = ... ; // Blue or Red
+Baltek.RulesEngine.Team.prototype.$init = function(fieldSide){
+    this.fieldSide = fieldSide ;
     this.footballers = null;
     this.goalDestination = null;
     this.player = null;
@@ -38,10 +44,23 @@ Baltek.RulesEngine.Team.prototype.$init = function(){
     this.canSprint = false;
     this.haveGoaled = false;
     this.credit = 0;
+
+    // Populate the team
+    this.footballer3 = new Baltek.RulesEngine.Footballer(3);
+    this.footballer2x = new Baltek.RulesEngine.Footballer(2);
+    this.footballer2y = new Baltek.RulesEngine.Footballer(2);
+    this.footballer1x = new Baltek.RulesEngine.Footballer(1);
+    this.footballer1y = new Baltek.RulesEngine.Footballer(1);
+    this.footballer1z = new Baltek.RulesEngine.Footballer(1);
+    this.footballers.push(this.footballer3);
+    this.footballers.push(this.footballer2x);
+    this.footballers.push(this.footballer2y);
+    this.footballers.push(this.footballer1x);
+    this.footballers.push(this.footballer1y);
+    this.footballers.push(this.footballer1z);
 }
 
 //TODO: Team.prepareFootballers(kickoff);
-
 
 Baltek.RulesEngine.prototype.switchActiveAndPassiveTeams = function(){
     var oldActiveTeam = this.activeTeam;
@@ -190,7 +209,8 @@ Baltek.RulesEngine.prototype.turnUpdate = function(){
 }
 
 Baltek.RulesEngine.prototype.turnStop = function(){
-    // Triggered by a Player
+    // Triggered by the player of the activeTeam
+
     if ( this.turn.isActive ) {
         this.turn.isActive = false;
         this.matchUpdate();
@@ -216,24 +236,28 @@ Baltek.RulesEngine.prototype.moveUpdate = function(){
                 } else {
                     // this.move.destinationIsSelected === false
                     this.moveFindDestinations();
-                    // notify the activeTeam
+                    // notify the player of the activeTeam
+
                 }
 
             } else {
                 // this.move.kindIsSelected === false
                 this.moveFindKinds();
-                // notify the activeTeam
+                // notify the player of the activeTeam
+
             }
         } else {
             // this.move.sourceIsSelected === false
             this.moveFindSources();
-            // notify the activeTeam
+            // notify the player of the activeTeam
+
         }
     }
 }
 
 Baltek.RulesEngine.prototype.moveSelectSource = function(source){
-    // Triggered by a Player
+    // Triggered by the player of the activeTeam
+
     if ( this.move.isActive ) {
         if ( ! this.move.sourceIsSelected) {
             if ( Baltek.Utils.hasValue(this.move.sources, source) ) {
@@ -245,11 +269,49 @@ Baltek.RulesEngine.prototype.moveSelectSource = function(source){
     }
 }
 
-//TODO: moveUnselectSource
-//TODO: moveUnselectKind
+Baltek.RulesEngine.prototype.moveUnselectSource = function(source){
+    // Triggered by the player of the activeTeam
+
+    if ( this.move.isActive && this.move.sourceIsSelected ) {
+        this.move.cost = 0;
+
+        this.move.sourceIsSelected = false;
+        this.move.sources = null;
+        this.move.selectedSource = null;
+
+        this.move.kindIsSelected = false;
+        this.move.kinds = null;
+        this.move.selectedKind = null;
+
+        this.move.destinationIsSelected = false;
+        this.move.destinations = null;
+        this.move.selectedDestination = null;
+
+        this.matchUpdate();
+    }
+}
+
+Baltek.RulesEngine.prototype.moveUnselectKind = function(source){
+    // Triggered by the player of the activeTeam
+
+    if ( this.move.isActive && this.move.sourceIsSelected && this.move.kindIsSelected ) {
+        this.move.cost = 0;
+
+        this.move.kindIsSelected = false;
+        this.move.kinds = null;
+        this.move.selectedKind = null;
+
+        this.move.destinationIsSelected = false;
+        this.move.destinations = null;
+        this.move.selectedDestination = null;
+
+        this.matchUpdate();
+    }
+}
 
 Baltek.RulesEngine.prototype.moveSelectKind = function(kind){
-    // Triggered by a Player
+    // Triggered by the player of the activeTeam
+
     if ( this.move.isActive && this.move.sourceIsSelected ) {
         if ( ! this.move.kindIsSelected ) {
             if ( Baltek.Utils.hasValue(this.move.kinds, kind) ) {
@@ -262,7 +324,8 @@ Baltek.RulesEngine.prototype.moveSelectKind = function(kind){
 }
 
 Baltek.RulesEngine.prototype.moveSelectDestination = function(destination){
-    // Triggered by a Player
+    // Triggered by the player of the activeTeam
+
     if ( this.move.isActive && this.move.sourceIsSelected && this.move.kindIsSelected ) {
         if ( ! this.move.destinationIsSelected ) {
             if ( Baltek.Utils.hasValue(this.move.destinations, destination) ) {
