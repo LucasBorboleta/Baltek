@@ -3,55 +3,52 @@
 // This file does not contain production code.
 // This files just helps thinking about the design.
 
-///////////////////////////////////////////////////////////////////////////////
 // Study of abstract interaction between the RulesEngine and the two Players.
 // The GUI aspect is not considered here.
 
-// Create the two Players
-// All kinds of concrete class inherits the class Baltek.Player
+///////////////////////////////////////////////////////////////////////////////
+// Triggered by the Presenter
+
 var bluePlayer = new Baltek.HumanPlayer();
 var redPlayer = new Baltek.AiPlayer();
 var redPlayer = new Baltek.RemotePlayer(); // Also possible
-// etc
 
-// Create a new RulesEngine for each new match
 var rulesEngine = new Baltek.RulesEngine();
 
-// Connect the two Players on the RulesEngine
 rulesEngine.connectBluePlayer(bluePlayer);
 rulesEngine.connectBluePlayer(redPlayer);
 
-// Init the match
 rulesEngine.matchInit();
-
-// Start the interactions
 rulesEngine.matchUpdate();
 
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.RulesEngine.Footballer.prototype.$init = function(force){
+Baltek.RulesEngine.Footballer.prototype.$init = function(team, force){
+    this.team = team;
     this.force = force;
+    this.box = null;
     this.canKick = false;
     this.canRun = false;
-    this.position = null;
 }
-
-Baltek.RulesEngine.Team.prototype.$init = function(fieldSide){
-    this.fieldSide = fieldSide ;
-    this.footballers = null;
-    this.goalDestination = null;
+///////////////////////////////////////////////////////////////////////////////
+Baltek.RulesEngine.Team.prototype.$init = function(engine, teamIndex){
+    this.engine = engine ;
+    this.teamIndex = teamIndex ;
     this.player = null;
+    this.goalDestination = null;
     this.score = 0;
     this.canSprint = false;
     this.haveGoaled = false;
     this.credit = 0;
 
     // Populate the team
-    this.footballer3 = new Baltek.RulesEngine.Footballer(3);
-    this.footballer2x = new Baltek.RulesEngine.Footballer(2);
-    this.footballer2y = new Baltek.RulesEngine.Footballer(2);
-    this.footballer1x = new Baltek.RulesEngine.Footballer(1);
-    this.footballer1y = new Baltek.RulesEngine.Footballer(1);
-    this.footballer1z = new Baltek.RulesEngine.Footballer(1);
+    this.footballer3 = new Baltek.RulesEngine.Footballer(this, 3);
+    this.footballer2x = new Baltek.RulesEngine.Footballer(this, 2);
+    this.footballer2y = new Baltek.RulesEngine.Footballer(this, 2);
+    this.footballer1x = new Baltek.RulesEngine.Footballer(this, 1);
+    this.footballer1y = new Baltek.RulesEngine.Footballer(this, 1);
+    this.footballer1z = new Baltek.RulesEngine.Footballer(this, 1);
+
+    this.footballers = [];
     this.footballers.push(this.footballer3);
     this.footballers.push(this.footballer2x);
     this.footballers.push(this.footballer2y);
@@ -61,6 +58,63 @@ Baltek.RulesEngine.Team.prototype.$init = function(fieldSide){
 }
 
 //TODO: Team.prepareFootballers(kickoff);
+
+///////////////////////////////////////////////////////////////////////////////
+Baltek.RulesEngine.Field.prototype.$init = function(engine){
+    this.engine = engine;
+    this.nx = ... ;
+    this.ny = ... ;
+    this.boxes = [] ;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+Baltek.RulesEngine.box.prototype.$init = function(engine, ix, iy){
+    this.engine = engine;
+    this.ix = ix ;
+    this.iy = iy ;
+    this.canHostBall = false;
+    this.canHostFootballer = false;
+    this.ball = null ;
+    this.footballers = [] ;
+    this.footballers.push(null);
+    this.footballers.push(null);
+}
+
+Baltek.RulesEngine.box.prototype.setActiveFootballer = function(footballer){
+    if ( footballer.box !== null ) {
+        footballer.box.footballers[this.engine.activeTeam.teamIndex] = null;
+    }
+    this.footballers[this.engine.activeTeam.teamIndex] = footballer;
+    footballer.box = this;
+}
+
+Baltek.RulesEngine.box.prototype.getActiveFootballer = function(){
+    return this.footballers[this.engine.activeTeam.teamIndex];
+}
+
+Baltek.RulesEngine.box.prototype.getPassiveFootballer = function(){
+    return this.footballers[this.engine.passiveTeam.teamIndex];
+}
+///////////////////////////////////////////////////////////////////////////////
+
+Baltek.RulesEngine.prototype.$init = function(){
+    this.field = new Baltek.RulesEngine.Field(this);
+
+    var BLUE_INDEX = 0;
+    var RED_INDEX = 1;
+    this.blueTeam = new Baltek.RulesEngine.Team(this, BLUE_INDEX);
+    this.redTeam = new Baltek.RulesEngine.Team(this, RED_INDEX);
+    this.activeTeam = this.blueTeam;
+    this.passiveTeam = this.redTeam;
+}
+
+Baltek.RulesEngine.prototype.connectBluePlayer = function(bluePlayer){
+    this.blueTeam.player = bluePlayer;
+}
+
+Baltek.RulesEngine.prototype.connectRedPlayer = function(redPlayer){
+    this.redTeam.player = redPlayer;
+}
 
 Baltek.RulesEngine.prototype.switchActiveAndPassiveTeams = function(){
     var oldActiveTeam = this.activeTeam;
@@ -79,16 +133,6 @@ Baltek.RulesEngine.prototype.setPassiveTeam = function(passiveTeam){
     if ( passiveTeam !== this.passiveTeam ) {
         this.switchActiveAndPassiveTeams();
     }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-Baltek.RulesEngine.prototype.connectBluePlayer = function(bluePlayer){
-    this.blueTeam.player = bluePlayer;
-}
-
-Baltek.RulesEngine.prototype.connectRedPlayer = function(redPlayer){
-    this.redTeam.player = redPlayer;
 }
 
 Baltek.RulesEngine.prototype.matchInit = function(){
