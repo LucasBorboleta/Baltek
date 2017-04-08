@@ -29,6 +29,7 @@ Baltek.RulesEngine.Footballer.prototype.$init = function(team, force){
     this.canKick = false;
     this.canRun = false;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 Baltek.RulesEngine.Team.prototype.$init = function(engine, teamIndex){
     this.engine = engine ;
@@ -57,14 +58,101 @@ Baltek.RulesEngine.Team.prototype.$init = function(engine, teamIndex){
     this.footballers.push(this.footballer1z);
 }
 
-//TODO: Team.prepareFootballers(kickoff);
+Baltek.RulesEngine.Team.prototype.exitFromField = function(){
+    var n = this.footballers.length;
+    var i;
+    for (i=0; i<n; i++) {
+        this.footballers[i].exitFromField();
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 Baltek.RulesEngine.Field.prototype.$init = function(engine){
     this.engine = engine;
-    this.nx = ... ;
-    this.ny = ... ;
-    this.boxes = [] ;
+    this.ny = 5 ;
+    this.nx = 2*( this.ny + 1 ) ;
+
+    this.firstX = 0;
+    this.lastX = this.nx-1;
+    this.middleX = Math.round((this.firstX + this.lastX)/2);
+
+    this.firstY = 0;
+    this.lastY = this.ny-1;
+    this.middleY = Math.round((this.firstY + this.lastY)/2);
+
+    this.boxesByIndices = [] ;
+
+    var box = null;
+
+    for ( var ix=this.firstX; ix<=this.lastX; ix++ ) {
+        this.boxesByIndices.push([]);
+
+        for ( var iy=this.firstY; iy<=this.lastY; iy++ ) {
+            this.boxesByIndices[ix].push(null);
+
+            if ( ix === this.firstX || ix === this.lastX ) {
+                if ( iy === this.middleY ) {
+                    box = new Baltek.RulesEngine.Box(this.engine, ix , iy);
+                    box.canHostBall = true;
+                    box.canHostFootballer = false;
+                    this.boxesByIndices[ix][iy] = box;
+                }
+            } else {
+                box = new Baltek.RulesEngine.Box(this.engine, ix , iy);
+                box.canHostBall = true;
+                box.canHostFootballer = true;
+                this.boxesByIndices[ix][iy] = box;
+            }
+        }
+    }
+}
+
+Baltek.RulesEngine.Field.prototype.initPositions = function(engine){
+    var box = null;
+    for ( var ix=this.firstX; ix<=this.lastX; ix++ ) {
+        for ( var iy=this.firstY; iy<=this.lastY; iy++ ) {
+            box = this.boxesByIndices[ix][iy];
+            if ( box !== null ) {
+                box.footballers[this.engine.activeTeam.teamIndex] = null;
+                box.footballers[this.engine.passiveTeam.teamIndex] = null;
+            }
+        }
+    }
+    var n = 0;
+    n = this.engine.activeTeam.footballers.length;
+    for ( i=0; i<n; i++) {
+        this.engine.activeTeam.footballers[i].box = null;
+    }
+    n = this.engine.passiveTeam.footballers.length;
+    for ( i=0; i<n; i++) {
+        this.engine.passiveTeam.footballers[i].box = null;
+    }
+
+    var activeIndex = this.engine.activeTeam.teamIndex;
+    var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
+    var activeDirectionX = 1 - 2*activeIndex
+    this.engine.activeTeam.footballer3.moveToBox(activeOriginX + 5*activeDirectionX, this.middleY);
+    this.engine.activeTeam.footballer2x.moveToBox(activeOriginX + 5*activeDirectionX, this.firstY);
+    this.engine.activeTeam.footballer2y.moveToBox(activeOriginX + 5*activeDirectionX, this.lastY);
+    this.engine.activeTeam.footballer1x.moveToBox(activeOriginX + 3*activeDirectionX, this.firstY);
+    this.engine.activeTeam.footballer1y.moveToBox(activeOriginX + 3*activeDirectionX, this.middleY);
+    this.engine.activeTeam.footballer1z.moveToBox(activeOriginX + 3*activeDirectionX, this.lastY);
+
+    //TODO: move elsewhere
+    this.engine.activeTeam.goalDestination = this.boxesByIndices[activeOriginX + 11*activeDirectionX][this.middleY];
+
+    var passiveIndex = this.engine.passiveTeam.teamIndex;
+    var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
+    var passiveDirectionX = 1 - 2*passiveIndex
+    this.engine.passiveTeam.footballer3.moveToBox(passiveOriginX + 5*passiveDirectionX, this.middleY);
+    this.engine.passiveTeam.footballer2x.moveToBox(passiveOriginX + 4*passiveDirectionX, this.firstY);
+    this.engine.passiveTeam.footballer2y.moveToBox(passiveOriginX + 5*passiveDirectionX, this.lastY);
+    this.engine.passiveTeam.footballer1x.moveToBox(passiveOriginX + 3*passiveDirectionX, this.firstY);
+    this.engine.passiveTeam.footballer1y.moveToBox(passiveOriginX + 3*passiveDirectionX, this.middleY);
+    this.engine.passiveTeam.footballer1z.moveToBox(passiveOriginX + 3*passiveDirectionX, this.lastY);
+
+    //TODO: move elsewhere
+    this.engine.passiveTeam.goalDestination = this.boxesByIndices[passiveOriginX + 11*passiveDirectionX][this.middleY];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -80,11 +168,17 @@ Baltek.RulesEngine.box.prototype.$init = function(engine, ix, iy){
     this.footballers.push(null);
 }
 
-Baltek.RulesEngine.box.prototype.setActiveFootballer = function(footballer){
-    if ( footballer.box !== null ) {
-        footballer.box.footballers[this.engine.activeTeam.teamIndex] = null;
+Baltek.RulesEngine.box.prototype.exitFromField = function(footballer){
+    if ( footballer !== null && footballer.box === this ) {
+        footballer.box.footballers[footballer.teamIndex] = null;
     }
-    this.footballers[this.engine.activeTeam.teamIndex] = footballer;
+}
+
+Baltek.RulesEngine.box.prototype.setFootballer = function(footballer){
+    if ( footballer.box !== null ) {
+        footballer.box.footballers[footballer.teamIndex] = null;
+    }
+    this.footballers[footballer.teamIndex] = footballer;
     footballer.box = this;
 }
 
@@ -153,9 +247,7 @@ Baltek.RulesEngine.prototype.roundInit = function(){
     this.activeTeam.haveGoaled = false;
     this.passiveTeam.haveGoaled = false;
 
-    var kickoff = true;
-    this.activeTeam.prepareFootballers(kickoff);
-    this.passiveTeam.prepareFootballers(! kickoff);
+    this.field.initPositions();
 
     this.turnInit();
     this.round.isActive = true;
