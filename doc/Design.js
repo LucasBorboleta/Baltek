@@ -22,6 +22,11 @@ rulesEngine.matchInit();
 rulesEngine.matchUpdate();
 
 ///////////////////////////////////////////////////////////////////////////////
+Baltek.RulesEngine.Ball.prototype.$init = function(){
+    this.box = null;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 Baltek.RulesEngine.Footballer.prototype.$init = function(team, force){
     this.team = team;
     this.force = force;
@@ -43,19 +48,19 @@ Baltek.RulesEngine.Team.prototype.$init = function(engine, teamIndex){
 
     // Populate the team
     this.footballer3 = new Baltek.RulesEngine.Footballer(this, 3);
-    this.footballer2x = new Baltek.RulesEngine.Footballer(this, 2);
-    this.footballer2y = new Baltek.RulesEngine.Footballer(this, 2);
-    this.footballer1x = new Baltek.RulesEngine.Footballer(this, 1);
-    this.footballer1y = new Baltek.RulesEngine.Footballer(this, 1);
-    this.footballer1z = new Baltek.RulesEngine.Footballer(this, 1);
+    this.footballer2t = new Baltek.RulesEngine.Footballer(this, 2);
+    this.footballer2m = new Baltek.RulesEngine.Footballer(this, 2);
+    this.footballer1t = new Baltek.RulesEngine.Footballer(this, 1);
+    this.footballer1m = new Baltek.RulesEngine.Footballer(this, 1);
+    this.footballer1b = new Baltek.RulesEngine.Footballer(this, 1);
 
     this.footballers = [];
     this.footballers.push(this.footballer3);
-    this.footballers.push(this.footballer2x);
-    this.footballers.push(this.footballer2y);
-    this.footballers.push(this.footballer1x);
-    this.footballers.push(this.footballer1y);
-    this.footballers.push(this.footballer1z);
+    this.footballers.push(this.footballer2t);
+    this.footballers.push(this.footballer2m);
+    this.footballers.push(this.footballer1t);
+    this.footballers.push(this.footballer1m);
+    this.footballers.push(this.footballer1b);
 }
 
 Baltek.RulesEngine.Team.prototype.exitFromField = function(){
@@ -69,8 +74,9 @@ Baltek.RulesEngine.Team.prototype.exitFromField = function(){
 ///////////////////////////////////////////////////////////////////////////////
 Baltek.RulesEngine.Field.prototype.$init = function(engine){
     this.engine = engine;
-    this.ny = 5 ;
-    this.nx = 2*( this.ny + 1 ) ;
+    this.ns = 5; // Number of boxes on the side of each team
+    this.ny = this.ns ;
+    this.nx = 2*( this.ns + 1 ) ;
 
     this.firstX = 0;
     this.lastX = this.nx-1;
@@ -105,6 +111,22 @@ Baltek.RulesEngine.Field.prototype.$init = function(engine){
             }
         }
     }
+
+    var activeIndex = this.engine.activeTeam.teamIndex;
+    var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
+    var activeDirectionX = 1 - 2*activeIndex
+
+    var agix =  this.boxesByIndices[activeOriginX + (2*this.ns + 1)*activeDirectionX;
+    var agiy = this.middleY;
+    this.engine.activeTeam.goalDestination = this.boxesByIndices[agix][agiy] ;
+
+    var passiveIndex = this.engine.passiveTeam.teamIndex;
+    var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
+    var passiveDirectionX = 1 - 2*passiveIndex
+
+    var pgix =  this.boxesByIndices[passiveOriginX + (2*this.ns + 1)*passiveDirectionX;
+    var pgiy = this.middleY;
+    this.engine.passiveTeam.goalDestination = this.boxesByIndices[pgix][pgiy] ;
 }
 
 Baltek.RulesEngine.Field.prototype.initPositions = function(engine){
@@ -131,32 +153,28 @@ Baltek.RulesEngine.Field.prototype.initPositions = function(engine){
     var activeIndex = this.engine.activeTeam.teamIndex;
     var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
     var activeDirectionX = 1 - 2*activeIndex
-    this.engine.activeTeam.footballer3.moveToBox(activeOriginX + 5*activeDirectionX, this.middleY);
-    this.engine.activeTeam.footballer2x.moveToBox(activeOriginX + 5*activeDirectionX, this.firstY);
-    this.engine.activeTeam.footballer2y.moveToBox(activeOriginX + 5*activeDirectionX, this.lastY);
-    this.engine.activeTeam.footballer1x.moveToBox(activeOriginX + 3*activeDirectionX, this.firstY);
-    this.engine.activeTeam.footballer1y.moveToBox(activeOriginX + 3*activeDirectionX, this.middleY);
-    this.engine.activeTeam.footballer1z.moveToBox(activeOriginX + 3*activeDirectionX, this.lastY);
+    this.engine.activeTeam.footballer3.moveToBox(activeOriginX + this.ns*activeDirectionX, this.middleY);
+    this.engine.activeTeam.footballer2t.moveToBox(activeOriginX + this.ns*activeDirectionX, this.firstY);
+    this.engine.activeTeam.footballer2m.moveToBox(activeOriginX + this.ns*activeDirectionX, this.lastY);
+    this.engine.activeTeam.footballer1t.moveToBox(activeOriginX + (this.ns - 2)*activeDirectionX, this.firstY);
+    this.engine.activeTeam.footballer1m.moveToBox(activeOriginX + (this.ns - 2)*activeDirectionX, this.middleY);
+    this.engine.activeTeam.footballer1b.moveToBox(activeOriginX + (this.ns - 2)*activeDirectionX, this.lastY);
 
-    //TODO: move elsewhere
-    this.engine.activeTeam.goalDestination = this.boxesByIndices[activeOriginX + 11*activeDirectionX][this.middleY];
+    this.engine.ball.moveToBox(this.engine.activeTeam.footballer3.box);
 
     var passiveIndex = this.engine.passiveTeam.teamIndex;
     var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
     var passiveDirectionX = 1 - 2*passiveIndex
-    this.engine.passiveTeam.footballer3.moveToBox(passiveOriginX + 5*passiveDirectionX, this.middleY);
-    this.engine.passiveTeam.footballer2x.moveToBox(passiveOriginX + 4*passiveDirectionX, this.firstY);
-    this.engine.passiveTeam.footballer2y.moveToBox(passiveOriginX + 5*passiveDirectionX, this.lastY);
-    this.engine.passiveTeam.footballer1x.moveToBox(passiveOriginX + 3*passiveDirectionX, this.firstY);
-    this.engine.passiveTeam.footballer1y.moveToBox(passiveOriginX + 3*passiveDirectionX, this.middleY);
-    this.engine.passiveTeam.footballer1z.moveToBox(passiveOriginX + 3*passiveDirectionX, this.lastY);
-
-    //TODO: move elsewhere
-    this.engine.passiveTeam.goalDestination = this.boxesByIndices[passiveOriginX + 11*passiveDirectionX][this.middleY];
+    this.engine.passiveTeam.footballer3.moveToBox(passiveOriginX + this.ns*passiveDirectionX, this.middleY);
+    this.engine.passiveTeam.footballer2t.moveToBox(passiveOriginX + this.ns*passiveDirectionX, this.firstY);
+    this.engine.passiveTeam.footballer2m.moveToBox(passiveOriginX + this.ns*passiveDirectionX, this.lastY);
+    this.engine.passiveTeam.footballer1t.moveToBox(passiveOriginX + (this.ns - 2)*passiveDirectionX, this.firstY);
+    this.engine.passiveTeam.footballer1m.moveToBox(passiveOriginX + (this.ns - 2)*passiveDirectionX, this.middleY);
+    this.engine.passiveTeam.footballer1b.moveToBox(passiveOriginX + (this.ns - 2)*passiveDirectionX, this.lastY);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.RulesEngine.box.prototype.$init = function(engine, ix, iy){
+Baltek.RulesEngine.Box.prototype.$init = function(engine, ix, iy){
     this.engine = engine;
     this.ix = ix ;
     this.iy = iy ;
@@ -168,13 +186,21 @@ Baltek.RulesEngine.box.prototype.$init = function(engine, ix, iy){
     this.footballers.push(null);
 }
 
-Baltek.RulesEngine.box.prototype.exitFromField = function(footballer){
+Baltek.RulesEngine.Box.prototype.setBall = function(ball){
+    if ( ball.box !== null ) {
+        ball.box.ball = null;
+    }
+    this.ball = ball;
+    ball.box = this;
+}
+
+Baltek.RulesEngine.Box.prototype.exitFromField = function(footballer){
     if ( footballer !== null && footballer.box === this ) {
         footballer.box.footballers[footballer.teamIndex] = null;
     }
 }
 
-Baltek.RulesEngine.box.prototype.setFootballer = function(footballer){
+Baltek.RulesEngine.Box.prototype.setFootballer = function(footballer){
     if ( footballer.box !== null ) {
         footballer.box.footballers[footballer.teamIndex] = null;
     }
@@ -182,22 +208,25 @@ Baltek.RulesEngine.box.prototype.setFootballer = function(footballer){
     footballer.box = this;
 }
 
-Baltek.RulesEngine.box.prototype.getActiveFootballer = function(){
+Baltek.RulesEngine.Box.prototype.getActiveFootballer = function(){
     return this.footballers[this.engine.activeTeam.teamIndex];
 }
 
-Baltek.RulesEngine.box.prototype.getPassiveFootballer = function(){
+Baltek.RulesEngine.Box.prototype.getPassiveFootballer = function(){
     return this.footballers[this.engine.passiveTeam.teamIndex];
 }
 ///////////////////////////////////////////////////////////////////////////////
 
 Baltek.RulesEngine.prototype.$init = function(){
+
     this.field = new Baltek.RulesEngine.Field(this);
+    this.ball = new Baltek.RulesEngine.Ball();
 
     var BLUE_INDEX = 0;
     var RED_INDEX = 1;
     this.blueTeam = new Baltek.RulesEngine.Team(this, BLUE_INDEX);
     this.redTeam = new Baltek.RulesEngine.Team(this, RED_INDEX);
+
     this.activeTeam = this.blueTeam;
     this.passiveTeam = this.redTeam;
 }
@@ -469,6 +498,7 @@ Baltek.RulesEngine.prototype.moveSelectDestination = function(destination){
                 this.move.destinationIsSelected = true;
                 // Compute the cost of the move
                 this.move.cost = ... ;
+                // Move ball or footballer
                 this.matchUpdate();
             }
         }
@@ -478,15 +508,43 @@ Baltek.RulesEngine.prototype.moveSelectDestination = function(destination){
 Baltek.RulesEngine.prototype.moveFindSources = function(){
     if ( this.move.isActive ) {
         if ( ! this.move.sourceIsSelected) {
-            this.move.sources = ... ;
+            this.move.sources = [] ;
+            var n = this.activeTeam.footballers.length;
+            var i;
+            for (i=0; i<n; i++) {
+                this.move.sources.push(this.activeTeam.footballers[i].box);
+            }
         }
     }
 }
 
 Baltek.RulesEngine.prototype.moveFindKinds = function(){
+    //TODO: move elsewhere
+    var MOVE_KIND_RUN = 0;
+    var MOVE_KIND_SPRINT = 1;
+    var MOVE_KIND_KICK = 2;
+
     if ( this.move.isActive && this.move.sourceIsSelected ) {
         if ( ! this.move.kindIsSelected ) {
-            this.move.kinds = ... ;
+
+            this.move.kinds = [] ;
+
+            var activeFootballer = this.selectedSource.footballers[this.engine.activeTeam.teamIndex];
+            var activeFootballerHasBall = ( this.selectedSource.ball !== null );
+
+            //TODO: add cost and credit concern
+
+            if ( activeFootballer.canRun ) {
+                this.move.kinds.push(MOVE_KIND_RUN);
+
+                if ( this.activeTeam.canSprint ) {
+                    this.move.kinds.push(MOVE_KIND_SPRINT);
+                }
+            }
+
+            if ( activeFootballer.canKick && activeFootballerHasBall ) {
+                this.move.kinds.push(MOVE_KIND_KICK);
+            }
         }
     }
 }
@@ -494,7 +552,67 @@ Baltek.RulesEngine.prototype.moveFindKinds = function(){
 Baltek.RulesEngine.prototype.moveFindDestinations = function(){
     if ( this.move.isActive && this.move.sourceIsSelected && this.move.kindIsSelected ) {
         if ( ! this.move.destinationIsSelected ) {
-            this.move.destinations = ... ;
+            this.move.destinations = [] ;
+
+            //TODO: add cost and credit concern
+
+            if ( this.move.selectedKind === MOVE_KIND_KICK ) {
+                var KICK_MOVE_MAX = 2;
+                var ix;
+                var iy;
+                var box;
+                for ( ix=this.selectedSource.ix - KICK_MOVE_MAX; ix <= this.selectedSource.ix + KICK_MOVE_MAX; ix++ = {
+                    if ( ix >= this.field.firstX && ix <= this.field.lastX) {
+                        for ( iy=this.selectedSource.iy - KICK_MOVE_MAX; iy <= this.selectedSource.iy + KICK_MOVE_MAX; iy++ = {
+                            if ( iy >= this.field.firstY && iy <= this.field.lastY) {
+                                box = this.field.boxes[ix][iy];
+                                if ( box !== null && box != this.selectedSource ) {
+                                    this.move.destinations.push(box);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if ( this.move.selectedKind === MOVE_KIND_RUN ) {
+                var RUN_MOVE_MAX = 1;
+                var ix;
+                var iy;
+                var box;
+                for ( ix=this.selectedSource.ix - RUN_MOVE_MAX; ix <= this.selectedSource.ix + RUN_MOVE_MAX; ix++ = {
+                    if ( ix >= this.field.firstX && ix <= this.field.lastX) {
+                        for ( iy=this.selectedSource.iy - RUN_MOVE_MAX; iy <= this.selectedSource.iy + RUN_MOVE_MAX; iy++ = {
+                            if ( iy >= this.field.firstY && iy <= this.field.lastY) {
+                                box = this.field.boxes[ix][iy];
+                                if ( box !== null && box != this.selectedSource ) {
+                                    if ( box.footballers[this.activeTeam.teamIndex] === null ) {
+                                        this.move.destinations.push(box);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if ( this.move.selectedKind === MOVE_KIND_SPRINT ) {
+                //TODO: remove boxes that are reachable using just MOVE_KIND_RUN
+                var SPRINT_MOVE_MAX = 2;
+                var ix;
+                var iy;
+                var box;
+                for ( ix=this.selectedSource.ix - SPRINT_MOVE_MAX; ix <= this.selectedSource.ix + SPRINT_MOVE_MAX; ix++ = {
+                    if ( ix >= this.field.firstX && ix <= this.field.lastX) {
+                        for ( iy=this.selectedSource.iy - SPRINT_MOVE_MAX; iy <= this.selectedSource.iy + SPRINT_MOVE_MAX; iy++ = {
+                            if ( iy >= this.field.firstY && iy <= this.field.lastY) {
+                                box = this.field.boxes[ix][iy];
+                                if ( box !== null && box != this.selectedSource ) {
+                                    if ( box.footballers[this.activeTeam.teamIndex] === null ) {
+                                        this.move.destinations.push(box);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
