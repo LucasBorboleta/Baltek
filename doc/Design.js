@@ -56,19 +56,11 @@ Baltek.RulesEngine.Team.prototype.$init = function(engine, teamIndex){
 
     this.footballers = [];
     this.footballers.push(this.footballer3);
-    this.footballers.push(this.footballer2t);
-    this.footballers.push(this.footballer2m);
-    this.footballers.push(this.footballer1t);
-    this.footballers.push(this.footballer1m);
-    this.footballers.push(this.footballer1b);
-}
-
-Baltek.RulesEngine.Team.prototype.exitFromField = function(){
-    var n = this.footballers.length;
-    var i;
-    for (i=0; i<n; i++) {
-        this.footballers[i].exitFromField();
-    }
+    this.footballers.push(this.footballer2t); // force 2 @ top
+    this.footballers.push(this.footballer2b); // force 2 @ bottom
+    this.footballers.push(this.footballer1t); // force 1 @ top
+    this.footballers.push(this.footballer1m); // force 1 @ middle
+    this.footballers.push(this.footballer1b); // force 1 @ botom
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -129,7 +121,7 @@ Baltek.RulesEngine.Field.prototype.$init = function(engine){
     this.engine.passiveTeam.goalDestination = this.boxesByIndices[pgix][pgiy] ;
 }
 
-Baltek.RulesEngine.Field.prototype.initPositions = function(engine){
+Baltek.RulesEngine.Field.prototype.initPositions = function(){
     var box = null;
     for ( var ix=this.firstX; ix<=this.lastX; ix++ ) {
         for ( var iy=this.firstY; iy<=this.lastY; iy++ ) {
@@ -140,6 +132,9 @@ Baltek.RulesEngine.Field.prototype.initPositions = function(engine){
             }
         }
     }
+
+    this.engine.ball.box = null;
+
     var n = 0;
     n = this.engine.activeTeam.footballers.length;
     for ( i=0; i<n; i++) {
@@ -153,24 +148,26 @@ Baltek.RulesEngine.Field.prototype.initPositions = function(engine){
     var activeIndex = this.engine.activeTeam.teamIndex;
     var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
     var activeDirectionX = 1 - 2*activeIndex
-    this.engine.activeTeam.footballer3.moveToBox(activeOriginX + this.ns*activeDirectionX, this.middleY);
-    this.engine.activeTeam.footballer2t.moveToBox(activeOriginX + this.ns*activeDirectionX, this.firstY);
-    this.engine.activeTeam.footballer2m.moveToBox(activeOriginX + this.ns*activeDirectionX, this.lastY);
-    this.engine.activeTeam.footballer1t.moveToBox(activeOriginX + (this.ns - 2)*activeDirectionX, this.firstY);
-    this.engine.activeTeam.footballer1m.moveToBox(activeOriginX + (this.ns - 2)*activeDirectionX, this.middleY);
-    this.engine.activeTeam.footballer1b.moveToBox(activeOriginX + (this.ns - 2)*activeDirectionX, this.lastY);
 
-    this.engine.ball.moveToBox(this.engine.activeTeam.footballer3.box);
+    this.boxesByIndices[activeOriginX + this.ns*activeDirectionX][this.middleY].setBall(this.engine.ball);
+
+    this.boxesByIndices[activeOriginX + this.ns*activeDirectionX][this.middleY].setActiveFootballer(this.engine.activeTeam.footballer3);
+    this.boxesByIndices[activeOriginX + this.ns*activeDirectionX][this.firstY].setActiveFootballer(this.engine.activeTeam.footballer2t);
+    this.boxesByIndices[activeOriginX + this.ns*activeDirectionX][this.lastY].setActiveFootballer(this.engine.activeTeam.footballer2b);
+    this.boxesByIndices[activeOriginX + (this.ns - 2)*activeDirectionX][this.firstY].setActiveFootballer(this.engine.activeTeam.footballer1t);
+    this.boxesByIndices[activeOriginX + (this.ns - 2)*activeDirectionX][this.middleY].setActiveFootballer(this.engine.activeTeam.footballer1m);
+    this.boxesByIndices[activeOriginX + (this.ns - 2)*activeDirectionX][this.lastY].setActiveFootballer(this.engine.activeTeam.footballer1b);
 
     var passiveIndex = this.engine.passiveTeam.teamIndex;
     var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
     var passiveDirectionX = 1 - 2*passiveIndex
-    this.engine.passiveTeam.footballer3.moveToBox(passiveOriginX + this.ns*passiveDirectionX, this.middleY);
-    this.engine.passiveTeam.footballer2t.moveToBox(passiveOriginX + this.ns*passiveDirectionX, this.firstY);
-    this.engine.passiveTeam.footballer2m.moveToBox(passiveOriginX + this.ns*passiveDirectionX, this.lastY);
-    this.engine.passiveTeam.footballer1t.moveToBox(passiveOriginX + (this.ns - 2)*passiveDirectionX, this.firstY);
-    this.engine.passiveTeam.footballer1m.moveToBox(passiveOriginX + (this.ns - 2)*passiveDirectionX, this.middleY);
-    this.engine.passiveTeam.footballer1b.moveToBox(passiveOriginX + (this.ns - 2)*passiveDirectionX, this.lastY);
+
+    this.boxesByIndices[passiveOriginX + (this.ns - 1)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer3);
+    this.boxesByIndices[passiveOriginX + this.ns*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer2t);
+    this.boxesByIndices[passiveOriginX + this.ns*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer2b);
+    this.boxesByIndices[passiveOriginX + (this.ns - 2)*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer1t);
+    this.boxesByIndices[passiveOriginX + (this.ns - 2)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer1m);
+    this.boxesByIndices[passiveOriginX + (this.ns - 2)*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer1b);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -187,34 +184,73 @@ Baltek.RulesEngine.Box.prototype.$init = function(engine, ix, iy){
 }
 
 Baltek.RulesEngine.Box.prototype.setBall = function(ball){
-    if ( ball.box !== null ) {
-        ball.box.ball = null;
+    assert ( ball !== null )
+
+    if ( this.ball !== ball ) {
+        assert ( this.ball === null )
+
+        if ( ball.box !== null ) {
+            ball.box.ball = null;
+        }
+        this.ball = ball;
+        ball.box = this;
     }
-    this.ball = ball;
-    ball.box = this;
 }
 
-Baltek.RulesEngine.Box.prototype.exitFromField = function(footballer){
-    if ( footballer !== null && footballer.box === this ) {
-        footballer.box.footballers[footballer.teamIndex] = null;
-    }
+Baltek.RulesEngine.Box.prototype.getBall = function(){
+    return this.ball;
 }
 
-Baltek.RulesEngine.Box.prototype.setFootballer = function(footballer){
-    if ( footballer.box !== null ) {
-        footballer.box.footballers[footballer.teamIndex] = null;
+Baltek.RulesEngine.Box.prototype.hasBall = function(){
+    return ( this.ball !== null );
+}
+
+Baltek.RulesEngine.Box.prototype.setActiveFootballer = function(footballer){
+    assert ( footballer !== null )
+    assert ( footballer.teamIndex === this.engine.activeTeam.teamIndex )
+
+    if ( this.footballers[footballer.teamIndex] !== footballer ) {
+        assert ( this.footballers[footballer.teamIndex] === null )
+
+        if ( footballer.box !== null ) {
+            footballer.box.footballers[footballer.teamIndex] = null;
+        }
+        this.footballers[footballer.teamIndex] = footballer;
+        footballer.box = this;
     }
-    this.footballers[footballer.teamIndex] = footballer;
-    footballer.box = this;
 }
 
 Baltek.RulesEngine.Box.prototype.getActiveFootballer = function(){
     return this.footballers[this.engine.activeTeam.teamIndex];
 }
 
+Baltek.RulesEngine.Box.prototype.hasActiveFootballer = function(){
+    return ( this.footballers[this.engine.activeTeam.teamIndex] !== null );
+}
+
+Baltek.RulesEngine.Box.prototype.setPassiveFootballer = function(footballer){
+    assert ( footballer !== null )
+    assert ( footballer.teamIndex === this.engine.passiveTeam.teamIndex )
+
+    if ( this.footballers[footballer.teamIndex] !== footballer ) {
+        assert ( this.footballers[footballer.teamIndex] === null )
+
+        if ( footballer.box !== null ) {
+            footballer.box.footballers[footballer.teamIndex] = null;
+        }
+        this.footballers[footballer.teamIndex] = footballer;
+        footballer.box = this;
+    }
+}
+
 Baltek.RulesEngine.Box.prototype.getPassiveFootballer = function(){
     return this.footballers[this.engine.passiveTeam.teamIndex];
 }
+
+Baltek.RulesEngine.Box.prototype.hasPassiveFootballer = function(){
+    return ( this.footballers[this.engine.passiveTeam.teamIndex] !== null );
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 Baltek.RulesEngine.prototype.$init = function(){
