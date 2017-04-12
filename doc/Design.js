@@ -547,8 +547,18 @@ Baltek.RulesEngine.prototype.moveFindSources = function(){
         if ( ! this.move.sourceIsSelected ) {
             var n = this.activeTeam.footballers.length;
             var i;
+            var footballer;
             for ( i=0; i<n; i++ ) {
-                sources.push(this.activeTeam.footballers[i].box);
+                footballer = this.activeTeam.footballers[i];
+
+                if ( footballer.canRun ) {
+                    // The footballer has not run during this turn
+                    sources.push(footballer.box);
+
+                } else if ( footballer.canKick && footballer.box.hasBall() ) {
+                    // The footballer has not kick during this turn
+                    sources.push(footballer.box);
+                }
             }
         }
     }
