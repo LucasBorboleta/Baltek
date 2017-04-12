@@ -566,9 +566,9 @@ Baltek.RulesEngine.prototype.moveFindKinds = function(){
     if ( this.move.isActive && this.move.sourceIsSelected ) {
         if ( ! this.move.kindIsSelected ) {
 
-            var activeFootballer = this.selectedSource.footballers[this.engine.activeTeam.teamIndex];
-            var passiveFootballer = this.selectedSource.footballers[this.engine.passiveTeam.teamIndex];
-            var sourceHasBall = ( this.selectedSource.ball !== null );
+            var activeFootballer = this.selectedSource.getActiveFootballer();
+            var passiveFootballer = this.selectedSource.getPassiveFootballer();
+            var sourceHasBall = this.selectedSource.hasBall();
 
             if ( activeFootballer.canRun ) {
                 kinds.push(MOVE_KIND_RUN);
@@ -624,7 +624,7 @@ Baltek.RulesEngine.prototype.moveFindDestinations = function(){
                             if ( ix >= this.field.firstX && ix <= this.field.lastX &&
                                  iy >= this.field.firstY && iy <= this.field.lastY ) {
                                      box = this.field.boxes[ix][iy];
-                                     if ( box !== null && box != this.selectedSource ) {
+                                     if ( box !== null && box != this.selectedSource && box.canHostBall && box !== this.passiveTeam.goalDestination ) {
                                          if ( d <= 1) {
                                              destinations.push(box);
                                          } else {
@@ -681,7 +681,7 @@ Baltek.RulesEngine.prototype.moveFindDestinations = function(){
                             if ( iy >= this.field.firstY && iy <= this.field.lastY) {
                                 box = this.field.boxes[ix][iy];
                                 if ( box !== null && box != this.selectedSource ) {
-                                    if ( box.footballers[this.activeTeam.teamIndex] === null ) {
+                                    if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
                                         destinations.push(box);
                                     }
                                 }
@@ -701,7 +701,7 @@ Baltek.RulesEngine.prototype.moveFindDestinations = function(){
                             if ( iy >= this.field.firstY && iy <= this.field.lastY) {
                                 box = this.field.boxes[ix][iy];
                                 if ( box !== null && box != this.selectedSource ) {
-                                    if ( box.footballers[this.activeTeam.teamIndex] === null ) {
+                                    if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
                                         destinations.push(box);
                                     }
                                 }

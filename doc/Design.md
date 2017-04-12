@@ -182,3 +182,11 @@ Let us determine a bound for the possible moves:
   - the second click selects the footballer for a "run"
   - the third click selects the footballer for a "sprint" if it is possible
   - the fourth click unselect the footballer.
+
+  # Idea for interfacing "sprint"
+
+  - button with three states:
+
+    - "sprint: off" ; this is the state at initialization.
+    - "sprint: on" ; this is the state when it is going to be used.
+    - "sprint: over" ; this is the state when it has been used.
