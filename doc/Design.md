@@ -112,13 +112,13 @@ Let us determine a bound for the possible moves:
   - run
   - sprint
 
-- For a kick (5*5 - 1) = 24 destination boxes are possible.
+- For a kick `(5*5 - 1) = 24` destination boxes are possible.
 
-- For a run (3*3 - 1) = 8 destination boxes are possible.
+- For a run `(3*3 - 1) = 8` destination boxes are possible.
 
-- For a sprint ( (5_5 - 1) - (3_3 -1) = (24 - 8) = 16 destination boxes are possible.
+- For a sprint `( (5*5 - 1) - (3*3 -1) = (24 - 8) = 16` destination boxes are possible.
 
-- For a move, 6_(24 + 8 + 16) = 6_ 48 = 288 moves are possible, or maybe less, but never more.
+- For a move, `6*(24 + 8 + 16) = 6*48 = 288` moves are possible, or maybe less, but never more.
 
 # Ideas for cutting responsibilities amongst the classes
 
@@ -190,3 +190,40 @@ Let us determine a bound for the possible moves:
     - "sprint: off" ; this is the state at initialization.
     - "sprint: on" ; this is the state when it is going to be used.
     - "sprint: over" ; this is the state when it has been used.
+
+# Idea for run/sprint/kick options
+
+Articulate the options as a sort of states and transitions machinery:
+
+- "run" is a state.
+- "sprint-on/on/over" is a sub-state of "run".
+- Transition , in both directions, is possible between "sprint:on" and "sprint:off".
+- Transition from "sprint:on" to "srint:over" is possible, but cannot be reversed.
+- "kick" is a state.
+- Transition, in both directions, is possible between "run" and "kick".
+- When entering in state "run", the default sub-state is "sprint:off", unless "sprint:over" has been reached.
+
+Use priorities in the states of options:
+
+1. run (if canRun)
+
+  1. sprint:off
+  2. sprint:on (if canSprint)
+
+2. kick (if canKick)
+
+# Regarding the move, other idea for organizing the interaction between the engine and the player
+
+Step | Engine                                            | Player
+---- | ------------------------------------------------- | -----------------------------------------------
+1    | Find the selectable sources that run and/or kick. |
+2    |                                                   | Select one of the selectable source.
+3    | Find the selectable options (run/sprint/kick).    |
+4    | Select the first selectable option.               |
+5    | Find the selectable destinations.                 |
+6    |                                                   | Change the option among the selectable options.
+7    | Find the selectable destinations.                 |
+8    |                                                   | Select one of the selectable destination.
+9    | Play the move.                                    |
+
+When finding selectable options or finding selectable destinations, the costs are evaluated.
