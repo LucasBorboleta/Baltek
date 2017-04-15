@@ -436,10 +436,10 @@ Baltek.RulesEngine.prototype.moveUpdate = function(){
                 if ( this.move.destinationBox !== null ) {
                     this.move.isActive = false;
 
-                    if ( this.move.kind == "RUN" || this.move.kind == "SPRINT" ) {
+                    if ( this.move.kind == this.move.KIND_RUN || this.move.kind == this.move.KIND_SPRINT ) {
                         this.move.destinationBox.setActiveFootballer(this.move.sourceBox.getActiveFootballer());
 
-                    } else if ( this.move.kind == "KICK" ) {
+                    } else if ( this.move.kind == this.move.KIND_KICK ) {
                         this.move.destinationBox.setBall(this.move.sourceBox.getBall());
                     }
 
@@ -558,7 +558,7 @@ Baltek.RulesEngine.prototype.moveSelectDestination = function(destinationWithCos
 Baltek.RulesEngine.prototype.moveFindSources = function(){
     var sources = [];
     if ( this.move.isActive ) {
-        if ( ! this.move.sourceBoxIsSelected ) {
+        if ( this.move.sourceBox === null ) {
             var n = this.activeTeam.footballers.length;
             var i;
             var footballer;
@@ -583,33 +583,31 @@ Baltek.RulesEngine.prototype.moveFindKindsWithCosts = function(){
 
     var kindsWithCosts = [];
 
-    if ( this.move.isActive && this.move.sourceBoxIsSelected ) {
-        if ( ! this.move.kindIsSelected ) {
+    if ( this.move.isActive && this.move.sourceBox !== null && this.move.kind === null ) {
 
-            var activeFootballer = this.source.getActiveFootballer();
-            var passiveFootballer = this.source.getPassiveFootballer();
-            var sourceHasBall = this.source.hasBall();
+        var activeFootballer = this.move.sourceBox.getActiveFootballer();
+        var passiveFootballer = this.move.sourceBox.getPassiveFootballer();
+        var sourceHasBall = this.move.sourceBox.hasBall();
 
-            if ( activeFootballer.canRun ) {
-                kindsWithCosts.push( { kind: this.move.KIND_RUN, cost: 0} );
+        if ( activeFootballer.canRun ) {
+            kindsWithCosts.push( { kind: this.move.KIND_RUN, cost: 0} );
 
-                if ( this.activeTeam.canSprint ) {
-                    kindsWithCosts.push( { kind: this.move.KIND_SPRINT, cost: 0} );
-                }
+            if ( this.activeTeam.canSprint ) {
+                kindsWithCosts.push( { kind: this.move.KIND_SPRINT, cost: 0} );
             }
+        }
 
-            if ( activeFootballer.canKick && sourceHasBall ) {
-                if ( passiveFootballer === null ) {
-                    kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: 0} );
+        if ( activeFootballer.canKick && sourceHasBall ) {
+            if ( passiveFootballer === null ) {
+                kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: 0} );
 
-                } else if { activeFootballer.force >= passiveFootballer.force } {
-                    kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: 0} );
+            } else if { activeFootballer.force >= passiveFootballer.force } {
+                kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: 0} );
 
-                } else {
-                    var cost = passiveFootballer.force - activeFootballer.force;
-                    if ( this.move.credit >= cost ) {
-                        kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: cost} );
-                    }
+            } else {
+                var cost = passiveFootballer.force - activeFootballer.force;
+                if ( this.activeTeam.credit >= cost ) {
+                    kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: cost} );
                 }
             }
         }
@@ -620,112 +618,116 @@ Baltek.RulesEngine.prototype.moveFindKindsWithCosts = function(){
 Baltek.RulesEngine.prototype.moveFindDestinationsWithCosts = function(){
     var destinationsWithCosts = [] ;
 
-    var activeFootballer = this.source.footballers[this.engine.activeTeam.teamIndex];
+    var preconditions = (   this.move.isActive &&
+                            this.move.sourceBox !== null &&
+                            this.move.kind !== null &&
+                            this.move.destinationBox === null );
 
-    if ( this.move.isActive && this.move.sourceBoxIsSelected && this.move.kindIsSelected ) {
-        if ( ! this.move.destinationBoxIsSelected ) {
+    if ( ! preconditions ) {
+        return destinationsWithCosts;
+    }
 
-            if ( this.move.kind === this.move.KIND_KICK ) {
-                // The ball moves along a vector of size this.move.KIND_KICK or less
-                var ux;
-                var uy;
-                var d;
-                var dx;
-                var dy;
-                var ix;
-                var iy;
-                var box;
-                for ( ux=-1; ux<=1; ux++ ) {
-                    for ( uy=-1; uy<=1; uy++ ) {
-                        for ( d=1; d<=this.move.LEN_KICK; d++) {
-                            dx = d*ux;
-                            dy = d*uy;
-                            ix = this.source.ix + dx;
-                            iy = this.source.iy + dy;
-                            if ( ix >= this.field.firstX && ix <= this.field.lastX &&
-                                 iy >= this.field.firstY && iy <= this.field.lastY ) {
-                                     box = this.field.boxes[ix][iy];
-                                     if ( box !== null && box != this.source && box.canHostBall && box !== this.activeTeam.goalBox ) {
-                                         if ( d <= 1) {
-                                             destinationsWithCosts.push( {box: box, cost: 0} );
-                                         } else {
-                                             // Find the passiveFootballer with the strongest force
-                                             // on the trajectory
-                                             var strongestPassiveFootballer = null;
-                                             var t;
-                                             vat tx;
-                                             var ty;
-                                             var jx;
-                                             var jy;
-                                             var tbox;
-                                             for ( t=1; t < d; t++ ) {
-                                                 tx = t*ux;
-                                                 ty = t*uy;
-                                                 jx = this.source.ix + tx;
-                                                 jy = this.source.iy + ty;
-                                                 tbox = this.field.boxes[jx][jy];
-                                                 if ( tbox !== null && tbox.hasPassiveFootballer() ) {
-                                                     if ( strongestPassiveFootballer === null ) {
-                                                         strongestPassiveFootballer = tbox.getPassiveFootballer();
-                                                     } else if ( tbox.getPassiveFootballer().force > strongestPassiveFootballer ) {
-                                                         strongestPassiveFootballer = tbox.getPassiveFootballer();
-                                                     }
-                                                 }
-                                             }
+    var activeFootballer = this.sourceBox.footballers[this.engine.activeTeam.teamIndex];
 
+    if ( this.move.kind === this.move.KIND_KICK ) {
+        // The ball moves along a vector of size this.move.LEN_KICK or less
+        var ux;
+        var uy;
+        var d;
+        var dx;
+        var dy;
+        var ix;
+        var iy;
+        var box;
+        for ( ux=-1; ux<=1; ux++ ) {
+            for ( uy=-1; uy<=1; uy++ ) {
+                for ( d=1; d <= this.move.LEN_KICK; d++) {
+                    dx = d*ux;
+                    dy = d*uy;
+                    ix = this.move.sourceBox.ix + dx;
+                    iy = this.move.sourceBox.iy + dy;
+                    if ( ix >= this.field.firstX && ix <= this.field.lastX &&
+                         iy >= this.field.firstY && iy <= this.field.lastY ) {
+                             box = this.field.boxes[ix][iy];
+                             if ( box !== null && box != this.source && box.canHostBall && box !== this.activeTeam.goalBox ) {
+                                 if ( d <= 1) {
+                                     destinationsWithCosts.push( {box: box, cost: 0} );
+                                 } else {
+                                     // Find the passiveFootballer with the strongest force
+                                     // on the trajectory
+                                     var strongestPassiveFootballer = null;
+                                     var t;
+                                     var tx;
+                                     var ty;
+                                     var jx;
+                                     var jy;
+                                     var tbox;
+                                     for ( t=1; t < d; t++ ) {
+                                         tx = t*ux;
+                                         ty = t*uy;
+                                         jx = this.move.sourceBox.ix + tx;
+                                         jy = this.move.sourceBox.iy + ty;
+                                         tbox = this.field.boxes[jx][jy];
+                                         if ( tbox !== null && tbox.hasPassiveFootballer() ) {
                                              if ( strongestPassiveFootballer === null ) {
-                                                 destinationsWithCosts.push( {box: box, cost: 0} );
-
-                                             } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
-                                                 destinationsWithCosts.push( {box: box, cost: 0} );
-
-                                             } else {
-                                                 var cost = strongestPassiveFootballer.force - activeFootballer.force;
-                                                 if (this.move.credit >= cost ) {
-                                                     destinationsWithCosts.push( {box: box, cost: cost} );
-                                                 }
+                                                 strongestPassiveFootballer = tbox.getPassiveFootballer();
+                                             } else if ( tbox.getPassiveFootballer().force > strongestPassiveFootballer ) {
+                                                 strongestPassiveFootballer = tbox.getPassiveFootballer();
                                              }
                                          }
                                      }
+
+                                     if ( strongestPassiveFootballer === null ) {
+                                         destinationsWithCosts.push( {box: box, cost: 0} );
+
+                                     } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
+                                         destinationsWithCosts.push( {box: box, cost: 0} );
+
+                                     } else {
+                                         var cost = strongestPassiveFootballer.force - activeFootballer.force;
+                                         if ( this.activeTeam.credit >= this.move.kindCost + cost ) {
+                                             destinationsWithCosts.push( {box: box, cost: kickCost} );
+                                         }
+                                     }
                                  }
+                             }
+                         }
+                    }
+                }
+            }
+        }
+    } else if ( this.move.kind === this.move.KIND_RUN ) {
+        // The footballer moves freely inside a square of size this.move.LEN_RUN or less
+        var ix;
+        var iy;
+        var box;
+        for ( ix=this.move.sourceBox.ix - this.move.LEN_RUN; ix <= this.move.sourceBox.ix + this.move.LEN_RUN; ix++ = {
+            if ( ix >= this.field.firstX && ix <= this.field.lastX) {
+                for ( iy=this.move.sourceBox.iy - this.move.LEN_RUN; iy <= this.move.sourceBox.iy + this.move.LEN_RUN; iy++ = {
+                    if ( iy >= this.field.firstY && iy <= this.field.lastY) {
+                        box = this.field.boxes[ix][iy];
+                        if ( box !== null && box != this.sourceBox ) {
+                            if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
+                                destinationsWithCosts.push( {box: box, cost: 0} );
                             }
                         }
                     }
                 }
-            } else if ( this.move.kind === this.move.KIND_RUN ) {
-                // The footballer moves freely inside a square of size this.move.LEN_RUN or less
-                var ix;
-                var iy;
-                var box;
-                for ( ix=this.source.ix - this.move.LEN_RUN; ix <= this.source.ix + this.move.LEN_RUN; ix++ = {
-                    if ( ix >= this.field.firstX && ix <= this.field.lastX) {
-                        for ( iy=this.source.iy - this.move.LEN_RUN; iy <= this.source.iy + this.move.LEN_RUN; iy++ = {
-                            if ( iy >= this.field.firstY && iy <= this.field.lastY) {
-                                box = this.field.boxes[ix][iy];
-                                if ( box !== null && box != this.source ) {
-                                    if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
-                                        destinationsWithCosts.push( {box: box, cost: 0} );
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else if ( this.move.kind === this.move.KIND_SPRINT ) {
-                // The footballer sprints freely inside a square of size this.move.LEN_SPRINT or less
-                var ix;
-                var iy;
-                var box;
-                for ( ix=this.source.ix - this.move.LEN_SPRINT; ix <= this.source.ix + this.move.LEN_SPRINT; ix++ = {
-                    if ( ix >= this.field.firstX && ix <= this.field.lastX) {
-                        for ( iy=this.source.iy - this.move.LEN_SPRINT; iy <= this.source.iy + this.move.LEN_SPRINT; iy++ = {
-                            if ( iy >= this.field.firstY && iy <= this.field.lastY) {
-                                box = this.field.boxes[ix][iy];
-                                if ( box !== null && box != this.source ) {
-                                    if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
-                                        destinationsWithCosts.push( {box: box, cost: 0} );
-                                    }
-                                }
+            }
+        }
+    } else if ( this.move.kind === this.move.KIND_SPRINT ) {
+        // The footballer sprints freely inside a square of size this.move.LEN_SPRINT or less
+        var ix;
+        var iy;
+        var box;
+        for ( ix=this.move.sourceBox.ix - this.move.LEN_SPRINT; ix <= this.move.sourceBox.ix + this.move.LEN_SPRINT; ix++ = {
+            if ( ix >= this.field.firstX && ix <= this.field.lastX) {
+                for ( iy=this.move.sourceBox.iy - this.move.LEN_SPRINT; iy <= this.move.sourceBox.iy + this.move.LEN_SPRINT; iy++ = {
+                    if ( iy >= this.field.firstY && iy <= this.field.lastY) {
+                        box = this.field.boxes[ix][iy];
+                        if ( box !== null && box != this.sourceBox ) {
+                            if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
+                                destinationsWithCosts.push( {box: box, cost: 0} );
                             }
                         }
                     }
