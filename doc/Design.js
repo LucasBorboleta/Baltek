@@ -71,11 +71,11 @@ Baltek.RulesEngine.Field.prototype.$init = function(engine){
     this.nx = 2*( this.ns + 1 ) ;
 
     this.firstX = 0;
-    this.lastX = this.nx-1;
+    this.lastX = this.nx - 1;
     this.middleX = Math.round((this.firstX + this.lastX)/2);
 
     this.firstY = 0;
-    this.lastY = this.ny-1;
+    this.lastY = this.ny - 1;
     this.middleY = Math.round((this.firstY + this.lastY)/2);
 
     this.boxesByIndices = [] ;
@@ -329,9 +329,9 @@ Baltek.RulesEngine.prototype.turnInit = function(){
 }
 
 Baltek.RulesEngine.prototype.moveInit = function(){
-    this.move.KIND_RUN = 0;
-    this.move.KIND_SPRINT = 1;
-    this.move.KIND_KICK = 2;
+    this.move.KIND_RUN = 900;
+    this.move.KIND_SPRINT = 901;
+    this.move.KIND_KICK = 902;
 
     this.move.LEN_KICK = 2;
     this.move.LEN_RUN = 1;
@@ -557,22 +557,20 @@ Baltek.RulesEngine.prototype.moveSelectDestination = function(destinationWithCos
 
 Baltek.RulesEngine.prototype.moveFindSources = function(){
     var sources = [];
-    if ( this.move.isActive ) {
-        if ( this.move.sourceBox === null ) {
-            var n = this.activeTeam.footballers.length;
-            var i;
-            var footballer;
-            for ( i=0; i<n; i++ ) {
-                footballer = this.activeTeam.footballers[i];
+        if ( this.move.isActive && this.move.sourceBox === null ) {
+        var n = this.activeTeam.footballers.length;
+        var i;
+        var footballer;
+        for ( i=0; i<n; i++ ) {
+            footballer = this.activeTeam.footballers[i];
 
-                if ( footballer.canRun ) {
-                    // The footballer has not run during this turn
-                    sources.push(footballer.box);
+            if ( footballer.canRun ) {
+                // The footballer has not run during this turn
+                sources.push(footballer.box);
 
-                } else if ( footballer.canKick && footballer.box.hasBall() ) {
-                    // The footballer has not kick during this turn
-                    sources.push(footballer.box);
-                }
+            } else if ( footballer.canKick && footballer.box.hasBall() ) {
+                // The footballer has not kick during this turn
+                sources.push(footballer.box);
             }
         }
     }

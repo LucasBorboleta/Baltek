@@ -23,9 +23,25 @@ Baltek.Utils.$init = function(){
     }
 }
 
+function stackTrace() {
+    var err = new Error();
+    return err.stack;
+}
+
 Baltek.Utils.assert = function(condition, message){
-    if( ! condition ) {
-        var text = "Baltek.Utils.assert(): failure: " + message;
+    if ( ! condition ) {
+
+        var text = "ASSERTION FAILED";
+
+        if ( message !== undefined ) {
+            text += ": " + message + " !";
+        } else {
+            text += " !";
+        }
+
+        var error = new Error();
+        text += "\n\n STACK TRACE: " + error.stack;
+
         console.log(text);
         Baltek.DebugZone.writeMessage(text);
         alert(text);
@@ -46,7 +62,7 @@ Baltek.Utils.getOwnProperties = function(anObject){
 }
 
 Baltek.Utils.hasValue = function(array, value){
-    Baltek.Utils.assert( Array.isArray(array), "Baltek.Utils.hasValue(): Array.isArray(array)" )
+    Baltek.Utils.assert( Array.isArray(array) )
     return (array.indexOf(value) > -1);
 }
 
@@ -77,28 +93,56 @@ Baltek.Observable = function(){
 Baltek.Utils.inheritPrototype(Baltek.Observable, Object);
 
 Baltek.Observable.prototype.$init = function(){
-    this.observerCollection = [];
+    this.aspectNames = [];
+    this.observersByAspects = [];
 }
 
-Baltek.Observable.prototype.notifyObservers = function(){
-    var n = this.observerCollection.length;
+Baltek.Observable.prototype.newAspect = function(aspectName){
+    Baltek.Utils.assert( ! Baltek.Utils.hasValue(this.aspectNames, aspectName) );
+    this.aspectNames.push(aspectName);
+    this.observersByAspects.push( [] );
+    var aspect = this.aspectNames.length - 1;
+    return aspect;
+}
+
+Baltek.Observable.prototype.getAspect = function(aspectName){
+    var aspect = this.aspectNames.indexOf(aspectName);
+    Baltek.Utils.assert( aspect > -1 );
+    return aspect;
+}
+
+Baltek.Observable.prototype.notifyObservers = function(aspect){
+    if ( aspect === undefined ) {
+        aspect = 0;
+    }
+    Baltek.Utils.assert( aspect < this.aspectNames.length );
+    var observers = this.observersByAspects[aspect];
+    var n = observers.length;
     var i = 0;
     for ( i=0; i < n ; i++ ) {
-        this.observerCollection[i].updateFromObservable(this);
+        observers[i].updateFromObservable(this, aspect);
     }
 }
 
-Baltek.Observable.prototype.registerObserver = function(observer){
-    var observerIndex = this.observerCollection.indexOf(observer);
+Baltek.Observable.prototype.registerObserver = function(observer, aspect){
+    if ( aspect === undefined ) {
+        aspect = 0;
+    }
+    Baltek.Utils.assert( aspect < this.aspectNames.length );
+    var observerIndex = this.observersByAspects[aspect].indexOf(observer);
     if ( ! ( observerIndex > -1 ) ) {
-        this.observerCollection.push(observer);
+        this.observersByAspects[aspect].push(observer);
     }
 }
 
-Baltek.Observable.prototype.unregisterObserver = function(observer){
-    var observerIndex = this.observerCollection.indexOf(observer);
+Baltek.Observable.prototype.unregisterObserver = function(observer, aspect){
+    if ( aspect === undefined ) {
+        aspect = 0;
+    }
+    Baltek.Utils.assert( aspect < this.aspectNames.length );
+    var observerIndex = this.observersByAspects[aspect].indexOf(observer);
     if ( observerIndex > -1 ) {
-        this.observerCollection.splice(observerIndex, 1);
+        this.observersByAspects[aspect].splice(observerIndex, 1);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -111,13 +155,14 @@ Baltek.Utils.inheritPrototype(Baltek.I18nator, Baltek.Observable);
 Baltek.I18nator.prototype.$init = function(translations, fallbackLanguage){
     Baltek.I18nator.super.$init.call(this);
 
+    this.languageAspect = this.newAspect("languageAspect");
+
     this.keySeparator = "_" ;
 
     this.translations = translations;
     this.availableLanguages = Baltek.Utils.getOwnProperties(this.translations);
 
-    Baltek.Utils.assert( Baltek.Utils.hasValue(this.availableLanguages, fallbackLanguage),
-                         "Baltek.I18nator.prototype.$init(): fallbackLanguage" );
+    Baltek.Utils.assert( Baltek.Utils.hasValue(this.availableLanguages, fallbackLanguage) );
     this.fallbackLanguage = fallbackLanguage ;
 
     this.language = this.getDefaultLanguage();
@@ -146,18 +191,16 @@ Baltek.I18nator.prototype.getLanguage = function(){
 Baltek.I18nator.prototype.getValueForKey = function(i18nKeyPrefix, i18nKeySuffix){
     var i18nKey = i18nKeyPrefix + this.keySeparator + i18nKeySuffix;
 
-    Baltek.Utils.assert( this.translations[this.language].hasOwnProperty(i18nKey),
-                         "Baltek.I18nator.prototype.getValueForKey(): i18nKey" );
+    Baltek.Utils.assert( this.translations[this.language].hasOwnProperty(i18nKey) );
 
     var value = this.translations[this.language][i18nKey];
     return value;
 }
 
 Baltek.I18nator.prototype.setLanguage = function(language){
-    Baltek.Utils.assert( Baltek.Utils.hasValue(this.availableLanguages, language),
-                         "Baltek.I18nator.prototype.setLanguage(): language" );
+    Baltek.Utils.assert( Baltek.Utils.hasValue(this.availableLanguages, language) );
     this.language = language;
-    this.notifyObservers();
+    this.notifyObservers(this.languageAspect);
 }
 ///////////////////////////////////////////////////////////////////////////////
 Baltek.Widget = function(id, i18nator){
@@ -168,17 +211,19 @@ Baltek.Utils.inheritPrototype(Baltek.Widget, Baltek.Observable);
 
 Baltek.Widget.prototype.$init = function(id, i18nator){
     Baltek.Widget.super.$init.call(this);
+    this.userInputAspect = this.newAspect("userInputAspect");
 
     this.element = document.getElementById(id);
 
     this.i18nKeyPrefix = id;
     this.i18nator = i18nator;
-    this.i18nator.registerObserver(this);
+    this.i18nLanguageAspect = this.i18nator.getAspect("languageAspect");
+    this.i18nator.registerObserver(this, this.i18nLanguageAspect);
+
 }
 
 Baltek.Widget.prototype.enable = function(condition){
-    Baltek.Utils.assert( condition === true || condition === false,
-                         "Baltek.Widget.prototype.enable(): condition" );
+    Baltek.Utils.assert( condition === true || condition === false );
 
     this.element.disabled = ( ! condition );
 }
@@ -197,8 +242,7 @@ Baltek.Widget.prototype.setColor = function(color){
 }
 
 Baltek.Widget.prototype.show = function(condition){
-    Baltek.Utils.assert( condition === true || condition === false,
-                         "Baltek.Widget.prototype.show(): condition" );
+    Baltek.Utils.assert( condition === true || condition === false );
 
     if ( condition ) {
         this.element.style.display = "inherit";
@@ -208,15 +252,14 @@ Baltek.Widget.prototype.show = function(condition){
 }
 
 Baltek.Widget.prototype.updateFromI18n = function(){
-    Baltek.Utils.assert( false, "Baltek.Widget.prototype.updateFromI18n(): must not be called" );
+    Baltek.Utils.assert( false, "must not be called" );
 }
 
-Baltek.Widget.prototype.updateFromObservable = function(observable){
-    if ( observable === this.i18nator ) {
+Baltek.Widget.prototype.updateFromObservable = function(observable, aspect){
+    if ( observable === this.i18nator && aspect === this.i18nLanguageAspect ) {
         this.updateFromI18n();
     } else {
-        Baltek.Utils.assert( false,
-                             "Baltek.Widget.prototype.updateFromObservable(): observable not managed" );
+        Baltek.Utils.assert( false, "observable/aspect not managed" );
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -246,7 +289,7 @@ Baltek.Utils.inheritPrototype(Baltek.Selector, Baltek.Widget);
 Baltek.Selector.prototype.$init = function(id, i18nator, values){
     Baltek.Selector.super.$init.call(this, id, i18nator);
 
-    Baltek.Utils.assert( (values.length >= 2), "Baltek.Selector.prototype.$init(): values.length" );
+    Baltek.Utils.assert( values.length >= 2 );
     this.values = values;
 
     // Finalize the construction regarding I18n.
@@ -258,8 +301,7 @@ Baltek.Selector.prototype.getSelection = function(){
 }
 
 Baltek.Selector.prototype.setSelection = function(selection){
-    Baltek.Utils.assert( Baltek.Utils.hasValue(this.values, selection),
-                         "Baltek.Selector.prototype.setSelection(): selection" );
+    Baltek.Utils.assert( Baltek.Utils.hasValue(this.values, selection) );
     this.element.value = selection;
 }
 
@@ -422,39 +464,39 @@ Baltek.PresenterState.prototype.enter = function(presenter){
 }
 
 Baltek.PresenterState.prototype.updateFromStartGame = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromStartGame(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromRestartGame = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromRestartGame(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromResumeGame = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromResumeGame(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromQuitGame = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromQuitGame(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromBlueKind = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromBlueKind(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromRedKind = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromRedKind(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromKickoff = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromKickoff(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromUseBonus = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromUseBonus(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromEndTurn = function(presenter){
-    Baltek.Utils.assert( false, "Baltek.PresenterState.prototype.updateFromEndTurn(): unexpected call" );
+    Baltek.Utils.assert( false, "unexpected call" );
 }
 
 Baltek.PresenterState.prototype.updateFromLanguage = function(presenter){
@@ -770,7 +812,7 @@ Baltek.Presenter.prototype.updateFromObservable = function(observable){
         this.state.updateFromCoordinates(this);
 
     } else {
-        Baltek.Utils.assert( false, "Baltek.Presenter.prototype.updateFromObservable(): observable not managed" );
+        Baltek.Utils.assert( false, "observable not managed" );
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
