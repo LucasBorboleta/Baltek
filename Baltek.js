@@ -8,8 +8,10 @@ Baltek.$init = function(){
 
         Baltek.Utils.$init();
         Baltek.CanvasZone.$init();
-        Baltek.presenter = new Baltek.Presenter();
         Baltek.DebugZone.$init();
+        Baltek.Rules.$init();
+
+        Baltek.presenter = new Baltek.Presenter();
 
         Baltek.DebugZone.writeMessage( "Baltek.$init(): done" );
     }
@@ -662,17 +664,12 @@ Baltek.Utils.inheritPrototype(Baltek.Presenter, Object);
 
 Baltek.Presenter.prototype.$init = function(){
 
-    // TODO: refactor that as a class
-    this.initGameModel();
-
-    // TODO: the Presenter has to interact with agents to retrieve decisions;
-    // TODO: this design is suggested from IA or remote human configurations.
-    // TODO: decision is retrieved from either view events or IA/remote events.
-    // TODO: Project priorities: 1) human/human; 2) human/IA ; 3) IA/IA ; 4) human/remote-human.
     this.blueAgent = { kind: "" };
     this.redAgent = { kind: "" };
 
     this.i18nator = new Baltek.I18nator(Baltek.I18nTranslations, "fr" );
+
+    this.rulesEngine = new Baltek.Rules.Engine();
 
     this.startGame = new Baltek.Button( "Baltek_ButtonZone_StartGame" , this.i18nator);
     this.startGame.registerObserver(this);
@@ -724,23 +721,6 @@ Baltek.Presenter.prototype.$init = function(){
 
     this.state = Baltek.PresenterStateIsReadyToStart.getInstance();
     this.state.enter(this);
-}
-
-Baltek.Presenter.prototype.initGameModel = function(){
-
-    this.gameModel = {};
-
-    this.gameModel.blueGoals = 0;
-    this.gameModel.redGoals = 0;
-
-    this.gameModel.isBlueToMove = true;
-    this.gameModel.isRedToMove = false;
-
-    this.gameModel.blueUsedBonus = false;
-    this.gameModel.redUsedBonus = false;
-
-    this.gameModel.newGameHasBeenStarted = false;
-    this.gameModel.newSetHasBeenStarted = false;
 }
 
 Baltek.Presenter.prototype.hideAllGameButtons = function(){

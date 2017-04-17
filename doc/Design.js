@@ -122,7 +122,7 @@ Baltek.RulesEngine.Field.prototype.$init = function(engine){
     this.engine.passiveTeam.goalBox = this.boxesByIndices[pgix][pgiy] ;
 }
 
-Baltek.RulesEngine.Field.prototype.initPositions = function(){
+Baltek.RulesEngine.Field.prototype.initBallAndTeamsBoxes = function(){
     var box = null;
     for ( var ix=this.firstX; ix<=this.lastX; ix++ ) {
         for ( var iy=this.firstY; iy<=this.lastY; iy++ ) {
@@ -267,7 +267,7 @@ Baltek.RulesEngine.prototype.$init = function(){
     this.ball = new Baltek.RulesEngine.Ball();
 
     this.field = new Baltek.RulesEngine.Field(this);
-    this.field.initPositions();
+    this.field.initBallAndTeamsBoxes();
 }
 
 Baltek.RulesEngine.prototype.switchActiveAndPassiveTeams = function(){
@@ -311,7 +311,7 @@ Baltek.RulesEngine.prototype.roundInit = function(){
     this.activeTeam.haveGoaled = false;
     this.passiveTeam.haveGoaled = false;
 
-    this.field.initPositions();
+    this.field.initBallAndTeamsBoxes();
     this.turnInit();
 }
 
