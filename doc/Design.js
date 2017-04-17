@@ -3,23 +3,24 @@
 // This file does not contain production code.
 // This files just helps thinking about the design.
 
-// Study of abstract interaction between the RulesEngine and the two Players.
-// The GUI aspect is not considered here.
+// Study of abstract interaction between the RulesEngine and its obervers.
+// The observers includes the Presenter, the AI Player, the remote Player or the remote Presenter
 
 ///////////////////////////////////////////////////////////////////////////////
 // Triggered by the Presenter
 
-var bluePlayer = new Baltek.HumanPlayer();
-var redPlayer = new Baltek.AiPlayer();
-var redPlayer = new Baltek.RemotePlayer(); // Also allowed
-
 var rulesEngine = new Baltek.RulesEngine();
 
-rulesEngine.connectBluePlayer(bluePlayer);
-rulesEngine.connectBluePlayer(redPlayer);
+rulesEngine.registerObserver(presenter, aspect1);
+rulesEngine.registerObserver(presenter, aspect2);
+rulesEngine.registerObserver(presenter, aspect3);
 
+presenter {
+    this.engine.getFieldNx();
+    this.engine.getFieldNy();
+}
 rulesEngine.matchInit();
-rulesEngine.update();
+rulesEngine.matchUpdate();
 
 ///////////////////////////////////////////////////////////////////////////////
 Baltek.RulesEngine.Ball.prototype.$init = function(){
@@ -255,9 +256,6 @@ Baltek.RulesEngine.Box.prototype.hasPassiveFootballer = function(){
 
 Baltek.RulesEngine.prototype.$init = function(){
 
-    this.field = new Baltek.RulesEngine.Field(this);
-    this.ball = new Baltek.RulesEngine.Ball();
-
     var BLUE_INDEX = 0;
     var RED_INDEX = 1;
     this.blueTeam = new Baltek.RulesEngine.Team(this, BLUE_INDEX);
@@ -265,14 +263,11 @@ Baltek.RulesEngine.prototype.$init = function(){
 
     this.activeTeam = this.blueTeam;
     this.passiveTeam = this.redTeam;
-}
 
-Baltek.RulesEngine.prototype.connectBluePlayer = function(bluePlayer){
-    this.blueTeam.player = bluePlayer;
-}
+    this.ball = new Baltek.RulesEngine.Ball();
 
-Baltek.RulesEngine.prototype.connectRedPlayer = function(redPlayer){
-    this.redTeam.player = redPlayer;
+    this.field = new Baltek.RulesEngine.Field(this);
+    this.field.initPositions();
 }
 
 Baltek.RulesEngine.prototype.switchActiveAndPassiveTeams = function(){
@@ -295,6 +290,9 @@ Baltek.RulesEngine.prototype.setPassiveTeam = function(passiveTeam){
 }
 
 Baltek.RulesEngine.prototype.matchInit = function(){
+    this.match.isActive = true;
+    this.match.SCORE_MAX = 2;
+
     this.activeTeam = this.blueTeam;
     this.passiveTeam = this.redTeam;
 
@@ -302,11 +300,11 @@ Baltek.RulesEngine.prototype.matchInit = function(){
     this.passiveTeam.score = 0;
 
     this.roundInit();
-    this.match.SCORE_MAX = 2;
-    this.match.isActive = true;
 }
 
 Baltek.RulesEngine.prototype.roundInit = function(){
+    this.round.isActive = true;
+
     this.activeTeam.canSprint = true;
     this.passiveTeam.canSprint = true;
 
@@ -314,21 +312,22 @@ Baltek.RulesEngine.prototype.roundInit = function(){
     this.passiveTeam.haveGoaled = false;
 
     this.field.initPositions();
-
     this.turnInit();
-    this.round.isActive = true;
 }
 
 Baltek.RulesEngine.prototype.turnInit = function(){
+    this.turn.isActive = true;
     this.turn.CREDIT_MAX = 3;
+
     this.activeTeam.credit = this.turn.CREDIT_MAX;
     this.passiveTeam.credit = 0;
 
     this.moveInit();
-    this.turn.isActive = true;
 }
 
 Baltek.RulesEngine.prototype.moveInit = function(){
+    this.move.isActive = true;
+
     this.move.KIND_RUN = 900;
     this.move.KIND_SPRINT = 901;
     this.move.KIND_KICK = 902;
@@ -346,12 +345,6 @@ Baltek.RulesEngine.prototype.moveInit = function(){
     this.move.kindCost = 0;
     this.move.destinationBox = null;
     this.move.destinationCost = 0;
-
-    this.move.isActive = true;
-}
-
-Baltek.RulesEngine.prototype.update = function(){
-    this.matchUpdate();
 }
 
 Baltek.RulesEngine.prototype.matchUpdate = function(){
@@ -363,7 +356,7 @@ Baltek.RulesEngine.prototype.matchUpdate = function(){
             if ( this.activeTeam.haveGoaled ) {
                 this.activeTeam.score += 1
 
-                if ( this.activeTeam.score >= this.match.SCORE_MAX or this.passiveTeam.score >= this.match.SCORE_MAX ) {
+                if ( this.activeTeam.score >= this.match.SCORE_MAX || this.passiveTeam.score >= this.match.SCORE_MAX ) {
                     this.match.isActive = false;
                 }
             }
@@ -422,7 +415,7 @@ Baltek.RulesEngine.prototype.turnStop = function(){
 
     if ( this.turn.isActive ) {
         this.turn.isActive = false;
-        this.update();
+        this.matchUpdate();
     }
 }
 
@@ -460,11 +453,6 @@ Baltek.RulesEngine.prototype.moveUpdate = function(){
                 this.move.kindsWithCosts = this.moveFindKindsWithCosts();
                 // notify the player of the activeTeam
 
-                //TODO: for interactive player, the presenter selects the first allowed kind
-                //TODO: and let the real player the option to change such default selection.
-                //TODO: In case the allowed kinds is an empty set, then just the source
-                //TODO: box is higlighted.
-
             }
         } else {
             // this.move.sourceBox === null
@@ -482,7 +470,7 @@ Baltek.RulesEngine.prototype.moveSelectSource = function(source){
         if ( this.move.sourceBox === null ) {
             if ( Baltek.Utils.hasValue(this.move.sources, source) ) {
                 this.move.sourceBox = source;
-                this.update();
+                this.matchUpdate();
             }
         }
     }
@@ -503,7 +491,7 @@ Baltek.RulesEngine.prototype.moveUnselectSource = function(source){
             this.move.destinationBox = null;
             this.move.destinationCost = 0;
 
-            this.update();
+            this.matchUpdate();
         }
     }
 }
@@ -516,7 +504,7 @@ Baltek.RulesEngine.prototype.moveSelectKind = function(kindWithCost){
             if ( Baltek.Utils.hasValue(this.move.kindsWithCosts, kindWithCost) ) {
                 this.move.kind = kindWithCost.kind;
                 this.move.kindCost = kindWithCost.kindCost;
-                this.update();
+                this.matchUpdate();
             }
         }
     }
@@ -536,7 +524,7 @@ Baltek.RulesEngine.prototype.moveUnselectKind = function(){
             this.move.destinationBox = null;
             this.move.destinationCost = 0;
 
-            this.update();
+            this.matchUpdate();
         }
     }
 }
@@ -549,7 +537,7 @@ Baltek.RulesEngine.prototype.moveSelectDestination = function(destinationWithCos
             if ( Baltek.Utils.hasValue(this.move.destinationsWithCosts, destinationWithCost) ) {
                 this.move.destinationBox = destinationWithCost.box;
                 this.move.destinationCost = destinationWithCost.cost;
-                this.update();
+                this.matchUpdate();
             }
         }
     }

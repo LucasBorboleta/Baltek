@@ -23,11 +23,6 @@ Baltek.Utils.$init = function(){
     }
 }
 
-function stackTrace() {
-    var err = new Error();
-    return err.stack;
-}
-
 Baltek.Utils.assert = function(condition, message){
     if ( ! condition ) {
 
@@ -112,8 +107,7 @@ Baltek.Observable.prototype.getAspect = function(aspectName){
 }
 
 Baltek.Observable.prototype.notifyObservers = function(aspect){
-    if ( aspect === undefined ) {
-        aspect = 0;
+    if ( aspect === undefined ) { aspect = 0;
     }
     Baltek.Utils.assert( aspect < this.aspectNames.length );
     var observers = this.observersByAspects[aspect];
@@ -223,8 +217,6 @@ Baltek.Widget.prototype.$init = function(id, i18nator){
 }
 
 Baltek.Widget.prototype.enable = function(condition){
-    Baltek.Utils.assert( condition === true || condition === false );
-
     this.element.disabled = ( ! condition );
 }
 
@@ -242,8 +234,6 @@ Baltek.Widget.prototype.setColor = function(color){
 }
 
 Baltek.Widget.prototype.show = function(condition){
-    Baltek.Utils.assert( condition === true || condition === false );
-
     if ( condition ) {
         this.element.style.display = "inherit";
     } else {
