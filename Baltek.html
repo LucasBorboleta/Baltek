@@ -16,7 +16,7 @@
 		}
 	</style>
 
-	<body onload="Baltek.$init();">
+	<body onload="baltek.$init();">
 
 		<div id="Baltek_ButtonZone" style="background-color:white; color:black; margin:4px; padding:4px;">
 
@@ -24,54 +24,54 @@
 			<div class="buttonGroup">
 
 				<button id="Baltek_ButtonZone_StartGame"
-						onclick="Baltek.presenter.startGame.notifyObservers();"
+						onclick="baltek.thePresenter.startGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<button id="Baltek_ButtonZone_RestartGame"
-						onclick="Baltek.presenter.restartGame.notifyObservers();"
+						onclick="baltek.thePresenter.restartGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<button id="Baltek_ButtonZone_ResumeGame"
-						onclick="Baltek.presenter.resumeGame.notifyObservers();"
+						onclick="baltek.thePresenter.resumeGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<button id="Baltek_ButtonZone_QuitGame"
-						onclick="Baltek.presenter.quitGame.notifyObservers();"
+						onclick="baltek.thePresenter.quitGame.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<select id="Baltek_ButtonZone_BlueKind"
-						onchange="Baltek.presenter.blueKind.notifyObservers();"
+						onchange="baltek.thePresenter.blueKind.notifyObservers();"
 						style="background-color:blue; color:white;">
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<select id="Baltek_ButtonZone_RedKind"
-						onchange="Baltek.presenter.redKind.notifyObservers();"
+						onchange="baltek.thePresenter.redKind.notifyObservers();"
 						style="background-color:red; color:white;">
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<button id="Baltek_ButtonZone_Kickoff"
-						onclick="Baltek.presenter.kickoff.notifyObservers();"
+						onclick="baltek.thePresenter.kickoff.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
 				<select id="Baltek_ButtonZone_UseBonus"
-						onchange="Baltek.presenter.useBonus.notifyObservers();"
+						onchange="baltek.thePresenter.useBonus.notifyObservers();"
 						<!-- The options are created dynamically using JavaScript -->
 				</select>
 
 				<button id="Baltek_ButtonZone_EndTurn"
-						onclick="Baltek.presenter.endTurn.notifyObservers();"
+						onclick="baltek.thePresenter.endTurn.notifyObservers();"
 						>
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
@@ -80,20 +80,20 @@
 
 			<!-- Peferences -->
 			<div class="buttonGroup">
-				<select id="Baltek_ButtonZone_Language" onchange="Baltek.presenter.language.notifyObservers();">
+				<select id="Baltek_ButtonZone_Language" onchange="baltek.thePresenter.language.notifyObservers();">
 					<!-- The options are created dynamically using JavaScript -->
 				</select>
 
-				<select id="Baltek_ButtonZone_Coordinates" onchange="Baltek.presenter.coordinates.notifyObservers();">
+				<select id="Baltek_ButtonZone_Coordinates" onchange="baltek.thePresenter.coordinates.notifyObservers();">
 					<!-- The options are created dynamically using JavaScript -->
 	        	</select>
 			</div>
 
 			<!-- Help -->
 			<div class="buttonGroup">
-	        	<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="Baltek.presenter.rules.openFile();"></button>
-	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="Baltek.presenter.help.openFile();"></button>
-	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="Baltek.presenter.about.openFile();"></button>
+	        	<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="baltek.thePresenter.rules.openFile();"></button>
+	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="baltek.thePresenter.help.openFile();"></button>
+	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="baltek.thePresenter.about.openFile();"></button>
 			</div>
 		</div>
 
@@ -104,18 +104,34 @@
 		<div id="Baltek_DebugZone" style="background-color:lightgrey; color:black; margin:2px; padding:2px;">
 			<span>Debug zone:</span>
 
-			<button id="Baltek_DebugZone_Disable" type="button"  onclick="Baltek.DebugZone.disable()">Disable</button>
-			<button id="Baltek_DebugZone_Enable"  type="button"  onclick="Baltek.DebugZone.enable()">Enable</button>
-			<button id="Baltek_DebugZone_Hide"    type="button"  onclick="Baltek.DebugZone.hide()">Hide</button>
-			<button id="Baltek_DebugZone_Show"    type="button"  onclick="Baltek.DebugZone.show()">Show</button>
+			<button id="Baltek_DebugZone_Disable" type="button"  onclick="baltek.debug.disable()">Disable</button>
+			<button id="Baltek_DebugZone_Enable"  type="button"  onclick="baltek.debug.enable()">Enable</button>
+			<button id="Baltek_DebugZone_Hide"    type="button"  onclick="baltek.debug.hide()">Hide</button>
+			<button id="Baltek_DebugZone_Show"    type="button"  onclick="baltek.debug.show()">Show</button>
 
-			<button id="Baltek_DebugZone_Clear"  type="button"  onclick="Baltek.DebugZone.clearMessages()">Clear messages</button>
+			<button id="Baltek_DebugZone_Clear"  type="button"  onclick="baltek.debug.clearMessages()">Clear messages</button>
 			<span id="Baltek_DebugZone_Mouse" style="background-color:white;">Mouse(x,y) = (?,?)</span>
 			<p id="Baltek_DebugZone_Messages"></p>
 		</div>
 
-		<script src="Baltek.js"></script>
-		<script src="Baltek.I18nTranslations.js"></script>
-		<script src="Baltek.Rules.js"></script>
+		<!-- The following *.js files must be loaded first, in this order.
+			Reasons:
+			1) Namespace "baltek" is created first.
+			2) Function "baltek.utils.inherit" is called when loaded the other files.
+			   This is related to the chosen declaration pattern of the "classes".
+			-->
+		<script src="baltek.js"></script>
+		<script src="baltek.utils.js"></script>
+
+		<!-- The following *.js files can be loaded in any order.
+			 Let us sorted them alphabetically. -->
+		<script src="baltek.debug.js"></script>
+		<script src="baltek.draw.js"></script>
+		<script src="baltek.i18n.js"></script>
+		<script src="baltek.i18n.translations.js"></script>
+		<script src="baltek.presenter.js"></script>
+		<script src="baltek.rules.js"></script>
+		<script src="baltek.widget.js"></script>
+
 	</body>
 </html>

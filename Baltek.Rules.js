@@ -1,76 +1,33 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.Rules = { initCalled: false };
+baltek.rules = { initCalled: false };
 
-Baltek.Rules.$init = function(){
-    if ( ! Baltek.Rules.initCalled ) {
-        Baltek.Rules.initCalled = true;
-        Baltek.DebugZone.writeMessage( "Baltek.Rules.$init(): done" );
+baltek.rules.$init = function(){
+    if ( ! baltek.rules.initCalled ) {
+        baltek.rules.initCalled = true;
+
+        // Init any package used by this one
+        baltek.utils.$init();
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.Rules.Ball = function(){
+baltek.rules.Ball = function(){
     this.$init();
 };
 
-Baltek.Utils.inheritPrototype(Baltek.Rules.Ball, Object);
+baltek.utils.inherit(baltek.rules.Ball, Object);
 
-Baltek.Rules.Ball.prototype.$init = function(){
+baltek.rules.Ball.prototype.$init = function(){
     this.box = null;
 }
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.Rules.Footballer = function(team, force){
-    this.$init(team, force);
-};
-
-Baltek.Utils.inheritPrototype(Baltek.Rules.Footballer, Object);
-
-Baltek.Rules.Footballer.prototype.$init = function(team, force){
-    this.team = team;
-    this.force = force;
-    this.box = null;
-    this.canKick = false;
-    this.canRun = false;
-}
-///////////////////////////////////////////////////////////////////////////////
-Baltek.Rules.Team = function(teamIndex){
-    this.$init(teamIndex);
-};
-
-Baltek.Utils.inheritPrototype(Baltek.Rules.Team, Object);
-
-Baltek.Rules.Team.prototype.$init = function(teamIndex){
-    this.teamIndex = teamIndex ;
-    this.goalBox = null; // the box to be defended by the team
-    this.score = 0;
-    this.canSprint = false;
-    this.haveGoaled = false;
-    this.credit = 0;
-
-    // Populate the team
-    this.footballer3 = new Baltek.Rules.Footballer(this, 3);  // captain
-    this.footballer2t = new Baltek.Rules.Footballer(this, 2); // @ top
-    this.footballer2b = new Baltek.Rules.Footballer(this, 2); // @ bottom
-    this.footballer1t = new Baltek.Rules.Footballer(this, 1); // @ top
-    this.footballer1m = new Baltek.Rules.Footballer(this, 1); // @ middle
-    this.footballer1b = new Baltek.Rules.Footballer(this, 1); // @ bottom
-
-    this.footballers = [];
-    this.footballers.push(this.footballer3);
-    this.footballers.push(this.footballer2t);
-    this.footballers.push(this.footballer2b);
-    this.footballers.push(this.footballer1t);
-    this.footballers.push(this.footballer1m);
-    this.footballers.push(this.footballer1b);
-}
-///////////////////////////////////////////////////////////////////////////////
-Baltek.Rules.Box = function(engine, ix, iy){
+baltek.rules.Box = function(engine, ix, iy){
     this.$init(engine, ix, iy);
 };
 
-Baltek.Utils.inheritPrototype(Baltek.Rules.Box, Object);
+baltek.utils.inherit(baltek.rules.Box, Object);
 
-Baltek.Rules.Box.prototype.$init = function(engine, ix, iy){
+baltek.rules.Box.prototype.$init = function(engine, ix, iy){
     this.engine = engine;
     this.ix = ix ;
     this.iy = iy ;
@@ -82,11 +39,50 @@ Baltek.Rules.Box.prototype.$init = function(engine, ix, iy){
     this.footballers.push(null);
 }
 
-Baltek.Rules.Box.prototype.setBall = function(ball){
-    Baltek.Utils.assert( ball !== null );
+baltek.rules.Box.prototype.getActiveFootballer = function(){
+    return this.footballers[this.engine.activeTeam.teamIndex];
+}
+
+baltek.rules.Box.prototype.getBall = function(){
+    return this.ball;
+}
+
+baltek.rules.Box.prototype.getPassiveFootballer = function(){
+    return this.footballers[this.engine.passiveTeam.teamIndex];
+}
+
+baltek.rules.Box.prototype.hasActiveFootballer = function(){
+    return ( this.footballers[this.engine.activeTeam.teamIndex] !== null );
+}
+
+baltek.rules.Box.prototype.hasBall = function(){
+    return ( this.ball !== null );
+}
+
+baltek.rules.Box.prototype.hasPassiveFootballer = function(){
+    return ( this.footballers[this.engine.passiveTeam.teamIndex] !== null );
+}
+
+baltek.rules.Box.prototype.setActiveFootballer = function(footballer){
+    baltek.utils.assert( footballer !== null ),
+    baltek.utils.assert( footballer.team.teamIndex === this.engine.activeTeam.teamIndex );
+
+    if ( this.footballers[footballer.team.teamIndex] !== footballer ) {
+        baltek.utils.assert( this.footballers[footballer.team.teamIndex] === null );
+
+        if ( footballer.box !== null ) {
+            footballer.box.footballers[footballer.team.teamIndex] = null;
+        }
+        this.footballers[footballer.team.teamIndex] = footballer;
+        footballer.box = this;
+    }
+}
+
+baltek.rules.Box.prototype.setBall = function(ball){
+    baltek.utils.assert( ball !== null );
 
     if ( this.ball !== ball ) {
-        Baltek.Utils.assert( this.ball === null );
+        baltek.utils.assert( this.ball === null );
 
         if ( ball.box !== null ) {
             ball.box.ball = null;
@@ -96,20 +92,12 @@ Baltek.Rules.Box.prototype.setBall = function(ball){
     }
 }
 
-Baltek.Rules.Box.prototype.getBall = function(){
-    return this.ball;
-}
-
-Baltek.Rules.Box.prototype.hasBall = function(){
-    return ( this.ball !== null );
-}
-
-Baltek.Rules.Box.prototype.setActiveFootballer = function(footballer){
-    Baltek.Utils.assert( footballer !== null ),
-    Baltek.Utils.assert( footballer.team.teamIndex === this.engine.activeTeam.teamIndex );
+baltek.rules.Box.prototype.setPassiveFootballer = function(footballer){
+    baltek.utils.assert( footballer !== null );
+    baltek.utils.assert( footballer.team.teamIndex === this.engine.passiveTeam.teamIndex );
 
     if ( this.footballers[footballer.team.teamIndex] !== footballer ) {
-        Baltek.Utils.assert( this.footballers[footballer.team.teamIndex] === null );
+        baltek.utils.assert( this.footballers[footballer.team.teamIndex] === null )
 
         if ( footballer.box !== null ) {
             footballer.box.footballers[footballer.team.teamIndex] = null;
@@ -117,46 +105,58 @@ Baltek.Rules.Box.prototype.setActiveFootballer = function(footballer){
         this.footballers[footballer.team.teamIndex] = footballer;
         footballer.box = this;
     }
-}
-
-Baltek.Rules.Box.prototype.getActiveFootballer = function(){
-    return this.footballers[this.engine.activeTeam.teamIndex];
-}
-
-Baltek.Rules.Box.prototype.hasActiveFootballer = function(){
-    return ( this.footballers[this.engine.activeTeam.teamIndex] !== null );
-}
-
-Baltek.Rules.Box.prototype.setPassiveFootballer = function(footballer){
-    Baltek.Utils.assert( footballer !== null );
-    Baltek.Utils.assert( footballer.team.teamIndex === this.engine.passiveTeam.teamIndex );
-
-    if ( this.footballers[footballer.team.teamIndex] !== footballer ) {
-        Baltek.Utils.assert( this.footballers[footballer.team.teamIndex] === null )
-
-        if ( footballer.box !== null ) {
-            footballer.box.footballers[footballer.team.teamIndex] = null;
-        }
-        this.footballers[footballer.team.teamIndex] = footballer;
-        footballer.box = this;
-    }
-}
-
-Baltek.Rules.Box.prototype.getPassiveFootballer = function(){
-    return this.footballers[this.engine.passiveTeam.teamIndex];
-}
-
-Baltek.Rules.Box.prototype.hasPassiveFootballer = function(){
-    return ( this.footballers[this.engine.passiveTeam.teamIndex] !== null );
 }
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.Rules.Field = function(engine){
+baltek.rules.Engine = function(){
+    this.$init();
+};
+
+baltek.utils.inherit(baltek.rules.Engine, baltek.utils.Observable);
+
+
+baltek.rules.Engine.prototype.$init = function(){
+
+    this.BLUE_INDEX = 0;
+    this.RED_INDEX = 1;
+
+    this.blueTeam = new baltek.rules.Team(this.BLUE_INDEX);
+    this.redTeam = new baltek.rules.Team(this.RED_INDEX);
+
+    this.activeTeam = this.blueTeam;
+    this.passiveTeam = this.redTeam;
+
+    this.ball = new baltek.rules.Ball();
+
+    this.field = new baltek.rules.Field(this);
+    this.field.initBallAndTeamsBoxes();
+}
+
+baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){
+    if ( activeTeam !== this.activeTeam ) {
+        this.switchActiveAndPassiveTeams();
+    }
+}
+
+baltek.rules.Engine.prototype.setPassiveTeam = function(passiveTeam){
+    if ( passiveTeam !== this.passiveTeam ) {
+        this.switchActiveAndPassiveTeams();
+    }
+}
+
+baltek.rules.Engine.prototype.switchActiveAndPassiveTeams = function(){
+    var oldActiveTeam = this.activeTeam;
+    var oldPassiveTeam = this.passiveTeam;
+    this.activeTeam = this.oldPassiveTeam;
+    this.passiveTeam = this.oldActiveTeam;
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.rules.Field = function(engine){
     this.$init(engine);
 };
 
-Baltek.Utils.inheritPrototype(Baltek.Rules.Field, Object);
+baltek.utils.inherit(baltek.rules.Field, Object);
 
-Baltek.Rules.Field.prototype.$init = function(engine){
+baltek.rules.Field.prototype.$init = function(engine){
     this.engine = engine;
 
     // Team square side
@@ -192,13 +192,13 @@ Baltek.Rules.Field.prototype.$init = function(engine){
 
             if ( ix === this.firstX || ix === this.lastX ) {
                 if ( iy === this.middleY ) {
-                    box = new Baltek.Rules.Box(this.engine, ix , iy);
+                    box = new baltek.rules.Box(this.engine, ix , iy);
                     box.canHostBall = true;
                     box.canHostFootballer = false;
                     this.boxesByIndices[ix][iy] = box;
                 }
             } else {
-                box = new Baltek.Rules.Box(this.engine, ix , iy);
+                box = new baltek.rules.Box(this.engine, ix , iy);
                 box.canHostBall = true;
                 box.canHostFootballer = true;
                 this.boxesByIndices[ix][iy] = box;
@@ -223,7 +223,7 @@ Baltek.Rules.Field.prototype.$init = function(engine){
     this.engine.passiveTeam.goalBox = this.boxesByIndices[pgix][pgiy] ;
 }
 
-Baltek.Rules.Field.prototype.initBallAndTeamsBoxes = function(){
+baltek.rules.Field.prototype.initBallAndTeamsBoxes = function(){
 
     // First: reset all boxes, from field, ball and teams
 
@@ -283,46 +283,48 @@ Baltek.Rules.Field.prototype.initBallAndTeamsBoxes = function(){
     this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer1b);
 }
 ///////////////////////////////////////////////////////////////////////////////
-Baltek.Rules.Engine = function(){
-    this.$init();
+baltek.rules.Footballer = function(team, force){
+    this.$init(team, force);
 };
 
-Baltek.Utils.inheritPrototype(Baltek.Rules.Engine, Baltek.Observable);
+baltek.utils.inherit(baltek.rules.Footballer, Object);
 
-
-Baltek.Rules.Engine.prototype.$init = function(){
-
-    this.BLUE_INDEX = 0;
-    this.RED_INDEX = 1;
-
-    this.blueTeam = new Baltek.Rules.Team(this.BLUE_INDEX);
-    this.redTeam = new Baltek.Rules.Team(this.RED_INDEX);
-
-    this.activeTeam = this.blueTeam;
-    this.passiveTeam = this.redTeam;
-
-    this.ball = new Baltek.Rules.Ball();
-
-    this.field = new Baltek.Rules.Field(this);
-    this.field.initBallAndTeamsBoxes();
+baltek.rules.Footballer.prototype.$init = function(team, force){
+    this.team = team;
+    this.force = force;
+    this.box = null;
+    this.canKick = false;
+    this.canRun = false;
 }
+///////////////////////////////////////////////////////////////////////////////
+baltek.rules.Team = function(teamIndex){
+    this.$init(teamIndex);
+};
 
-Baltek.Rules.Engine.prototype.switchActiveAndPassiveTeams = function(){
-    var oldActiveTeam = this.activeTeam;
-    var oldPassiveTeam = this.passiveTeam;
-    this.activeTeam = this.oldPassiveTeam;
-    this.passiveTeam = this.oldActiveTeam;
-}
+baltek.utils.inherit(baltek.rules.Team, Object);
 
-Baltek.Rules.Engine.prototype.setActiveTeam = function(activeTeam){
-    if ( activeTeam !== this.activeTeam ) {
-        this.switchActiveAndPassiveTeams();
-    }
-}
+baltek.rules.Team.prototype.$init = function(teamIndex){
+    this.teamIndex = teamIndex ;
+    this.goalBox = null; // the box to be defended by the team
+    this.score = 0;
+    this.canSprint = false;
+    this.haveGoaled = false;
+    this.credit = 0;
 
-Baltek.Rules.Engine.prototype.setPassiveTeam = function(passiveTeam){
-    if ( passiveTeam !== this.passiveTeam ) {
-        this.switchActiveAndPassiveTeams();
-    }
+    // Populate the team
+    this.footballer3 = new baltek.rules.Footballer(this, 3);  // captain
+    this.footballer2t = new baltek.rules.Footballer(this, 2); // @ top
+    this.footballer2b = new baltek.rules.Footballer(this, 2); // @ bottom
+    this.footballer1t = new baltek.rules.Footballer(this, 1); // @ top
+    this.footballer1m = new baltek.rules.Footballer(this, 1); // @ middle
+    this.footballer1b = new baltek.rules.Footballer(this, 1); // @ bottom
+
+    this.footballers = [];
+    this.footballers.push(this.footballer3);
+    this.footballers.push(this.footballer2t);
+    this.footballers.push(this.footballer2b);
+    this.footballers.push(this.footballer1t);
+    this.footballers.push(this.footballer1m);
+    this.footballers.push(this.footballer1b);
 }
 ///////////////////////////////////////////////////////////////////////////////
