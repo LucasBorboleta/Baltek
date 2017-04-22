@@ -7,10 +7,10 @@ baltek.presenter.$init = function(){
         baltek.presenter.initCalled = true;
 
         // Init any package used by this one
-        baltek.utils.$init();
         baltek.debug.$init();
-        baltek.widget.$init();
         baltek.rules.$init();
+        baltek.utils.$init();
+        baltek.widget.$init();
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -28,6 +28,19 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.i18nTranslator = new baltek.i18n.Translator(baltek.i18n.translations, "fr" );
 
     this.rulesEngine = new baltek.rules.Engine();
+    this.fieldNx = this.rulesEngine.getFieldNx();
+    this.fieldNy = this.rulesEngine.getFieldNy();
+    baltek.draw.setDimensions(this.fieldNx, this.fieldNy);
+    var ix = 0;
+    var iy = 0;
+    var b = null;
+    for (ix=0; ix<this.fieldNx; ix++) {
+        for (iy=0; iy<this.fieldNy; iy++) {
+            b = new baltek.draw.Box(ix, iy, "XXX");
+            b.draw();
+            b.enableSelection();
+        }
+    }
 
     this.startGame = new baltek.widget.Button( "Baltek_ButtonZone_StartGame" , this.i18nTranslator);
     this.startGame.registerObserver(this);

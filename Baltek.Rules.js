@@ -131,6 +131,14 @@ baltek.rules.Engine.prototype.$init = function(){
     this.field.initBallAndTeamsBoxes();
 }
 
+baltek.rules.Engine.prototype.getFieldNx = function(){
+    return this.field.nx;
+}
+
+baltek.rules.Engine.prototype.getFieldNy = function(){
+    return this.field.ny;
+}
+
 baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){
     if ( activeTeam !== this.activeTeam ) {
         this.switchActiveAndPassiveTeams();
