@@ -1,13 +1,14 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter = { initCalled: false };
+baltek.presenter = { $initCalled: false };
 
 baltek.presenter.$init = function(){
-    if ( ! baltek.presenter.initCalled ) {
-        baltek.presenter.initCalled = true;
+    if ( ! baltek.presenter.$initCalled ) {
+        baltek.presenter.$initCalled = true;
 
         // Init any package used by this one
         baltek.debug.$init();
+        baltek.draw.$init();
         baltek.rules.$init();
         baltek.utils.$init();
         baltek.widget.$init();
@@ -28,19 +29,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.i18nTranslator = new baltek.i18n.Translator(baltek.i18n.translations, "fr" );
 
     this.rulesEngine = new baltek.rules.Engine();
-    this.fieldNx = this.rulesEngine.getFieldNx();
-    this.fieldNy = this.rulesEngine.getFieldNy();
-    baltek.draw.setDimensions(this.fieldNx, this.fieldNy);
-    var ix = 0;
-    var iy = 0;
-    var b = null;
-    for (ix=0; ix<this.fieldNx; ix++) {
-        for (iy=0; iy<this.fieldNy; iy++) {
-            b = new baltek.draw.Box(ix, iy, "XXX");
-            b.draw();
-            b.enableSelection();
-        }
-    }
+    this.drawField();
 
     this.startGame = new baltek.widget.Button( "Baltek_ButtonZone_StartGame" , this.i18nTranslator);
     this.startGame.registerObserver(this);
@@ -80,6 +69,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.coordinates = new baltek.widget.Selector( "Baltek_ButtonZone_Coordinates", this.i18nTranslator,
                                              [ "no", "yes" ] );
     this.coordinates.registerObserver(this);
+    this.coordinates.setSelection("no");
 
     this.rules = new baltek.widget.FileButton( "Baltek_ButtonZone_Rules" , this.i18nTranslator);
     //this.rules.registerObserver(this);
@@ -104,6 +94,48 @@ baltek.presenter.Presenter.prototype.disableAllGameButtons = function(){
     this.endTurn.enable(false);
     this.resumeGame.enable(false);
     this.quitGame.enable(false);
+}
+
+baltek.presenter.Presenter.prototype.drawField = function(){
+    this.draw = {};
+    this.draw.fieldNx = this.rulesEngine.getFieldNx();
+    this.draw.fieldNy = this.rulesEngine.getFieldNy();
+    baltek.draw.setBoxLatticeDimensions(this.draw.fieldNx, this.draw.fieldNy);
+
+    this.draw.xLabels = [];
+    var letters = "abcdefghijklmnopqrstuvwxyz".split("");
+    baltek.utils.assert( this.draw.fieldNx <= letters.length);
+    for (ix=0; ix < this.draw.fieldNx; ix++) {
+        this.draw.xLabels[ix] = letters[ix];
+    }
+
+    this.draw.yLabels = [];
+    var digits = "123456789".split("");
+    baltek.utils.assert( this.draw.fieldNy <= digits.length);
+    for (iy=0; iy < this.draw.fieldNy; iy++) {
+        this.draw.yLabels[iy] = digits[this.draw.fieldNy - iy - 1];
+    }
+
+    this.draw.boxesByIndices = [] ;
+
+    var ix = 0;
+    var iy = 0;
+    var box = null;
+    var xyLabel = "";
+    for (ix=0; ix < this.draw.fieldNx; ix++) {
+        this.draw.boxesByIndices.push([]);
+
+        for (iy=0; iy < this.draw.fieldNy; iy++) {
+            this.draw.boxesByIndices[ix].push(null);
+            if ( this.rulesEngine.hasFieldBox(ix, iy) ) {
+                xyLabel = this.draw.xLabels[ix] + this.draw.yLabels[iy];
+                box = new baltek.draw.Box(ix, iy, xyLabel);
+                this.draw.boxesByIndices[ix][iy] = box;
+                box.draw();
+                box.disableSelection();
+            }
+        }
+    }
 }
 
 baltek.presenter.Presenter.prototype.hideAllGameButtons = function(){
@@ -181,8 +213,18 @@ baltek.presenter.State.prototype.updateFromBlueKind = function(presenter){
 }
 
 baltek.presenter.State.prototype.updateFromCoordinates = function(presenter){
-    baltek.debug.writeMessage( "baltek.presenter.State.prototype.updateFromCoordinates: " +
-                                        presenter.coordinates.element.id + " has notified me." );
+    var doShowXYLabel = ( presenter.coordinates.getSelection() === "yes" );
+    var ix = 0;
+    var iy = 0;
+    var box = null;
+    for (ix=0; ix < presenter.draw.fieldNx; ix++) {
+        for (iy=0; iy < presenter.draw.fieldNy; iy++) {
+            box = presenter.draw.boxesByIndices[ix][iy]
+            if ( box !== null ) {
+                box.showXYLabel(doShowXYLabel);
+            }
+        }
+    }
 }
 
 baltek.presenter.State.prototype.updateFromEndTurn = function(presenter){

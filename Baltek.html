@@ -97,17 +97,12 @@
 			</div>
 		</div>
 
-		<div id="Baltek_CanvasZone" style="background-color:grey; color:black; margin:2px; padding:2px;">
+		<div id="Baltek_CanvasZone" style="background-color:white; color:black; margin:2px; padding:2px;">
 			<canvas id="Baltek_CanvasZone_Canvas" width="1200" height="500"  style="background-color:black margin:0px; padding:0px;" </canvas>
 		</div>
 
 		<div id="Baltek_DebugZone" style="background-color:lightgrey; color:black; margin:2px; padding:2px;">
 			<span>Debug zone:</span>
-
-			<button id="Baltek_DebugZone_Disable" type="button"  onclick="baltek.debug.disable()">Disable</button>
-			<button id="Baltek_DebugZone_Enable"  type="button"  onclick="baltek.debug.enable()">Enable</button>
-			<button id="Baltek_DebugZone_Hide"    type="button"  onclick="baltek.debug.hide()">Hide</button>
-			<button id="Baltek_DebugZone_Show"    type="button"  onclick="baltek.debug.show()">Show</button>
 
 			<button id="Baltek_DebugZone_Clear"  type="button"  onclick="baltek.debug.clearMessages()">Clear messages</button>
 			<span id="Baltek_DebugZone_Mouse" style="background-color:white;">Mouse(x,y) = (?,?)</span>
@@ -125,13 +120,13 @@
 
 		<!-- The following *.js files can be loaded in any order.
 			 Let us sorted them alphabetically. -->
-		<script src="baltek.color.js"></script>
 		<script src="baltek.debug.js"></script>
 		<script src="baltek.draw.js"></script>
 		<script src="baltek.i18n.js"></script>
 		<script src="baltek.i18n.translations.js"></script>
 		<script src="baltek.presenter.js"></script>
 		<script src="baltek.rules.js"></script>
+		<script src="baltek.style.js"></script>
 		<script src="baltek.widget.js"></script>
 
 	</body>

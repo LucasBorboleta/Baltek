@@ -1,10 +1,10 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-baltek.rules = { initCalled: false };
+baltek.rules = { $initCalled: false };
 
 baltek.rules.$init = function(){
-    if ( ! baltek.rules.initCalled ) {
-        baltek.rules.initCalled = true;
+    if ( ! baltek.rules.$initCalled ) {
+        baltek.rules.$initCalled = true;
 
         // Init any package used by this one
         baltek.utils.$init();
@@ -137,6 +137,10 @@ baltek.rules.Engine.prototype.getFieldNx = function(){
 
 baltek.rules.Engine.prototype.getFieldNy = function(){
     return this.field.ny;
+}
+
+baltek.rules.Engine.prototype.hasFieldBox = function(ix, iy){
+    return ( this.field.boxesByIndices[ix][iy] !== null );
 }
 
 baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){

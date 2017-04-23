@@ -1,10 +1,10 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-baltek.widget = { initCalled: false };
+baltek.widget = { $initCalled: false };
 
 baltek.widget.$init = function(){
-    if ( ! baltek.widget.initCalled ) {
-        baltek.widget.initCalled = true;
+    if ( ! baltek.widget.$initCalled ) {
+        baltek.widget.$initCalled = true;
 
         // Init any package used by this one
         baltek.utils.$init();
