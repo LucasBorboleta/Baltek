@@ -29,8 +29,12 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.i18nTranslator = new baltek.i18n.Translator(baltek.i18n.translations, "fr" );
 
     this.rulesEngine = new baltek.rules.Engine();
+    this.initField();
     this.drawField();
-    this.drawBallAndFootballers();
+    this.initBall();
+    this.drawBall();
+    this.initFootballers();
+    this.drawFootballers();
 
     this.startGame = new baltek.widget.Button( "Baltek_ButtonZone_StartGame" , this.i18nTranslator);
     this.startGame.registerObserver(this);
@@ -97,7 +101,66 @@ baltek.presenter.Presenter.prototype.disableAllGameButtons = function(){
     this.quitGame.enable(false);
 }
 
+baltek.presenter.Presenter.prototype.drawBall = function(){
+    var ballIndices = this.rulesEngine.getBallBoxIndices();
+    var ballBox = this.draw.boxesByIndices[ballIndices.ix][ballIndices.iy];
+    ballBox.setBall(this.draw.ball);
+    this.draw.ball.enableSelection();
+}
+
 baltek.presenter.Presenter.prototype.drawField = function(){
+    var ix = 0;
+    var iy = 0;
+    var box = null;
+    for (ix=0; ix < this.draw.fieldNx; ix++) {
+        for (iy=0; iy < this.draw.fieldNy; iy++) {
+            box = this.draw.boxesByIndices[ix][iy];
+            if ( box !== null ) {
+                box.draw();
+                box.disableSelection();
+            }
+        }
+    }
+}
+
+baltek.presenter.Presenter.prototype.drawFootballers = function(){
+    var teamIndex = 0;
+    var teamCount = 2;
+
+    var footballerCount = 0;
+    var footballerIndex = 0;
+    var footballerIndices = null;
+    var footballerBox = null;
+
+    for (teamIndex=0; teamIndex<teamCount; teamIndex++) {
+        footballerCount = this.draw.teams[teamIndex].length;
+
+        for (footballerIndex=0; footballerIndex<footballerCount; footballerIndex++) {
+            footballerIndices = this.rulesEngine.getFooballerBoxIndices(teamIndex, footballerIndex);
+            footballerBox = this.draw.boxesByIndices[footballerIndices.ix][footballerIndices.iy];
+            footballerBox.setFootballer(this.draw.teams[teamIndex][footballerIndex]);
+            this.draw.teams[teamIndex][footballerIndex].enableSelection();
+        }
+    }
+}
+
+baltek.presenter.Presenter.prototype.hideAllGameButtons = function(){
+    this.restartGame.show(false);
+    this.startGame.show(false);
+    this.blueKind.show(false);
+    this.redKind.show(false);
+    this.kickoff.show(false);
+    this.useBonus.show(false);
+    this.endTurn.show(false);
+    this.resumeGame.show(false);
+    this.quitGame.show(false);
+}
+
+baltek.presenter.Presenter.prototype.initBall = function(){
+    this.draw.ball = new baltek.draw.Ball();
+}
+
+baltek.presenter.Presenter.prototype.initField = function(){
     this.draw = {};
     this.draw.fieldNx = this.rulesEngine.getFieldNx();
     this.draw.fieldNy = this.rulesEngine.getFieldNy();
@@ -132,55 +195,31 @@ baltek.presenter.Presenter.prototype.drawField = function(){
                 xyLabel = this.draw.xLabels[ix] + this.draw.yLabels[iy];
                 box = new baltek.draw.Box(ix, iy, xyLabel);
                 this.draw.boxesByIndices[ix][iy] = box;
-                box.draw();
-                box.disableSelection();
             }
         }
     }
 }
 
-baltek.presenter.Presenter.prototype.drawBallAndFootballers = function(){
-    this.draw.ball = new baltek.draw.Ball();
-    var ballIndices = this.rulesEngine.getBallBoxIndices();
-    var ballBox = this.draw.boxesByIndices[ballIndices.ix][ballIndices.iy];
-    ballBox.setBall(this.draw.ball);
-    this.draw.ball.enableSelection();
-
+baltek.presenter.Presenter.prototype.initFootballers = function(){
     this.draw.teams = [];
     this.draw.teams.push([]);
     this.draw.teams.push([]);
 
     var teamIndex = 0;
     var teamCount = 2;
+
     var footballerCount = 0;
     var footballerIndex = 0;
     var footballerForce = 0;
-    var footballerIndices = null;
-    var footballerBox = null;
+
     for (teamIndex=0; teamIndex<teamCount; teamIndex++) {
         footballerCount = this.rulesEngine.getFooballerCount(teamIndex);
 
         for (footballerIndex=0; footballerIndex<footballerCount; footballerIndex++) {
             footballerForce = this.rulesEngine.getFooballerForce(teamIndex, footballerIndex);
             this.draw.teams[teamIndex].push(new baltek.draw.Footballer(teamIndex, footballerForce));
-            footballerIndices = this.rulesEngine.getFooballerBoxIndices(teamIndex, footballerIndex);
-            footballerBox = this.draw.boxesByIndices[footballerIndices.ix][footballerIndices.iy];
-            footballerBox.setFootballer(this.draw.teams[teamIndex][footballerIndex]);
-            this.draw.teams[teamIndex][footballerIndex].enableSelection();
         }
     }
-}
-
-baltek.presenter.Presenter.prototype.hideAllGameButtons = function(){
-    this.restartGame.show(false);
-    this.startGame.show(false);
-    this.blueKind.show(false);
-    this.redKind.show(false);
-    this.kickoff.show(false);
-    this.useBonus.show(false);
-    this.endTurn.show(false);
-    this.resumeGame.show(false);
-    this.quitGame.show(false);
 }
 
 baltek.presenter.Presenter.prototype.updateFromObservable = function(observable){
