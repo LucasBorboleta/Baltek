@@ -116,19 +116,24 @@ baltek.utils.inherit(baltek.rules.Engine, baltek.utils.Observable);
 
 baltek.rules.Engine.prototype.$init = function(){
 
-    this.BLUE_INDEX = 0;
-    this.RED_INDEX = 1;
+    this.teams = [];
+    this.teams.push(null);
+    this.teams.push(null);
 
-    this.blueTeam = new baltek.rules.Team(this.BLUE_INDEX);
-    this.redTeam = new baltek.rules.Team(this.RED_INDEX);
+    this.teams[0] = new baltek.rules.Team(0);
+    this.teams[1] = new baltek.rules.Team(1);
 
-    this.activeTeam = this.blueTeam;
-    this.passiveTeam = this.redTeam;
+    this.activeTeam = this.teams[0];
+    this.passiveTeam = this.teams[1];
 
     this.ball = new baltek.rules.Ball();
 
     this.field = new baltek.rules.Field(this);
     this.field.initBallAndTeamsBoxes();
+}
+
+baltek.rules.Engine.prototype.getBallBoxIndices = function(){
+    return { ix:this.ball.box.ix, iy:this.ball.box.iy };
 }
 
 baltek.rules.Engine.prototype.getFieldNx = function(){
@@ -137,6 +142,19 @@ baltek.rules.Engine.prototype.getFieldNx = function(){
 
 baltek.rules.Engine.prototype.getFieldNy = function(){
     return this.field.ny;
+}
+
+baltek.rules.Engine.prototype.getFooballerBoxIndices = function(teamIndex, footballerIndex){
+    var box = this.teams[teamIndex].footballers[footballerIndex].box;
+    return { ix:box.ix, iy:box.iy };
+}
+
+baltek.rules.Engine.prototype.getFooballerCount = function(teamIndex){
+    return this.teams[teamIndex].footballers.length;
+}
+
+baltek.rules.Engine.prototype.getFooballerForce = function(teamIndex, footballerIndex){
+    return this.teams[teamIndex].footballers[footballerIndex].force;
 }
 
 baltek.rules.Engine.prototype.hasFieldBox = function(ix, iy){

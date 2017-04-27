@@ -30,6 +30,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
 
     this.rulesEngine = new baltek.rules.Engine();
     this.drawField();
+    this.drawBallAndFootballers();
 
     this.startGame = new baltek.widget.Button( "Baltek_ButtonZone_StartGame" , this.i18nTranslator);
     this.startGame.registerObserver(this);
@@ -134,6 +135,38 @@ baltek.presenter.Presenter.prototype.drawField = function(){
                 box.draw();
                 box.disableSelection();
             }
+        }
+    }
+}
+
+baltek.presenter.Presenter.prototype.drawBallAndFootballers = function(){
+    this.draw.ball = new baltek.draw.Ball();
+    var ballIndices = this.rulesEngine.getBallBoxIndices();
+    var ballBox = this.draw.boxesByIndices[ballIndices.ix][ballIndices.iy];
+    ballBox.setBall(this.draw.ball);
+    this.draw.ball.enableSelection();
+
+    this.draw.teams = [];
+    this.draw.teams.push([]);
+    this.draw.teams.push([]);
+
+    var teamIndex = 0;
+    var teamCount = 2;
+    var footballerCount = 0;
+    var footballerIndex = 0;
+    var footballerForce = 0;
+    var footballerIndices = null;
+    var footballerBox = null;
+    for (teamIndex=0; teamIndex<teamCount; teamIndex++) {
+        footballerCount = this.rulesEngine.getFooballerCount(teamIndex);
+
+        for (footballerIndex=0; footballerIndex<footballerCount; footballerIndex++) {
+            footballerForce = this.rulesEngine.getFooballerForce(teamIndex, footballerIndex);
+            this.draw.teams[teamIndex].push(new baltek.draw.Footballer(teamIndex, footballerForce));
+            footballerIndices = this.rulesEngine.getFooballerBoxIndices(teamIndex, footballerIndex);
+            footballerBox = this.draw.boxesByIndices[footballerIndices.ix][footballerIndices.iy];
+            footballerBox.setFootballer(this.draw.teams[teamIndex][footballerIndex]);
+            this.draw.teams[teamIndex][footballerIndex].enableSelection();
         }
     }
 }
