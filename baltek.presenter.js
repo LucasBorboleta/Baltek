@@ -76,23 +76,20 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.coordinates.registerObserver(this);
     this.coordinates.setSelection("no");
 
-    this.mutexDisplay = new baltek.widget.MutexDisplay();
-    this.mutexDisplay.registerDisplayer(baltek.draw.canvas);
-    this.mutexDisplay.setActiveDisplayer(baltek.draw.canvas);
-
-    this.iFrame = document.getElementById( "Baltek_DrawZone_IFrame" );
-    this.mutexDisplay.registerDisplayer(this.iFrame);
-
     this.game = new baltek.widget.Button( "Baltek_ButtonZone_Game" , this.i18nTranslator);
+    this.game.registerObserver(this);
 
-    this.rules = new baltek.widget.FileToFrameButton( "Baltek_ButtonZone_Rules" ,
-                    this.i18nTranslator, this.iFrame, this.mutexDisplay);
+    this.rulesIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_Rules" , this.i18nTranslator);
+    this.rules = new baltek.widget.Button( "Baltek_ButtonZone_Rules" , this.i18nTranslator);
+    this.rules.registerObserver(this);
 
-    this.help = new baltek.widget.FileToFrameButton( "Baltek_ButtonZone_Help" ,
-                    this.i18nTranslator, this.iFrame, this.mutexDisplay);
+    this.helpIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_Help" , this.i18nTranslator);
+    this.help = new baltek.widget.Button( "Baltek_ButtonZone_Help" , this.i18nTranslator);
+    this.help.registerObserver(this);
 
-    this.about = new baltek.widget.FileToFrameButton( "Baltek_ButtonZone_About" ,
-                    this.i18nTranslator, this.iFrame, this.mutexDisplay);
+    this.aboutIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_About" , this.i18nTranslator);
+    this.about = new baltek.widget.Button( "Baltek_ButtonZone_About" , this.i18nTranslator);
+    this.about.registerObserver(this);
 
     this.state = baltek.presenter.StateIsReadyToStart.getInstance();
     this.state.enter(this);
@@ -163,6 +160,8 @@ baltek.presenter.Presenter.prototype.hideAllGameButtons = function(){
     this.endTurn.show(false);
     this.resumeGame.show(false);
     this.quitGame.show(false);
+    this.coordinates.show(false);
+    this.game.show(false);
 }
 
 baltek.presenter.Presenter.prototype.initBall = function(){
@@ -231,15 +230,6 @@ baltek.presenter.Presenter.prototype.initFootballers = function(){
     }
 }
 
-baltek.presenter.Presenter.prototype.showGame = function(condition){
-    if ( condition ) {
-        this.mutexDisplay.setActiveDisplayer(baltek.draw.canvas);
-
-    } else {
-        this.mutexDisplay.setActiveDisplayer(this.iFrame);
-    }
-}
-
 baltek.presenter.Presenter.prototype.updateFromObservable = function(observable){
     if ( observable === this.startGame ) {
         this.state.updateFromStartGame(this);
@@ -273,6 +263,18 @@ baltek.presenter.Presenter.prototype.updateFromObservable = function(observable)
 
     } else if ( observable === this.coordinates ) {
         this.state.updateFromCoordinates(this);
+
+    } else if ( observable === this.game ) {
+        this.state.updateFromGame(this);
+
+    } else if ( observable === this.rules ) {
+        this.state.updateFromRules(this);
+
+    } else if ( observable === this.help ) {
+        this.state.updateFromHelp(this);
+
+    } else if ( observable === this.about ) {
+        this.state.updateFromAbout(this);
 
     } else {
         baltek.utils.assert( false, "observable not managed" );
@@ -352,6 +354,48 @@ baltek.presenter.State.prototype.updateFromUseBonus = function(presenter){
 baltek.presenter.State.prototype.updateFromQuitGame = function(presenter){
     baltek.utils.assert( false, "unexpected call" );
 }
+
+baltek.presenter.State.prototype.updateFromGame = function(presenter){
+    //baltek.utils.assert( false, "unexpected call" );
+    presenter.game.show(false);
+    presenter.rulesIFrame.show(false);
+    presenter.helpIFrame.show(false);
+    presenter.aboutIFrame.show(false);
+    baltek.draw.canvas.style.display = "inherit";
+
+    presenter.state.enter(presenter);
+}
+
+baltek.presenter.State.prototype.updateFromRules = function(presenter){
+    //baltek.utils.assert( false, "unexpected call" );
+    presenter.hideAllGameButtons();
+    presenter.game.show(true);
+    presenter.rulesIFrame.show(true);
+    presenter.helpIFrame.show(false);
+    presenter.aboutIFrame.show(false);
+    baltek.draw.canvas.style.display = "none";
+}
+
+baltek.presenter.State.prototype.updateFromHelp = function(presenter){
+    //baltek.utils.assert( false, "unexpected call" );
+    presenter.hideAllGameButtons();
+    presenter.game.show(true);
+    presenter.rulesIFrame.show(false);
+    presenter.helpIFrame.show(true);
+    presenter.aboutIFrame.show(false);
+    baltek.draw.canvas.style.display = "none";
+}
+
+baltek.presenter.State.prototype.updateFromAbout = function(presenter){
+    //baltek.utils.assert( false, "unexpected call" );
+    presenter.hideAllGameButtons();
+    presenter.game.show(true);
+    presenter.rulesIFrame.show(false);
+    presenter.helpIFrame.show(false);
+    presenter.aboutIFrame.show(true);
+    baltek.draw.canvas.style.display = "none";
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 baltek.presenter.StateIsFinished = function(){
     this.$init();
@@ -377,6 +421,7 @@ baltek.presenter.StateIsFinished.prototype.enter = function(presenter){
     presenter.restartGame.show(true);
     presenter.blueKind.show(true);
     presenter.redKind.show(true);
+    presenter.coordinates.show(true);
 
     presenter.disableAllGameButtons();
     presenter.restartGame.enable(true);
@@ -414,6 +459,7 @@ baltek.presenter.StateIsReadyToStart.prototype.enter = function(presenter){
     presenter.startGame.show(true);
     presenter.blueKind.show(true);
     presenter.redKind.show(true);
+    presenter.coordinates.show(true);
 
     presenter.disableAllGameButtons();
     presenter.startGame.enable(true);
@@ -462,6 +508,7 @@ baltek.presenter.StateIsRunning.prototype.enter = function(presenter){
     presenter.quitGame.show(true);
     presenter.blueKind.show(true);
     presenter.redKind.show(true);
+    presenter.coordinates.show(true);
 
     presenter.disableAllGameButtons();
     presenter.quitGame.enable(true);
@@ -496,6 +543,7 @@ baltek.presenter.StateIsReadyToQuit.prototype.enter = function(presenter){
     presenter.quitGame.show(true);
     presenter.blueKind.show(true);
     presenter.redKind.show(true);
+    presenter.coordinates.show(true);
 
     presenter.disableAllGameButtons();
     presenter.resumeGame.enable(true);

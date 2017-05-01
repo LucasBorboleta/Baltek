@@ -76,32 +76,33 @@
 						<!-- The text is created dynamically using JavaScript -->
 				</button>
 
+				<button id="Baltek_ButtonZone_Game"  type="button"  onclick="baltek.thePresenter.game.notifyObservers();"></button>
 			</div>
 
 			<!-- Peferences -->
 			<div class="buttonGroup">
-				<select id="Baltek_ButtonZone_Language" onchange="baltek.thePresenter.language.notifyObservers();">
-					<!-- The options are created dynamically using JavaScript -->
-				</select>
-
 				<select id="Baltek_ButtonZone_Coordinates" onchange="baltek.thePresenter.coordinates.notifyObservers();">
 					<!-- The options are created dynamically using JavaScript -->
 	        	</select>
+
+				<select id="Baltek_ButtonZone_Language" onchange="baltek.thePresenter.language.notifyObservers();">
+					<!-- The options are created dynamically using JavaScript -->
+				</select>
 			</div>
 
 			<!-- Help -->
 			<div class="buttonGroup">
-				<button id="Baltek_ButtonZone_Game"  type="button"  onclick="baltek.thePresenter.showGame(true);"></button>
-				<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="baltek.thePresenter.rules.openFile();"></button>
-	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="baltek.thePresenter.help.openFile();"></button>
-	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="baltek.thePresenter.about.openFile();"></button>
+				<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="baltek.thePresenter.rules.notifyObservers();"></button>
+	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="baltek.thePresenter.help.notifyObservers();"></button>
+	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="baltek.thePresenter.about.notifyObservers();"></button>
 			</div>
 		</div>
 
 		<div id="Baltek_DrawZone" style="background-color:white; color:black; margin:2px; padding:2px; display:block;">
-			<iframe id="Baltek_DrawZone_IFrame" width="1200" height="500"  src="" style="border:none;" >
-				<!-- The source is created dynamically using JavaScript -->
-			</iframe>
+			<!-- The source of each iframe is created dynamically using JavaScript -->
+			<iframe id="Baltek_DrawZone_Rules" width="1200" height="500"  src="" style="border:none;"></iframe>
+			<iframe id="Baltek_DrawZone_Help" width="1200" height="500"  src="" style="border:none;"></iframe>
+			<iframe id="Baltek_DrawZone_About" width="1200" height="500"  src="" style="border:none;"></iframe>
 
 			<canvas id="Baltek_DrawZone_Canvas" width="1200" height="500" </canvas>
 		</div>
