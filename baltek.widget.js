@@ -74,7 +74,7 @@ baltek.widget.Button = function(id, i18nTranslator){
 baltek.utils.inherit(baltek.widget.Button, baltek.widget.Widget);
 
 baltek.widget.Button.prototype.$init = function(id, i18nTranslator){
-    baltek.widget.FileButton.super.$init.call(this, id, i18nTranslator);
+    baltek.widget.Button.super.$init.call(this, id, i18nTranslator);
 
     // Finalize the construction regarding i18n.
     this.updateFromI18nTranslator();
@@ -84,14 +84,50 @@ baltek.widget.Button.prototype.updateFromI18nTranslator = function(){
     this.element.innerHTML = this.getI18nValueForKeySuffix( "button" );
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.widget.FileButton = function(id, i18nTranslator){
+baltek.widget.FileToFrameButton = function(id, i18nTranslator, frame, mutexDisplay){
+    this.$init(id, i18nTranslator, frame, mutexDisplay);
+};
+
+baltek.utils.inherit(baltek.widget.FileToFrameButton, baltek.widget.Widget);
+
+baltek.widget.FileToFrameButton.prototype.$init = function(id, i18nTranslator, frame, mutexDisplay){
+    baltek.widget.FileToFrameButton.super.$init.call(this, id, i18nTranslator);
+
+    this.file = null;
+    this.frame = frame;
+    this.mutexDisplay = mutexDisplay;
+
+    // Finalize the construction regarding i18n.
+    this.updateFromI18nTranslator();
+}
+
+baltek.widget.FileToFrameButton.prototype.openFile = function(){
+    this.frame.src = this.file;
+    this.mutexDisplay.setActiveDisplayer(this.frame);
+    // Update the file path after its browser interpretation, because
+    // it might be an absolute path.
+    this.file = this.frame.src;
+}
+
+baltek.widget.FileToFrameButton.prototype.updateFromI18nTranslator = function(){
+    this.element.innerHTML = this.getI18nValueForKeySuffix( "button" );
+
+    var previousFile = this.file;
+    this.file = this.getI18nValueForKeySuffix( "file" );
+
+    if ( this.mutexDisplay.isActiveDisplayer(this.frame) && this.frame.src === previousFile) {
+        this.openFile();
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.widget.FileToWindowButton = function(id, i18nTranslator){
     this.$init(id, i18nTranslator);
 };
 
-baltek.utils.inherit(baltek.widget.FileButton, baltek.widget.Widget);
+baltek.utils.inherit(baltek.widget.FileToWindowButton, baltek.widget.Widget);
 
-baltek.widget.FileButton.prototype.$init = function(id, i18nTranslator){
-    baltek.widget.FileButton.super.$init.call(this, id, i18nTranslator);
+baltek.widget.FileToWindowButton.prototype.$init = function(id, i18nTranslator){
+    baltek.widget.FileToWindowButton.super.$init.call(this, id, i18nTranslator);
 
     this.file = undefined;
     this.openedFile = undefined;
@@ -101,7 +137,7 @@ baltek.widget.FileButton.prototype.$init = function(id, i18nTranslator){
     this.updateFromI18nTranslator();
 }
 
-baltek.widget.FileButton.prototype.openFile = function(){
+baltek.widget.FileToWindowButton.prototype.openFile = function(){
     if ( this.window !== null && this.openedFile !== this.file ) {
         this.window.close();
         this.openedFile = undefined;
@@ -115,9 +151,60 @@ baltek.widget.FileButton.prototype.openFile = function(){
     }
 }
 
-baltek.widget.FileButton.prototype.updateFromI18nTranslator = function(){
+baltek.widget.FileToWindowButton.prototype.updateFromI18nTranslator = function(){
     this.element.innerHTML = this.getI18nValueForKeySuffix( "button" );
     this.file = this.getI18nValueForKeySuffix( "file" );
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.widget.MutexDisplay = function(){
+    this.$init();
+};
+
+baltek.utils.inherit(baltek.widget.MutexDisplay, Object);
+
+baltek.widget.MutexDisplay.prototype.$init = function(){
+    this.displayers = [];
+    this.activeDisplayer = null;
+}
+
+baltek.widget.MutexDisplay.prototype.isActiveDisplayer = function(displayer){
+    var displayerIndex = this.displayers.indexOf(displayer);
+    baltek.utils.assert(displayerIndex > -1);
+    return ( displayer === this.activeDisplayer );
+}
+
+baltek.widget.MutexDisplay.prototype.registerDisplayer = function(displayer){
+    var displayerIndex = this.displayers.indexOf(displayer);
+    if ( ! ( displayerIndex > -1 ) ) {
+        this.displayers.push(displayer);
+        displayer.style.display = "none";
+    }
+}
+
+baltek.widget.MutexDisplay.prototype.setActiveDisplayer = function(displayer){
+    var displayerIndex = this.displayers.indexOf(displayer);
+    baltek.utils.assert(displayerIndex > -1);
+
+    var displayerCount = this.displayers.length;
+    for ( displayerIndex=0; displayerIndex < displayerCount; displayerIndex++ ) {
+        this.displayers[displayerIndex].style.display = "none";
+    }
+
+    this.activeDisplayer = displayer;
+    this.activeDisplayer.style.display = "inherit";
+}
+
+baltek.widget.MutexDisplay.prototype.unregisterDisplayer = function(displayer){
+    var displayerIndex = this.displayers.indexOf(displayer);
+    baltek.utils.assert(displayerIndex > -1);
+    if ( displayerIndex > -1 ) {
+        this.displayers.splice(displayerIndex, 1);
+
+        if ( displayer === this.activeDisplayer ) {
+            this.activeDisplayer.style.display = "none";
+            this.activeDisplayer = null;
+        }
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.Selector = function(id, i18nTranslator, values){

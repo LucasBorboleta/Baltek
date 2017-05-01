@@ -24,6 +24,14 @@ baltek.debug.clearMessages = function(){
     }
 }
 
+baltek.debug.hide = function(){
+    baltek.debug.writeMessage("hide ...");
+    var canvas = document.getElementById( "Baltek_DrawZone_Canvas" );
+    var iFrame = document.getElementById( "Baltek_DrawZone_IFrame" );
+    canvas.style.display = "none";
+    iFrame.style.display = "inherit";
+}
+
 baltek.debug.writeMessage = function(text){
     if ( baltek.debug.isEnabled ) {
         baltek.debug.messageCount += 1 ;

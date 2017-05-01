@@ -10,7 +10,7 @@ baltek.draw.$init = function(){
         baltek.debug.$init();
         baltek.style.$init();
 
-        baltek.draw.canvas = document.getElementById( "Baltek_CanvasZone_Canvas" );
+        baltek.draw.canvas = document.getElementById( "Baltek_DrawZone_Canvas" );
         baltek.draw.rectangle = baltek.draw.canvas.getBoundingClientRect();
         baltek.draw.drawer = baltek.draw.canvas.getContext( "2d" );
 

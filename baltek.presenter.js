@@ -76,14 +76,23 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.coordinates.registerObserver(this);
     this.coordinates.setSelection("no");
 
-    this.rules = new baltek.widget.FileButton( "Baltek_ButtonZone_Rules" , this.i18nTranslator);
-    //this.rules.registerObserver(this);
+    this.mutexDisplay = new baltek.widget.MutexDisplay();
+    this.mutexDisplay.registerDisplayer(baltek.draw.canvas);
+    this.mutexDisplay.setActiveDisplayer(baltek.draw.canvas);
 
-    this.help = new baltek.widget.FileButton( "Baltek_ButtonZone_Help" , this.i18nTranslator);
-    //this.help.registerObserver(this);
+    this.iFrame = document.getElementById( "Baltek_DrawZone_IFrame" );
+    this.mutexDisplay.registerDisplayer(this.iFrame);
 
-    this.about = new baltek.widget.FileButton( "Baltek_ButtonZone_About" , this.i18nTranslator);
-    //this.about.registerObserver(this);
+    this.game = new baltek.widget.Button( "Baltek_ButtonZone_Game" , this.i18nTranslator);
+
+    this.rules = new baltek.widget.FileToFrameButton( "Baltek_ButtonZone_Rules" ,
+                    this.i18nTranslator, this.iFrame, this.mutexDisplay);
+
+    this.help = new baltek.widget.FileToFrameButton( "Baltek_ButtonZone_Help" ,
+                    this.i18nTranslator, this.iFrame, this.mutexDisplay);
+
+    this.about = new baltek.widget.FileToFrameButton( "Baltek_ButtonZone_About" ,
+                    this.i18nTranslator, this.iFrame, this.mutexDisplay);
 
     this.state = baltek.presenter.StateIsReadyToStart.getInstance();
     this.state.enter(this);
@@ -219,6 +228,15 @@ baltek.presenter.Presenter.prototype.initFootballers = function(){
             footballerForce = this.rulesEngine.getFooballerForce(teamIndex, footballerIndex);
             this.draw.teams[teamIndex].push(new baltek.draw.Footballer(teamIndex, footballerForce));
         }
+    }
+}
+
+baltek.presenter.Presenter.prototype.showGame = function(condition){
+    if ( condition ) {
+        this.mutexDisplay.setActiveDisplayer(baltek.draw.canvas);
+
+    } else {
+        this.mutexDisplay.setActiveDisplayer(this.iFrame);
     }
 }
 

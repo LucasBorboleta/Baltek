@@ -91,14 +91,19 @@
 
 			<!-- Help -->
 			<div class="buttonGroup">
-	        	<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="baltek.thePresenter.rules.openFile();"></button>
+				<button id="Baltek_ButtonZone_Game"  type="button"  onclick="baltek.thePresenter.showGame(true);"></button>
+				<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="baltek.thePresenter.rules.openFile();"></button>
 	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="baltek.thePresenter.help.openFile();"></button>
 	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="baltek.thePresenter.about.openFile();"></button>
 			</div>
 		</div>
 
-		<div id="Baltek_CanvasZone" style="background-color:white; color:black; margin:2px; padding:2px;">
-			<canvas id="Baltek_CanvasZone_Canvas" width="1200" height="500"  style="background-color:black margin:0px; padding:0px;" </canvas>
+		<div id="Baltek_DrawZone" style="background-color:white; color:black; margin:2px; padding:2px; display:block;">
+			<iframe id="Baltek_DrawZone_IFrame" width="1200" height="500"  src="" style="border:none;" >
+				<!-- The source is created dynamically using JavaScript -->
+			</iframe>
+
+			<canvas id="Baltek_DrawZone_Canvas" width="1200" height="500" </canvas>
 		</div>
 
 		<div id="Baltek_DebugZone" style="background-color:lightgrey; color:black; margin:2px; padding:2px;">

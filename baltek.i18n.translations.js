@@ -16,6 +16,8 @@ baltek.i18n.translations.eo = {
 
     "Baltek_ButtonZone_EndTurn_button"     : "*(eo)End my turn" ,
 
+    "Baltek_ButtonZone_Game_button"        : "Ludo",
+
     "Baltek_ButtonZone_Help_button"        : "Helpo" ,
     "Baltek_ButtonZone_Help_file"          : "./lang/eo/Baltek-help-eo.html" ,
 
@@ -60,6 +62,8 @@ baltek.i18n.translations.en = {
 
     "Baltek_ButtonZone_EndTurn_button"     : "End my turn" ,
 
+    "Baltek_ButtonZone_Game_button"        : "Game",
+
     "Baltek_ButtonZone_Help_button"        : "Help" ,
     "Baltek_ButtonZone_Help_file"          : "./lang/en/Baltek-help-en.html" ,
 
@@ -103,6 +107,8 @@ baltek.i18n.translations.fr = {
     "Baltek_ButtonZone_Coordinates_yes"    : "Coordonnées : oui",
 
     "Baltek_ButtonZone_EndTurn_button"     : "Finir mon tour" ,
+
+    "Baltek_ButtonZone_Game_button"        : "Jeu",
 
     "Baltek_ButtonZone_Help_button"        : "Aide" ,
     "Baltek_ButtonZone_Help_file"          : "./lang/fr/Baltek-help-fr.html" ,
@@ -150,6 +156,8 @@ baltek.i18n.translations.pt = {
 
     "Baltek_ButtonZone_Help_button"        : "Ajuda" ,
     "Baltek_ButtonZone_Help_file"          : "./lang/pt/Baltek-help-pt.html" ,
+
+    "Baltek_ButtonZone_Game_button"        : "Jogo",
 
     "Baltek_ButtonZone_Kickoff_button"     : "*(pt)Kickoff" ,
 
