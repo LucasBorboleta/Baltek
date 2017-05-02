@@ -51,10 +51,14 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.blueKind = new baltek.widget.Selector( "Baltek_ButtonZone_BlueKind", this.i18nTranslator,
                                          [ "human", "ai1", "ai2", "ai3" ] );
     this.blueKind.registerObserver(this);
+    this.blueKind.setColor(baltek.style.colors.WHITE);
+    this.blueKind.setBackgroundColor(baltek.style.colors.BLUE);
 
     this.redKind = new baltek.widget.Selector( "Baltek_ButtonZone_RedKind", this.i18nTranslator,
                                         [ "human", "ai1", "ai2", "ai3" ] );
     this.redKind.registerObserver(this);
+    this.redKind.setColor(baltek.style.colors.WHITE);
+    this.redKind.setBackgroundColor(baltek.style.colors.RED);
 
     this.kickoff = new baltek.widget.Button( "Baltek_ButtonZone_Kickoff" , this.i18nTranslator);
     this.kickoff.registerObserver(this);
