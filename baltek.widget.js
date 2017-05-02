@@ -101,15 +101,28 @@ baltek.utils.inherit(baltek.widget.IFrame, baltek.widget.Widget);
 baltek.widget.IFrame.prototype.$init = function(id, i18nTranslator){
     baltek.widget.IFrame.super.$init.call(this, id, i18nTranslator);
 
-    this.element.src = "";
     this.show(false);
+    this.src = "" ;
+    this.element.src = this.src;
 
     // Finalize the construction regarding i18n.
     this.updateFromI18nTranslator();
 }
 
+baltek.widget.IFrame.prototype.show = function(condition){
+    baltek.widget.IFrame.super.show.call(this, condition);
+
+    if ( this.isShowed() ) {
+        this.element.src = this.src;
+    }
+}
+
 baltek.widget.IFrame.prototype.updateFromI18nTranslator = function(){
-    this.element.src = this.getI18nValueForKeySuffix( "file" );
+    this.src = this.getI18nValueForKeySuffix( "file" );
+
+    if ( this.isShowed() ) {
+        this.element.src = this.src;
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.Selector = function(id, i18nTranslator, values){
