@@ -11,7 +11,6 @@ baltek.draw.$init = function(){
         baltek.style.$init();
 
         baltek.draw.canvas = document.getElementById( "Baltek_DrawZone_Canvas" );
-        baltek.draw.rectangle = baltek.draw.canvas.getBoundingClientRect();
         baltek.draw.drawer = baltek.draw.canvas.getContext( "2d" );
 
         if ( baltek.debug.isEnabled ) {
@@ -29,20 +28,23 @@ baltek.draw.$init = function(){
 }
 
 baltek.draw.getMousePosition = function(event){
+    var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
     return {
-      x: event.clientX + window.pageXOffset - baltek.draw.rectangle.left,
-      y: event.clientY + window.pageYOffset - baltek.draw.rectangle.top
+      x: event.clientX + window.pageXOffset - canvasRectangle.left,
+      y: event.clientY + window.pageYOffset - canvasRectangle.top
     };
 }
 
 baltek.draw.setBoxLatticeDimensions = function(nx, ny){
+    var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
+
     baltek.draw.nx = nx;
     baltek.draw.ny = ny;
 
     // From the lattice dimension (nx, ny) computes the boxSide, etc.
     baltek.draw.boxQuantum = Math.min(
-        (baltek.draw.rectangle.right  - baltek.draw.rectangle.left)/baltek.draw.nx,
-        (baltek.draw.rectangle.bottom - baltek.draw.rectangle.top )/baltek.draw.ny ) ;
+        (canvasRectangle.right  - canvasRectangle.left)/baltek.draw.nx,
+        (canvasRectangle.bottom - canvasRectangle.top )/baltek.draw.ny ) ;
 
     baltek.draw.boxSide = baltek.draw.boxQuantum ;
 

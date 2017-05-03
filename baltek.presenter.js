@@ -28,14 +28,6 @@ baltek.presenter.Presenter.prototype.$init = function(){
 
     this.i18nTranslator = new baltek.i18n.Translator(baltek.i18n.translations, "fr" );
 
-    this.rulesEngine = new baltek.rules.Engine();
-    this.initField();
-    this.drawField();
-    this.initBall();
-    this.drawBall();
-    this.initFootballers();
-    this.drawFootballers();
-
     this.startGame = new baltek.widget.Button( "Baltek_ButtonZone_StartGame" , this.i18nTranslator);
     this.startGame.registerObserver(this);
 
@@ -94,6 +86,14 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.aboutIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_About" , this.i18nTranslator);
     this.about = new baltek.widget.Button( "Baltek_ButtonZone_About" , this.i18nTranslator);
     this.about.registerObserver(this);
+
+    this.rulesEngine = new baltek.rules.Engine();
+    this.initField();
+    this.drawField();
+    this.initBall();
+    this.drawBall();
+    this.initFootballers();
+    this.drawFootballers();
 
     this.state = baltek.presenter.StateIsReadyToStart.getInstance();
     this.state.enter(this);
