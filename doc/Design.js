@@ -725,3 +725,133 @@ Baltek.RulesEngine.prototype.moveFindDestinationsWithCosts = function(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+baltek.presenter.State = function(presenter){
+    this.$init(presenter);
+};
+
+baltek.utils.inherit(baltek.presenter.State, Object);
+
+baltek.presenter.State.prototype.$init = function(presenter){
+    this.presenter = presenter;
+}
+
+baltek.presenter.State.prototype.enter = function(observable){
+}
+
+baltek.presenter.State.prototype.exit = function(){
+}
+
+baltek.presenter.State.prototype.updateFromObservable = function(observable){
+    baltek.utils.assert( false, "observable not managed" );
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.presenter.CompositeStateWithHistory = function(presenter){
+    this.$init(presenter);
+};
+
+baltek.utils.inherit(baltek.presenter.CompositeStateWithHistory, baltek.presenter.State);
+
+baltek.presenter.CompositeStateWithHistory.prototype.$init = function(presenter){
+    baltek.presenter.CompositeStateWithHistory.super.$init.call(this, presenter);
+    this.substate = null;
+}
+
+baltek.presenter.CompositeStateWithHistory.prototype.enter = function(observable){
+    if ( observable === null) {
+
+        if ( this.substate === null ) {
+            this.substate = this.getDefaultSubstate();
+            baltek.utils.assert( this.substate !== null );
+        }
+
+    } else {
+        // Select the substate from the observable
+        this.updateFromObservable(observable);
+        baltek.utils.assert( this.substate !== null );
+    }
+
+    this.substate.enter(null);
+}
+
+baltek.presenter.CompositeStateWithHistory.prototype.exit = function(){
+}
+
+baltek.presenter.CompositeStateWithHistory.prototype.getDefaultSubstate = function(){
+    return null;
+}
+
+baltek.presenter.CompositeStateWithHistory.prototype.updateFromObservable = function(observable){
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.presenter.CompositeStateWithoutHistory = function(presenter){
+    this.$init(presenter);
+};
+
+baltek.utils.inherit(baltek.presenter.CompositeStateWithoutHistory, baltek.presenter.CompositeStateWithHistory);
+
+baltek.presenter.CompositeStateWithoutHistory.prototype.$init = function(presenter){
+    baltek.presenter.CompositeStateWithoutHistory.super.$init.call(this, presenter);
+}
+
+baltek.presenter.CompositeStateWithoutHistory.prototype.exit = function(){
+    // Forget the current substate
+    this.substate = null;
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.presenter.TopState = function(presenter){
+    this.$init(presenter);
+};
+
+baltek.utils.inherit(baltek.presenter.TopState, baltek.presenter.State);
+
+baltek.presenter.TopState.prototype.$init = function(presenter){
+    baltek.presenter.TopState.super.$init.call(this, presenter);
+
+    // A CompositeStateWithHistory initializes its substates
+    this.substate1 = new baltek.presenter.Substate1(presenter);
+    this.substate2 = new baltek.presenter.Substate2(presenter);
+    this.substate3 = new baltek.presenter.Substate3(presenter);
+}
+
+baltek.presenter.TopState.prototype.enter = function(observable){
+    if ( observable === null) {
+
+        if ( this.substate === null ) {
+            var defaultSubstate = this.getDefaultSubstate();
+            baltek.utils.assert( defaultSubstate !== null);
+            this.substate = defaultSubstate;
+        }
+
+    } else {
+        // Select the substate from the observable
+        this.updateFromObservable(observable);
+    }
+
+    baltek.utils.assert( this.substate !== null);
+    this.substate.enter(null);
+}
+
+baltek.presenter.TopState.prototype.exit = function(){
+    this.substate = null;
+    // No reset if historical substate must be kept
+}
+
+baltek.presenter.TopState.prototype.getDefaultSubstate = function(){
+    return this.substate1;
+}
+
+baltek.presenter.TopState.prototype.updateFromObservable = function(observable){
+    // Define the managed events as managed observables
+    if ( observable === this.startGame ) {
+        this.state.updateFromStartGame(observable);
+    } else {
+        baltek.utils.assert( false, "observable not managed" );
+    }
+}
+
+baltek.presenter.TopState.prototype.updateFromStartGame = function(observable){
+    // A composite state
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
