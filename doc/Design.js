@@ -725,77 +725,99 @@ Baltek.RulesEngine.prototype.moveFindDestinationsWithCosts = function(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.State = function(presenter){
-    this.$init(presenter);
+baltek.presenter.State = function(presenter, parentState){
+    this.$init(presenter, parentState);
 };
 
 baltek.utils.inherit(baltek.presenter.State, Object);
 
-baltek.presenter.State.prototype.$init = function(presenter){
+baltek.presenter.State.prototype.$init = function(presenter, parentState){
     this.presenter = presenter;
+
+    if ( parentState !== undefined ) {
+        this.parentState = parentState;
+    } else {
+        this.parentState = null;
+    }
 }
 
-baltek.presenter.State.prototype.enter = function(observable){
+baltek.presenter.State.prototype.changeState = function(newState){
+    baltek.utils.assert( newState !== this.presenter.state );
+
+    if ( this.presenter.state !== null ) {
+        this.presenter.state.exit();
+    }
+
+    if ( newState !== null ) {
+        baltek.utils.assert( this.parentState.hasSubstate(newState) );
+        this.presenter.state = newState;
+        this.presenter.state.enter();
+    } else {
+        // This is a final state
+        this.presenter.state = newState;
+    }
+}
+
+baltek.presenter.State.prototype.enter = function(){
 }
 
 baltek.presenter.State.prototype.exit = function(){
 }
 
 baltek.presenter.State.prototype.updateFromObservable = function(observable){
-    baltek.utils.assert( false, "observable not managed" );
+    if ( this.parentState !== null ) {
+        this.parentState.updateFromObservable = function(observable);
+    } else {
+        baltek.utils.assert( false, "observable not managed" );
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.CompositeStateWithHistory = function(presenter){
-    this.$init(presenter);
+baltek.presenter.CompositeState = function(presenter, parentState){
+    this.$init(presenter, parentState);
 };
 
-baltek.utils.inherit(baltek.presenter.CompositeStateWithHistory, baltek.presenter.State);
+baltek.utils.inherit(baltek.presenter.CompositeState, baltek.presenter.State);
 
-baltek.presenter.CompositeStateWithHistory.prototype.$init = function(presenter){
-    baltek.presenter.CompositeStateWithHistory.super.$init.call(this, presenter);
+baltek.presenter.CompositeState.prototype.$init = function(presenter, parentState){
+    baltek.presenter.CompositeState.super.$init.call(this, presenter, parentState);
     this.substate = null;
+    this.enabledHistory = false;
+    this.initSubstates();
 }
 
-baltek.presenter.CompositeStateWithHistory.prototype.enter = function(observable){
-    if ( observable === null) {
+baltek.presenter.CompositeState.prototype.enableHistory = function(condition){
+    this.enabledHistory = condition;
+}
 
-        if ( this.substate === null ) {
-            this.substate = this.getDefaultSubstate();
-            baltek.utils.assert( this.substate !== null );
-        }
-
-    } else {
-        // Select the substate from the observable
-        this.updateFromObservable(observable);
+baltek.presenter.CompositeState.prototype.enter = function(){
+    if ( this.substate === null ) {
+        this.substate = this.getDefaultSubstate();
         baltek.utils.assert( this.substate !== null );
     }
 
-    this.substate.enter(null);
+    this.substate.enter();
 }
 
-baltek.presenter.CompositeStateWithHistory.prototype.exit = function(){
+baltek.presenter.CompositeState.prototype.exit = function(){
+    this.substate.exit();
+
+    if ( ! this.enabledHistory ) {
+        this.substate = null;
+    }
 }
 
-baltek.presenter.CompositeStateWithHistory.prototype.getDefaultSubstate = function(){
+baltek.presenter.CompositeState.prototype.getDefaultSubstate = function(){
+    baltek.utils.assert( false, "must be redefined" );
     return null;
 }
 
-baltek.presenter.CompositeStateWithHistory.prototype.updateFromObservable = function(observable){
-}
-///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.CompositeStateWithoutHistory = function(presenter){
-    this.$init(presenter);
-};
-
-baltek.utils.inherit(baltek.presenter.CompositeStateWithoutHistory, baltek.presenter.CompositeStateWithHistory);
-
-baltek.presenter.CompositeStateWithoutHistory.prototype.$init = function(presenter){
-    baltek.presenter.CompositeStateWithoutHistory.super.$init.call(this, presenter);
+baltek.presenter.CompositeState.prototype.hasSubstate = function(substate){
+    baltek.utils.assert( false, "must be redefined" );
+    return false;
 }
 
-baltek.presenter.CompositeStateWithoutHistory.prototype.exit = function(){
-    // Forget the current substate
-    this.substate = null;
+baltek.presenter.CompositeState.prototype.initSubstates = function(){
+    baltek.utils.assert( false, "must be redefined" );
 }
 ///////////////////////////////////////////////////////////////////////////////
 baltek.presenter.TopState = function(presenter){
@@ -807,7 +829,7 @@ baltek.utils.inherit(baltek.presenter.TopState, baltek.presenter.State);
 baltek.presenter.TopState.prototype.$init = function(presenter){
     baltek.presenter.TopState.super.$init.call(this, presenter);
 
-    // A CompositeStateWithHistory initializes its substates
+    // A CompositeState initializes its substates
     this.substate1 = new baltek.presenter.Substate1(presenter);
     this.substate2 = new baltek.presenter.Substate2(presenter);
     this.substate3 = new baltek.presenter.Substate3(presenter);
