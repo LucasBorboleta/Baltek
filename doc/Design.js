@@ -795,7 +795,7 @@ baltek.presenter.CompositeState.prototype.enter = function(){
         baltek.utils.assert( this.substate !== null );
     }
 
-    this.substate.enter();
+    this.changeState(this.substate);
 }
 
 baltek.presenter.CompositeState.prototype.exit = function(){
