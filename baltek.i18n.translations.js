@@ -44,6 +44,8 @@ baltek.i18n.translations.eo = {
     "Baltek_ButtonZone_UseBonus_no"        : "*(eo)Use my bonus: ne" ,
     "Baltek_ButtonZone_UseBonus_yes"       : "*(eo)Use my bonus: jes" ,
 
+    "Baltek_ButtonZone_What_button"        : "?" ,
+
     "Baltek_DrawZone_About_file"           : "./lang/eo/Baltek-about-eo.html" ,
     "Baltek_DrawZone_Help_file"            : "./lang/eo/Baltek-help-eo.html" ,
     "Baltek_DrawZone_Rules_file"           : "./lang/eo/Baltek-rules-eo.html"
@@ -90,6 +92,8 @@ baltek.i18n.translations.en = {
 
     "Baltek_ButtonZone_UseBonus_no"        : "Use my bonus: no" ,
     "Baltek_ButtonZone_UseBonus_yes"       : "Use my bonus: yes" ,
+
+    "Baltek_ButtonZone_What_button"        : "?" ,
 
     "Baltek_DrawZone_About_file"           : "./lang/en/Baltek-about-en.html" ,
     "Baltek_DrawZone_Help_file"            : "./lang/en/Baltek-help-en.html" ,
@@ -138,6 +142,8 @@ baltek.i18n.translations.fr = {
     "Baltek_ButtonZone_UseBonus_no"        : "Utiliser mon bonus: non" ,
     "Baltek_ButtonZone_UseBonus_yes"       : "Utiliser mon bonus: oui" ,
 
+    "Baltek_ButtonZone_What_button"        : "?" ,
+
     "Baltek_DrawZone_About_file"           : "./lang/fr/Baltek-about-fr.html" ,
     "Baltek_DrawZone_Help_file"            : "./lang/fr/Baltek-help-fr.html" ,
     "Baltek_DrawZone_Rules_file"           : "./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf"
@@ -184,6 +190,8 @@ baltek.i18n.translations.pt = {
 
     "Baltek_ButtonZone_UseBonus_no"        : "Use my bonus: no" ,
     "Baltek_ButtonZone_UseBonus_yes"       : "Use my bonus: yes" ,
+
+    "Baltek_ButtonZone_What_button"        : "?" ,
 
     "Baltek_DrawZone_About_file"           : "./lang/pt/Baltek-about-pt.html" ,
     "Baltek_DrawZone_Help_file"            : "./lang/pt/Baltek-help-pt.html" ,
