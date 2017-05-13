@@ -55,9 +55,17 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.kickoff = new baltek.widget.Button( "Baltek_ButtonZone_Kickoff" , this.i18nTranslator);
     this.kickoff.registerObserver(this);
 
-    this.useBonus = new baltek.widget.Selector( "Baltek_ButtonZone_UseBonus", this.i18nTranslator,
+    this.blueSprint = new baltek.widget.Selector( "Baltek_ButtonZone_BlueSprint", this.i18nTranslator,
                                          [ "no", "yes" ] );
-    this.useBonus.registerObserver(this);
+    this.blueSprint.registerObserver(this);
+    this.blueSprint.setColor(baltek.style.colors.WHITE);
+    this.blueSprint.setBackgroundColor(baltek.style.colors.BLUE);
+
+    this.redSprint = new baltek.widget.Selector( "Baltek_ButtonZone_RedSprint", this.i18nTranslator,
+                                         [ "no", "yes" ] );
+    this.redSprint.registerObserver(this);
+    this.redSprint.setColor(baltek.style.colors.WHITE);
+    this.redSprint.setBackgroundColor(baltek.style.colors.RED);
 
     this.endTurn = new baltek.widget.Button( "Baltek_ButtonZone_EndTurn" , this.i18nTranslator);
     this.endTurn.registerObserver(this);
@@ -110,7 +118,8 @@ baltek.presenter.Presenter.prototype.disableAllButtons = function(){
     this.blueKind.enable(false);
     this.redKind.enable(false);
     this.kickoff.enable(false);
-    this.useBonus.enable(false);
+    this.blueSprint.enable(false);
+    this.redSprint.enable(false);
     this.endTurn.enable(false);
     this.language.enable(false);
     this.coordinates.enable(false);
@@ -172,7 +181,8 @@ baltek.presenter.Presenter.prototype.hideAllButtons = function(){
     this.blueKind.show(false);
     this.redKind.show(false);
     this.kickoff.show(false);
-    this.useBonus.show(false);
+    this.blueSprint.show(false);
+    this.redSprint.show(false);
     this.endTurn.show(false);
     this.language.show(false);
     this.coordinates.show(false);
@@ -556,12 +566,16 @@ baltek.presenter.GameStateIsRunning.prototype.enter = function(){
     this.presenter.quitGame.show(true);
     this.presenter.blueKind.show(true);
     this.presenter.redKind.show(true);
+    this.presenter.blueSprint.show(true);
+    this.presenter.redSprint.show(true);
     this.presenter.coordinates.show(true);
     this.presenter.language.show(true);
     this.presenter.what.show(true);
 
     this.presenter.disableAllButtons();
     this.presenter.quitGame.enable(true);
+    this.presenter.blueSprint.enable(true);
+    this.presenter.redSprint.enable(true);
     this.presenter.coordinates.enable(true);
     this.presenter.language.enable(true);
     this.presenter.what.enable(true);

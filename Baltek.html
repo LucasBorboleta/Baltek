@@ -20,80 +20,80 @@
 
 		<div id="Baltek_ButtonZone" style="background-color:white; color:black; margin:4px; padding:4px;">
 
+			<!-- For "button" and "select" elements:
+			     the text is created dynamically using JavaScript
+			 -->
+
 			<!-- Game -->
 			<div class="buttonGroup">
 
-				<button id="Baltek_ButtonZone_StartGame"
-						onclick="baltek.thePresenter.startGame.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
+				<button id="Baltek_ButtonZone_StartGame" type="button"
+						onclick="baltek.thePresenter.startGame.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_RestartGame"
-						onclick="baltek.thePresenter.restartGame.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
+				<button id="Baltek_ButtonZone_RestartGame" type="button"
+						onclick="baltek.thePresenter.restartGame.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_ResumeGame"
-						onclick="baltek.thePresenter.resumeGame.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
+				<button id="Baltek_ButtonZone_ResumeGame" type="button"
+						onclick="baltek.thePresenter.resumeGame.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_QuitGame"
-						onclick="baltek.thePresenter.quitGame.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
+				<button id="Baltek_ButtonZone_QuitGame" type="button"
+						onclick="baltek.thePresenter.quitGame.notifyObservers();" ></button>
+
+				<select id="Baltek_ButtonZone_BlueSprint"
+						onchange="baltek.thePresenter.blueSprint.notifyObservers();" ></select>
 
 				<select id="Baltek_ButtonZone_BlueKind"
-						onchange="baltek.thePresenter.blueKind.notifyObservers();" >
-						<!-- The options are created dynamically using JavaScript -->
-				</select>
+						onchange="baltek.thePresenter.blueKind.notifyObservers();" ></select>
+
+				<button id="Baltek_ButtonZone_BlueScore" type="button">0</button>
+
+				<button id="Baltek_ButtonZone_RedScore" type="button">0</button>
 
 				<select id="Baltek_ButtonZone_RedKind"
-						onchange="baltek.thePresenter.redKind.notifyObservers();" >
-						<!-- The options are created dynamically using JavaScript -->
-				</select>
+						onchange="baltek.thePresenter.redKind.notifyObservers();" ></select>
 
-				<button id="Baltek_ButtonZone_Kickoff"
-						onclick="baltek.thePresenter.kickoff.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
+				<select id="Baltek_ButtonZone_RedSprint"
+						onchange="baltek.thePresenter.redSprint.notifyObservers();" ></select>
 
-				<select id="Baltek_ButtonZone_UseBonus"
-						onchange="baltek.thePresenter.useBonus.notifyObservers();"
-						<!-- The options are created dynamically using JavaScript -->
-				</select>
+				<button id="Baltek_ButtonZone_Kickoff" type="button"
+						onclick="baltek.thePresenter.kickoff.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_EndTurn"
-						onclick="baltek.thePresenter.endTurn.notifyObservers();"
-						>
-						<!-- The text is created dynamically using JavaScript -->
-				</button>
+				<button id="Baltek_ButtonZone_EndTurn" type="button"
+						onclick="baltek.thePresenter.endTurn.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_Game"  type="button"  onclick="baltek.thePresenter.game.notifyObservers();"></button>
+				<button id="Baltek_ButtonZone_Game" type="button"
+					onclick="baltek.thePresenter.game.notifyObservers();" ></button>
 			</div>
+
+			<div class="buttonGroup">
+				<button id="Baltek_ButtonZone_Done" type="button">OK</button>
+				<button id="Baltek_ButtonZone_Undo" type="button">&lt;&lt;</button>
+				<button id="Baltek_ButtonZone_Moves" type="button">$$$</button>
+			</div>
+
 
 			<!-- Peferences -->
 			<div class="buttonGroup">
-				<select id="Baltek_ButtonZone_Coordinates" onchange="baltek.thePresenter.coordinates.notifyObservers();">
-					<!-- The options are created dynamically using JavaScript -->
-	        	</select>
+				<select id="Baltek_ButtonZone_Coordinates"
+						onchange="baltek.thePresenter.coordinates.notifyObservers();" ></select>
 
-				<select id="Baltek_ButtonZone_Language" onchange="baltek.thePresenter.language.notifyObservers();">
-					<!-- The options are created dynamically using JavaScript -->
-				</select>
+				<select id="Baltek_ButtonZone_Language"
+						onchange="baltek.thePresenter.language.notifyObservers();" ></select>
 			</div>
 
 			<!-- Help -->
 			<div class="buttonGroup">
-				<button id="Baltek_ButtonZone_What"  type="button"  onclick="baltek.thePresenter.what.notifyObservers();"></button>
-				<button id="Baltek_ButtonZone_Rules"  type="button"  onclick="baltek.thePresenter.rules.notifyObservers();"></button>
-	        	<button id="Baltek_ButtonZone_Help"   type="button"  onclick="baltek.thePresenter.help.notifyObservers();"></button>
-	        	<button id="Baltek_ButtonZone_About"  type="button"  onclick="baltek.thePresenter.about.notifyObservers();"></button>
+				<button id="Baltek_ButtonZone_What" type="button"
+						onclick="baltek.thePresenter.what.notifyObservers();" ></button>
+
+				<button id="Baltek_ButtonZone_Rules" type="button"
+						onclick="baltek.thePresenter.rules.notifyObservers();" ></button>
+
+				<button id="Baltek_ButtonZone_Help" type="button"
+						onclick="baltek.thePresenter.help.notifyObservers();" ></button>
+
+	        	<button id="Baltek_ButtonZone_About" type="button"
+						onclick="baltek.thePresenter.about.notifyObservers();" ></button>
 			</div>
 		</div>
 
@@ -109,8 +109,11 @@
 		<div id="Baltek_DebugZone" style="background-color:lightgrey; color:black; margin:2px; padding:2px;">
 			<span>Debug zone:</span>
 
-			<button id="Baltek_DebugZone_Clear"  type="button"  onclick="baltek.debug.clearMessages()">Clear messages</button>
+			<button id="Baltek_DebugZone_Clear"  type="button"
+				    onclick="baltek.debug.clearMessages()">Clear messages</button>
+
 			<span id="Baltek_DebugZone_Mouse" style="background-color:white;">Mouse(x,y) = (?,?)</span>
+
 			<p id="Baltek_DebugZone_Messages"></p>
 		</div>
 

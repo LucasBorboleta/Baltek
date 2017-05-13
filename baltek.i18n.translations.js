@@ -10,6 +10,9 @@ baltek.i18n.translations.eo = {
     "Baltek_ButtonZone_BlueKind_ai2"       : "*(eo)AI2" ,
     "Baltek_ButtonZone_BlueKind_ai3"       : "*(eo)AI3" ,
 
+    "Baltek_ButtonZone_BlueSprint_no"     : "*(eo)Sprint: ne" ,
+    "Baltek_ButtonZone_BlueSprint_yes"    : "*(eo)Sprint: jes" ,
+
     "Baltek_ButtonZone_Coordinates_no"     : "Koordinatoj: ne" ,
     "Baltek_ButtonZone_Coordinates_yes"    : "Koordinatoj: jes" ,
 
@@ -27,6 +30,9 @@ baltek.i18n.translations.eo = {
     "Baltek_ButtonZone_Language_fr"        : "Français" ,
     "Baltek_ButtonZone_Language_pt"        : "Português" ,
 
+    "Baltek_ButtonZone_RedSprint_no"       : "*(eo)Sprint: ne" ,
+    "Baltek_ButtonZone_RedSprint_yes"      : "*(eo)Sprint: jes" ,
+
     "Baltek_ButtonZone_RestartGame_button" : "*(eo)Restart game" ,
     "Baltek_ButtonZone_StartGame_button"   : "*(eo)New game" ,
 
@@ -40,9 +46,6 @@ baltek.i18n.translations.eo = {
     "Baltek_ButtonZone_ResumeGame_button"  : "*(eo)Resume game" ,
 
     "Baltek_ButtonZone_Rules_button"       : "Reguloj" ,
-
-    "Baltek_ButtonZone_UseBonus_no"        : "*(eo)Use my bonus: ne" ,
-    "Baltek_ButtonZone_UseBonus_yes"       : "*(eo)Use my bonus: jes" ,
 
     "Baltek_ButtonZone_What_button"        : "?" ,
 
@@ -58,6 +61,9 @@ baltek.i18n.translations.en = {
     "Baltek_ButtonZone_BlueKind_ai1"       : "AI1" ,
     "Baltek_ButtonZone_BlueKind_ai2"       : "AI2" ,
     "Baltek_ButtonZone_BlueKind_ai3"       : "AI3" ,
+
+    "Baltek_ButtonZone_BlueSprint_no"      : "Sprint: no" ,
+    "Baltek_ButtonZone_BlueSprint_yes"     : "Sprint: yes" ,
 
     "Baltek_ButtonZone_Coordinates_no"     : "Coordinates: no" ,
     "Baltek_ButtonZone_Coordinates_yes"    : "Coordinates: yes" ,
@@ -81,6 +87,9 @@ baltek.i18n.translations.en = {
 
     "Baltek_ButtonZone_QuitGame_button"    : "Quit game" ,
 
+    "Baltek_ButtonZone_RedSprint_no"      : "Sprint: no" ,
+    "Baltek_ButtonZone_RedSprint_yes"     : "Sprint: yes" ,
+
     "Baltek_ButtonZone_RedKind_human"      : "Human" ,
     "Baltek_ButtonZone_RedKind_ai1"        : "AI1" ,
     "Baltek_ButtonZone_RedKind_ai2"        : "AI2" ,
@@ -89,9 +98,6 @@ baltek.i18n.translations.en = {
     "Baltek_ButtonZone_ResumeGame_button"  : "Resume game" ,
 
     "Baltek_ButtonZone_Rules_button"       : "Rules" ,
-
-    "Baltek_ButtonZone_UseBonus_no"        : "Use my bonus: no" ,
-    "Baltek_ButtonZone_UseBonus_yes"       : "Use my bonus: yes" ,
 
     "Baltek_ButtonZone_What_button"        : "?" ,
 
@@ -107,6 +113,9 @@ baltek.i18n.translations.fr = {
     "Baltek_ButtonZone_BlueKind_ai1"       : "IA1" ,
     "Baltek_ButtonZone_BlueKind_ai2"       : "IA2" ,
     "Baltek_ButtonZone_BlueKind_ai3"       : "IA3" ,
+
+    "Baltek_ButtonZone_BlueSprint_no"      : "Sprint: non" ,
+    "Baltek_ButtonZone_BlueSprint_yes"     : "Sprint: oui" ,
 
     "Baltek_ButtonZone_Coordinates_no"     : "Coordonnées : non" ,
     "Baltek_ButtonZone_Coordinates_yes"    : "Coordonnées : oui" ,
@@ -125,6 +134,9 @@ baltek.i18n.translations.fr = {
     "Baltek_ButtonZone_Language_fr"        : "Français" ,
     "Baltek_ButtonZone_Language_pt"        : "Português" ,
 
+    "Baltek_ButtonZone_RedSprint_no"      : "Sprint: non" ,
+    "Baltek_ButtonZone_RedSprint_yes"     : "Sprint: oui" ,
+
     "Baltek_ButtonZone_RestartGame_button" : "Redémarrer une partie" ,
     "Baltek_ButtonZone_StartGame_button"   : "Nouvelle partie" ,
 
@@ -138,9 +150,6 @@ baltek.i18n.translations.fr = {
     "Baltek_ButtonZone_ResumeGame_button"  : "Continuer le jeu" ,
 
     "Baltek_ButtonZone_Rules_button"       : "Règles" ,
-
-    "Baltek_ButtonZone_UseBonus_no"        : "Utiliser mon bonus: non" ,
-    "Baltek_ButtonZone_UseBonus_yes"       : "Utiliser mon bonus: oui" ,
 
     "Baltek_ButtonZone_What_button"        : "?" ,
 
@@ -156,6 +165,9 @@ baltek.i18n.translations.pt = {
     "Baltek_ButtonZone_BlueKind_ai1"       : "*(pt)AI1" ,
     "Baltek_ButtonZone_BlueKind_ai2"       : "*(pt)AI2" ,
     "Baltek_ButtonZone_BlueKind_ai3"       : "*(pt)AI3" ,
+
+    "Baltek_ButtonZone_BlueSprint_no"      : "Sprint: não" ,
+    "Baltek_ButtonZone_BlueSprint_yes"     : "Sprint: sim" ,
 
     "Baltek_ButtonZone_Coordinates_no"     : "Coordenadas: não" ,
     "Baltek_ButtonZone_Coordinates_yes"    : "Coordenadas: sim" ,
@@ -184,12 +196,12 @@ baltek.i18n.translations.pt = {
     "Baltek_ButtonZone_RedKind_ai2"        : "*(pt)AI2" ,
     "Baltek_ButtonZone_RedKind_ai3"        : "*(pt)AI3" ,
 
+    "Baltek_ButtonZone_RedSprint_no"      : "Sprint: não" ,
+    "Baltek_ButtonZone_RedSprint_yes"     : "Sprint: sim" ,
+
     "Baltek_ButtonZone_ResumeGame_button"  : "*(pt)Resume game" ,
 
     "Baltek_ButtonZone_Rules_button"       : "Regras" ,
-
-    "Baltek_ButtonZone_UseBonus_no"        : "Use my bonus: no" ,
-    "Baltek_ButtonZone_UseBonus_yes"       : "Use my bonus: yes" ,
 
     "Baltek_ButtonZone_What_button"        : "?" ,
 

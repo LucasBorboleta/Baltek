@@ -198,7 +198,7 @@ Articulate the options as a sort of states and transitions machinery:
 - "run" is a state.
 - "sprint-on/on/over" is a sub-state of "run".
 - Transition , in both directions, is possible between "sprint:on" and "sprint:off".
-- Transition from "sprint:on" to "srint:over" is possible, but cannot be reversed.
+- Transition from "sprint:on" to "sprint:over" is possible, but cannot be reversed.
 - "kick" is a state.
 - Transition, in both directions, is possible between "run" and "kick".
 - When entering in state "run", the default sub-state is "sprint:off", unless "sprint:over" has been reached.
