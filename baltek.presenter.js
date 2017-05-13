@@ -284,21 +284,13 @@ baltek.presenter.State.prototype.$init = function(presenter, superState){
 }
 
 baltek.presenter.State.prototype.setState = function(newState){
+    // newState and this must be sibbling states
     baltek.utils.assert( newState !== null );
+    baltek.utils.assert( newState.superState !== null );
+    baltek.utils.assert( newState.superState === this.superState );
 
-    if ( this.presenter.state !== null ) {
-        this.presenter.state.exit();
-
-        if ( this.presenter.state.superState !== null ) {
-            if ( this.presenter.state.superState !== newState.superState ) {
-                this.presenter.state.superState.exit();
-            }
-        }
-    }
-
-    if ( this.superState !== null ) {
-        baltek.utils.assert( this.superState.hasSubstate(newState) );
-    }
+    this.exit();
+    newState.superState.substate = newState;
     this.presenter.state = newState;
     this.presenter.state.enter();
 }
@@ -330,31 +322,31 @@ baltek.presenter.SuperState.prototype.$init = function(presenter, superState){
     this.initSubstates();
 }
 
+baltek.presenter.SuperState.prototype.atEnter = function(){
+}
+
+baltek.presenter.SuperState.prototype.atExit = function(){
+}
+
 baltek.presenter.SuperState.prototype.enableHistory = function(condition){
     this.enabledHistory = condition;
 }
 
-baltek.presenter.SuperState.prototype.setSubstate = function(newSubstate){
-
-    baltek.utils.assert( newSubstate !== null );
-    baltek.utils.assert( newSubstate.superState === this );
-    baltek.utils.assert( this.hasSubstate(newSubstate) );
-    baltek.utils.assert( this.presenter.state === this );
-
-    this.presenter.state = newSubstate;
-    this.presenter.state.enter();
-}
-
 baltek.presenter.SuperState.prototype.enter = function(){
+    this.atEnter();
+
     if ( this.substate === null ) {
         this.substate = this.getDefaultSubstate();
         baltek.utils.assert( this.substate !== null );
     }
 
-    this.setSubstate(this.substate);
+    this.presenter.state = this.substate;
+    this.presenter.state.enter();
 }
 
 baltek.presenter.SuperState.prototype.exit = function(){
+    this.atExit();
+
     this.substate.exit();
 
     if ( ! this.enabledHistory ) {
@@ -365,11 +357,6 @@ baltek.presenter.SuperState.prototype.exit = function(){
 baltek.presenter.SuperState.prototype.getDefaultSubstate = function(){
     baltek.utils.assert( false, "must be redefined" );
     return null;
-}
-
-baltek.presenter.SuperState.prototype.hasSubstate = function(substate){
-    baltek.utils.assert( false, "must be redefined" );
-    return false;
 }
 
 baltek.presenter.SuperState.prototype.initSubstates = function(){
@@ -388,17 +375,12 @@ baltek.presenter.TopState.prototype.$init = function(presenter, superState){
 }
 
 baltek.presenter.TopState.prototype.initSubstates = function(){
-    this.topGameState = new baltek.presenter.TopGameState(this.presenter, this);
-    this.topWhatState = new baltek.presenter.TopWhatState(this.presenter, this);
+    this.gameTopState = new baltek.presenter.GameTopState(this.presenter, this);
+    this.whatTopState = new baltek.presenter.WhatTopState(this.presenter, this);
 }
 
 baltek.presenter.TopState.prototype.getDefaultSubstate = function(){
-    return this.topGameState;
-}
-
-baltek.presenter.TopState.prototype.hasSubstate = function(substate){
-    return ( substate === this.topGameState ||
-             substate === this.topWhatState );
+    return this.gameTopState;
 }
 
 baltek.presenter.TopState.prototype.updateFromObservable = function(observable){
@@ -416,54 +398,43 @@ baltek.presenter.TopState.prototype.updateFromObservable = function(observable){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.TopGameState = function(presenter, superState){
+baltek.presenter.GameTopState = function(presenter, superState){
     this.$init(presenter, superState);
 }
 
-baltek.utils.inherit(baltek.presenter.TopGameState, baltek.presenter.SuperState);
+baltek.utils.inherit(baltek.presenter.GameTopState, baltek.presenter.SuperState);
 
-baltek.presenter.TopGameState.prototype.$init = function(presenter, superState){
-    baltek.presenter.TopGameState.super.$init.call(this, presenter, superState);
+baltek.presenter.GameTopState.prototype.$init = function(presenter, superState){
+    baltek.presenter.GameTopState.super.$init.call(this, presenter, superState);
     this.enableHistory(true);
 }
 
-baltek.presenter.TopGameState.prototype.enter = function(){
+baltek.presenter.GameTopState.prototype.atEnter = function(){
     baltek.draw.canvas.style.display = "inherit";
-    baltek.debug.writeMessage("TopGameState: enter");
-    baltek.presenter.TopGameState.super.enter.call(this);
 }
 
-baltek.presenter.TopGameState.prototype.exit = function(){
+baltek.presenter.GameTopState.prototype.atExit = function(){
     baltek.draw.canvas.style.display = "none";
-    baltek.debug.writeMessage("TopGameState: exit");
-    baltek.presenter.TopGameState.super.exit.call(this);
 }
 
-baltek.presenter.TopGameState.prototype.initSubstates = function(){
-    this.stateIsFinished = new baltek.presenter.StateIsFinished(this.presenter, this);
-    this.stateIsReadyToStart = new baltek.presenter.StateIsReadyToStart(this.presenter, this);
-    this.stateIsRunning = new baltek.presenter.StateIsRunning(this.presenter, this);
-    this.stateIsReadyToQuit = new baltek.presenter.StateIsReadyToQuit(this.presenter, this);
+baltek.presenter.GameTopState.prototype.initSubstates = function(){
+    this.gameStateIsFinished = new baltek.presenter.GameStateIsFinished(this.presenter, this);
+    this.gameStateIsReadyToStart = new baltek.presenter.GameStateIsReadyToStart(this.presenter, this);
+    this.gameStateIsRunning = new baltek.presenter.GameStateIsRunning(this.presenter, this);
+    this.gameStateIsReadyToQuit = new baltek.presenter.GameStateIsReadyToQuit(this.presenter, this);
 }
 
-baltek.presenter.TopGameState.prototype.getDefaultSubstate = function(){
-    return this.stateIsReadyToStart;
+baltek.presenter.GameTopState.prototype.getDefaultSubstate = function(){
+    return this.gameStateIsReadyToStart;
 }
 
-baltek.presenter.TopGameState.prototype.hasSubstate = function(substate){
-    return ( substate === this.stateIsFinished ||
-             substate === this.stateIsReadyToStart ||
-             substate === this.stateIsRunning ||
-             substate === this.stateIsReadyToQuit );
-}
-
-baltek.presenter.TopGameState.prototype.updateFromObservable = function(observable){
+baltek.presenter.GameTopState.prototype.updateFromObservable = function(observable){
 
     if ( observable === this.presenter.coordinates ) {
         this.presenter.showXYLabels( this.presenter.coordinates.getSelection() === "yes" );
 
     } else if ( observable === this.presenter.what ) {
-        this.setState(this.superState.topWhatState);
+        this.setState(this.superState.whatTopState);
 
     } else {
 
@@ -475,17 +446,17 @@ baltek.presenter.TopGameState.prototype.updateFromObservable = function(observab
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.StateIsFinished = function(presenter, superState){
+baltek.presenter.GameStateIsFinished = function(presenter, superState){
     this.$init(presenter, superState);
 };
 
-baltek.utils.inherit(baltek.presenter.StateIsFinished, baltek.presenter.State);
+baltek.utils.inherit(baltek.presenter.GameStateIsFinished, baltek.presenter.State);
 
-baltek.presenter.StateIsFinished.prototype.$init = function(presenter, superState){
-    baltek.presenter.StateIsFinished.super.$init.call(this, presenter, superState);
+baltek.presenter.GameStateIsFinished.prototype.$init = function(presenter, superState){
+    baltek.presenter.GameStateIsFinished.super.$init.call(this, presenter, superState);
 }
 
-baltek.presenter.StateIsFinished.prototype.enter = function(){
+baltek.presenter.GameStateIsFinished.prototype.enter = function(){
     this.presenter.hideAllButtons();
     this.presenter.restartGame.show(true);
     this.presenter.blueKind.show(true);
@@ -501,13 +472,13 @@ baltek.presenter.StateIsFinished.prototype.enter = function(){
     this.presenter.what.enable(true);
 }
 
-baltek.presenter.StateIsFinished.prototype.updateFromObservable = function(observable){
+baltek.presenter.GameStateIsFinished.prototype.updateFromObservable = function(observable){
 
     if ( observable === this.presenter.restartGame ) {
-        this.setState(this.superState.stateIsReadyToStart);
+        this.setState(this.superState.gameStateIsReadyToStart);
 
     } else if ( observable === this.presenter.quitGame ) {
-        this.setState(this.superState.stateIsFinished);
+        this.setState(this.superState.gameStateIsFinished);
 
     } else {
 
@@ -519,17 +490,17 @@ baltek.presenter.StateIsFinished.prototype.updateFromObservable = function(obser
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.StateIsReadyToStart = function(presenter, superState){
+baltek.presenter.GameStateIsReadyToStart = function(presenter, superState){
     this.$init(presenter, superState);
 };
 
-baltek.utils.inherit(baltek.presenter.StateIsReadyToStart, baltek.presenter.State);
+baltek.utils.inherit(baltek.presenter.GameStateIsReadyToStart, baltek.presenter.State);
 
-baltek.presenter.StateIsReadyToStart.prototype.$init = function(presenter, superState){
-    baltek.presenter.StateIsReadyToStart.super.$init.call(this, presenter, superState);
+baltek.presenter.GameStateIsReadyToStart.prototype.$init = function(presenter, superState){
+    baltek.presenter.GameStateIsReadyToStart.super.$init.call(this, presenter, superState);
 }
 
-baltek.presenter.StateIsReadyToStart.prototype.enter = function(){
+baltek.presenter.GameStateIsReadyToStart.prototype.enter = function(){
     this.presenter.hideAllButtons();
     this.presenter.startGame.show(true);
     this.presenter.blueKind.show(true);
@@ -547,7 +518,7 @@ baltek.presenter.StateIsReadyToStart.prototype.enter = function(){
     this.presenter.what.enable(true);
 }
 
-baltek.presenter.StateIsReadyToStart.prototype.updateFromObservable = function(observable){
+baltek.presenter.GameStateIsReadyToStart.prototype.updateFromObservable = function(observable){
 
     if ( observable === this.presenter.blueKind ) {
         this.presenter.blueAgent.kind = this.presenter.blueKind.getSelection();
@@ -558,7 +529,7 @@ baltek.presenter.StateIsReadyToStart.prototype.updateFromObservable = function(o
     } else if ( observable === this.presenter.startGame ) {
         this.presenter.blueAgent.kind = this.presenter.blueKind.getSelection();
         this.presenter.redAgent.kind = this.presenter.redKind.getSelection();
-        this.setState(this.superState.stateIsRunning);
+        this.setState(this.superState.gameStateIsRunning);
 
     } else {
 
@@ -570,17 +541,17 @@ baltek.presenter.StateIsReadyToStart.prototype.updateFromObservable = function(o
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.StateIsRunning = function(presenter, superState){
+baltek.presenter.GameStateIsRunning = function(presenter, superState){
     this.$init(presenter, superState);
 };
 
-baltek.utils.inherit(baltek.presenter.StateIsRunning, baltek.presenter.State);
+baltek.utils.inherit(baltek.presenter.GameStateIsRunning, baltek.presenter.State);
 
-baltek.presenter.StateIsRunning.prototype.$init = function(presenter, superState){
-    baltek.presenter.StateIsRunning.super.$init.call(this, presenter, superState);
+baltek.presenter.GameStateIsRunning.prototype.$init = function(presenter, superState){
+    baltek.presenter.GameStateIsRunning.super.$init.call(this, presenter, superState);
 }
 
-baltek.presenter.StateIsRunning.prototype.enter = function(){
+baltek.presenter.GameStateIsRunning.prototype.enter = function(){
     this.presenter.hideAllButtons();
     this.presenter.quitGame.show(true);
     this.presenter.blueKind.show(true);
@@ -596,10 +567,10 @@ baltek.presenter.StateIsRunning.prototype.enter = function(){
     this.presenter.what.enable(true);
 }
 
-baltek.presenter.StateIsRunning.prototype.updateFromObservable = function(observable){
+baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
 
     if ( observable === this.presenter.quitGame ) {
-        this.setState(this.superState.stateIsReadyToQuit);
+        this.setState(this.superState.gameStateIsReadyToQuit);
 
     } else {
 
@@ -611,17 +582,17 @@ baltek.presenter.StateIsRunning.prototype.updateFromObservable = function(observ
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.StateIsReadyToQuit = function(presenter, superState){
+baltek.presenter.GameStateIsReadyToQuit = function(presenter, superState){
     this.$init(presenter, superState);
 };
 
-baltek.utils.inherit(baltek.presenter.StateIsReadyToQuit, baltek.presenter.State);
+baltek.utils.inherit(baltek.presenter.GameStateIsReadyToQuit, baltek.presenter.State);
 
-baltek.presenter.StateIsReadyToQuit.prototype.$init = function(presenter, superState){
-    baltek.presenter.StateIsReadyToQuit.super.$init.call(this, presenter, superState);
+baltek.presenter.GameStateIsReadyToQuit.prototype.$init = function(presenter, superState){
+    baltek.presenter.GameStateIsReadyToQuit.super.$init.call(this, presenter, superState);
 }
 
-baltek.presenter.StateIsReadyToQuit.prototype.enter = function(){
+baltek.presenter.GameStateIsReadyToQuit.prototype.enter = function(){
     this.presenter.hideAllButtons();
     this.presenter.resumeGame.show(true);
     this.presenter.quitGame.show(true);
@@ -639,13 +610,13 @@ baltek.presenter.StateIsReadyToQuit.prototype.enter = function(){
     this.presenter.what.enable(true);
 }
 
-baltek.presenter.StateIsReadyToQuit.prototype.updateFromObservable = function(observable){
+baltek.presenter.GameStateIsReadyToQuit.prototype.updateFromObservable = function(observable){
 
     if ( observable === this.presenter.resumeGame ) {
-        this.setState(this.superState.stateIsRunning);
+        this.setState(this.superState.gameStateIsRunning);
 
     } else if ( observable === this.presenter.quitGame ) {
-        this.setState(this.superState.stateIsFinished);
+        this.setState(this.superState.gameStateIsFinished);
 
     } else {
 
@@ -657,23 +628,23 @@ baltek.presenter.StateIsReadyToQuit.prototype.updateFromObservable = function(ob
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.TopWhatState = function(presenter, superState){
+baltek.presenter.WhatTopState = function(presenter, superState){
     this.$init(presenter, superState);
 };
 
-baltek.utils.inherit(baltek.presenter.TopWhatState, baltek.presenter.State);
+baltek.utils.inherit(baltek.presenter.WhatTopState, baltek.presenter.SuperState);
 
-baltek.presenter.TopWhatState.prototype.$init = function(presenter, superState){
-    baltek.presenter.TopWhatState.super.$init.call(this, presenter, superState);
+baltek.presenter.WhatTopState.prototype.$init = function(presenter, superState){
+    baltek.presenter.WhatTopState.super.$init.call(this, presenter, superState);
+    this.enableHistory(true);
 }
 
-baltek.presenter.TopWhatState.prototype.enter = function(){
-    baltek.debug.writeMessage("TopWhatState: enter");
-    this.presenter.hideAllButtons();
+baltek.presenter.WhatTopState.prototype.atEnter = function(){
     this.presenter.rulesIFrame.show(false);
     this.presenter.helpIFrame.show(false);
-    this.presenter.aboutIFrame.show(true);
+    this.presenter.aboutIFrame.show(false);
 
+    this.presenter.hideAllButtons();
     this.presenter.language.show(true);
     this.presenter.game.show(true);
     this.presenter.rules.show(true);
@@ -683,37 +654,169 @@ baltek.presenter.TopWhatState.prototype.enter = function(){
     this.presenter.disableAllButtons();
     this.presenter.language.enable(true);
     this.presenter.game.enable(true);
-    this.presenter.rules.enable(true);
-    this.presenter.help.enable(true);
-    this.presenter.about.enable(true);
 }
 
-baltek.presenter.TopWhatState.prototype.exit = function(){
-    baltek.debug.writeMessage("TopWhatState: exit");
+baltek.presenter.WhatTopState.prototype.atExit = function(){
     this.presenter.rulesIFrame.show(false);
     this.presenter.helpIFrame.show(false);
     this.presenter.aboutIFrame.show(false);
 }
 
-baltek.presenter.TopWhatState.prototype.updateFromObservable = function(observable){
+baltek.presenter.WhatTopState.prototype.initSubstates = function(){
+    this.whatStateShowRules = new baltek.presenter.WhatStateShowRules(this.presenter, this);
+    this.whatStateShowHelp = new baltek.presenter.WhatStateShowHelp(this.presenter, this);
+    this.whatStateShowAbout = new baltek.presenter.WhatStateShowAbout(this.presenter, this);
+}
+
+baltek.presenter.WhatTopState.prototype.getDefaultSubstate = function(){
+    return this.whatStateShowAbout;
+}
+
+baltek.presenter.WhatTopState.prototype.updateFromObservable = function(observable){
 
     if ( observable === this.presenter.game ) {
-        this.setState(this.superState.topGameState);
+        this.setState(this.superState.gameTopState);
 
-    } else if ( observable === this.presenter.rules ) {
-        this.presenter.rulesIFrame.show(true);
-        this.presenter.helpIFrame.show(false);
-        this.presenter.aboutIFrame.show(false);
+    } else {
+
+        if ( this.superState !== null ) {
+            this.superState.updateFromObservable(observable);
+        } else {
+            baltek.utils.assert( false, "observable not managed" );
+        }
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.presenter.WhatStateShowRules = function(presenter, superState){
+    this.$init(presenter, superState);
+};
+
+baltek.utils.inherit(baltek.presenter.WhatStateShowRules, baltek.presenter.State);
+
+baltek.presenter.WhatStateShowRules.prototype.$init = function(presenter, superState){
+    baltek.presenter.WhatStateShowRules.super.$init.call(this, presenter, superState);
+}
+
+baltek.presenter.WhatStateShowRules.prototype.enter = function(){
+    this.presenter.rulesIFrame.show(true);
+
+    this.presenter.rules.enable(false);
+    this.presenter.help.enable(true);
+    this.presenter.about.enable(true);
+}
+
+baltek.presenter.WhatStateShowRules.prototype.exit = function(){
+    this.presenter.rulesIFrame.show(false);
+
+    this.presenter.rules.enable(false);
+    this.presenter.help.enable(false);
+    this.presenter.about.enable(false);
+}
+
+baltek.presenter.WhatStateShowRules.prototype.updateFromObservable = function(observable){
+
+    if ( observable === this.presenter.rules ) {
+        this.setState(this.superState.whatStateShowRules);
 
     } else if ( observable === this.presenter.help ) {
-        this.presenter.rulesIFrame.show(false);
-        this.presenter.helpIFrame.show(true);
-        this.presenter.aboutIFrame.show(false);
+        this.setState(this.superState.whatStateShowHelp);
 
     } else if ( observable === this.presenter.about ) {
-        this.presenter.rulesIFrame.show(false);
-        this.presenter.helpIFrame.show(false);
-        this.presenter.aboutIFrame.show(true);
+        this.setState(this.superState.whatStateShowAbout);
+
+    } else {
+
+        if ( this.superState !== null ) {
+            this.superState.updateFromObservable(observable);
+        } else {
+            baltek.utils.assert( false, "observable not managed" );
+        }
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.presenter.WhatStateShowHelp = function(presenter, superState){
+    this.$init(presenter, superState);
+};
+
+baltek.utils.inherit(baltek.presenter.WhatStateShowHelp, baltek.presenter.State);
+
+baltek.presenter.WhatStateShowHelp.prototype.$init = function(presenter, superState){
+    baltek.presenter.WhatStateShowHelp.super.$init.call(this, presenter, superState);
+}
+
+baltek.presenter.WhatStateShowHelp.prototype.enter = function(){
+    this.presenter.helpIFrame.show(true);
+
+    this.presenter.rules.enable(true);
+    this.presenter.help.enable(false);
+    this.presenter.about.enable(true);
+}
+
+baltek.presenter.WhatStateShowHelp.prototype.exit = function(){
+    this.presenter.helpIFrame.show(false);
+
+    this.presenter.rules.enable(false);
+    this.presenter.help.enable(false);
+    this.presenter.about.enable(false);
+}
+
+baltek.presenter.WhatStateShowHelp.prototype.updateFromObservable = function(observable){
+
+    if ( observable === this.presenter.rules ) {
+        this.setState(this.superState.whatStateShowRules);
+
+    } else if ( observable === this.presenter.help ) {
+        this.setState(this.superState.whatStateShowHelp);
+
+    } else if ( observable === this.presenter.about ) {
+        this.setState(this.superState.whatStateShowAbout);
+
+    } else {
+
+        if ( this.superState !== null ) {
+            this.superState.updateFromObservable(observable);
+        } else {
+            baltek.utils.assert( false, "observable not managed" );
+        }
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.presenter.WhatStateShowAbout = function(presenter, superState){
+    this.$init(presenter, superState);
+};
+
+baltek.utils.inherit(baltek.presenter.WhatStateShowAbout, baltek.presenter.State);
+
+baltek.presenter.WhatStateShowAbout.prototype.$init = function(presenter, superState){
+    baltek.presenter.WhatStateShowAbout.super.$init.call(this, presenter, superState);
+}
+
+baltek.presenter.WhatStateShowAbout.prototype.enter = function(){
+    this.presenter.aboutIFrame.show(true);
+
+    this.presenter.rules.enable(true);
+    this.presenter.help.enable(true);
+    this.presenter.about.enable(false);
+}
+
+baltek.presenter.WhatStateShowAbout.prototype.exit = function(){
+    this.presenter.aboutIFrame.show(false);
+
+    this.presenter.rules.enable(false);
+    this.presenter.help.enable(false);
+    this.presenter.about.enable(false);
+}
+
+baltek.presenter.WhatStateShowAbout.prototype.updateFromObservable = function(observable){
+
+    if ( observable === this.presenter.rules ) {
+        this.setState(this.superState.whatStateShowRules);
+
+    } else if ( observable === this.presenter.help ) {
+        this.setState(this.superState.whatStateShowHelp);
+
+    } else if ( observable === this.presenter.about ) {
+        this.setState(this.superState.whatStateShowAbout);
 
     } else {
 
