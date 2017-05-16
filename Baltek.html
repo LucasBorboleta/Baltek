@@ -39,62 +39,59 @@
 				<button id="Baltek_ButtonZone_QuitGame" type="button"
 						onclick="baltek.thePresenter.quitGame.notifyObservers();" ></button>
 
-				<select id="Baltek_ButtonZone_BlueSprint"
-						onchange="baltek.thePresenter.blueSprint.notifyObservers();" ></select>
+				<button id="Baltek_ButtonZone_Game" type="button"
+					onclick="baltek.thePresenter.game.notifyObservers();" ></button>
 
 				<select id="Baltek_ButtonZone_BlueKind"
 						onchange="baltek.thePresenter.blueKind.notifyObservers();" ></select>
 
-				<button id="Baltek_ButtonZone_BlueScore" type="button">0</button>
-
-				<button id="Baltek_ButtonZone_RedScore" type="button">0</button>
-
 				<select id="Baltek_ButtonZone_RedKind"
 						onchange="baltek.thePresenter.redKind.notifyObservers();" ></select>
+		</div>
 
-				<select id="Baltek_ButtonZone_RedSprint"
-						onchange="baltek.thePresenter.redSprint.notifyObservers();" ></select>
+		<div class="buttonGroup">
+			<button id="Baltek_ButtonZone_BlueBonus" type="button"></button>
+			<button id="Baltek_ButtonZone_BlueScore" type="button"></button>
+			<button id="Baltek_ButtonZone_RedScore" type="button"></button>
+			<button id="Baltek_ButtonZone_RedBonus" type="button"></button>
+		</div>
 
-				<button id="Baltek_ButtonZone_Kickoff" type="button"
-						onclick="baltek.thePresenter.kickoff.notifyObservers();" ></button>
+		<div class="buttonGroup">
+			<select id="Baltek_ButtonZone_Sprint"
+					onchange="baltek.thePresenter.sprint.notifyObservers();" ></select>
 
-				<button id="Baltek_ButtonZone_EndTurn" type="button"
-						onclick="baltek.thePresenter.endTurn.notifyObservers();" ></button>
+			<button id="Baltek_ButtonZone_Confirm" type="button"
+					onclick="baltek.thePresenter.confirm.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_Game" type="button"
-					onclick="baltek.thePresenter.game.notifyObservers();" ></button>
-			</div>
+			<button id="Baltek_ButtonZone_Cancel" type="button"
+					onclick="baltek.thePresenter.cancel.notifyObservers();" ></button>
 
-			<div class="buttonGroup">
-				<button id="Baltek_ButtonZone_Done" type="button">OK</button>
-				<button id="Baltek_ButtonZone_Undo" type="button">&lt;&lt;</button>
-				<button id="Baltek_ButtonZone_Moves" type="button">$$$</button>
-			</div>
+			<button id="Baltek_ButtonZone_Credit" type="button" ></button>
+		</div>
 
 
-			<!-- Peferences -->
-			<div class="buttonGroup">
-				<select id="Baltek_ButtonZone_Coordinates"
-						onchange="baltek.thePresenter.coordinates.notifyObservers();" ></select>
+		<!-- Peferences -->
+		<div class="buttonGroup">
+			<select id="Baltek_ButtonZone_Coordinates"
+					onchange="baltek.thePresenter.coordinates.notifyObservers();" ></select>
 
-				<select id="Baltek_ButtonZone_Language"
-						onchange="baltek.thePresenter.language.notifyObservers();" ></select>
-			</div>
+			<select id="Baltek_ButtonZone_Language"
+					onchange="baltek.thePresenter.language.notifyObservers();" ></select>
+		</div>
 
-			<!-- Help -->
-			<div class="buttonGroup">
-				<button id="Baltek_ButtonZone_What" type="button"
-						onclick="baltek.thePresenter.what.notifyObservers();" ></button>
+		<!-- Help -->
+		<div class="buttonGroup">
+			<button id="Baltek_ButtonZone_What" type="button"
+					onclick="baltek.thePresenter.what.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_Rules" type="button"
-						onclick="baltek.thePresenter.rules.notifyObservers();" ></button>
+			<button id="Baltek_ButtonZone_Rules" type="button"
+					onclick="baltek.thePresenter.rules.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_Help" type="button"
-						onclick="baltek.thePresenter.help.notifyObservers();" ></button>
+			<button id="Baltek_ButtonZone_Help" type="button"
+					onclick="baltek.thePresenter.help.notifyObservers();" ></button>
 
-	        	<button id="Baltek_ButtonZone_About" type="button"
-						onclick="baltek.thePresenter.about.notifyObservers();" ></button>
-			</div>
+        	<button id="Baltek_ButtonZone_About" type="button"
+					onclick="baltek.thePresenter.about.notifyObservers();" ></button>
 		</div>
 
 		<div id="Baltek_DrawZone" style="background-color:white; color:black; margin:2px; padding:2px; display:block;">

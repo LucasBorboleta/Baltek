@@ -171,3 +171,23 @@ baltek.widget.Selector.prototype.updateFromI18nTranslator = function(){
     this.element.value = selection;
 }
 ///////////////////////////////////////////////////////////////////////////////
+baltek.widget.TextBox = function(id, i18nTranslator){
+    this.$init(id, i18nTranslator);
+};
+
+baltek.utils.inherit(baltek.widget.TextBox, baltek.widget.Widget);
+
+baltek.widget.TextBox.prototype.$init = function(id, i18nTranslator){
+    baltek.widget.TextBox.super.$init.call(this, id, i18nTranslator);
+
+    // Finalize the construction regarding i18n.
+    this.updateFromI18nTranslator();
+}
+
+baltek.widget.TextBox.prototype.setText = function(text){
+    this.element.innerHTML = text;
+}
+
+baltek.widget.TextBox.prototype.updateFromI18nTranslator = function(){
+}
+///////////////////////////////////////////////////////////////////////////////

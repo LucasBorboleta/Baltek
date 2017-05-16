@@ -40,6 +40,9 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.quitGame = new baltek.widget.Button( "Baltek_ButtonZone_QuitGame" , this.i18nTranslator);
     this.quitGame.registerObserver(this);
 
+    this.game = new baltek.widget.Button( "Baltek_ButtonZone_Game" , this.i18nTranslator);
+    this.game.registerObserver(this);
+
     this.blueKind = new baltek.widget.Selector( "Baltek_ButtonZone_BlueKind", this.i18nTranslator,
                                          [ "human", "ai1", "ai2", "ai3" ] );
     this.blueKind.registerObserver(this);
@@ -52,23 +55,38 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.redKind.setColor(baltek.style.colors.WHITE);
     this.redKind.setBackgroundColor(baltek.style.colors.RED);
 
-    this.kickoff = new baltek.widget.Button( "Baltek_ButtonZone_Kickoff" , this.i18nTranslator);
-    this.kickoff.registerObserver(this);
+    this.blueBonus = new baltek.widget.TextBox( "Baltek_ButtonZone_BlueBonus" , this.i18nTranslator);
+    this.blueBonus.setColor(baltek.style.colors.WHITE);
+    this.blueBonus.setBackgroundColor(baltek.style.colors.BLUE);
+    this.blueBonus.setText( "[*]" );
 
-    this.blueSprint = new baltek.widget.Selector( "Baltek_ButtonZone_BlueSprint", this.i18nTranslator,
+    this.blueScore = new baltek.widget.TextBox( "Baltek_ButtonZone_BlueScore" , this.i18nTranslator);
+    this.blueScore.setColor(baltek.style.colors.WHITE);
+    this.blueScore.setBackgroundColor(baltek.style.colors.BLUE);
+    this.blueScore.setText( "0" );
+
+    this.redScore = new baltek.widget.TextBox( "Baltek_ButtonZone_RedScore" , this.i18nTranslator);
+    this.redScore.setColor(baltek.style.colors.WHITE);
+    this.redScore.setBackgroundColor(baltek.style.colors.RED);
+    this.redScore.setText( "0" );
+
+    this.redBonus = new baltek.widget.TextBox( "Baltek_ButtonZone_RedBonus" , this.i18nTranslator);
+    this.redBonus.setColor(baltek.style.colors.WHITE);
+    this.redBonus.setBackgroundColor(baltek.style.colors.RED);
+    this.redBonus.setText( "[ ]" );
+
+    this.sprint = new baltek.widget.Selector( "Baltek_ButtonZone_Sprint", this.i18nTranslator,
                                          [ "no", "yes" ] );
-    this.blueSprint.registerObserver(this);
-    this.blueSprint.setColor(baltek.style.colors.WHITE);
-    this.blueSprint.setBackgroundColor(baltek.style.colors.BLUE);
+    this.sprint.registerObserver(this);
 
-    this.redSprint = new baltek.widget.Selector( "Baltek_ButtonZone_RedSprint", this.i18nTranslator,
-                                         [ "no", "yes" ] );
-    this.redSprint.registerObserver(this);
-    this.redSprint.setColor(baltek.style.colors.WHITE);
-    this.redSprint.setBackgroundColor(baltek.style.colors.RED);
+    this.confirm = new baltek.widget.Button( "Baltek_ButtonZone_Confirm" , this.i18nTranslator);
+    this.confirm.registerObserver(this);
 
-    this.endTurn = new baltek.widget.Button( "Baltek_ButtonZone_EndTurn" , this.i18nTranslator);
-    this.endTurn.registerObserver(this);
+    this.cancel = new baltek.widget.Button( "Baltek_ButtonZone_Cancel" , this.i18nTranslator);
+    this.cancel.registerObserver(this);
+
+    this.credit = new baltek.widget.TextBox( "Baltek_ButtonZone_Credit" , this.i18nTranslator);
+    this.credit.setText( "$$$");
 
     this.language = new baltek.widget.Selector( "Baltek_ButtonZone_Language", this.i18nTranslator,
                                          this.i18nTranslator.getAvailableLanguages() );
@@ -79,9 +97,6 @@ baltek.presenter.Presenter.prototype.$init = function(){
                                              [ "no", "yes" ] );
     this.coordinates.registerObserver(this);
     this.coordinates.setSelection("no");
-
-    this.game = new baltek.widget.Button( "Baltek_ButtonZone_Game" , this.i18nTranslator);
-    this.game.registerObserver(this);
 
     this.what = new baltek.widget.Button( "Baltek_ButtonZone_What" , this.i18nTranslator);
     this.what.registerObserver(this);
@@ -115,15 +130,22 @@ baltek.presenter.Presenter.prototype.disableAllButtons = function(){
     this.restartGame.enable(false);
     this.resumeGame.enable(false);
     this.quitGame.enable(false);
+
+    this.blueBonus.enable(false);
     this.blueKind.enable(false);
     this.redKind.enable(false);
-    this.kickoff.enable(false);
-    this.blueSprint.enable(false);
-    this.redSprint.enable(false);
-    this.endTurn.enable(false);
+    this.redBonus.enable(false);
+
+    this.game.enable(false);
+
+    this.sprint.enable(false);
+    this.confirm.enable(false);
+    this.cancel.enable(false);
+    this.credit.enable(false);
+
     this.language.enable(false);
     this.coordinates.enable(false);
-    this.game.enable(false);
+
     this.what.enable(false);
     this.rules.enable(false);
     this.help.enable(false);
@@ -178,15 +200,24 @@ baltek.presenter.Presenter.prototype.hideAllButtons = function(){
     this.restartGame.show(false);
     this.resumeGame.show(false);
     this.quitGame.show(false);
+
+    this.blueBonus.show(false);
+    this.blueScore.show(false);
     this.blueKind.show(false);
     this.redKind.show(false);
-    this.kickoff.show(false);
-    this.blueSprint.show(false);
-    this.redSprint.show(false);
-    this.endTurn.show(false);
+    this.redScore.show(false);
+    this.redBonus.show(false);
+
+    this.game.show(false);
+
+    this.sprint.show(false);
+    this.confirm.show(false);
+    this.cancel.show(false);
+    this.credit.show(false);
+
     this.language.show(false);
     this.coordinates.show(false);
-    this.game.show(false);
+
     this.what.show(false);
     this.rules.show(false);
     this.help.show(false);
@@ -469,8 +500,8 @@ baltek.presenter.GameStateIsFinished.prototype.$init = function(presenter, super
 baltek.presenter.GameStateIsFinished.prototype.enter = function(){
     this.presenter.hideAllButtons();
     this.presenter.restartGame.show(true);
-    this.presenter.blueKind.show(true);
-    this.presenter.redKind.show(true);
+    this.presenter.blueScore.show(true);
+    this.presenter.redScore.show(true);
     this.presenter.coordinates.show(true);
     this.presenter.language.show(true);
     this.presenter.what.show(true);
@@ -564,18 +595,23 @@ baltek.presenter.GameStateIsRunning.prototype.$init = function(presenter, superS
 baltek.presenter.GameStateIsRunning.prototype.enter = function(){
     this.presenter.hideAllButtons();
     this.presenter.quitGame.show(true);
-    this.presenter.blueKind.show(true);
-    this.presenter.redKind.show(true);
-    this.presenter.blueSprint.show(true);
-    this.presenter.redSprint.show(true);
+    this.presenter.blueBonus.show(true);
+    this.presenter.blueScore.show(true);
+    this.presenter.redScore.show(true);
+    this.presenter.redBonus.show(true);
+    this.presenter.sprint.show(true);
+    this.presenter.confirm.show(true);
+    this.presenter.cancel.show(true);
+    this.presenter.credit.show(true);
     this.presenter.coordinates.show(true);
     this.presenter.language.show(true);
     this.presenter.what.show(true);
 
     this.presenter.disableAllButtons();
     this.presenter.quitGame.enable(true);
-    this.presenter.blueSprint.enable(true);
-    this.presenter.redSprint.enable(true);
+    this.presenter.sprint.enable(true);
+    this.presenter.confirm.enable(true);
+    this.presenter.cancel.enable(true);
     this.presenter.coordinates.enable(true);
     this.presenter.language.enable(true);
     this.presenter.what.enable(true);
@@ -610,8 +646,10 @@ baltek.presenter.GameStateIsReadyToQuit.prototype.enter = function(){
     this.presenter.hideAllButtons();
     this.presenter.resumeGame.show(true);
     this.presenter.quitGame.show(true);
-    this.presenter.blueKind.show(true);
-    this.presenter.redKind.show(true);
+    this.presenter.blueBonus.show(true);
+    this.presenter.blueScore.show(true);
+    this.presenter.redScore.show(true);
+    this.presenter.redBonus.show(true);
     this.presenter.coordinates.show(true);
     this.presenter.language.show(true);
     this.presenter.what.show(true);
