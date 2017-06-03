@@ -58,7 +58,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.blueBonus = new baltek.widget.TextBox( "Baltek_ButtonZone_BlueBonus" , this.i18nTranslator);
     this.blueBonus.setColor(baltek.style.colors.WHITE);
     this.blueBonus.setBackgroundColor(baltek.style.colors.BLUE);
-    this.blueBonus.setText( "[*]" );
+    this.blueBonus.setText( "*" );
 
     this.blueScore = new baltek.widget.TextBox( "Baltek_ButtonZone_BlueScore" , this.i18nTranslator);
     this.blueScore.setColor(baltek.style.colors.WHITE);
@@ -66,14 +66,14 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.blueScore.setText( "0" );
 
     this.redScore = new baltek.widget.TextBox( "Baltek_ButtonZone_RedScore" , this.i18nTranslator);
-    this.redScore.setColor(baltek.style.colors.WHITE);
-    this.redScore.setBackgroundColor(baltek.style.colors.RED);
+    this.redScore.setColor(baltek.style.colors.BLACK);
+    this.redScore.setBackgroundColor(baltek.style.colors.WHITE);
     this.redScore.setText( "0" );
 
     this.redBonus = new baltek.widget.TextBox( "Baltek_ButtonZone_RedBonus" , this.i18nTranslator);
-    this.redBonus.setColor(baltek.style.colors.WHITE);
-    this.redBonus.setBackgroundColor(baltek.style.colors.RED);
-    this.redBonus.setText( "[ ]" );
+    this.redBonus.setColor(baltek.style.colors.BLACK);
+    this.redBonus.setBackgroundColor(baltek.style.colors.WHITE);
+    this.redBonus.setText( "_" );
 
     this.sprint = new baltek.widget.Selector( "Baltek_ButtonZone_Sprint", this.i18nTranslator,
                                          [ "no", "yes" ] );
@@ -86,7 +86,9 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.cancel.registerObserver(this);
 
     this.credit = new baltek.widget.TextBox( "Baltek_ButtonZone_Credit" , this.i18nTranslator);
-    this.credit.setText( "$$$");
+    this.credit.setColor(baltek.style.colors.BLACK);
+    this.credit.setBackgroundColor(baltek.style.colors.WHITE);
+    this.credit.setText( "$__");
 
     this.language = new baltek.widget.Selector( "Baltek_ButtonZone_Language", this.i18nTranslator,
                                          this.i18nTranslator.getAvailableLanguages() );
