@@ -9,10 +9,17 @@
 		* { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
 
 		.buttonGroup{
-			display:inline;
-			margin:4px;
-			padding:4px;
-			background-color:white;
+			display: inline;
+			margin: 4px;
+			padding: 4px;
+			background-color: white;
+		}
+		.Counter{
+			border-style: solid;
+			border-width: 1px;
+			border-color: gray;
+			padding-left: 4px;
+			padding-right: 4px;
 		}
 	</style>
 
@@ -50,10 +57,10 @@
 		</div>
 
 		<div class="buttonGroup">
-			<button id="Baltek_ButtonZone_BlueBonus" type="button" ></button>
-			<button id="Baltek_ButtonZone_BlueScore" type="button" ></button>
-			<button id="Baltek_ButtonZone_RedScore" type="button" ></button>
-			<button id="Baltek_ButtonZone_RedBonus" type="button" ></button>
+			<span id="Baltek_ButtonZone_BlueBonus" class="Counter" ></span>
+			<span id="Baltek_ButtonZone_BlueScore" class="Counter" ></span>
+			<span id="Baltek_ButtonZone_RedScore" class="Counter" ></span>
+			<span id="Baltek_ButtonZone_RedBonus" class="Counter" ></span>
 		</div>
 
 		<div class="buttonGroup">
@@ -66,7 +73,7 @@
 			<button id="Baltek_ButtonZone_Cancel" type="button"
 					onclick="baltek.thePresenter.cancel.notifyObservers();" ></button>
 
-			<button id="Baltek_ButtonZone_Credit" type="button" ></button>
+			<span id="Baltek_ButtonZone_Credit" class="Counter" ></span>
 		</div>
 
 

@@ -55,25 +55,37 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.redKind.setColor(baltek.style.colors.WHITE);
     this.redKind.setBackgroundColor(baltek.style.colors.RED);
 
-    this.blueBonus = new baltek.widget.TextBox( "Baltek_ButtonZone_BlueBonus" , this.i18nTranslator);
+    var SCORE_DIGITS = 1;
+
+    var BONUS_DIGITS = 1;
+    var BONUS_ZERO_SYMBOL = "-";
+    var BONUS_ONE_SYMBOL = "*";
+
+    var CREDIT_DIGITS = 3;
+    var CREDIT_ZERO_SYMBOL = "-";
+    var CREDIT_ONE_SYMBOL = "$";
+
+    this.blueBonus = new baltek.widget.CounterBar( "Baltek_ButtonZone_BlueBonus" , this.i18nTranslator,
+                                                BONUS_DIGITS, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
     this.blueBonus.setColor(baltek.style.colors.WHITE);
     this.blueBonus.setBackgroundColor(baltek.style.colors.BLUE);
-    this.blueBonus.setText( "*" );
+    this.blueBonus.setCount( 1 );
 
-    this.blueScore = new baltek.widget.TextBox( "Baltek_ButtonZone_BlueScore" , this.i18nTranslator);
+    this.blueScore = new baltek.widget.Counter( "Baltek_ButtonZone_BlueScore" , this.i18nTranslator, SCORE_DIGITS);
     this.blueScore.setColor(baltek.style.colors.WHITE);
     this.blueScore.setBackgroundColor(baltek.style.colors.BLUE);
-    this.blueScore.setText( "0" );
+    this.blueScore.setCount( 3 );
 
-    this.redScore = new baltek.widget.TextBox( "Baltek_ButtonZone_RedScore" , this.i18nTranslator);
-    this.redScore.setColor(baltek.style.colors.BLACK);
-    this.redScore.setBackgroundColor(baltek.style.colors.WHITE);
-    this.redScore.setText( "0" );
+    this.redScore = new baltek.widget.Counter( "Baltek_ButtonZone_RedScore" , this.i18nTranslator, SCORE_DIGITS);
+    this.redScore.setColor(baltek.style.colors.WHITE);
+    this.redScore.setBackgroundColor(baltek.style.colors.RED);
+    this.redScore.setCount( 0 );
 
-    this.redBonus = new baltek.widget.TextBox( "Baltek_ButtonZone_RedBonus" , this.i18nTranslator);
-    this.redBonus.setColor(baltek.style.colors.BLACK);
-    this.redBonus.setBackgroundColor(baltek.style.colors.WHITE);
-    this.redBonus.setText( "_" );
+    this.redBonus = new baltek.widget.CounterBar( "Baltek_ButtonZone_RedBonus" , this.i18nTranslator,
+                                                BONUS_DIGITS, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
+    this.redBonus.setColor(baltek.style.colors.WHITE);
+    this.redBonus.setBackgroundColor(baltek.style.colors.RED);
+    this.redBonus.setCount( 0 );
 
     this.sprint = new baltek.widget.Selector( "Baltek_ButtonZone_Sprint", this.i18nTranslator,
                                          [ "no", "yes" ] );
@@ -85,10 +97,11 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.cancel = new baltek.widget.Button( "Baltek_ButtonZone_Cancel" , this.i18nTranslator);
     this.cancel.registerObserver(this);
 
-    this.credit = new baltek.widget.TextBox( "Baltek_ButtonZone_Credit" , this.i18nTranslator);
-    this.credit.setColor(baltek.style.colors.BLACK);
-    this.credit.setBackgroundColor(baltek.style.colors.WHITE);
-    this.credit.setText( "$__");
+    this.credit = new baltek.widget.CounterBar( "Baltek_ButtonZone_Credit" , this.i18nTranslator,
+                                                CREDIT_DIGITS, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
+    this.credit.setColor(baltek.style.colors.WHITE);
+    this.credit.setBackgroundColor(baltek.style.colors.BLUE);
+    this.credit.setCount( 3 );
 
     this.language = new baltek.widget.Selector( "Baltek_ButtonZone_Language", this.i18nTranslator,
                                          this.i18nTranslator.getAvailableLanguages() );
