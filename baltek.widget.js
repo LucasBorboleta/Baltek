@@ -92,24 +92,25 @@ baltek.widget.Button.prototype.updateFromI18nTranslator = function(){
     this.element.innerHTML = this.getI18nValueForKeySuffix( "button" );
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.widget.Counter = function(id, i18nTranslator, numberOfDigits){
-    this.$init(id, i18nTranslator, numberOfDigits);
+baltek.widget.CounterWithDecimals = function(id, i18nTranslator, maximum){
+    this.$init(id, i18nTranslator, maximum);
 }
 
-baltek.utils.inherit(baltek.widget.Counter, baltek.widget.Widget);
+baltek.utils.inherit(baltek.widget.CounterWithDecimals, baltek.widget.Widget);
 
-baltek.widget.Counter.prototype.$init = function(id, i18nTranslator, numberOfDigits){
-    baltek.widget.Counter.super.$init.call(this, id, i18nTranslator);
+baltek.widget.CounterWithDecimals.prototype.$init = function(id, i18nTranslator, maximum){
+    baltek.widget.CounterWithDecimals.super.$init.call(this, id, i18nTranslator);
 
-    baltek.utils.assert( numberOfDigits >= 1 );
-    this.numberOfDigits = numberOfDigits;
+    baltek.utils.assert( maximum >= 1 );
+    this.maximum = maximum;
+    this.numberOfDigits = Math.ceil( Math.log(this.maximum)/Math.LN10 );
     this.setCount(0);
 
     // Finalize the construction regarding i18n.
     this.updateFromI18nTranslator();
 }
 
-baltek.widget.Counter.prototype.setCount = function(count){
+baltek.widget.CounterWithDecimals.prototype.setCount = function(count){
     baltek.utils.assert( count >= 0 );
     var text = count.toString();
     baltek.utils.assert( text.length <= this.numberOfDigits );
@@ -117,17 +118,17 @@ baltek.widget.Counter.prototype.setCount = function(count){
     this.element.innerHTML = text;
 }
 
-baltek.widget.Counter.prototype.updateFromI18nTranslator = function(){
+baltek.widget.CounterWithDecimals.prototype.updateFromI18nTranslator = function(){
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.widget.CounterBar = function(id, i18nTranslator, maximum, zeroSymbol, oneSymbol){
+baltek.widget.CounterWithSymbols = function(id, i18nTranslator, maximum, zeroSymbol, oneSymbol){
     this.$init(id, i18nTranslator, maximum, zeroSymbol, oneSymbol);
 }
 
-baltek.utils.inherit(baltek.widget.CounterBar, baltek.widget.Widget);
+baltek.utils.inherit(baltek.widget.CounterWithSymbols, baltek.widget.Widget);
 
-baltek.widget.CounterBar.prototype.$init = function(id, i18nTranslator, maximum, zeroSymbol, oneSymbol){
-    baltek.widget.CounterBar.super.$init.call(this, id, i18nTranslator);
+baltek.widget.CounterWithSymbols.prototype.$init = function(id, i18nTranslator, maximum, zeroSymbol, oneSymbol){
+    baltek.widget.CounterWithSymbols.super.$init.call(this, id, i18nTranslator);
 
     baltek.utils.assert( maximum >= 1 );
     baltek.utils.assert( zeroSymbol.length === 1 );
@@ -142,14 +143,14 @@ baltek.widget.CounterBar.prototype.$init = function(id, i18nTranslator, maximum,
     this.updateFromI18nTranslator();
 }
 
-baltek.widget.CounterBar.prototype.setCount = function(count){
+baltek.widget.CounterWithSymbols.prototype.setCount = function(count){
     baltek.utils.assert( count >= 0 );
     baltek.utils.assert( count <= this.maximum );
     var text = this.oneSymbol.repeat(count) + this.zeroSymbol.repeat(this.maximum - count);
     this.element.innerHTML = text;
 }
 
-baltek.widget.CounterBar.prototype.updateFromI18nTranslator = function(){
+baltek.widget.CounterWithSymbols.prototype.updateFromI18nTranslator = function(){
 }
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.IFrame = function(id, i18nTranslator){

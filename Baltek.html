@@ -4,8 +4,9 @@
 	    <meta charset="UTF-8">
 		<title>Baltek</title>
 	</head>
-
-	<style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<!-- <style>
 		* { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
 
 		.buttonGroup{
@@ -21,56 +22,59 @@
 			padding-left: 4px;
 			padding-right: 4px;
 		}
-	</style>
-
+	</style> -->
 	<body onload="baltek.$init();">
 
-		<div id="Baltek_ButtonZone" style="background-color:white; color:black; margin:4px; padding:4px;">
+		<!-- <div id="Baltek_ButtonZone" style="background-color:white; color:black; margin:4px; padding:4px;"> -->
+		<div id="Baltek_ButtonZone" class="w3-container" >
 
 			<!-- For "button" and "select" elements:
 			     the text is created dynamically using JavaScript
 			 -->
 
 			<!-- Game -->
-			<div class="buttonGroup">
+			<!-- <div class="buttonGroup" > -->
+			<div class="w3-display-container w3-cell" >
 
-				<button id="Baltek_ButtonZone_StartGame" type="button"
+				<button id="Baltek_ButtonZone_StartGame" type="button" class="w3-button w3-light-gray w3-round"
 						onclick="baltek.thePresenter.startGame.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_RestartGame" type="button"
+				<button id="Baltek_ButtonZone_RestartGame" type="button" class="w3-button w3-light-gray w3-round"
 						onclick="baltek.thePresenter.restartGame.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_ResumeGame" type="button"
+				<button id="Baltek_ButtonZone_ResumeGame" type="button" class="w3-button w3-light-gray w3-round"
 						onclick="baltek.thePresenter.resumeGame.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_QuitGame" type="button"
+				<button id="Baltek_ButtonZone_QuitGame" type="button" class="w3-button w3-light-gray w3-round"
 						onclick="baltek.thePresenter.quitGame.notifyObservers();" ></button>
 
-				<button id="Baltek_ButtonZone_Game" type="button"
+				<button id="Baltek_ButtonZone_Game" type="button" class="w3-button w3-light-gray w3-round"
 					onclick="baltek.thePresenter.game.notifyObservers();" ></button>
 
-				<select id="Baltek_ButtonZone_BlueKind"
+				<select id="Baltek_ButtonZone_BlueKind" class="w3-select w3-light-gray w3-round"
 						onchange="baltek.thePresenter.blueKind.notifyObservers();" ></select>
 
-				<select id="Baltek_ButtonZone_RedKind"
+				<select id="Baltek_ButtonZone_RedKind" class="w3-select w3-light-gray w3-round"
 						onchange="baltek.thePresenter.redKind.notifyObservers();" ></select>
 		</div>
 
-		<div class="buttonGroup">
+		<!-- <div class="buttonGroup" > -->
+		<div class="w3-container w3-cell" >
 			<span id="Baltek_ButtonZone_BlueBonus" class="Counter" ></span>
 			<span id="Baltek_ButtonZone_BlueScore" class="Counter" ></span>
 			<span id="Baltek_ButtonZone_RedScore" class="Counter" ></span>
 			<span id="Baltek_ButtonZone_RedBonus" class="Counter" ></span>
 		</div>
 
-		<div class="buttonGroup">
-			<select id="Baltek_ButtonZone_Sprint"
+		<!-- <div class="buttonGroup" > -->
+		<div class="w3-container w3-cell" >
+			<select id="Baltek_ButtonZone_Sprint" class="w3-select w3-light-gray w3-round"
 					onchange="baltek.thePresenter.sprint.notifyObservers();" ></select>
 
-			<button id="Baltek_ButtonZone_Confirm" type="button"
+			<button id="Baltek_ButtonZone_Confirm" type="button" class="w3-button w3-light-gray w3-round"
 					onclick="baltek.thePresenter.confirm.notifyObservers();" ></button>
 
-			<button id="Baltek_ButtonZone_Cancel" type="button"
+			<button id="Baltek_ButtonZone_Cancel" type="button" class="w3-button w3-light-gray w3-round"
 					onclick="baltek.thePresenter.cancel.notifyObservers();" ></button>
 
 			<span id="Baltek_ButtonZone_Credit" class="Counter" ></span>
@@ -78,30 +82,33 @@
 
 
 		<!-- Peferences -->
-		<div class="buttonGroup">
-			<select id="Baltek_ButtonZone_Coordinates"
+		<!-- <div class="buttonGroup" > -->
+		<div class="w3-container w3-cell" >
+			<select id="Baltek_ButtonZone_Coordinates" class="w3-select w3-light-gray w3-round"
 					onchange="baltek.thePresenter.coordinates.notifyObservers();" ></select>
 
-			<select id="Baltek_ButtonZone_Language"
+			<select id="Baltek_ButtonZone_Language" class="w3-select w3-light-gray w3-round"
 					onchange="baltek.thePresenter.language.notifyObservers();" ></select>
 		</div>
 
 		<!-- Help -->
-		<div class="buttonGroup">
-			<button id="Baltek_ButtonZone_What" type="button"
+		<!-- <div class="buttonGroup" > -->
+		<div class="w3-container w3-cell" >
+			<button id="Baltek_ButtonZone_What" type="button" class="w3-button w3-light-gray w3-round"
 					onclick="baltek.thePresenter.what.notifyObservers();" ></button>
 
-			<button id="Baltek_ButtonZone_Rules" type="button"
+			<button id="Baltek_ButtonZone_Rules" type="button" class="w3-button w3-light-gray w3-round"
 					onclick="baltek.thePresenter.rules.notifyObservers();" ></button>
 
-			<button id="Baltek_ButtonZone_Help" type="button"
+			<button id="Baltek_ButtonZone_Help" type="button" class="w3-button w3-light-gray w3-round"
 					onclick="baltek.thePresenter.help.notifyObservers();" ></button>
 
-        	<button id="Baltek_ButtonZone_About" type="button"
+        	<button id="Baltek_ButtonZone_About" type="button" class="w3-button w3-light-gray w3-round"
 					onclick="baltek.thePresenter.about.notifyObservers();" ></button>
 		</div>
 
-		<div id="Baltek_DrawZone" style="background-color:white; color:black; margin:2px; padding:2px; display:block;">
+		<!-- <div id="Baltek_DrawZone" style="background-color:white; color:black; margin:2px; padding:2px; display:block;"> -->
+		<div id="Baltek_DrawZone" class="w3-container">
 			<!-- The source of each iframe is created dynamically using JavaScript -->
 			<iframe id="Baltek_DrawZone_Rules" width="1200" height="500"  src="" style="border:none;"></iframe>
 			<iframe id="Baltek_DrawZone_Help" width="1200" height="500"  src="" style="border:none;"></iframe>
@@ -110,10 +117,11 @@
 			<canvas id="Baltek_DrawZone_Canvas" width="1200" height="500" </canvas>
 		</div>
 
-		<div id="Baltek_DebugZone" style="background-color:lightgrey; color:black; margin:2px; padding:2px;">
+		<!-- <div id="Baltek_DebugZone" style="background-color:lightgrey; color:black; margin:2px; padding:2px;"> -->
+		<div id="Baltek_DebugZone" class="w3-container w3-cell w3-gray">
 			<span>Debug zone:</span>
 
-			<button id="Baltek_DebugZone_Clear"  type="button"
+			<button id="Baltek_DebugZone_Clear"  type="button" class="w3-button w3-light-gray w3-round"
 				    onclick="baltek.debug.clearMessages()">Clear messages</button>
 
 			<span id="Baltek_DebugZone_Mouse" style="background-color:white;">Mouse(x,y) = (?,?)</span>
