@@ -114,7 +114,8 @@ baltek.widget.CounterWithDecimals.prototype.setCount = function(count){
     baltek.utils.assert( count >= 0 );
     var text = count.toString();
     baltek.utils.assert( text.length <= this.numberOfDigits );
-    text = "0".repeat(this.numberOfDigits - text.length) + text;
+    var zeroSymbol = "0";
+    text = baltek.utils.repeatString(zeroSymbol, this.numberOfDigits - text.length) + text;
     this.element.innerHTML = text;
 }
 
@@ -146,7 +147,9 @@ baltek.widget.CounterWithSymbols.prototype.$init = function(id, i18nTranslator, 
 baltek.widget.CounterWithSymbols.prototype.setCount = function(count){
     baltek.utils.assert( count >= 0 );
     baltek.utils.assert( count <= this.maximum );
-    var text = this.oneSymbol.repeat(count) + this.zeroSymbol.repeat(this.maximum - count);
+
+    var text = baltek.utils.repeatString(this.oneSymbol, count) +
+               baltek.utils.repeatString(this.zeroSymbol, this.maximum - count);
     this.element.innerHTML = text;
 }
 
