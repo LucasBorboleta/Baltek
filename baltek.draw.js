@@ -10,7 +10,14 @@ baltek.draw.$init = function(){
         baltek.debug.$init();
         baltek.style.$init();
 
+
         baltek.draw.canvas = document.getElementById( "Baltek_DrawZone_Canvas" );
+
+        // Force the dimensions of the canvas
+        var drawZone = document.getElementById( "Baltek_DrawZone" );
+        baltek.draw.canvas.width = drawZone.offsetWidth;
+        baltek.draw.canvas.height = drawZone.offsetHeight;
+
         baltek.draw.drawer = baltek.draw.canvas.getContext( "2d" );
 
         if ( baltek.debug.isEnabled ) {

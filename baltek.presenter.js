@@ -40,7 +40,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.quitGame = new baltek.widget.Button( "Baltek_ButtonZone_QuitGame" , this.i18nTranslator);
     this.quitGame.registerObserver(this);
 
-    this.game = new baltek.widget.Button( "Baltek_ButtonZone_Game" , this.i18nTranslator);
+    this.game = new baltek.widget.Button( "Baltek_ButtonZone_GoToGame" , this.i18nTranslator);
     this.game.registerObserver(this);
 
     this.blueKind = new baltek.widget.Selector( "Baltek_ButtonZone_BlueKind", this.i18nTranslator,
@@ -113,7 +113,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.coordinates.registerObserver(this);
     this.coordinates.setSelection("no");
 
-    this.what = new baltek.widget.Button( "Baltek_ButtonZone_What" , this.i18nTranslator);
+    this.what = new baltek.widget.Button( "Baltek_ButtonZone_GoToHelp" , this.i18nTranslator);
     this.what.registerObserver(this);
 
     this.rulesIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_Rules" , this.i18nTranslator);
