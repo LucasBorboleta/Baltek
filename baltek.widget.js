@@ -11,6 +11,13 @@ baltek.widget.$init = function(){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
+baltek.widget.getStylePropertyValue = function(elementId, propertyName){
+    var element = document.getElementById(elementId);
+    var style = window.getComputedStyle(element, null);
+    var propertyValue = style.getPropertyValue(propertyName);
+    return propertyValue;
+}
+///////////////////////////////////////////////////////////////////////////////
 baltek.widget.Widget = function(id, i18nTranslator){
     this.$init(id, i18nTranslator);
 };

@@ -44,13 +44,6 @@ baltek.utils.getOwnProperties = function(anObject){
     return properties;
 }
 
-baltek.utils.getStylePropertyValue = function(elementId, propertyName){
-    var element = document.getElementById(elementId);
-    var style = window.getComputedStyle(element, null);
-    var propertyValue = style.getPropertyValue(propertyName);
-    return propertyValue;
-}
-
 baltek.utils.hasValue = function(array, value){
     baltek.utils.assert( Array.isArray(array) )
     return (array.indexOf(value) > -1);

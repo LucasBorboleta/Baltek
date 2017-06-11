@@ -12,26 +12,6 @@
 
 	<body onload="baltek.$init();">
 
-		<!-- Hidden elements just for retrieving CSS properties in Javascript -->
-		<div style="display:none;">
-			<!-- Only in this block: the "id" of each element equals its "class" -->
-
-			<span class="baltek-circle" id="baltek-circle">baltek-circle</span>
-			<span class="baltek-circle-selected" id="baltek-circle-selected">baltek-circle-selected</span>
-
-			<span class="baltek-team-0" id="baltek-team-0">baltek-team-0</span>
-			<span class="baltek-team-1" id="baltek-team-1">baltek-team-1</span>
-
-			<span class="baltek-ball" id="baltek-ball">baltek-ball</span>
-			<span class="baltek-ball-selected" id="baltek-ball-selected">baltek-ball-selected</span>
-
-			<span class="baltek-box" id="baltek-box">baltek-box</span>
-			<span class="baltek-box-selected" id="baltek-box-selected">baltek-box-selected</span>
-			<span class="baltek-box-0" id="baltek-box-0">baltek-box-0</span>
-			<span class="baltek-box-1" id="baltek-box-1">baltek-box-1</span>
-
-		</div>
-
 		<div id="Baltek_ButtonZone" class="baltek-button-zone" >
 
 			<div class="baltek-logo">
@@ -56,10 +36,10 @@
 				<button  class="baltek-button" type="button" id="Baltek_ButtonZone_QuitGame"
 						onclick="baltek.thePresenter.quitGame.notifyObservers();" ></button>
 
-				<select class="baltek-select" id="Baltek_ButtonZone_Team0Kind"
+				<select class="baltek-select baltek-team-0-background" id="Baltek_ButtonZone_Team0Kind"
 						onchange="baltek.thePresenter.team0Kind.notifyObservers();" ></select>
 
-				<select  class="baltek-select" id="Baltek_ButtonZone_Team1Kind"
+				<select  class="baltek-select baltek-team-1-background" id="Baltek_ButtonZone_Team1Kind"
 						onchange="baltek.thePresenter.team1Kind.notifyObservers();" ></select>
 
 				<button class="baltek-button"  type="button" id="Baltek_ButtonZone_GoToGame"
@@ -68,10 +48,10 @@
 
 		<!-- 2) Scores and bonuses -->
 		<div class="baltek-button-group">
-			<span class="baltek-counter" id="Baltek_ButtonZone_Team0Bonus" ></span>
-			<span class="baltek-counter" id="Baltek_ButtonZone_Team0Score" ></span>
-			<span class="baltek-counter" id="Baltek_ButtonZone_Team1Score" ></span>
-			<span class="baltek-counter" id="Baltek_ButtonZone_Team1Bonus" ></span>
+			<span class="baltek-counter baltek-team-0-background" id="Baltek_ButtonZone_Team0Bonus" ></span>
+			<span class="baltek-counter baltek-team-0-background" id="Baltek_ButtonZone_Team0Score" ></span>
+			<span class="baltek-counter baltek-team-1-background" id="Baltek_ButtonZone_Team1Score" ></span>
+			<span class="baltek-counter baltek-team-1-background" id="Baltek_ButtonZone_Team1Bonus" ></span>
 		</div>
 
 		<!-- 3) Turn and Move handling -->
@@ -128,7 +108,7 @@
 
 		<div class="baltek-debug-zone" id="Baltek_DebugZone" >
 
-			<div class="baltek-debug-zone-title">
+			<div class="baltek-debug-logo">
 				<span>Baltek</span>
 				<span>Debug</span>
 				<span>Zone</span>

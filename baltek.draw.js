@@ -37,8 +37,8 @@ baltek.draw.$init = function(){
 baltek.draw.getMousePosition = function(event){
     var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
     return {
-      x: event.clientX + window.pageXOffset - canvasRectangle.left,
-      y: event.clientY + window.pageYOffset - canvasRectangle.top
+        x: event.clientX - canvasRectangle.left,
+        y: event.clientY - canvasRectangle.top
     };
 }
 
