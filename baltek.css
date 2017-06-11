@@ -32,8 +32,65 @@ h1,h2,h3,h4,h5,h6{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin
 hr{border:0;border-top:1px solid #eee;margin:20px 0}
 /* End extract */
 
+/* Begin Javascript styles: retrieved in Javascript code from hidden DOM elements */
+.baltek-circle{
+    background-color:gray;
+    border-width:5px;
+    border-style:solid;
+    border-color:black;
+    color:black;
+    font-size:24px;
+}
+
+.baltek-circle-selected{
+    border-style:solid;
+    border-color:#FFFF00;
+}
+
+.baltek-team-0{
+    background-color:#0099CC;
+}
+
+.baltek-team-1{
+    background-color:#E62E00;
+}
+
+.baltek-ball{
+    background-color:white;
+    border-style:solid;
+    border-color:white;
+}
+
+.baltek-ball-selected{
+    background-color:#FFFF00;
+    border-style:solid;
+    border-color:#FFFF00;
+}
+
+.baltek-box{
+    border-width:5px;
+    border-style:solid;
+    color:white;
+    font-size:16px;
+}
+
+.baltek-box-selected{
+    border-style:solid;
+    border-color:#FFFF00;
+}
+
+.baltek-box-0{
+    background-color:#006600;
+}
+
+.baltek-box-1{
+    background-color:#5C8A00;
+}
+
+/* End Javascript styles */
+
 .baltek-button-zone{
-        display:inline;
+    display:inline;
 }
 
 .baltek-logo{
@@ -49,19 +106,19 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 }
 
 .baltek-button-group{
-        display:inherit;
-        padding-right:32px;
+    display:inherit;
+    padding-right:32px;
 }
 
 .baltek-button, .baltek-select{
-        background-color:khaki;
-        border-radius:8px;
-        color:black;
-        font-size:18px;
+    background-color:khaki;
+    border-radius:8px;
+    color:black;
+    font-size:18px;
 }
 
 .baltek-button:disabled{
-        opacity:0.5;
+    opacity:0.5;
 }
 
 .baltek-counter{

@@ -133,14 +133,14 @@ baltek.draw.Box.prototype.$init = function(ix, iy, xyLabel){
     this.y = this.iy * baltek.draw.boxSide;
     this.side = baltek.draw.boxSide;
 
-    this.fillStyle = baltek.style.colors.GREEN_2;
-    this.fillStyleSelected = baltek.style.colors.GREEN_2;
+    this.fillStyle = baltek.style.colors.BOX_1;
+    this.fillStyleSelected = baltek.style.colors.BOX_1;
     if ( (this.ix + this.iy) % 2 === 0 ) {
-        this.fillStyle = baltek.style.colors.GREEN_1;
-        this.fillStyleSelected = baltek.style.colors.GREEN_1;
+        this.fillStyle = baltek.style.colors.BOX_0;
+        this.fillStyleSelected = baltek.style.colors.BOX_0;
     }
     this.strokeStyle = this.fillStyle;
-    this.strokeStyleSelected = baltek.style.colors.YELLOW;
+    this.strokeStyleSelected = baltek.style.colors.BOX_BORDER_SELECTED;
 }
 
 baltek.draw.Box.prototype.clear = function(){
@@ -215,7 +215,7 @@ baltek.draw.Box.prototype.distributeBallAndFootballers = function(){
 baltek.draw.Box.prototype.draw = function(){
     baltek.draw.drawer.strokeStyle = this.strokeStyle;
     baltek.draw.drawer.fillStyle = this.fillStyle;
-    baltek.draw.drawer.lineWidth = baltek.style.LINE_WIDTH;
+    baltek.draw.drawer.lineWidth = baltek.style.widths.BOX_BORDER;
 
     if ( this.selectable ) {
         baltek.draw.drawer.strokeStyle = this.strokeStyleSelected;
@@ -229,11 +229,11 @@ baltek.draw.Box.prototype.draw = function(){
 
     if ( this.xyLabel != null ) {
         if ( this.doShowXYLabel ) {
-            baltek.draw.drawer.fillStyle = baltek.style.colors.WHITE;
+            baltek.draw.drawer.fillStyle = baltek.style.colors.BOX_TEXT;
         } else {
             baltek.draw.drawer.fillStyle = this.fillStyle;
         }
-        baltek.draw.drawer.font = baltek.style.BOX_XY_LABEL_FONT;
+        baltek.draw.drawer.font = baltek.style.fonts.BOX_TEXT;
         baltek.draw.drawer.textBaseline = "bottom";
         baltek.draw.drawer.textAlign = "start";
         baltek.draw.drawer.fillText(this.xyLabel, this.x + this.side/16, this.y + this.side*(1 - 1/16));
@@ -313,11 +313,10 @@ baltek.draw.Circle.prototype.$init = function(){
 
     this.radius = baltek.draw.circleRadius;
 
-    this.strokeStyle = baltek.style.colors.BLACK;
-    this.strokeStyleSelected = baltek.style.colors.YELLOW;
-    this.fillStyle = baltek.style.colors.GRAY;
-    this.fillStyleSelected = baltek.style.colors.GRAY;
-
+    this.strokeStyle = baltek.style.colors.CIRCLE_BORDER;
+    this.strokeStyleSelected = baltek.style.colors.CIRCLE_BORDER_SELECTED;
+    this.fillStyle = baltek.style.colors.CIRCLE_BACKGROUND;
+    this.fillStyleSelected = baltek.style.colors.CIRCLE_BACKGROUND;
 }
 
 baltek.draw.Circle.prototype.contains = function(point){
@@ -342,7 +341,7 @@ baltek.draw.Circle.prototype.draw = function(){
             baltek.draw.drawer.fillStyle = this.fillStyleSelected;
         }
 
-        baltek.draw.drawer.lineWidth = baltek.style.LINE_WIDTH;
+        baltek.draw.drawer.lineWidth = baltek.style.widths.CIRCLE_BORDER;
 
         var lw = baltek.draw.drawer.lineWidth;
         baltek.draw.drawer.beginPath();
@@ -353,8 +352,8 @@ baltek.draw.Circle.prototype.draw = function(){
         baltek.draw.drawer.fill();
 
         if ( this.text !== null ) {
-            baltek.draw.drawer.fillStyle = baltek.style.colors.BLACK;
-            baltek.draw.drawer.font = baltek.style.CIRCLE_TEXT_FONT;
+            baltek.draw.drawer.fillStyle = baltek.style.colors.CIRCLE_TEXT;
+            baltek.draw.drawer.font = baltek.style.fonts.CIRCLE_TEXT;
             baltek.draw.drawer.textBaseline = "middle";
             baltek.draw.drawer.textAlign = "center";
             baltek.draw.drawer.fillText(this.text, this.x, this.y);
@@ -371,10 +370,10 @@ baltek.utils.inherit(baltek.draw.Ball, baltek.draw.Circle);
 baltek.draw.Ball.prototype.$init = function(){
     baltek.draw.Ball.super.$init.call(this);
 
-    this.fillStyle = baltek.style.colors.WHITE ;
-    this.fillStyleSelected = baltek.style.colors.YELLOW;
-    this.strokeStyle = baltek.style.colors.WHITE;
-    this.strokeStyleSelected = baltek.style.colors.YELLOW;
+    this.fillStyle = baltek.style.colors.BALL_BACKGROUND ;
+    this.fillStyleSelected = baltek.style.colors.BALL_BACKGROUND_SELECTED;
+    this.strokeStyle = baltek.style.colors.BALL_BORDER;
+    this.strokeStyleSelected = baltek.style.colors.BALL_BORDER_SELECTED;
 
     this.text = "@";
 }
@@ -401,7 +400,7 @@ baltek.draw.Footballer.prototype.$init = function(teamIndex, force){
     this.fillStyle = teamColor ;
     this.fillStyleSelected = teamColor ;
     this.strokeStyle = teamColor;
-    this.strokeStyleSelected = baltek.style.colors.YELLOW;
+    this.strokeStyleSelected = baltek.style.colors.CIRCLE_BORDER_SELECTED;
 }
 
 baltek.draw.Footballer.prototype.update = function(){
