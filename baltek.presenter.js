@@ -62,7 +62,6 @@ baltek.presenter.Presenter.prototype.$init = function(){
     var CREDIT_MAX = 3;
     var CREDIT_ZERO_SYMBOL = "-";
     var CREDIT_ONE_SYMBOL = "$";
-
     this.team0Bonus = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Team0Bonus" , this.i18nTranslator,
                                                 BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
     this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_0);
@@ -94,7 +93,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.credit = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Credit" , this.i18nTranslator,
                                                 CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
     this.credit.setBackgroundColor(baltek.style.colors.TEAM_0);
-    this.credit.setCount( 3 );
+    this.credit.setCount( 2 );
 
     this.language = new baltek.widget.Selector( "Baltek_ButtonZone_Language", this.i18nTranslator,
                                          this.i18nTranslator.getAvailableLanguages() );
