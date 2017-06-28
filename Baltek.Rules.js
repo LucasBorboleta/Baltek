@@ -115,6 +115,8 @@ baltek.utils.inherit(baltek.rules.Engine, baltek.utils.Observable);
 
 
 baltek.rules.Engine.prototype.$init = function(){
+    this.SCORE_MAX = 2;
+    this.CREDIT_MAX = 3;
 
     this.teams = [];
     this.teams.push(null);
@@ -132,8 +134,20 @@ baltek.rules.Engine.prototype.$init = function(){
     this.field.initBallAndTeamsBoxes();
 }
 
+baltek.rules.Engine.prototype.getActiveTeamIndex = function(){
+    return this.activeTeam.teamIndex;
+}
+
 baltek.rules.Engine.prototype.getBallBoxIndices = function(){
     return { ix:this.ball.box.ix, iy:this.ball.box.iy };
+}
+
+baltek.rules.Engine.prototype.getCredit = function(teamIndex){
+    return this.teams[teamIndex].credit;
+}
+
+baltek.rules.Engine.prototype.getCreditMax = function(){
+    return this.CREDIT_MAX;
 }
 
 baltek.rules.Engine.prototype.getFieldNx = function(){
@@ -155,6 +169,14 @@ baltek.rules.Engine.prototype.getFooballerCount = function(teamIndex){
 
 baltek.rules.Engine.prototype.getFooballerForce = function(teamIndex, footballerIndex){
     return this.teams[teamIndex].footballers[footballerIndex].force;
+}
+
+baltek.rules.Engine.prototype.getScore = function(teamIndex){
+    return this.teams[teamIndex].score;
+}
+
+baltek.rules.Engine.prototype.getScoreMax = function(){
+    return this.SCORE_MAX;
 }
 
 baltek.rules.Engine.prototype.hasFieldBox = function(ix, iy){
@@ -183,11 +205,12 @@ baltek.rules.Engine.prototype.switchActiveAndPassiveTeams = function(){
 // TODO: clean the next methods
 
 baltek.rules.Engine.prototype.matchInit = function(){
-    this.match.isActive = true;
-    this.match.SCORE_MAX = 2;
+    this.match = {};
 
-    this.activeTeam = this.blueTeam;
-    this.passiveTeam = this.redTeam;
+    this.match.isActive = true;
+
+    this.activeTeam = this.teams[0];
+    this.passiveTeam = this.teams[1];
 
     this.activeTeam.score = 0;
     this.passiveTeam.score = 0;
@@ -196,6 +219,8 @@ baltek.rules.Engine.prototype.matchInit = function(){
 }
 
 baltek.rules.Engine.prototype.roundInit = function(){
+    this.round = {};
+
     this.round.isActive = true;
 
     this.activeTeam.canSprint = true;
@@ -209,16 +234,22 @@ baltek.rules.Engine.prototype.roundInit = function(){
 }
 
 baltek.rules.Engine.prototype.turnInit = function(){
-    this.turn.isActive = true;
-    this.turn.CREDIT_MAX = 3;
+    this.turn = {};
 
-    this.activeTeam.credit = this.turn.CREDIT_MAX;
+    this.turn.isActive = true;
+
+    this.activeTeam.credit = this.CREDIT_MAX;
     this.passiveTeam.credit = 0;
+
+    this.teams[0].initFootballerCapabilities();
+    this.teams[1].initFootballerCapabilities();
 
     this.moveInit();
 }
 
 baltek.rules.Engine.prototype.moveInit = function(){
+    this.move = {};
+
     this.move.isActive = true;
 
     this.move.KIND_RUN = 900;
@@ -249,7 +280,7 @@ baltek.rules.Engine.prototype.matchUpdate = function(){
             if ( this.activeTeam.haveGoaled ) {
                 this.activeTeam.score += 1
 
-                if ( this.activeTeam.score >= this.match.SCORE_MAX || this.passiveTeam.score >= this.match.SCORE_MAX ) {
+                if ( this.activeTeam.score >= this.SCORE_MAX || this.passiveTeam.score >= this.SCORE_MAX ) {
                     this.match.isActive = false;
                 }
             }
@@ -323,9 +354,11 @@ baltek.rules.Engine.prototype.moveUpdate = function(){
                     this.move.isActive = false;
 
                     if ( this.move.kind == this.move.KIND_RUN || this.move.kind == this.move.KIND_SPRINT ) {
+                        this.move.sourceBox.getActiveFootballer().canRun = false;
                         this.move.destinationBox.setActiveFootballer(this.move.sourceBox.getActiveFootballer());
 
                     } else if ( this.move.kind == this.move.KIND_KICK ) {
+                        this.move.sourceBox.getActiveFootballer().canKick = false;
                         this.move.destinationBox.setBall(this.move.sourceBox.getBall());
                     }
 
@@ -792,5 +825,14 @@ baltek.rules.Team.prototype.$init = function(teamIndex){
     this.footballers.push(this.footballer1t);
     this.footballers.push(this.footballer1m);
     this.footballers.push(this.footballer1b);
+}
+
+baltek.rules.Team.prototype.initFootballerCapabilities = function(){
+    var i = 0;
+    var n = this.footballers.length;
+    for ( i=0; i<n; i++ ) {
+        this.footballers[i].canKick = true;
+        this.footballers[i].canRun = true;
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////

@@ -22,6 +22,17 @@ baltek.presenter.Presenter = function(){
 baltek.utils.inherit(baltek.presenter.Presenter, Object);
 
 baltek.presenter.Presenter.prototype.$init = function(){
+    this.rulesEngine = new baltek.rules.Engine();
+
+    var SCORE_MAX = this.rulesEngine.getScoreMax();
+
+    var BONUS_MAX = 1;
+    var BONUS_ZERO_SYMBOL = "-";
+    var BONUS_ONE_SYMBOL = "*";
+
+    var CREDIT_MAX = this.rulesEngine.getCreditMax();
+    var CREDIT_ZERO_SYMBOL = "-";
+    var CREDIT_ONE_SYMBOL = "$";
 
     this.team0Agent = { kind: "" };
     this.team1Agent = { kind: "" };
@@ -46,38 +57,28 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.team0Kind = new baltek.widget.Selector( "Baltek_ButtonZone_Team0Kind", this.i18nTranslator,
                                          [ "human", "ai1", "ai2", "ai3" ] );
     this.team0Kind.registerObserver(this);
-    this.team0Kind.setBackgroundColor(baltek.style.colors.TEAM_0);
+    this.team0Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
 
     this.team1Kind = new baltek.widget.Selector( "Baltek_ButtonZone_Team1Kind", this.i18nTranslator,
                                         [ "human", "ai1", "ai2", "ai3" ] );
     this.team1Kind.registerObserver(this);
-    this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_1);
-
-    var SCORE_MAX = 2;
-
-    var BONUS_MAX = 1;
-    var BONUS_ZERO_SYMBOL = "-";
-    var BONUS_ONE_SYMBOL = "*";
-
-    var CREDIT_MAX = 3;
-    var CREDIT_ZERO_SYMBOL = "-";
-    var CREDIT_ONE_SYMBOL = "$";
+    this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
     this.team0Bonus = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Team0Bonus" , this.i18nTranslator,
                                                 BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
-    this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_0);
-    this.team0Bonus.setCount( 1 );
+    this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
+    this.team0Bonus.setCount( 0 );
 
     this.team0Score = new baltek.widget.CounterWithDecimals( "Baltek_ButtonZone_Team0Score" , this.i18nTranslator, SCORE_MAX);
-    this.team0Score.setBackgroundColor(baltek.style.colors.TEAM_0);
-    this.team0Score.setCount( 3 );
+    this.team0Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
+    this.team0Score.setCount( 0 );
 
     this.team1Score = new baltek.widget.CounterWithDecimals( "Baltek_ButtonZone_Team1Score" , this.i18nTranslator, SCORE_MAX);
-    this.team1Score.setBackgroundColor(baltek.style.colors.TEAM_1);
+    this.team1Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
     this.team1Score.setCount( 0 );
 
     this.team1Bonus = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Team1Bonus" , this.i18nTranslator,
                                                 BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
-    this.team1Bonus.setBackgroundColor(baltek.style.colors.TEAM_1);
+    this.team1Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
     this.team1Bonus.setCount( 0 );
 
     this.sprint = new baltek.widget.Selector( "Baltek_ButtonZone_Sprint", this.i18nTranslator,
@@ -92,8 +93,7 @@ baltek.presenter.Presenter.prototype.$init = function(){
 
     this.credit = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Credit" , this.i18nTranslator,
                                                 CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
-    this.credit.setBackgroundColor(baltek.style.colors.TEAM_0);
-    this.credit.setCount( 2 );
+    this.credit.setCount( 0 );
 
     this.language = new baltek.widget.Selector( "Baltek_ButtonZone_Language", this.i18nTranslator,
                                          this.i18nTranslator.getAvailableLanguages() );
@@ -120,7 +120,6 @@ baltek.presenter.Presenter.prototype.$init = function(){
     this.about = new baltek.widget.Button( "Baltek_ButtonZone_About" , this.i18nTranslator);
     this.about.registerObserver(this);
 
-    this.rulesEngine = new baltek.rules.Engine();
     this.initField();
     this.drawField();
     this.initBall();
@@ -622,6 +621,13 @@ baltek.presenter.GameStateIsRunning.prototype.enter = function(){
     this.presenter.coordinates.enable(true);
     this.presenter.language.enable(true);
     this.presenter.what.enable(true);
+
+    this.presenter.rulesEngine.matchInit();
+    this.presenter.team0Score.setCount( this.presenter.rulesEngine.getScore(0) );
+    this.presenter.team1Score.setCount( this.presenter.rulesEngine.getScore(1) );
+    var activeTeamIndex = this.presenter.rulesEngine.getActiveTeamIndex();
+    this.presenter.credit.setCount( this.presenter.rulesEngine.getCredit(activeTeamIndex) );
+    this.presenter.credit.setBackgroundColor( baltek.style.colors.TEAM_COLORS[activeTeamIndex] );
 }
 
 baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
