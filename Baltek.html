@@ -19,7 +19,8 @@
 				<span>&#x26BD;&#127939;</span>
 			</div>
 
-			<!-- For "button" and "select" elements: the text is created dynamically using JavaScript -->
+			<!-- The text of each "button" is created dynamically using JavaScript -->
+			<!-- The text of each "select" is created dynamically using JavaScript -->
 
 			<!-- 1) Game handling -->
 			<div class="baltek-button-group">
@@ -123,10 +124,9 @@
 			<p class="baltek-debug-message" id="Baltek_DebugZone_Messages" ></p>
 		</div>
 
-		<!-- The following *.js files must be loaded according to the following rules:
-		 	- first lowest level of namespace;
-			- any order inside the same level or namespace
-			Conclusion: lexicographical order suits well.
+		<!-- The following "baltek*.js" files must be loaded accordingly with
+		     their associated namespace; parent namespace first.
+			 So the lexicographical order suits well.
 			-->
 		<script src="baltek.js"></script>
 		<script src="baltek.debug.js"></script>

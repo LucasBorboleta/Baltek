@@ -67,61 +67,32 @@ baltek.draw.setBoxLatticeDimensions = function(nx, ny){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-baltek.draw.Selectable = function(){
+baltek.draw.Ball = function(){
     this.$initObject();
 }
 
-baltek.draw.Selectable.$initClassCalled = false;
+baltek.draw.Ball.$initClassCalled = false;
 
-baltek.draw.Selectable.$initClass = function(){
+baltek.draw.Ball.$initClass = function(){
 
-    if ( baltek.draw.Selectable.$initClassCalled ) return;
-    baltek.draw.Selectable.$initClassCalled = true;
+    if ( baltek.draw.Ball.$initClassCalled ) return;
+    baltek.draw.Ball.$initClassCalled = true;
 
-    baltek.utils.inherit(baltek.draw.Selectable, Object);
+    baltek.utils.inherit(baltek.draw.Ball, baltek.draw.Circle);
 
-    baltek.draw.Selectable.prototype.$initObject = function(){
-        this.selectable = false;
-        this.selected = false;
+    baltek.draw.Ball.prototype.$initObject = function(){
+        baltek.draw.Ball.super.$initObject.call(this);
 
-        var thisSaved = this;
-        this.onClickWrapper = function(event){ thisSaved.onclick(event); };
+        this.fillStyle = baltek.style.colors.BALL_BACKGROUND ;
+        this.fillStyleSelected = baltek.style.colors.BALL_BACKGROUND_SELECTED;
+        this.strokeStyle = baltek.style.colors.BALL_BORDER;
+        this.strokeStyleSelected = baltek.style.colors.BALL_BORDER_SELECTED;
+
+        this.text = "@";
     }
 
-    baltek.draw.Selectable.prototype.contains = function(point){
-        return false;
-    }
-
-    baltek.draw.Selectable.prototype.disableSelection = function(){
-        baltek.draw.canvas.removeEventListener('click', this.onClickWrapper , false);
-        this.selectable = false;
-        this.draw();
-    }
-
-    baltek.draw.Selectable.prototype.draw = function(){
-    }
-
-    baltek.draw.Selectable.prototype.enableSelection = function(){
-        baltek.draw.canvas.addEventListener('click', this.onClickWrapper , false);
-        this.selectable = true;
-        this.draw();
-    }
-
-    baltek.draw.Selectable.prototype.onclick = function(event){
-        baltek.utils.assert(this.selectable);
-
-        var mousePosition = baltek.draw.getMousePosition(event);
-        var clicked = this.contains(mousePosition);
-
-        if ( clicked ) {
-            // Inverse the selection status
-            this.selected = (! this.selected);
-            this.update();
-            this.draw();
-        }
-    }
-
-    baltek.draw.Selectable.prototype.update = function(){
+    baltek.draw.Ball.prototype.update = function(){
+        baltek.debug.writeMessage( "Ball: at (" + this.box.ix + "," + this.box.iy + ") just updated!" );
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -392,35 +363,6 @@ baltek.draw.Circle.$initClass = function(){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
-baltek.draw.Ball = function(){
-    this.$initObject();
-}
-
-baltek.draw.Ball.$initClassCalled = false;
-
-baltek.draw.Ball.$initClass = function(){
-
-    if ( baltek.draw.Ball.$initClassCalled ) return;
-    baltek.draw.Ball.$initClassCalled = true;
-
-    baltek.utils.inherit(baltek.draw.Ball, baltek.draw.Circle);
-
-    baltek.draw.Ball.prototype.$initObject = function(){
-        baltek.draw.Ball.super.$initObject.call(this);
-
-        this.fillStyle = baltek.style.colors.BALL_BACKGROUND ;
-        this.fillStyleSelected = baltek.style.colors.BALL_BACKGROUND_SELECTED;
-        this.strokeStyle = baltek.style.colors.BALL_BORDER;
-        this.strokeStyleSelected = baltek.style.colors.BALL_BORDER_SELECTED;
-
-        this.text = "@";
-    }
-
-    baltek.draw.Ball.prototype.update = function(){
-        baltek.debug.writeMessage( "Ball: at (" + this.box.ix + "," + this.box.iy + ") just updated!" );
-    }
-}
-///////////////////////////////////////////////////////////////////////////////
 baltek.draw.Footballer = function(teamIndex, force){
     this.$initObject(teamIndex, force);
 }
@@ -452,6 +394,64 @@ baltek.draw.Footballer.$initClass = function(){
     baltek.draw.Footballer.prototype.update = function(){
         baltek.debug.writeMessage( "Footballer: " + this.teamIndex + "." + this.text +
             " at (" + this.box.ix + "," + this.box.iy + ") just updated!" );
+    }
+}
+///////////////////////////////////////////////////////////////////////////////
+baltek.draw.Selectable = function(){
+    this.$initObject();
+}
+
+baltek.draw.Selectable.$initClassCalled = false;
+
+baltek.draw.Selectable.$initClass = function(){
+
+    if ( baltek.draw.Selectable.$initClassCalled ) return;
+    baltek.draw.Selectable.$initClassCalled = true;
+
+    baltek.utils.inherit(baltek.draw.Selectable, Object);
+
+    baltek.draw.Selectable.prototype.$initObject = function(){
+        this.selectable = false;
+        this.selected = false;
+
+        var thisSaved = this;
+        this.onClickWrapper = function(event){ thisSaved.onclick(event); };
+    }
+
+    baltek.draw.Selectable.prototype.contains = function(point){
+        return false;
+    }
+
+    baltek.draw.Selectable.prototype.disableSelection = function(){
+        baltek.draw.canvas.removeEventListener('click', this.onClickWrapper , false);
+        this.selectable = false;
+        this.draw();
+    }
+
+    baltek.draw.Selectable.prototype.draw = function(){
+    }
+
+    baltek.draw.Selectable.prototype.enableSelection = function(){
+        baltek.draw.canvas.addEventListener('click', this.onClickWrapper , false);
+        this.selectable = true;
+        this.draw();
+    }
+
+    baltek.draw.Selectable.prototype.onclick = function(event){
+        baltek.utils.assert(this.selectable);
+
+        var mousePosition = baltek.draw.getMousePosition(event);
+        var clicked = this.contains(mousePosition);
+
+        if ( clicked ) {
+            // Inverse the selection status
+            this.selected = (! this.selected);
+            this.update();
+            this.draw();
+        }
+    }
+
+    baltek.draw.Selectable.prototype.update = function(){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
