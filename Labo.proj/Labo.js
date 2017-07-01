@@ -31,83 +31,114 @@ Labo.inArray = function(value,array){
 }
 ///////////////////////////////////////////////////////////////////////////////
 Labo.inheritPrototype = function(childConstructor, parentConstructor){
+    if ( childConstructor.prototype !== childConstructor ) {
+        // Copied from: http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
+        // OOP In JavaScript: What You NEED to Know
+        // march. 19 2013 215
+        // (Object Oriented JavaScript: Only Two Techniques Matter)
 
-    // Copied from: http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
-    // OOP In JavaScript: What You NEED to Know
-    // march. 19 2013 215
-    // (Object Oriented JavaScript: Only Two Techniques Matter)
+        var copyOfParent = Object.create(parentConstructor.prototype);
+        copyOfParent.constructor = childConstructor;
+        childConstructor.prototype = copyOfParent;
 
-    var copyOfParent = Object.create(parentConstructor.prototype);
-    copyOfParent.constructor = childConstructor;
-    childConstructor.prototype = copyOfParent;
-
-    // Adds the parent as "super" to the childConstructor.
-    // Adding "super" to childConstructor.prototype leads to infinite recursion!
-    // Using "super" minimizes the occurence of the parentConstructor name
-    // in the block of code that defines the child. The unique occurence is
-    // in the "inheritPrototype(childConstructor, parentConstructor)"
-    // statement.
-    childConstructor.super = parentConstructor.prototype;
+        // Adds the parent as "super" to the childConstructor.
+        // Adding "super" to childConstructor.prototype leads to infinite recursion!
+        // Using "super" minimizes the occurence of the parentConstructor name
+        // in the block of code that defines the child. The unique occurence is
+        // in the "inheritPrototype(childConstructor, parentConstructor)"
+        // statement.
+        childConstructor.super = parentConstructor.prototype;
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 Labo.Animal = function(name){
     this.init(name);
- };
-
-Labo.inheritPrototype(Labo.Animal,Object)
-
-Labo.Animal.prototype.init = function(name){
-    this.name = name;
 }
 
-Labo.Animal.prototype.cry = function(){
-    var text = "Labo.Animal: '" + this.name + "' cries something!" ;
-    Labo.writeDebugText(text);
-    return text;
-}
-Labo.Animal.prototype.fooAnimal = function(){
+Labo.Animal.initCalled = false;
+
+Labo.Animal.init = function(){
+    if ( ! Labo.Animal.initCalled ) {
+        Labo.Animal.initCalled = true;
+        Labo.inheritPrototype(Labo.Animal,Object);
+    }
+
+    Labo.Animal.prototype.init = function(name){
+        this.name = name;
+    }
+
+    Labo.Animal.prototype.cry = function(){
+        var text = "Labo.Animal: '" + this.name + "' cries something!" ;
+        Labo.writeDebugText(text);
+        return text;
+    }
+    Labo.Animal.prototype.fooAnimal = function(){
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 Labo.Dog = function(name,color){
-     this.init(name,color);
- }
-
-Labo.inheritPrototype(Labo.Dog, Labo.Animal);
-
-Labo.Dog.prototype.init = function(name,color){
-    Labo.Dog.super.init.call(this,name);
-    this.color = color;
+    this.init(name,color);
 }
 
-Labo.Dog.prototype.cry = function(){
-    var text = "Labo.Dog: '" + this.name + "', whose color is '" + this.color +
-               "', cries whoua!" ;
-    Labo.writeDebugText(text);
-    return text;
-}
-Labo.Dog.prototype.fooDog = function(){
+Labo.Dog.initCalled = false;
+
+Labo.Dog.init = function(){
+    if ( ! Labo.Dog.initCalled ) {
+        Labo.Dog.initCalled = true;
+        Labo.Animal.init();
+        Labo.inheritPrototype(Labo.Dog, Labo.Animal);
+
+        Labo.Dog.prototype.init = function(name,color){
+            Labo.Dog.super.init.call(this,name);
+            this.color = color;
+        }
+
+        Labo.Dog.prototype.cry = function(){
+            var text = "Labo.Dog: '" + this.name + "', whose color is '" + this.color +
+                       "', cries whoua!" ;
+            Labo.writeDebugText(text);
+            return text;
+        }
+
+        Labo.Dog.prototype.fooDog = function(){
+        }
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 Labo.BigDog = function(name,color,size){
     this.init(name,color,size);
 }
 
-Labo.inheritPrototype(Labo.BigDog, Labo.Dog);
+Labo.BigDog.initCalled = false;
 
-Labo.BigDog.prototype.init = function(name,color,size){
-   Labo.BigDog.super.init.call(this,name,color);
-   this.size = size;
-}
+Labo.BigDog.init = function(){
+    if ( ! Labo.BigDog.initCalled ) {
+        Labo.BigDog.initCalled = true;
+        Labo.Dog.init();
+        Labo.inheritPrototype(Labo.BigDog, Labo.Dog);
+    }
 
-Labo.BigDog.prototype.cry = function(){
-   var text = "Labo.Dog: '" + this.name + "', whose color and size are '" +
-              this.color + "' and '" + this.size + "', cries whoua whoua!";
-   Labo.writeDebugText(text);
-   return text;
-}
-Labo.BigDog.prototype.fooBigDog = function(){
+    Labo.BigDog.prototype.init = function(name,color,size){
+       Labo.BigDog.super.init.call(this,name,color);
+       this.size = size;
+    }
+
+    Labo.BigDog.prototype.cry = function(){
+       var text = "Labo.Dog: '" + this.name + "', whose color and size are '" +
+                  this.color + "' and '" + this.size + "', cries whoua whoua!";
+       Labo.writeDebugText(text);
+       return text;
+    }
+
+    Labo.BigDog.prototype.fooBigDog = function(){
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
 jQuery(document).ready(function(){
+
+    Labo.Animal.init();
+    Labo.BigDog.init();
+    Labo.Dog.init();
+
     Labo.writeDebugText( "Labo.js: Loaded." );
 });

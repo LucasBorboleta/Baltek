@@ -10,7 +10,7 @@
 
 	<link rel="stylesheet" href="./baltek.css">
 
-	<body onload="baltek.$init();">
+	<body onload="baltek.$initPackage();">
 
 		<div id="Baltek_ButtonZone" class="baltek-button-zone" >
 
@@ -123,17 +123,12 @@
 			<p class="baltek-debug-message" id="Baltek_DebugZone_Messages" ></p>
 		</div>
 
-		<!-- The following *.js files must be loaded first, in this order.
-			Reasons:
-			1) Namespace "baltek" is created first.
-			2) Function "baltek.utils.inherit" is called when loading the other files.
-			   This is related to the chosen declaration pattern of the "classes".
+		<!-- The following *.js files must be loaded according to the following rules:
+		 	- first lowest level of namespace;
+			- any order inside the same level or namespace
+			Conclusion: lexicographical order suits well.
 			-->
 		<script src="baltek.js"></script>
-		<script src="baltek.utils.js"></script>
-
-		<!-- The following *.js files can be loaded in any order.
-			 Let us sorted them alphabetically. -->
 		<script src="baltek.debug.js"></script>
 		<script src="baltek.draw.js"></script>
 		<script src="baltek.i18n.js"></script>
@@ -141,6 +136,7 @@
 		<script src="baltek.presenter.js"></script>
 		<script src="baltek.rules.js"></script>
 		<script src="baltek.style.js"></script>
+		<script src="baltek.utils.js"></script>
 		<script src="baltek.widget.js"></script>
 
 	</body>

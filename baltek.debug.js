@@ -1,21 +1,24 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-baltek.debug = { $initCalled: false };
+baltek.debug = { };
+baltek.debug.$initPackageCalled = false;
 
-baltek.debug.$init = function(){
+baltek.debug.$initPackage = function(){
 
-    if ( ! baltek.debug.$initCalled ) {
-        baltek.debug.$initCalled = true;
+    if ( baltek.debug.$initPackageCalled ) return;
+    baltek.debug.$initPackageCalled = true;
 
-        // Init any package used by this one
-        // No used package yet
+    // Init required packages
+    // None
 
-        baltek.debug.messageCount = 0;
+    // Init inner classes
+    // None
 
-        baltek.debug.isEnabled = ( document.getElementById( "Baltek_DebugZone" ) !== null ) ;
-        baltek.debug.messages = document.getElementById( "Baltek_DebugZone_Messages" );
-        baltek.debug.mousePosition = document.getElementById( "Baltek_DebugZone_Mouse" );
-    }
+    baltek.debug.messageCount = 0;
+
+    baltek.debug.isEnabled = ( document.getElementById( "Baltek_DebugZone" ) !== null ) ;
+    baltek.debug.messages = document.getElementById( "Baltek_DebugZone_Messages" );
+    baltek.debug.mousePosition = document.getElementById( "Baltek_DebugZone_Mouse" );
 }
 
 baltek.debug.clearMessages = function(){
