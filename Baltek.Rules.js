@@ -364,6 +364,10 @@ baltek.rules.Engine.prototype.moveUpdate = function(){
 
                     this.activeTeam.credit -= ( this.move.kindCost + this.move.destinationCost );
 
+                    if ( this.move.kind == this.move.KIND_SPRINT ) {
+                        this.activeTeam.canSprint = false;
+                    }
+
                     if (this.move.destinationBox === this.passiveTeam.goalBox ) {
                         this.activeTeam.haveGoaled = true;
                     }
@@ -562,7 +566,7 @@ baltek.rules.Engine.prototype.moveFindDestinationsWithCosts = function(){
                          box = this.field.boxes[ix][iy];
                          if ( box !== null && box != this.source && box.canHostBall && box !== this.activeTeam.goalBox ) {
                              if ( d <= 1) {
-                                 destinationsWithCosts.push( {box: box, cost: 0} );
+                                 destinationsWithCosts.push( {box: box, cost: 1} );
                              } else {
                                  // Find the passiveFootballer with the strongest force
                                  // on the trajectory
@@ -589,10 +593,10 @@ baltek.rules.Engine.prototype.moveFindDestinationsWithCosts = function(){
                                  }
 
                                  if ( strongestPassiveFootballer === null ) {
-                                     destinationsWithCosts.push( {box: box, cost: 0} );
+                                     destinationsWithCosts.push( {box: box, cost: 1} );
 
                                  } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
-                                     destinationsWithCosts.push( {box: box, cost: 0} );
+                                     destinationsWithCosts.push( {box: box, cost: 1} );
 
                                  } else {
                                      var cost = strongestPassiveFootballer.force - activeFootballer.force;
@@ -618,7 +622,7 @@ baltek.rules.Engine.prototype.moveFindDestinationsWithCosts = function(){
                         box = this.field.boxes[ix][iy];
                         if ( box !== null && box != this.sourceBox ) {
                             if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
-                                destinationsWithCosts.push( {box: box, cost: 0} );
+                                destinationsWithCosts.push( {box: box, cost: 1} );
                             }
                         }
                     }
@@ -637,7 +641,7 @@ baltek.rules.Engine.prototype.moveFindDestinationsWithCosts = function(){
                         box = this.field.boxes[ix][iy];
                         if ( box !== null && box != this.sourceBox ) {
                             if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
-                                destinationsWithCosts.push( {box: box, cost: 0} );
+                                destinationsWithCosts.push( {box: box, cost: 1} );
                             }
                         }
                     }

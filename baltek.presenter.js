@@ -331,7 +331,7 @@ baltek.presenter.State.prototype.$init = function(presenter, superState){
 }
 
 baltek.presenter.State.prototype.setState = function(newState){
-    // newState and this must be sibbling states
+    // newState and "this" must be sibbling states
     baltek.utils.assert( newState !== null );
     baltek.utils.assert( newState.superState !== null );
     baltek.utils.assert( newState.superState === this.superState );
@@ -402,12 +402,12 @@ baltek.presenter.SuperState.prototype.exit = function(){
 }
 
 baltek.presenter.SuperState.prototype.getDefaultSubstate = function(){
-    baltek.utils.assert( false, "must be team1efined" );
+    baltek.utils.assert( false, "must be redefined" );
     return null;
 }
 
 baltek.presenter.SuperState.prototype.initSubstates = function(){
-    baltek.utils.assert( false, "must be team1efined" );
+    baltek.utils.assert( false, "must be redefined" );
 }
 ///////////////////////////////////////////////////////////////////////////////
 baltek.presenter.TopState = function(presenter, superState){
