@@ -375,23 +375,20 @@ baltek.presenter.Presenter.$initClass = function(){
                                             [ "human", "ai1", "ai2", "ai3" ] );
         this.team1Kind.registerObserver(this);
         this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
+
         this.team0Bonus = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Team0Bonus" , this.i18nTranslator,
                                                     BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
         this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
-        this.team0Bonus.setCount( 0 );
 
         this.team0Score = new baltek.widget.CounterWithDecimals( "Baltek_ButtonZone_Team0Score" , this.i18nTranslator, SCORE_MAX);
         this.team0Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
-        this.team0Score.setCount( 0 );
 
         this.team1Score = new baltek.widget.CounterWithDecimals( "Baltek_ButtonZone_Team1Score" , this.i18nTranslator, SCORE_MAX);
         this.team1Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
-        this.team1Score.setCount( 0 );
 
         this.team1Bonus = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Team1Bonus" , this.i18nTranslator,
                                                     BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
         this.team1Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
-        this.team1Bonus.setCount( 0 );
 
         this.sprint = new baltek.widget.Selector( "Baltek_ButtonZone_Sprint", this.i18nTranslator,
                                              [ "no", "yes" ] );
@@ -405,7 +402,6 @@ baltek.presenter.Presenter.$initClass = function(){
 
         this.credit = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Credit" , this.i18nTranslator,
                                                     CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
-        this.credit.setCount( 0 );
 
         this.language = new baltek.widget.Selector( "Baltek_ButtonZone_Language", this.i18nTranslator,
                                              this.i18nTranslator.getAvailableLanguages() );

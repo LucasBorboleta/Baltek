@@ -19,32 +19,18 @@
 				<span>&#x26BD;&#127939;</span>
 			</div>
 
-			<!-- The text of each "button" is created dynamically using JavaScript -->
-			<!-- The text of each "select" is created dynamically using JavaScript -->
-
 			<!-- 1) Game handling -->
 			<div class="baltek-button-group">
 
-				<button class="baltek-button" type="button" id="Baltek_ButtonZone_StartGame"
-						onclick="baltek.thePresenter.startGame.notifyObservers();" ></button>
+				<button class="baltek-button" type="button" id="Baltek_ButtonZone_StartGame" ></button>
+				<button class="baltek-button" type="button" id="Baltek_ButtonZone_RestartGame" ></button>
+				<button class="baltek-button" type="button" id="Baltek_ButtonZone_ResumeGame" ></button>
+				<button class="baltek-button" type="button" id="Baltek_ButtonZone_QuitGame" ></button>
 
-				<button class="baltek-button" type="button" id="Baltek_ButtonZone_RestartGame"
-						onclick="baltek.thePresenter.restartGame.notifyObservers();" ></button>
+				<select class="baltek-select baltek-team-0-background" id="Baltek_ButtonZone_Team0Kind" ></select>
+				<select class="baltek-select baltek-team-1-background" id="Baltek_ButtonZone_Team1Kind"  ></select>
 
-				<button  class="baltek-button" type="button" id="Baltek_ButtonZone_ResumeGame"
-						onclick="baltek.thePresenter.resumeGame.notifyObservers();" ></button>
-
-				<button  class="baltek-button" type="button" id="Baltek_ButtonZone_QuitGame"
-						onclick="baltek.thePresenter.quitGame.notifyObservers();" ></button>
-
-				<select class="baltek-select baltek-team-0-background" id="Baltek_ButtonZone_Team0Kind"
-						onchange="baltek.thePresenter.team0Kind.notifyObservers();" ></select>
-
-				<select  class="baltek-select baltek-team-1-background" id="Baltek_ButtonZone_Team1Kind"
-						onchange="baltek.thePresenter.team1Kind.notifyObservers();" ></select>
-
-				<button class="baltek-button"  type="button" id="Baltek_ButtonZone_GoToGame"
-						onclick="baltek.thePresenter.game.notifyObservers();" ></button>
+				<button class="baltek-button"  type="button" id="Baltek_ButtonZone_GoToGame" ></button>
 		</div>
 
 		<!-- 2) Scores and bonuses -->
@@ -57,50 +43,30 @@
 
 		<!-- 3) Turn and Move handling -->
 		<div class="baltek-button-group">
-
-			<select class="baltek-select" id="Baltek_ButtonZone_Sprint"
-					onchange="baltek.thePresenter.sprint.notifyObservers();" ></select>
-
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Confirm"
-					onclick="baltek.thePresenter.confirm.notifyObservers();" ></button>
-
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Cancel"
-					onclick="baltek.thePresenter.cancel.notifyObservers();" ></button>
+			<select class="baltek-select" id="Baltek_ButtonZone_Sprint" ></select>
+			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Confirm" ></button>
+			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Cancel" ></button>
 
 			<span class="baltek-counter" id="Baltek_ButtonZone_Credit" ></span>
-	</div>
-
+		</div>
 		<!-- 4) Preferences -->
 		<div class="baltek-button-group">
-
-			<select  class="baltek-select" id="Baltek_ButtonZone_Coordinates"
-					onchange="baltek.thePresenter.coordinates.notifyObservers();" ></select>
-
-			<select  class="baltek-select" id="Baltek_ButtonZone_Language"
-					onchange="baltek.thePresenter.language.notifyObservers();" ></select>
+			<select  class="baltek-select" id="Baltek_ButtonZone_Coordinates" ></select>
+			<select  class="baltek-select" id="Baltek_ButtonZone_Language" ></select>
 		</div>
 
 		<!-- 5) Help -->
 		<div class="baltek-button-group">
-
-			<button  class="baltek-button" type="button" id="Baltek_ButtonZone_GoToHelp"
-					onclick="baltek.thePresenter.what.notifyObservers();" ></button>
-
-			<button  class="baltek-button" type="button" id="Baltek_ButtonZone_Rules"
-					onclick="baltek.thePresenter.rules.notifyObservers();" ></button>
-
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Help"
-					onclick="baltek.thePresenter.help.notifyObservers();" ></button>
-
-        	<button class="baltek-button" type="button" id="Baltek_ButtonZone_About"
-					onclick="baltek.thePresenter.about.notifyObservers();" ></button>
+			<button class="baltek-button" type="button" id="Baltek_ButtonZone_GoToHelp" ></button>
+			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Rules" ></button>
+			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Help" ></button>
+        	<button class="baltek-button" type="button" id="Baltek_ButtonZone_About" ></button>
 		</div>
 
 		<div class="baltek-draw-zone" id="Baltek_DrawZone">
 
 			<canvas class="baltek-canvas" id="Baltek_DrawZone_Canvas"></canvas>
 
-			<!-- The source of each iframe is created dynamically using JavaScript -->
 			<iframe class="baltek-help-frame" id="Baltek_DrawZone_Rules" ></iframe>
 			<iframe class="baltek-help-frame" id="Baltek_DrawZone_Help" ></iframe>
 			<iframe class="baltek-help-frame" id="Baltek_DrawZone_About"></iframe>
@@ -124,8 +90,8 @@
 			<p class="baltek-debug-message" id="Baltek_DebugZone_Messages" ></p>
 		</div>
 
-		<!-- The following "baltek*.js" files must be loaded accordingly with
-		     their associated namespace; parent namespace first.
+		<!-- The following "baltek*.js" files can be loaded in any order, except that
+		     any file "*.parentNameSpace.js" must be loaded before any file "*.parentNameSpace.childNameSpace.js".
 			 So the lexicographical order suits well.
 			-->
 		<script src="baltek.js"></script>

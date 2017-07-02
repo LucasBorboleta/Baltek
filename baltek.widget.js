@@ -48,6 +48,10 @@ baltek.widget.Button.$initClass = function(){
 
         // Finalize the construction regarding i18n.
         this.updateFromI18nTranslator();
+
+        var thisSaved = this;
+        var eventHandler = function(event){ thisSaved.notifyObservers(); };
+        this.element.onclick = eventHandler;
     }
 
     baltek.widget.Button.prototype.updateFromI18nTranslator = function(){
@@ -197,6 +201,10 @@ baltek.widget.Selector.$initClass = function(){
 
         // Finalize the construction regarding i18n.
         this.updateFromI18nTranslator();
+
+        var thisSaved = this;
+        var eventHandler = function(event){ thisSaved.notifyObservers(); };
+        this.element.onchange = eventHandler;
     }
 
     baltek.widget.Selector.prototype.getSelection = function(){
