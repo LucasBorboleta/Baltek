@@ -32,11 +32,11 @@ h1,h2,h3,h4,h5,h6{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin
 hr{border:0;border-top:1px solid #eee;margin:20px 0}
 /* End extract */
 
-.baltek-button-zone{
+.baltek-buttonZone-class{
     display:inline;
 }
 
-.baltek-logo{
+.baltek-logo-class{
     background-color:white;
     border-radius:8px;
     color:black;
@@ -48,31 +48,32 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     text-align:center
 }
 
-.baltek-button-group{
+.baltek-buttonGroup-class
+{
     display:inherit;
     padding-right:24px;
 }
 
-.baltek-button, .baltek-select{
+.baltek-button-class, .baltek-select-class{
     background-color:khaki;
     border-radius:8px;
     color:black;
     font-size:18px;
 }
 
-.baltek-button:disabled{
+.baltek-button-class:disabled{
     opacity:0.5;
 }
 
-.baltek-team-0-background{
+.baltek-team-0-background-class{
     background-color:#0099CC;
 }
 
-.baltek-team-1-background{
+.baltek-team-1-background-class{
     background-color:#E62E00;
 }
 
-.baltek-counter{
+.baltek-counter-class{
     border-radius:8px;
     color:white;
     font-size:24px;
@@ -81,25 +82,25 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     text-align:center
 }
 
-.baltek-draw-zone{
+.baltek-drawZone-class{
     margin:4px;
     height:500px;
     width:1200px;
 }
 
-.baltek-canvas{
+.baltek-canvas-class{
     /* Using Javascript, the dimensions of the canvas are forced to those
      of the element with "id=Baltek_DrawZone"
     */
 }
 
-.baltek-help-frame{
+.baltek-help-frame-class{
     border:none;
     height:100%;
     width:100%;
 }
 
-.baltek-debug-zone{
+.baltek-debugZone-class{
     background-color:lavender;
     color:black;
     border-style:solid;

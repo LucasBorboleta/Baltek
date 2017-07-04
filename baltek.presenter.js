@@ -351,81 +351,81 @@ baltek.presenter.Presenter.$initClass = function(){
 
         this.i18nTranslator = new baltek.i18n.Translator(baltek.i18n.translations, "fr" );
 
-        this.startGame = new baltek.widget.Button( "Baltek_ButtonZone_StartGame" , this.i18nTranslator);
+        this.startGame = new baltek.widget.Button( "baltek-button-startGame" , this.i18nTranslator);
         this.startGame.registerObserver(this);
 
-        this.restartGame = new baltek.widget.Button( "Baltek_ButtonZone_RestartGame" , this.i18nTranslator);
+        this.restartGame = new baltek.widget.Button( "baltek-button-restartGame" , this.i18nTranslator);
         this.restartGame.registerObserver(this);
 
-        this.resumeGame = new baltek.widget.Button( "Baltek_ButtonZone_ResumeGame" , this.i18nTranslator );
+        this.resumeGame = new baltek.widget.Button( "baltek-button-resumeGame" , this.i18nTranslator );
         this.resumeGame.registerObserver(this);
 
-        this.quitGame = new baltek.widget.Button( "Baltek_ButtonZone_QuitGame" , this.i18nTranslator);
+        this.quitGame = new baltek.widget.Button( "baltek-button-quitGame" , this.i18nTranslator);
         this.quitGame.registerObserver(this);
 
-        this.game = new baltek.widget.Button( "Baltek_ButtonZone_GoToGame" , this.i18nTranslator);
+        this.game = new baltek.widget.Button( "baltek-button-goToGame" , this.i18nTranslator);
         this.game.registerObserver(this);
 
-        this.team0Kind = new baltek.widget.Selector( "Baltek_ButtonZone_Team0Kind", this.i18nTranslator,
+        this.team0Kind = new baltek.widget.Selector( "baltek-select-team0Kind", this.i18nTranslator,
                                              [ "human", "ai1", "ai2", "ai3" ] );
         this.team0Kind.registerObserver(this);
         this.team0Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
 
-        this.team1Kind = new baltek.widget.Selector( "Baltek_ButtonZone_Team1Kind", this.i18nTranslator,
+        this.team1Kind = new baltek.widget.Selector( "baltek-select-team1Kind", this.i18nTranslator,
                                             [ "human", "ai1", "ai2", "ai3" ] );
         this.team1Kind.registerObserver(this);
         this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
 
-        this.team0Bonus = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Team0Bonus" , this.i18nTranslator,
+        this.team0Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team0Bonus" , this.i18nTranslator,
                                                     BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
         this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
 
-        this.team0Score = new baltek.widget.CounterWithDecimals( "Baltek_ButtonZone_Team0Score" , this.i18nTranslator, SCORE_MAX);
+        this.team0Score = new baltek.widget.CounterWithDecimals( "baltek-counter-team0Score" , this.i18nTranslator, SCORE_MAX);
         this.team0Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
 
-        this.team1Score = new baltek.widget.CounterWithDecimals( "Baltek_ButtonZone_Team1Score" , this.i18nTranslator, SCORE_MAX);
+        this.team1Score = new baltek.widget.CounterWithDecimals( "baltek-counter-team1Score" , this.i18nTranslator, SCORE_MAX);
         this.team1Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
 
-        this.team1Bonus = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Team1Bonus" , this.i18nTranslator,
+        this.team1Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team1Bonus" , this.i18nTranslator,
                                                     BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
         this.team1Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
 
-        this.sprint = new baltek.widget.Selector( "Baltek_ButtonZone_Sprint", this.i18nTranslator,
+        this.sprint = new baltek.widget.Selector( "baltek-select-sprint", this.i18nTranslator,
                                              [ "no", "yes" ] );
         this.sprint.registerObserver(this);
 
-        this.confirm = new baltek.widget.Button( "Baltek_ButtonZone_Confirm" , this.i18nTranslator);
+        this.confirm = new baltek.widget.Button( "baltek-button-confirm" , this.i18nTranslator);
         this.confirm.registerObserver(this);
 
-        this.cancel = new baltek.widget.Button( "Baltek_ButtonZone_Cancel" , this.i18nTranslator);
+        this.cancel = new baltek.widget.Button( "baltek-button-cancel" , this.i18nTranslator);
         this.cancel.registerObserver(this);
 
-        this.credit = new baltek.widget.CounterWithSymbols( "Baltek_ButtonZone_Credit" , this.i18nTranslator,
+        this.credit = new baltek.widget.CounterWithSymbols( "baltek-counter-credit" , this.i18nTranslator,
                                                     CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
 
-        this.language = new baltek.widget.Selector( "Baltek_ButtonZone_Language", this.i18nTranslator,
+        this.language = new baltek.widget.Selector( "baltek-select-language", this.i18nTranslator,
                                              this.i18nTranslator.getAvailableLanguages() );
         this.language.registerObserver(this);
         this.language.setSelection(this.i18nTranslator.getLanguage());
 
-        this.coordinates = new baltek.widget.Selector( "Baltek_ButtonZone_Coordinates", this.i18nTranslator,
+        this.coordinates = new baltek.widget.Selector( "baltek-select-coordinates", this.i18nTranslator,
                                                  [ "no", "yes" ] );
         this.coordinates.registerObserver(this);
         this.coordinates.setSelection("no");
 
-        this.what = new baltek.widget.Button( "Baltek_ButtonZone_GoToHelp" , this.i18nTranslator);
+        this.what = new baltek.widget.Button( "baltek-button-goToHelp" , this.i18nTranslator);
         this.what.registerObserver(this);
 
-        this.rulesIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_Rules" , this.i18nTranslator);
-        this.rules = new baltek.widget.Button( "Baltek_ButtonZone_Rules" , this.i18nTranslator);
+        this.rulesIFrame = new baltek.widget.IFrame( "baltek-drawZone-rules" , this.i18nTranslator);
+        this.rules = new baltek.widget.Button( "baltek-button-rules" , this.i18nTranslator);
         this.rules.registerObserver(this);
 
-        this.helpIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_Help" , this.i18nTranslator);
-        this.help = new baltek.widget.Button( "Baltek_ButtonZone_Help" , this.i18nTranslator);
+        this.helpIFrame = new baltek.widget.IFrame( "baltek-drawZone-help" , this.i18nTranslator);
+        this.help = new baltek.widget.Button( "baltek-button-help" , this.i18nTranslator);
         this.help.registerObserver(this);
 
-        this.aboutIFrame = new baltek.widget.IFrame( "Baltek_DrawZone_About" , this.i18nTranslator);
-        this.about = new baltek.widget.Button( "Baltek_ButtonZone_About" , this.i18nTranslator);
+        this.aboutIFrame = new baltek.widget.IFrame( "baltek-drawZone-about" , this.i18nTranslator);
+        this.about = new baltek.widget.Button( "baltek-button-about" , this.i18nTranslator);
         this.about.registerObserver(this);
 
         this.initField();

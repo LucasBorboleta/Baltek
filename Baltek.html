@@ -12,68 +12,72 @@
 
 	<body onload="baltek.$initPackage();">
 
-		<div id="Baltek_ButtonZone" class="baltek-button-zone" >
+		<div id="baltek-buttonZone" class="baltek-buttonZone-class" >
 
-			<div class="baltek-logo">
+			<div class="baltek-logo-class">
 				<span>Baltek</span>
 				<span>&#x26BD;&#127939;</span>
 			</div>
 
 			<!-- 1) Game handling -->
-			<div class="baltek-button-group">
+			<div class="baltek-buttonGroup-class">
 
-				<button class="baltek-button" type="button" id="Baltek_ButtonZone_StartGame" ></button>
-				<button class="baltek-button" type="button" id="Baltek_ButtonZone_RestartGame" ></button>
-				<button class="baltek-button" type="button" id="Baltek_ButtonZone_ResumeGame" ></button>
-				<button class="baltek-button" type="button" id="Baltek_ButtonZone_QuitGame" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-startGame" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-restartGame" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-resumeGame" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-quitGame" ></button>
 
-				<select class="baltek-select baltek-team-0-background" id="Baltek_ButtonZone_Team0Kind" ></select>
-				<select class="baltek-select baltek-team-1-background" id="Baltek_ButtonZone_Team1Kind"  ></select>
+				<select class="baltek-select-class baltek-team-0-background-class" id="baltek-select-team0Kind" ></select>
+				<select class="baltek-select-class baltek-team-1-background-class" id="baltek-select-team1Kind"  ></select>
 
-				<button class="baltek-button"  type="button" id="Baltek_ButtonZone_GoToGame" ></button>
+				<button class="baltek-button-class"  type="button" id="baltek-button-goToGame" ></button>
 		</div>
 
 		<!-- 2) Scores and bonuses -->
-		<div class="baltek-button-group">
-			<span class="baltek-counter baltek-team-0-background" id="Baltek_ButtonZone_Team0Bonus" ></span>
-			<span class="baltek-counter baltek-team-0-background" id="Baltek_ButtonZone_Team0Score" ></span>
-			<span class="baltek-counter baltek-team-1-background" id="Baltek_ButtonZone_Team1Score" ></span>
-			<span class="baltek-counter baltek-team-1-background" id="Baltek_ButtonZone_Team1Bonus" ></span>
+		<div class="baltek-buttonGroup-class
+">
+			<span class="baltek-counter-class baltek-team-0-background-class" id="baltek-counter-team0Bonus" ></span>
+			<span class="baltek-counter-class baltek-team-0-background-class" id="baltek-counter-team0Score" ></span>
+			<span class="baltek-counter-class baltek-team-1-background-class" id="baltek-counter-team1Score" ></span>
+			<span class="baltek-counter-class baltek-team-1-background-class" id="baltek-counter-team1Bonus" ></span>
 		</div>
 
 		<!-- 3) Turn and Move handling -->
-		<div class="baltek-button-group">
-			<select class="baltek-select" id="Baltek_ButtonZone_Sprint" ></select>
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Confirm" ></button>
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Cancel" ></button>
+		<div class="baltek-buttonGroup-class
+">
+			<select class="baltek-select-class" id="baltek-select-sprint" ></select>
+			<button class="baltek-button-class" type="button" id="baltek-button-confirm" ></button>
+			<button class="baltek-button-class" type="button" id="baltek-button-cancel" ></button>
 
-			<span class="baltek-counter" id="Baltek_ButtonZone_Credit" ></span>
+			<span class="baltek-counter-class" id="baltek-counter-credit" ></span>
 		</div>
 		<!-- 4) Preferences -->
-		<div class="baltek-button-group">
-			<select  class="baltek-select" id="Baltek_ButtonZone_Coordinates" ></select>
-			<select  class="baltek-select" id="Baltek_ButtonZone_Language" ></select>
+		<div class="baltek-buttonGroup-class
+">
+			<select  class="baltek-select-class" id="baltek-select-coordinates" ></select>
+			<select  class="baltek-select-class" id="baltek-select-language" ></select>
 		</div>
 
 		<!-- 5) Help -->
-		<div class="baltek-button-group">
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_GoToHelp" ></button>
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Rules" ></button>
-			<button class="baltek-button" type="button" id="Baltek_ButtonZone_Help" ></button>
-        	<button class="baltek-button" type="button" id="Baltek_ButtonZone_About" ></button>
+		<div class="baltek-buttonGroup-class
+">
+			<button class="baltek-button-class" type="button" id="baltek-button-goToHelp" ></button>
+			<button class="baltek-button-class" type="button" id="baltek-button-rules" ></button>
+			<button class="baltek-button-class" type="button" id="baltek-button-help" ></button>
+        	<button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
 		</div>
 
-		<div class="baltek-draw-zone" id="Baltek_DrawZone">
+		<div class="baltek-drawZone-class" id="baltek-drawZone">
 
-			<canvas class="baltek-canvas" id="Baltek_DrawZone_Canvas"></canvas>
+			<canvas class="baltek-canvas-class" id="baltek-drawZone-canvas"></canvas>
 
-			<iframe class="baltek-help-frame" id="Baltek_DrawZone_Rules" ></iframe>
-			<iframe class="baltek-help-frame" id="Baltek_DrawZone_Help" ></iframe>
-			<iframe class="baltek-help-frame" id="Baltek_DrawZone_About"></iframe>
+			<iframe class="baltek-help-frame-class" id="baltek-drawZone-rules" ></iframe>
+			<iframe class="baltek-help-frame-class" id="baltek-drawZone-help" ></iframe>
+			<iframe class="baltek-help-frame-class" id="baltek-drawZone-about"></iframe>
 
 		</div>
 
-		<div class="baltek-debug-zone" id="Baltek_DebugZone" >
+		<div class="baltek-debugZone-class" id="baltek-debugZone" >
 
 			<div class="baltek-debug-logo">
 				<span>Baltek</span>
@@ -82,12 +86,12 @@
 				<span>&#x26BD;&#127939;</span>
 			</div>
 
-			<button class="baltek-button" type="button" id="Baltek_DebugZone_Clear"
+			<button class="baltek-button-class" type="button" id="baltek-debugZone-clear"
 				    onclick="baltek.debug.clearMessages()" >Clear messages</button>
 
-			<span class="baltek-debug-status" id="Baltek_DebugZone_Mouse" >Mouse(x,y) = (?, ?)</span>
+			<span class="baltek-debug-status" id="baltek-debugZone-mouse" >Mouse(x,y) = (?, ?)</span>
 
-			<p class="baltek-debug-message" id="Baltek_DebugZone_Messages" ></p>
+			<p class="baltek-debug-message" id="baltek-debugZone-messages" ></p>
 		</div>
 
 		<!-- The following "baltek*.js" files can be loaded in any order, except that

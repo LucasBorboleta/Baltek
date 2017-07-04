@@ -33,8 +33,8 @@ baltek.style.$initPackage = function(){
     baltek.style.colors.CIRCLE_BORDER_SELECTED = BALTEK_YELLOW;
 
     // Retrieve team colors from existing HTML elements that are already parmetrized thanks to CCS
-    baltek.style.colors.TEAM_0 = baltek.widget.getStylePropertyValue( "Baltek_ButtonZone_Team0Score", "background-color" );
-    baltek.style.colors.TEAM_1 = baltek.widget.getStylePropertyValue( "Baltek_ButtonZone_Team1Score", "background-color" );
+    baltek.style.colors.TEAM_0 = baltek.widget.getStylePropertyValue( "baltek-counter-team0Score", "background-color" );
+    baltek.style.colors.TEAM_1 = baltek.widget.getStylePropertyValue( "baltek-counter-team1Score", "background-color" );
 
     baltek.style.colors.BALL_BACKGROUND = "white";
     baltek.style.colors.BALL_BORDER = "white";

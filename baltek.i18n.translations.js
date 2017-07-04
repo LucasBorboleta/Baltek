@@ -3,190 +3,190 @@
 baltek.i18n.translations = {};
 
 baltek.i18n.translations.eo = {
-    "Baltek_ButtonZone_About_button"       : "Pri" ,
+    "baltek-button-about:button"       : "Pri" ,
 
-    "Baltek_ButtonZone_Cancel_button"      : "*(eo)Undo" ,
-    "Baltek_ButtonZone_Confirm_button"     : "*(eo)OK" ,
+    "baltek-button-cancel:button"      : "*(eo)Undo" ,
+    "baltek-button-confirm:button"     : "*(eo)OK" ,
 
-    "Baltek_ButtonZone_Coordinates_no"     : "Koordinatoj: ne" ,
-    "Baltek_ButtonZone_Coordinates_yes"    : "Koordinatoj: jes" ,
+    "baltek-select-coordinates:no"     : "Koordinatoj: ne" ,
+    "baltek-select-coordinates:yes"    : "Koordinatoj: jes" ,
 
-    "Baltek_ButtonZone_GoToGame_button"    : "< Ludo" ,
-    "Baltek_ButtonZone_GoToHelp_button"    : "?" ,
+    "baltek-button-goToGame:button"    : "< Ludo" ,
+    "baltek-button-goToHelp:button"    : "?" ,
 
-    "Baltek_ButtonZone_Help_button"        : "Helpo" ,
+    "baltek-button-help:button"        : "Helpo" ,
 
-    "Baltek_ButtonZone_Language_name"      : "Esperanto" ,
-    "Baltek_ButtonZone_Language_eo"        : "Esperanto" ,
-    "Baltek_ButtonZone_Language_en"        : "English" ,
-    "Baltek_ButtonZone_Language_fr"        : "Français" ,
-    "Baltek_ButtonZone_Language_pt"        : "Português" ,
+    "baltek-select-language:name"      : "Esperanto" ,
+    "baltek-select-language:eo"        : "Esperanto" ,
+    "baltek-select-language:en"        : "English" ,
+    "baltek-select-language:fr"        : "Français" ,
+    "baltek-select-language:pt"        : "Português" ,
 
-    "Baltek_ButtonZone_Sprint_no"          : "*(eo)Sprint: ne" ,
-    "Baltek_ButtonZone_Sprint_yes"         : "*(eo)Sprint: jes" ,
+    "baltek-select-sprint:no"          : "*(eo)Sprint: ne" ,
+    "baltek-select-sprint:yes"         : "*(eo)Sprint: jes" ,
 
-    "Baltek_ButtonZone_RestartGame_button" : "*(eo)Restart game" ,
-    "Baltek_ButtonZone_StartGame_button"   : "*(eo)New game" ,
+    "baltek-button-restartGame:button" : "*(eo)Restart game" ,
+    "baltek-button-startGame:button"   : "*(eo)New game" ,
 
-    "Baltek_ButtonZone_QuitGame_button"    : "*(eo)Quit game" ,
+    "baltek-button-quitGame:button"    : "*(eo)Quit game" ,
 
-    "Baltek_ButtonZone_Team0Kind_human"    : "Homo" ,
-    "Baltek_ButtonZone_Team0Kind_ai1"      : "*(eo)AI1" ,
-    "Baltek_ButtonZone_Team0Kind_ai2"      : "*(eo)AI2" ,
-    "Baltek_ButtonZone_Team0Kind_ai3"      : "*(eo)AI3" ,
+    "baltek-select-team0Kind:human"    : "Homo" ,
+    "baltek-select-team0Kind:ai1"      : "*(eo)AI1" ,
+    "baltek-select-team0Kind:ai2"      : "*(eo)AI2" ,
+    "baltek-select-team0Kind:ai3"      : "*(eo)AI3" ,
 
-    "Baltek_ButtonZone_Team1Kind_human"    : "Homo" ,
-    "Baltek_ButtonZone_Team1Kind_ai1"      : "*(eo)AI1" ,
-    "Baltek_ButtonZone_Team1Kind_ai2"      : "*(eo)AI2" ,
-    "Baltek_ButtonZone_Team1Kind_ai3"      : "*(eo)AI3" ,
+    "baltek-select-team1Kind:human"    : "Homo" ,
+    "baltek-select-team1Kind:ai1"      : "*(eo)AI1" ,
+    "baltek-select-team1Kind:ai2"      : "*(eo)AI2" ,
+    "baltek-select-team1Kind:ai3"      : "*(eo)AI3" ,
 
-    "Baltek_ButtonZone_ResumeGame_button"  : "*(eo)Resume game" ,
+    "baltek-button-resumeGame:button"  : "*(eo)Resume game" ,
 
-    "Baltek_ButtonZone_Rules_button"       : "Reguloj" ,
+    "baltek-button-rules:button"       : "Reguloj" ,
 
-    "Baltek_DrawZone_About_file"           : "./lang/eo/Baltek-about-eo.html" ,
-    "Baltek_DrawZone_Help_file"            : "./lang/eo/Baltek-help-eo.html" ,
-    "Baltek_DrawZone_Rules_file"           : "./lang/eo/Baltek-rules-eo.html"
+    "baltek-drawZone-about:file"       : "./lang/eo/Baltek-about-eo.html" ,
+    "baltek-drawZone-help:file"        : "./lang/eo/Baltek-help-eo.html" ,
+    "baltek-drawZone-rules:file"       : "./lang/eo/Baltek-rules-eo.html"
 };
 
 baltek.i18n.translations.en = {
-    "Baltek_ButtonZone_About_button"       : "About" ,
+    "baltek-button-about:button"       : "About" ,
 
-    "Baltek_ButtonZone_Cancel_button"      : "Undo" ,
-    "Baltek_ButtonZone_Confirm_button"     : "OK" ,
+    "baltek-button-cancel:button"      : "Undo" ,
+    "baltek-button-confirm:button"     : "OK" ,
 
-    "Baltek_ButtonZone_Coordinates_no"     : "Coordinates: no" ,
-    "Baltek_ButtonZone_Coordinates_yes"    : "Coordinates: yes" ,
+    "baltek-select-coordinates:no"     : "Coordinates: no" ,
+    "baltek-select-coordinates:yes"    : "Coordinates: yes" ,
 
-    "Baltek_ButtonZone_GoToGame_button"    : "< Game" ,
-    "Baltek_ButtonZone_GoToHelp_button"    : "?" ,
+    "baltek-button-goToGame:button"    : "< Game" ,
+    "baltek-button-goToHelp:button"    : "?" ,
 
-    "Baltek_ButtonZone_Help_button"        : "Help" ,
+    "baltek-button-help:button"        : "Help" ,
 
-    "Baltek_ButtonZone_Language_name"      : "English" ,
-    "Baltek_ButtonZone_Language_eo"        : "Esperanto" ,
-    "Baltek_ButtonZone_Language_en"        : "English" ,
-    "Baltek_ButtonZone_Language_fr"        : "Français" ,
-    "Baltek_ButtonZone_Language_pt"        : "Português" ,
+    "baltek-select-language:name"      : "English" ,
+    "baltek-select-language:eo"        : "Esperanto" ,
+    "baltek-select-language:en"        : "English" ,
+    "baltek-select-language:fr"        : "Français" ,
+    "baltek-select-language:pt"        : "Português" ,
 
-    "Baltek_ButtonZone_RestartGame_button" : "Restart game" ,
-    "Baltek_ButtonZone_StartGame_button"   : "New game" ,
+    "baltek-button-restartGame:button" : "Restart game" ,
+    "baltek-button-startGame:button"   : "New game" ,
 
-    "Baltek_ButtonZone_QuitGame_button"    : "Quit game" ,
+    "baltek-button-quitGame:button"    : "Quit game" ,
 
-    "Baltek_ButtonZone_Sprint_no"          : "Sprint: no" ,
-    "Baltek_ButtonZone_Sprint_yes"         : "Sprint: yes" ,
+    "baltek-select-sprint:no"          : "Sprint: no" ,
+    "baltek-select-sprint:yes"         : "Sprint: yes" ,
 
-    "Baltek_ButtonZone_Team0Kind_human"    : "Human" ,
-    "Baltek_ButtonZone_Team0Kind_ai1"      : "AI1" ,
-    "Baltek_ButtonZone_Team0Kind_ai2"      : "AI2" ,
-    "Baltek_ButtonZone_Team0Kind_ai3"      : "AI3" ,
+    "baltek-select-team0Kind:human"    : "Human" ,
+    "baltek-select-team0Kind:ai1"      : "AI1" ,
+    "baltek-select-team0Kind:ai2"      : "AI2" ,
+    "baltek-select-team0Kind:ai3"      : "AI3" ,
 
-    "Baltek_ButtonZone_Team1Kind_human"    : "Human" ,
-    "Baltek_ButtonZone_Team1Kind_ai1"      : "AI1" ,
-    "Baltek_ButtonZone_Team1Kind_ai2"      : "AI2" ,
-    "Baltek_ButtonZone_Team1Kind_ai3"      : "AI3" ,
+    "baltek-select-team1Kind:human"    : "Human" ,
+    "baltek-select-team1Kind:ai1"      : "AI1" ,
+    "baltek-select-team1Kind:ai2"      : "AI2" ,
+    "baltek-select-team1Kind:ai3"      : "AI3" ,
 
-    "Baltek_ButtonZone_ResumeGame_button"  : "Resume game" ,
+    "baltek-button-resumeGame:button"  : "Resume game" ,
 
-    "Baltek_ButtonZone_Rules_button"       : "Rules" ,
+    "baltek-button-rules:button"       : "Rules" ,
 
-    "Baltek_DrawZone_About_file"           : "./lang/en/Baltek-about-en.html" ,
-    "Baltek_DrawZone_Help_file"            : "./lang/en/Baltek-help-en.html" ,
-    "Baltek_DrawZone_Rules_file"           : "./lang/en/Baltek-rules-en.html"
+    "baltek-drawZone-about:file"       : "./lang/en/Baltek-about-en.html" ,
+    "baltek-drawZone-help:file"        : "./lang/en/Baltek-help-en.html" ,
+    "baltek-drawZone-rules:file"       : "./lang/en/Baltek-rules-en.html"
 };
 
 baltek.i18n.translations.fr = {
-    "Baltek_ButtonZone_About_button"       : "A propos" ,
+    "baltek-button-about:button"       : "A propos" ,
 
-    "Baltek_ButtonZone_Cancel_button"      : "Annuler" ,
-    "Baltek_ButtonZone_Confirm_button"     : "OK" ,
+    "baltek-button-cancel:button"      : "Annuler" ,
+    "baltek-button-confirm:button"     : "OK" ,
 
-    "Baltek_ButtonZone_Coordinates_no"     : "Coordonnées : non" ,
-    "Baltek_ButtonZone_Coordinates_yes"    : "Coordonnées : oui" ,
+    "baltek-select-coordinates:no"     : "Coordonnées : non" ,
+    "baltek-select-coordinates:yes"    : "Coordonnées : oui" ,
 
-    "Baltek_ButtonZone_GoToGame_button"    : "< Jeu" ,
-    "Baltek_ButtonZone_GoToHelp_button"    : "?" ,
+    "baltek-button-goToGame:button"    : "< Jeu" ,
+    "baltek-button-goToHelp:button"    : "?" ,
 
-    "Baltek_ButtonZone_Help_button"        : "Aide" ,
+    "baltek-button-help:button"        : "Aide" ,
 
-    "Baltek_ButtonZone_Language_name"      : "Français" ,
-    "Baltek_ButtonZone_Language_eo"        : "Esperanto" ,
-    "Baltek_ButtonZone_Language_en"        : "English" ,
-    "Baltek_ButtonZone_Language_fr"        : "Français" ,
-    "Baltek_ButtonZone_Language_pt"        : "Português" ,
+    "baltek-select-language:name"      : "Français" ,
+    "baltek-select-language:eo"        : "Esperanto" ,
+    "baltek-select-language:en"        : "English" ,
+    "baltek-select-language:fr"        : "Français" ,
+    "baltek-select-language:pt"        : "Português" ,
 
-    "Baltek_ButtonZone_Sprint_no"          : "Sprint: non" ,
-    "Baltek_ButtonZone_Sprint_yes"         : "Sprint: oui" ,
+    "baltek-select-sprint:no"          : "Sprint: non" ,
+    "baltek-select-sprint:yes"         : "Sprint: oui" ,
 
-    "Baltek_ButtonZone_RestartGame_button" : "Redémarrer une partie" ,
-    "Baltek_ButtonZone_StartGame_button"   : "Nouvelle partie" ,
+    "baltek-button-restartGame:button" : "Redémarrer une partie" ,
+    "baltek-button-startGame:button"   : "Nouvelle partie" ,
 
-    "Baltek_ButtonZone_QuitGame_button"    : "Quitter la partie" ,
+    "baltek-button-quitGame:button"    : "Quitter la partie" ,
 
-    "Baltek_ButtonZone_Team0Kind_human"    : "Humain" ,
-    "Baltek_ButtonZone_Team0Kind_ai1"      : "IA1" ,
-    "Baltek_ButtonZone_Team0Kind_ai2"      : "IA2" ,
-    "Baltek_ButtonZone_Team0Kind_ai3"      : "IA3" ,
+    "baltek-select-team0Kind:human"    : "Humain" ,
+    "baltek-select-team0Kind:ai1"      : "IA1" ,
+    "baltek-select-team0Kind:ai2"      : "IA2" ,
+    "baltek-select-team0Kind:ai3"      : "IA3" ,
 
-    "Baltek_ButtonZone_Team1Kind_human"    : "Humain" ,
-    "Baltek_ButtonZone_Team1Kind_ai1"      : "IA1" ,
-    "Baltek_ButtonZone_Team1Kind_ai2"      : "IA2" ,
-    "Baltek_ButtonZone_Team1Kind_ai3"      : "IA3" ,
+    "baltek-select-team1Kind:human"    : "Humain" ,
+    "baltek-select-team1Kind:ai1"      : "IA1" ,
+    "baltek-select-team1Kind:ai2"      : "IA2" ,
+    "baltek-select-team1Kind:ai3"      : "IA3" ,
 
-    "Baltek_ButtonZone_ResumeGame_button"  : "Continuer le jeu" ,
+    "baltek-button-resumeGame:button"  : "Continuer le jeu" ,
 
-    "Baltek_ButtonZone_Rules_button"       : "Règles" ,
+    "baltek-button-rules:button"       : "Règles" ,
 
-    "Baltek_DrawZone_About_file"           : "./lang/fr/Baltek-about-fr.html" ,
-    "Baltek_DrawZone_Help_file"            : "./lang/fr/Baltek-help-fr.html" ,
-    "Baltek_DrawZone_Rules_file"           : "./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf"
+    "baltek-drawZone-about:file"       : "./lang/fr/Baltek-about-fr.html" ,
+    "baltek-drawZone-help:file"        : "./lang/fr/Baltek-help-fr.html" ,
+    "baltek-drawZone-rules:file"       : "./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf"
 };
 
 baltek.i18n.translations.pt = {
-    "Baltek_ButtonZone_About_button"       : "Acerca" ,
+    "baltek-button-about:button"       : "Acerca" ,
 
-    "Baltek_ButtonZone_Cancel_button"      : "*(pt)Undo" ,
-    "Baltek_ButtonZone_Confirm_button"     : "*(pt)OK" ,
+    "baltek-button-cancel:button"      : "*(pt)Undo" ,
+    "baltek-button-confirm:button"     : "*(pt)OK" ,
 
-    "Baltek_ButtonZone_Coordinates_no"     : "Coordenadas: não" ,
-    "Baltek_ButtonZone_Coordinates_yes"    : "Coordenadas: sim" ,
+    "baltek-select-coordinates:no"     : "Coordenadas: não" ,
+    "baltek-select-coordinates:yes"    : "Coordenadas: sim" ,
 
-    "Baltek_ButtonZone_Help_button"        : "Ajuda" ,
+    "baltek-button-help:button"        : "Ajuda" ,
 
-    "Baltek_ButtonZone_GoToGame_button"    : "< Jogo" ,
-    "Baltek_ButtonZone_GoToHelp_button"    : "?" ,
+    "baltek-button-goToGame:button"    : "< Jogo" ,
+    "baltek-button-goToHelp:button"    : "?" ,
 
-    "Baltek_ButtonZone_Language_name"      : "Português" ,
-    "Baltek_ButtonZone_Language_eo"        : "Esperanto" ,
-    "Baltek_ButtonZone_Language_en"        : "English" ,
-    "Baltek_ButtonZone_Language_fr"        : "Français" ,
-    "Baltek_ButtonZone_Language_pt"        : "Português" ,
+    "baltek-select-language:name"      : "Português" ,
+    "baltek-select-language:eo"        : "Esperanto" ,
+    "baltek-select-language:en"        : "English" ,
+    "baltek-select-language:fr"        : "Français" ,
+    "baltek-select-language:pt"        : "Português" ,
 
-    "Baltek_ButtonZone_RestartGame_button" : "*(pt)Restart game" ,
-    "Baltek_ButtonZone_StartGame_button"   : "*(pt)New game" ,
+    "baltek-button-restartGame:button" : "*(pt)Restart game" ,
+    "baltek-button-startGame:button"   : "*(pt)New game" ,
 
-    "Baltek_ButtonZone_QuitGame_button"    : "*(pt)Quit game" ,
+    "baltek-button-quitGame:button"    : "*(pt)Quit game" ,
 
-    "Baltek_ButtonZone_Team0Kind_human"    : "*(pt)Human" ,
-    "Baltek_ButtonZone_Team0Kind_ai1"      : "*(pt)AI1" ,
-    "Baltek_ButtonZone_Team0Kind_ai2"      : "*(pt)AI2" ,
-    "Baltek_ButtonZone_Team0Kind_ai3"      : "*(pt)AI3" ,
+    "baltek-select-team0Kind:human"    : "*(pt)Human" ,
+    "baltek-select-team0Kind:ai1"      : "*(pt)AI1" ,
+    "baltek-select-team0Kind:ai2"      : "*(pt)AI2" ,
+    "baltek-select-team0Kind:ai3"      : "*(pt)AI3" ,
 
-    "Baltek_ButtonZone_Team1Kind_human"    : "*(pt)Human" ,
-    "Baltek_ButtonZone_Team1Kind_ai1"      : "*(pt)AI1" ,
-    "Baltek_ButtonZone_Team1Kind_ai2"      : "*(pt)AI2" ,
-    "Baltek_ButtonZone_Team1Kind_ai3"      : "*(pt)AI3" ,
+    "baltek-select-team1Kind:human"    : "*(pt)Human" ,
+    "baltek-select-team1Kind:ai1"      : "*(pt)AI1" ,
+    "baltek-select-team1Kind:ai2"      : "*(pt)AI2" ,
+    "baltek-select-team1Kind:ai3"      : "*(pt)AI3" ,
 
-    "Baltek_ButtonZone_Sprint_no"          : "Sprint: não" ,
-    "Baltek_ButtonZone_Sprint_yes"         : "Sprint: sim" ,
+    "baltek-select-sprint:no"          : "Sprint: não" ,
+    "baltek-select-sprint:yes"         : "Sprint: sim" ,
 
-    "Baltek_ButtonZone_ResumeGame_button"  : "*(pt)Resume game" ,
+    "baltek-button-resumeGame:button"  : "*(pt)Resume game" ,
 
-    "Baltek_ButtonZone_Rules_button"       : "Regras" ,
+    "baltek-button-rules:button"       : "Regras" ,
 
-    "Baltek_DrawZone_About_file"           : "./lang/pt/Baltek-about-pt.html" ,
-    "Baltek_DrawZone_Help_file"            : "./lang/pt/Baltek-help-pt.html" ,
-    "Baltek_DrawZone_Rules_file"           : "./lang/pt/Baltek-rules-pt.html"
+    "baltek-drawZone-about:file"       : "./lang/pt/Baltek-about-pt.html" ,
+    "baltek-drawZone-help:file"        : "./lang/pt/Baltek-help-pt.html" ,
+    "baltek-drawZone-rules:file"       : "./lang/pt/Baltek-rules-pt.html"
 };
 ///////////////////////////////////////////////////////////////////////////////

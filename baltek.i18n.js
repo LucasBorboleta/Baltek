@@ -33,7 +33,7 @@ baltek.i18n.Translator.$initClass = function(){
 
         this.languageAspect = this.newAspect("languageAspect");
 
-        this.keySeparator = "_" ;
+        this.keySeparator = ":" ;
 
         this.translations = translations;
         this.availableLanguages = baltek.utils.getOwnProperties(this.translations);

@@ -16,9 +16,9 @@ baltek.debug.$initPackage = function(){
 
     baltek.debug.messageCount = 0;
 
-    baltek.debug.isEnabled = ( document.getElementById( "Baltek_DebugZone" ) !== null ) ;
-    baltek.debug.messages = document.getElementById( "Baltek_DebugZone_Messages" );
-    baltek.debug.mousePosition = document.getElementById( "Baltek_DebugZone_Mouse" );
+    baltek.debug.isEnabled = ( document.getElementById( "baltek-debugZone" ) !== null ) ;
+    baltek.debug.messages = document.getElementById( "baltek-debugZone-messages" );
+    baltek.debug.mousePosition = document.getElementById( "baltek-debugZone-mouse" );
 }
 
 baltek.debug.clearMessages = function(){
