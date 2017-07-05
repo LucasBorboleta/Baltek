@@ -19,7 +19,7 @@ baltek.draw.$initPackage = function(){
     baltek.draw.Footballer.$initClass();
     baltek.draw.Selectable.$initClass();
 
-    baltek.draw.canvas = document.getElementById( "baltek-drawZone-canvas" );
+    baltek.draw.canvas = document.getElementById( "baltek-canvas-field" );
 
     // Force the dimensions of the canvas
     var drawZone = document.getElementById( "baltek-drawZone" );

@@ -416,15 +416,15 @@ baltek.presenter.Presenter.$initClass = function(){
         this.what = new baltek.widget.Button( "baltek-button-goToHelp" , this.i18nTranslator);
         this.what.registerObserver(this);
 
-        this.rulesIFrame = new baltek.widget.IFrame( "baltek-drawZone-rules" , this.i18nTranslator);
+        this.rulesIFrame = new baltek.widget.IFrame( "baltek-iframe-rules" , this.i18nTranslator);
         this.rules = new baltek.widget.Button( "baltek-button-rules" , this.i18nTranslator);
         this.rules.registerObserver(this);
 
-        this.helpIFrame = new baltek.widget.IFrame( "baltek-drawZone-help" , this.i18nTranslator);
+        this.helpIFrame = new baltek.widget.IFrame( "baltek-iframe-help" , this.i18nTranslator);
         this.help = new baltek.widget.Button( "baltek-button-help" , this.i18nTranslator);
         this.help.registerObserver(this);
 
-        this.aboutIFrame = new baltek.widget.IFrame( "baltek-drawZone-about" , this.i18nTranslator);
+        this.aboutIFrame = new baltek.widget.IFrame( "baltek-iframe-about" , this.i18nTranslator);
         this.about = new baltek.widget.Button( "baltek-button-about" , this.i18nTranslator);
         this.about.registerObserver(this);
 

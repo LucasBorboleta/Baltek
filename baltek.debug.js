@@ -17,8 +17,8 @@ baltek.debug.$initPackage = function(){
     baltek.debug.messageCount = 0;
 
     baltek.debug.isEnabled = ( document.getElementById( "baltek-debugZone" ) !== null ) ;
-    baltek.debug.messages = document.getElementById( "baltek-debugZone-messages" );
-    baltek.debug.mousePosition = document.getElementById( "baltek-debugZone-mouse" );
+    baltek.debug.messages = document.getElementById( "baltek-debug-messages" );
+    baltek.debug.mousePosition = document.getElementById( "baltek-debug-mousePosition" );
 }
 
 baltek.debug.clearMessages = function(){

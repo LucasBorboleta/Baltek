@@ -108,7 +108,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     border-color:gray;
 }
 
-.baltek-debug-logo{
+.baltek-debug-logo-class{
      float:right;
      font-size:24px;
      padding-left:8px;
@@ -117,12 +117,12 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
      text-align:center;
 }
 
-.baltek-debug-message{
+.baltek-debug-messages-class{
     background-color:inherit;
     color:inherit;
 }
 
-.baltek-debug-status{
+.baltek-debug-mousePosition-class{
     background-color:black;
     border-radius:8px;
     color:white;

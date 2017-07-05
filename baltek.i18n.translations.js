@@ -44,9 +44,9 @@ baltek.i18n.translations.eo = {
 
     "baltek-button-rules:button"       : "Reguloj" ,
 
-    "baltek-drawZone-about:file"       : "./lang/eo/Baltek-about-eo.html" ,
-    "baltek-drawZone-help:file"        : "./lang/eo/Baltek-help-eo.html" ,
-    "baltek-drawZone-rules:file"       : "./lang/eo/Baltek-rules-eo.html"
+    "baltek-iframe-about:file"         : "./lang/eo/Baltek-about-eo.html" ,
+    "baltek-iframe-help:file"          : "./lang/eo/Baltek-help-eo.html" ,
+    "baltek-iframe-rules:file"         : "./lang/eo/Baltek-rules-eo.html"
 };
 
 baltek.i18n.translations.en = {
@@ -91,9 +91,9 @@ baltek.i18n.translations.en = {
 
     "baltek-button-rules:button"       : "Rules" ,
 
-    "baltek-drawZone-about:file"       : "./lang/en/Baltek-about-en.html" ,
-    "baltek-drawZone-help:file"        : "./lang/en/Baltek-help-en.html" ,
-    "baltek-drawZone-rules:file"       : "./lang/en/Baltek-rules-en.html"
+    "baltek-iframe-about:file"         : "./lang/en/Baltek-about-en.html" ,
+    "baltek-iframe-help:file"          : "./lang/en/Baltek-help-en.html" ,
+    "baltek-iframe-rules:file"         : "./lang/en/Baltek-rules-en.html"
 };
 
 baltek.i18n.translations.fr = {
@@ -138,9 +138,9 @@ baltek.i18n.translations.fr = {
 
     "baltek-button-rules:button"       : "Règles" ,
 
-    "baltek-drawZone-about:file"       : "./lang/fr/Baltek-about-fr.html" ,
-    "baltek-drawZone-help:file"        : "./lang/fr/Baltek-help-fr.html" ,
-    "baltek-drawZone-rules:file"       : "./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf"
+    "baltek-iframe-about:file"         : "./lang/fr/Baltek-about-fr.html" ,
+    "baltek-iframe-help:file"          : "./lang/fr/Baltek-help-fr.html" ,
+    "baltek-iframe-rules:file"         : "./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf"
 };
 
 baltek.i18n.translations.pt = {
@@ -185,8 +185,8 @@ baltek.i18n.translations.pt = {
 
     "baltek-button-rules:button"       : "Regras" ,
 
-    "baltek-drawZone-about:file"       : "./lang/pt/Baltek-about-pt.html" ,
-    "baltek-drawZone-help:file"        : "./lang/pt/Baltek-help-pt.html" ,
-    "baltek-drawZone-rules:file"       : "./lang/pt/Baltek-rules-pt.html"
+    "baltek-iframe-about:file"         : "./lang/pt/Baltek-about-pt.html" ,
+    "baltek-iframe-help:file"          : "./lang/pt/Baltek-help-pt.html" ,
+    "baltek-iframe-rules:file"         : "./lang/pt/Baltek-rules-pt.html"
 };
 ///////////////////////////////////////////////////////////////////////////////
