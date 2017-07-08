@@ -33,6 +33,10 @@ baltek.rules.Box.__initClass = function(){
         return this.ball;
     }
 
+    baltek.rules.Box.prototype.getBoxIndices = function(){
+        return { ix:this.ix, iy:this.iy };
+    }
+
     baltek.rules.Box.prototype.getPassiveFootballer = function(){
         return this.footballers[this.engine.passiveTeam.teamIndex];
     }
@@ -75,6 +79,20 @@ baltek.rules.Box.__initClass = function(){
             }
             this.ball = ball;
             ball.box = this;
+        }
+    }
+
+    baltek.rules.Box.prototype.setFootballer = function(footballer){
+        baltek.utils.assert( footballer !== null );
+
+        if ( this.footballers[footballer.team.teamIndex] !== footballer ) {
+            baltek.utils.assert( this.footballers[footballer.team.teamIndex] === null );
+
+            if ( footballer.box !== null ) {
+                footballer.box.footballers[footballer.team.teamIndex] = null;
+            }
+            this.footballers[footballer.team.teamIndex] = footballer;
+            footballer.box = this;
         }
     }
 

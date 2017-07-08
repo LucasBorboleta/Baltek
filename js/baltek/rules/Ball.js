@@ -16,5 +16,15 @@ baltek.rules.Ball.__initClass = function(){
     baltek.rules.Ball.prototype.__initObject = function(){
         this.box = null;
     }
+
+    baltek.rules.Ball.prototype.exportState = function(){
+        var state = {};
+        state.boxIndices = this.box.getBoxIndices();
+        return state;
+    }
+
+    baltek.rules.Ball.prototype.importState = function(state, field){
+        field.boxesByIndices[state.boxIndices.ix][state.boxIndices.iy].setBall(this);
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////

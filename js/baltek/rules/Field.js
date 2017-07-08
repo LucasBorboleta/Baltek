@@ -80,10 +80,7 @@ baltek.rules.Field.__initClass = function(){
         this.engine.passiveTeam.goalBox = this.boxesByIndices[pgix][pgiy] ;
     }
 
-    baltek.rules.Field.prototype.initBallAndTeamsBoxes = function(){
-
-        // First: reset all boxes, from field, ball and teams
-
+    baltek.rules.Field.prototype.clearBallAndFootballerBoxes = function(){
         var box = null;
         var ix = 0;
         var iy = 0;
@@ -91,6 +88,7 @@ baltek.rules.Field.__initClass = function(){
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
                 box = this.boxesByIndices[ix][iy];
                 if ( box !== null ) {
+                    box.ball = null;
                     box.footballers[this.engine.activeTeam.teamIndex] = null;
                     box.footballers[this.engine.passiveTeam.teamIndex] = null;
                 }
@@ -106,20 +104,25 @@ baltek.rules.Field.__initClass = function(){
         for ( i=0; i<n; i++) {
             this.engine.activeTeam.footballers[i].box = null;
         }
+
         n = this.engine.passiveTeam.footballers.length;
         for ( i=0; i<n; i++) {
             this.engine.passiveTeam.footballers[i].box = null;
         }
+    }
 
-        // Second: set boxes for the active team
+    baltek.rules.Field.prototype.initBallAndFootballerBoxes = function(){
+
+        // First: clear all boxes, from field, ball and teams
+        this.clearBallAndFootballerBoxes();
+
+        // Second: set boxes for the active and passive teams
 
         var activeIndex = this.engine.activeTeam.teamIndex;
         var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
         var activeDirectionX = 1 - 2*activeIndex
 
         this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.middleY].setBall(this.engine.ball);
-
-        // Third: set boxes for the passive team
 
         this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.middleY].setActiveFootballer(this.engine.activeTeam.footballer3);
         this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.firstY].setActiveFootballer(this.engine.activeTeam.footballer2t);

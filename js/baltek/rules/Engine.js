@@ -30,7 +30,25 @@ baltek.rules.Engine.__initClass = function(){
         this.ball = new baltek.rules.Ball();
 
         this.field = new baltek.rules.Field(this);
-        this.field.initBallAndTeamsBoxes();
+        this.field.initBallAndFootballerBoxes();
+    }
+
+    baltek.rules.Engine.prototype.exportState = function(){
+        var state = {};
+        state.activeTeamIndex = this.activeTeam.teamIndex;
+        state.ball = this.ball.exportState();
+        state.teams = [];
+        state.teams[0] = this.teams[0].exportState();
+        state.teams[1] = this.teams[1].exportState();
+        return state;
+    }
+
+    baltek.rules.Engine.prototype.importState = function(state){
+        this.field.clearBallAndFootballerBoxes();
+        this.setActiveTeam(this.teams[state.activeTeamIndex]);
+        this.ball.importState(state.ball, this.field);
+        this.teams[0].importState(state.teams[0], this.field);
+        this.teams[1].importState(state.teams[1], this.field);
     }
 
     baltek.rules.Engine.prototype.getActiveTeamIndex = function(){
@@ -38,7 +56,7 @@ baltek.rules.Engine.__initClass = function(){
     }
 
     baltek.rules.Engine.prototype.getBallBoxIndices = function(){
-        return { ix:this.ball.box.ix, iy:this.ball.box.iy };
+        return this.ball.box.getBoxIndices();
     }
 
     baltek.rules.Engine.prototype.getCredit = function(teamIndex){
@@ -128,7 +146,7 @@ baltek.rules.Engine.__initClass = function(){
         this.activeTeam.haveGoaled = false;
         this.passiveTeam.haveGoaled = false;
 
-        this.field.initBallAndTeamsBoxes();
+        this.field.initBallAndFootballerBoxes();
         this.turnInit();
     }
 

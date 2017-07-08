@@ -46,5 +46,32 @@ baltek.rules.Team.__initClass = function(){
             this.footballers[i].canRun = true;
         }
     }
+
+    baltek.rules.Team.prototype.exportState = function(){
+        var state = {};
+        state.score = this.score;
+        state.canSprint = this.canSprint;
+        state.haveGoaled = this.haveGoaled;
+        state.credit = this.credit;
+        state.footballers = [];
+        var i = 0;
+        var n = this.footballers.length;
+        for ( i=0; i<n; i++ ) {
+            state.footballers[i] = this.footballers[i].exportState();
+        }
+        return state;
+    }
+
+    baltek.rules.Team.prototype.importState = function(state, field){
+        this.score = state.score ;
+        this.canSprint = state.canSprint;
+        this.haveGoaled = state.haveGoaled;
+        this.credit = state.credit;
+        var i = 0;
+        var n = this.footballers.length;
+        for ( i=0; i<n; i++ ) {
+            this.footballers[i].importState(state.footballers[i], field);
+        }
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////
