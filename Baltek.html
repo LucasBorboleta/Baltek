@@ -10,7 +10,7 @@
 
 	<link rel="stylesheet" href="./baltek.css">
 
-	<body onload="baltek.$initPackage();">
+	<body onload="baltek.__initModule();">
 
 		<div id="baltek-buttonZone" class="baltek-buttonZone-class" >
 
@@ -88,19 +88,56 @@
 			<p class="baltek-debug-messages-class" id="baltek-debug-messages" ></p>
 		</div>
 
-		<!-- The following "baltek*.js" files can be loaded in any order, except that
-		     any "*.parentNameSpace.js" file must be loaded before any "*.parentNameSpace.childNameSpace.js" file.
-			 So the lexicographical order suits well.
-			-->
-		<script src="baltek.js"></script>
-		<script src="baltek.debug.js"></script>
-		<script src="baltek.draw.js"></script>
-		<script src="baltek.i18n.js"></script>
-		<script src="baltek.i18n.translations.js"></script>
-		<script src="baltek.presenter.js"></script>
-		<script src="baltek.rules.js"></script>
-		<script src="baltek.style.js"></script>
-		<script src="baltek.utils.js"></script>
-		<script src="baltek.widget.js"></script>
+		<!-- The "*.js" baltek files must be loaded in lexicographical order -->
+		<script src="js/baltek/__baltek.js"></script>
+
+		<script src="js/baltek/debug/__debug.js"></script>
+
+		<script src="js/baltek/draw/__draw.js"></script>
+		<script src="js/baltek/draw/Ball.js"></script>
+		<script src="js/baltek/draw/Box.js"></script>
+		<script src="js/baltek/draw/Circle.js"></script>
+		<script src="js/baltek/draw/Footballer.js"></script>
+		<script src="js/baltek/draw/Selectable.js"></script>
+
+		<script src="js/baltek/i18n/__i18n.js"></script>
+		<script src="js/baltek/i18n/translations.js"></script>
+		<script src="js/baltek/i18n/Translator.js"></script>
+
+		<script src="js/baltek/presenter/__presenter.js"></script>
+		<script src="js/baltek/presenter/GameStateIsFinished.js"></script>
+		<script src="js/baltek/presenter/GameStateIsReadyToStart.js"></script>
+		<script src="js/baltek/presenter/GameStateIsReadyToQuit.js"></script>
+		<script src="js/baltek/presenter/GameStateIsRunning.js"></script>
+		<script src="js/baltek/presenter/GameTopState.js"></script>
+		<script src="js/baltek/presenter/Presenter.js"></script>
+		<script src="js/baltek/presenter/State.js"></script>
+		<script src="js/baltek/presenter/SuperState.js"></script>
+		<script src="js/baltek/presenter/TopState.js"></script>
+		<script src="js/baltek/presenter/WhatStateShowAbout.js"></script>
+		<script src="js/baltek/presenter/WhatStateShowHelp.js"></script>
+		<script src="js/baltek/presenter/WhatStateShowRules.js"></script>
+		<script src="js/baltek/presenter/WhatTopState.js"></script>
+
+		<script src="js/baltek/rules/__rules.js"></script>
+		<script src="js/baltek/rules/Ball.js"></script>
+		<script src="js/baltek/rules/Box.js"></script>
+		<script src="js/baltek/rules/Engine.js"></script>
+		<script src="js/baltek/rules/Field.js"></script>
+		<script src="js/baltek/rules/Footballer.js"></script>
+		<script src="js/baltek/rules/Team.js"></script>
+
+		<script src="js/baltek/style/__style.js"></script>
+
+		<script src="js/baltek/utils/__utils.js"></script>
+		<script src="js/baltek/utils/Observable.js"></script>
+
+		<script src="js/baltek/widget/__widget.js"></script>
+		<script src="js/baltek/widget/Button.js"></script>
+		<script src="js/baltek/widget/CounterWithDecimals.js"></script>
+		<script src="js/baltek/widget/CounterWithSymbols.js"></script>
+		<script src="js/baltek/widget/IFrame.js"></script>
+		<script src="js/baltek/widget/Selector.js"></script>
+		<script src="js/baltek/widget/Widget.js"></script>
 	</body>
 </html>

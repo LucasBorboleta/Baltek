@@ -1,15 +1,15 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
 baltek.style = { };
-baltek.style.$initPackageCalled = false;
+baltek.style.__initModuleCalled = false;
 
-baltek.style.$initPackage = function(){
-    if ( baltek.style.$initPackageCalled ) return;
-    baltek.style.$initPackageCalled = true;
+baltek.style.__initModule = function(){
+    if ( baltek.style.__initModuleCalled ) return;
+    baltek.style.__initModuleCalled = true;
 
-    // Init required packages
-    baltek.debug.$initPackage();
-    baltek.widget.$initPackage();
+    // Init required modules
+    baltek.debug.__initModule();
+    baltek.widget.__initModule();
 
     // Init inner classes
     // None

@@ -1,21 +1,21 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
 var baltek = { };
-baltek.$initPackageCalled = false;
+baltek.__initModuleCalled = false;
 
-baltek.$initPackage = function(){
+baltek.__initModule = function(){
 
-    if ( baltek.$initPackageCalled ) return;
-    baltek.$initPackageCalled = true;
+    if ( baltek.__initModuleCalled ) return;
+    baltek.__initModuleCalled = true;
 
     // Init required packages
-    baltek.debug.$initPackage();
-    baltek.presenter.$initPackage();
+    baltek.debug.__initModule();
+    baltek.presenter.__initModule();
 
     // Init inner classes
     // None
 
     baltek.thePresenter = new baltek.presenter.Presenter();
-    baltek.debug.writeMessage( "baltek.$initPackage(): done" );
+    baltek.debug.writeMessage( "baltek.__initModule(): done" );
 }
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,14 +1,14 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
 baltek.debug = { };
-baltek.debug.$initPackageCalled = false;
+baltek.debug.__initModuleCalled = false;
 
-baltek.debug.$initPackage = function(){
+baltek.debug.__initModule = function(){
 
-    if ( baltek.debug.$initPackageCalled ) return;
-    baltek.debug.$initPackageCalled = true;
+    if ( baltek.debug.__initModuleCalled ) return;
+    baltek.debug.__initModuleCalled = true;
 
-    // Init required packages
+    // Init required modules
     // None
 
     // Init inner classes

@@ -1,35 +1,20 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-baltek.i18n = { };
-baltek.i18n.$initPackageCalled = false;
-
-baltek.i18n.$initPackage = function(){
-    if ( baltek.i18n.$initPackageCalled ) return;
-    baltek.i18n.$initPackageCalled = true;
-
-    // Init required packages
-    baltek.debug.$initPackage();
-    baltek.utils.$initPackage();
-
-    // Init inner classes
-    baltek.i18n.Translator.$initClass();
-}
-///////////////////////////////////////////////////////////////////////////////
 baltek.i18n.Translator = function(translations, fallbackLanguage){
-    this.$initObject(translations, fallbackLanguage);
+    this.__initObject(translations, fallbackLanguage);
 };
 
-baltek.i18n.Translator.$initClassCalled = false;
+baltek.i18n.Translator.__initClassCalled = false;
 
-baltek.i18n.Translator.$initClass = function(){
+baltek.i18n.Translator.__initClass = function(){
 
-    if ( baltek.i18n.Translator.$initClassCalled ) return;
-    baltek.i18n.Translator.$initClassCalled = true;
+    if ( baltek.i18n.Translator.__initClassCalled ) return;
+    baltek.i18n.Translator.__initClassCalled = true;
 
     baltek.utils.inherit(baltek.i18n.Translator, baltek.utils.Observable);
 
-    baltek.i18n.Translator.prototype.$initObject = function(translations, fallbackLanguage){
-        baltek.i18n.Translator.super.$initObject.call(this);
+    baltek.i18n.Translator.prototype.__initObject = function(translations, fallbackLanguage){
+        baltek.i18n.Translator.super.__initObject.call(this);
 
         this.languageAspect = this.newAspect("languageAspect");
 
