@@ -56,19 +56,11 @@ baltek.rules.Box.__initClass = function(){
     baltek.rules.Box.prototype.setActiveFootballer = function(footballer){
         baltek.utils.assert( footballer !== null ),
         baltek.utils.assert( footballer.team.teamIndex === this.engine.activeTeam.teamIndex );
-
-        if ( this.footballers[footballer.team.teamIndex] !== footballer ) {
-            baltek.utils.assert( this.footballers[footballer.team.teamIndex] === null );
-
-            if ( footballer.box !== null ) {
-                footballer.box.footballers[footballer.team.teamIndex] = null;
-            }
-            this.footballers[footballer.team.teamIndex] = footballer;
-            footballer.box = this;
-        }
+        this.setFootballer(footballer);
     }
 
     baltek.rules.Box.prototype.setBall = function(ball){
+        baltek.utils.assert( this.canHostBall );
         baltek.utils.assert( ball !== null );
 
         if ( this.ball !== ball ) {
@@ -83,6 +75,7 @@ baltek.rules.Box.__initClass = function(){
     }
 
     baltek.rules.Box.prototype.setFootballer = function(footballer){
+        baltek.utils.assert( this.canHostFootballer );
         baltek.utils.assert( footballer !== null );
 
         if ( this.footballers[footballer.team.teamIndex] !== footballer ) {
@@ -99,16 +92,7 @@ baltek.rules.Box.__initClass = function(){
     baltek.rules.Box.prototype.setPassiveFootballer = function(footballer){
         baltek.utils.assert( footballer !== null );
         baltek.utils.assert( footballer.team.teamIndex === this.engine.passiveTeam.teamIndex );
-
-        if ( this.footballers[footballer.team.teamIndex] !== footballer ) {
-            baltek.utils.assert( this.footballers[footballer.team.teamIndex] === null )
-
-            if ( footballer.box !== null ) {
-                footballer.box.footballers[footballer.team.teamIndex] = null;
-            }
-            this.footballers[footballer.team.teamIndex] = footballer;
-            footballer.box = this;
-        }
+        this.setFootballer(footballer);        
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
