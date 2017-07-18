@@ -27,9 +27,7 @@ baltek.draw.BoxWatcher.__initClass = function(){
     baltek.draw.BoxWatcher.prototype.updateFromObservable = function(observable){
         // The observable is assumed of type baltek.draw.Box
         this.box = observable;
-        baltek.debug.writeMessage( "BoxWatcher: box selected=" +
-            this.box.selected +
-            " at (" + this.box.ix + ","  + this.box.iy + ")" );
+        this.notifyObservers();
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

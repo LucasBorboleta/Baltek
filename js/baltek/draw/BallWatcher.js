@@ -27,9 +27,7 @@ baltek.draw.BallWatcher.__initClass = function(){
     baltek.draw.BallWatcher.prototype.updateFromObservable = function(observable){
         // The observable is assumed of type baltek.draw.Ball
         this.ball = observable;
-        baltek.debug.writeMessage( "BallWatcher: ball selected=" +
-            this.ball.selected +
-            " at box(" + this.ball.box.ix + ","  + this.ball.box.iy + ")" );
+        this.notifyObservers();
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

@@ -64,6 +64,21 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         if ( observable === this.presenter.quitGame ) {
             this.setState(this.superState.gameStateIsReadyToQuit);
 
+        } else if ( observable === this.presenter.ballWatcher ) {
+            baltek.debug.writeMessage( "GameStateIsRunning: ball selected=" +
+                observable.ball.selected +
+                " at box(" + observable.ball.box.ix + ","  + observable.ball.box.iy + ")" );
+
+        } else if ( observable === this.presenter.footballerWatcher ) {
+            baltek.debug.writeMessage( "GameStateIsRunning: footballer selected=" +
+                observable.footballer.selected +
+                " at box(" + observable.footballer.box.ix + ","  + observable.footballer.box.iy + ")" );
+
+        } else if ( observable === this.presenter.boxWatcher ) {
+            baltek.debug.writeMessage( "GameStateIsRunning: box selected=" +
+                observable.box.selected +
+                " at (" + observable.box.ix + ","  + observable.box.iy + ")" );
+
         } else {
 
             if ( this.superState !== null ) {

@@ -27,9 +27,7 @@ baltek.draw.FootballerWatcher.__initClass = function(){
     baltek.draw.FootballerWatcher.prototype.updateFromObservable = function(observable){
         // The observable is assumed of type baltek.draw.Footballer
         this.footballer = observable;
-        baltek.debug.writeMessage( "FootballerWatcher: footballer selected=" +
-            this.footballer.selected +
-            " at box(" + this.footballer.box.ix + ","  + this.footballer.box.iy + ")" );
+        this.notifyObservers();
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
