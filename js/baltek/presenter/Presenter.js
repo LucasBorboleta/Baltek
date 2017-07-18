@@ -108,6 +108,15 @@ baltek.presenter.Presenter.__initClass = function(){
         this.about = new baltek.widget.Button( "baltek-button-about" , this.i18nTranslator);
         this.about.registerObserver(this);
 
+        this.ballWatcher = new baltek.draw.BallWatcher();
+        this.ballWatcher.registerObserver(this);
+
+        this.boxWatcher = new baltek.draw.BoxWatcher();
+        this.boxWatcher.registerObserver(this);
+
+        this.footballerWatcher = new baltek.draw.FootballerWatcher();
+        this.footballerWatcher.registerObserver(this);
+
         this.initField();
         this.drawField();
         this.initBall();
@@ -220,6 +229,7 @@ baltek.presenter.Presenter.__initClass = function(){
 
     baltek.presenter.Presenter.prototype.initBall = function(){
         this.draw.ball = new baltek.draw.Ball();
+        this.draw.ball.registerObserver(this.ballWatcher);
     }
 
     baltek.presenter.Presenter.prototype.initField = function(){
@@ -230,7 +240,7 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.draw.xLabels = [];
         var letters = "abcdefghijklmnopqrstuvwxyz".split("");
-        baltek.utils.assert( this.draw.fieldNx <= letters.length);
+        baltek.utils.assert( this.draw.fieldNx <= letters.length );
         for (ix=0; ix < this.draw.fieldNx; ix++) {
             this.draw.xLabels[ix] = letters[ix];
         }
@@ -256,6 +266,7 @@ baltek.presenter.Presenter.__initClass = function(){
                 if ( this.rulesEngine.hasFieldBox(ix, iy) ) {
                     xyLabel = this.draw.xLabels[ix] + this.draw.yLabels[iy];
                     box = new baltek.draw.Box(ix, iy, xyLabel);
+                    box.registerObserver(this.boxWatcher);
                     this.draw.boxesByIndices[ix][iy] = box;
                 }
             }
@@ -273,13 +284,17 @@ baltek.presenter.Presenter.__initClass = function(){
         var footballerCount = 0;
         var footballerIndex = 0;
         var footballerForce = 0;
+        var footballer = null;
+
 
         for (teamIndex=0; teamIndex<teamCount; teamIndex++) {
             footballerCount = this.rulesEngine.getFooballerCount(teamIndex);
 
             for (footballerIndex=0; footballerIndex<footballerCount; footballerIndex++) {
                 footballerForce = this.rulesEngine.getFooballerForce(teamIndex, footballerIndex);
-                this.draw.teams[teamIndex].push(new baltek.draw.Footballer(teamIndex, footballerForce));
+                footballer = new baltek.draw.Footballer(teamIndex, footballerForce);
+                footballer.registerObserver(this.footballerWatcher);
+                this.draw.teams[teamIndex].push(footballer);
             }
         }
     }

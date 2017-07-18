@@ -212,7 +212,7 @@ Use priorities in the states of options:
 
 2. kick (if canKick)
 
-# Regarding the move, other idea for organizing the interaction between the engine and the player
+  # Regarding the move, other idea for organizing the interaction between the engine and the player
 
 Step | Engine                                            | Player
 ---- | ------------------------------------------------- | -----------------------------------------------
@@ -227,3 +227,47 @@ Step | Engine                                            | Player
 9    | Play the move.                                    |
 
 When finding selectable options or finding selectable destinations, the costs are evaluated.
+
+# Ideas for synchronizing the Engine state and the Presenter state
+
+- Engine export a state to Presenter without using pointers, but just integers.
+- Engine exported state includes:
+
+  - The active team
+  - The ball position
+  - For each Team:
+
+    - Its score
+    - Its sprint status
+    - Its move credits
+    - For each of its Footballers:
+
+      - Its position
+      - Its force
+
+  - matchIsActive status (whether one Team wins )
+
+  - moveCanCancel
+
+  - moveCanConfirm
+
+  - selectable boxes
+
+  - selectable Footballers
+
+  - selected footballer
+
+  - ballIsSelectable
+
+  - ballIsSelected
+
+- Player actions to be transmitted to the Engine are:
+
+  - matchCancel()
+  - turnConfirm() if turn.isActive
+  - turnCancel() if turn.isActive
+  - selectBall() as reaction to "click"
+  - selectFootballer( {ix:? ; iy:?} ) as reaction to "click"
+  - unselectBall() as reaction to "click"
+  - unselectFootballer( {ix:? ; iy:?} ) as reaction to "click"
+  - selectBox( {ix:? , iy:?} ) as reaction to "click"

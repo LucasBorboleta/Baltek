@@ -189,9 +189,5 @@ baltek.draw.Box.__initClass = function(){
         this.doShowXYLabel = condition;
         this.draw();
     }
-
-    baltek.draw.Box.prototype.update = function(){
-        baltek.debug.writeMessage( "Box: '" + this.xyLabel + "' (" + this.ix + "," + this.iy + ") just updated!" );
-    }
 }
 ///////////////////////////////////////////////////////////////////////////////

@@ -11,12 +11,16 @@ baltek.draw.__initModule = function(){
     // Init required modules
     baltek.debug.__initModule();
     baltek.style.__initModule();
+    baltek.utils.__initModule();
 
     // Init inner classes
     baltek.draw.Ball.__initClass();
+    baltek.draw.BallWatcher.__initClass();
     baltek.draw.Box.__initClass();
+    baltek.draw.BoxWatcher.__initClass();
     baltek.draw.Circle.__initClass();
     baltek.draw.Footballer.__initClass();
+    baltek.draw.FootballerWatcher.__initClass();
     baltek.draw.Selectable.__initClass();
 
     baltek.draw.canvas = document.getElementById( "baltek-canvas-field" );

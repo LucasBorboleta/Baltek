@@ -43,6 +43,16 @@ baltek.rules.Engine.__initClass = function(){
         return state;
     }
 
+    baltek.rules.Engine.prototype.getState = function(){
+        var state = {};
+        state.activeTeam = this.activeTeam;
+        state.ball = this.ball.getState();
+        state.teams = [];
+        state.teams[0] = this.teams[0].getState();
+        state.teams[1] = this.teams[1].getState();
+        return state;
+    }
+
     baltek.rules.Engine.prototype.importState = function(state){
         this.field.clearBallAndFootballerBoxes();
         this.setActiveTeam(this.teams[state.activeTeamIndex]);
@@ -110,6 +120,14 @@ baltek.rules.Engine.__initClass = function(){
         if ( passiveTeam !== this.passiveTeam ) {
             this.switchActiveAndPassiveTeams();
         }
+    }
+
+    baltek.rules.Engine.prototype.setState = function(state){
+        this.field.clearBallAndFootballerBoxes();
+        this.setActiveTeam(state.activeTeam);
+        this.ball.setState(state.ball);
+        this.teams[0].setState(state.teams[0]);
+        this.teams[1].setState(state.teams[1]);
     }
 
     baltek.rules.Engine.prototype.switchActiveAndPassiveTeams = function(){
@@ -251,7 +269,7 @@ baltek.rules.Engine.__initClass = function(){
         }
     }
 
-    baltek.rules.Engine.prototype.turnStop = function(){
+    baltek.rules.Engine.prototype.turnConfirm = function(){
         // Triggered by the player of the activeTeam
 
         if ( this.turn.isActive ) {

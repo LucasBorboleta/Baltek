@@ -48,7 +48,12 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.credit.setCount( this.presenter.rulesEngine.getCredit(activeTeamIndex) );
         this.presenter.credit.setBackgroundColor( baltek.style.colors.TEAM_COLORS[activeTeamIndex] );
 
-        var engineState = this.presenter.rulesEngine.exportState();
+        var engineState = this.presenter.rulesEngine.getState();
+        baltek.debug.writeMessage("after getState");
+        this.presenter.rulesEngine.setState(engineState);
+        baltek.debug.writeMessage("after setState");
+
+        engineState = this.presenter.rulesEngine.exportState();
         baltek.debug.writeMessage("after exportState");
         this.presenter.rulesEngine.importState(engineState);
         baltek.debug.writeMessage("after importState");

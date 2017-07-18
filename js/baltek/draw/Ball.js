@@ -23,9 +23,5 @@ baltek.draw.Ball.__initClass = function(){
 
         this.text = "@";
     }
-
-    baltek.draw.Ball.prototype.update = function(){
-        baltek.debug.writeMessage( "Ball: at (" + this.box.ix + "," + this.box.iy + ") just updated!" );
-    }
 }
 ///////////////////////////////////////////////////////////////////////////////

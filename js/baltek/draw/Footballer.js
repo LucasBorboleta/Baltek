@@ -27,10 +27,5 @@ baltek.draw.Footballer.__initClass = function(){
         this.strokeStyle = teamColor;
         this.strokeStyleSelected = baltek.style.colors.CIRCLE_BORDER_SELECTED;
     }
-
-    baltek.draw.Footballer.prototype.update = function(){
-        baltek.debug.writeMessage( "Footballer: " + this.teamIndex + "." + this.text +
-            " at (" + this.box.ix + "," + this.box.iy + ") just updated!" );
-    }
 }
 ///////////////////////////////////////////////////////////////////////////////

@@ -24,7 +24,18 @@ baltek.rules.Ball.__initClass = function(){
     }
 
     baltek.rules.Ball.prototype.importState = function(state, field){
-        field.boxesByIndices[state.boxIndices.ix][state.boxIndices.iy].setBall(this);
+        var box = field.boxesByIndices[state.boxIndices.ix][state.boxIndices.iy];
+        box.setBall(this);
+    }
+
+    baltek.rules.Ball.prototype.getState = function(){
+        var state = {};
+        state.box = this.box;
+        return state;
+    }
+
+    baltek.rules.Ball.prototype.setState = function(state){
+        state.box.setBall(this);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

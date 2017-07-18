@@ -11,9 +11,12 @@ baltek.draw.Selectable.__initClass = function(){
     if ( baltek.draw.Selectable.__initClassCalled ) return;
     baltek.draw.Selectable.__initClassCalled = true;
 
-    baltek.utils.inherit(baltek.draw.Selectable, Object);
+    baltek.utils.inherit(baltek.draw.Selectable, baltek.utils.Observable);
 
     baltek.draw.Selectable.prototype.__initObject = function(){
+        baltek.draw.Selectable.super.__initObject.call(this);
+        this.selectableAspect = this.newAspect("selectableAspect");
+
         this.selectable = false;
         this.selected = false;
 
@@ -49,12 +52,9 @@ baltek.draw.Selectable.__initClass = function(){
         if ( clicked ) {
             // Inverse the selection status
             this.selected = (! this.selected);
-            this.update();
             this.draw();
+            this.notifyObservers();
         }
-    }
-
-    baltek.draw.Selectable.prototype.update = function(){
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
