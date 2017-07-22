@@ -49,6 +49,7 @@ baltek.rules.Team.__initClass = function(){
 
     baltek.rules.Team.prototype.exportState = function(){
         var state = {};
+        state.teamIndex = this.teamIndex ;
         state.score = this.score;
         state.canSprint = this.canSprint;
         state.haveGoaled = this.haveGoaled;
@@ -63,6 +64,7 @@ baltek.rules.Team.__initClass = function(){
     }
 
     baltek.rules.Team.prototype.importState = function(state, field){
+        baltek.utils.assert( this.teamIndex === state.teamIndex );
         this.score = state.score ;
         this.canSprint = state.canSprint;
         this.haveGoaled = state.haveGoaled;

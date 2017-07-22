@@ -20,49 +20,27 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
     baltek.presenter.GameStateIsRunning.prototype.enter = function(){
         this.presenter.hideAllButtons();
         this.presenter.quitGame.show(true);
-        this.presenter.team0Bonus.show(true);
-        this.presenter.team0Score.show(true);
-        this.presenter.team1Score.show(true);
-        this.presenter.team1Bonus.show(true);
-        this.presenter.sprint.show(true);
-        this.presenter.confirm.show(true);
-        this.presenter.cancel.show(true);
-        this.presenter.credit.show(true);
         this.presenter.coordinates.show(true);
         this.presenter.language.show(true);
         this.presenter.what.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.quitGame.enable(true);
-        this.presenter.sprint.enable(true);
-        this.presenter.confirm.enable(true);
-        this.presenter.cancel.enable(true);
         this.presenter.coordinates.enable(true);
         this.presenter.language.enable(true);
         this.presenter.what.enable(true);
 
         this.presenter.rulesEngine.matchInit();
-        this.presenter.team0Score.setCount( this.presenter.rulesEngine.getScore(0) );
-        this.presenter.team1Score.setCount( this.presenter.rulesEngine.getScore(1) );
-        var activeTeamIndex = this.presenter.rulesEngine.getActiveTeamIndex();
-        this.presenter.credit.setCount( this.presenter.rulesEngine.getCredit(activeTeamIndex) );
-        this.presenter.credit.setBackgroundColor( baltek.style.colors.TEAM_COLORS[activeTeamIndex] );
-
-        var engineState = this.presenter.rulesEngine.getState();
-        baltek.debug.writeMessage("after getState");
-        this.presenter.rulesEngine.setState(engineState);
-        baltek.debug.writeMessage("after setState");
-
-        engineState = this.presenter.rulesEngine.exportState();
-        baltek.debug.writeMessage("after exportState");
-        this.presenter.rulesEngine.importState(engineState);
-        baltek.debug.writeMessage("after importState");
     }
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
 
         if ( observable === this.presenter.quitGame ) {
             this.setState(this.superState.gameStateIsReadyToQuit);
+
+        } else if ( observable === this.presenter.rulesEngine ) {
+            var state = this.presenter.rulesEngine.exportState();
+            this.presenter.updateFromEngineState(state);
 
         } else if ( observable === this.presenter.ballWatcher ) {
             baltek.debug.writeMessage( "GameStateIsRunning: ball selected=" +

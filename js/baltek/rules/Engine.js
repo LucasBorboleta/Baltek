@@ -14,6 +14,9 @@ baltek.rules.Engine.__initClass = function(){
     baltek.utils.inherit(baltek.rules.Engine, baltek.utils.Observable);
 
     baltek.rules.Engine.prototype.__initObject = function(){
+        baltek.rules.Engine.super.__initObject.call(this);
+        this.engineAspect = this.newAspect("engineAspect");
+
         this.SCORE_MAX = 2;
         this.CREDIT_MAX = 3;
 
@@ -151,6 +154,7 @@ baltek.rules.Engine.__initClass = function(){
         this.passiveTeam.score = 0;
 
         this.roundInit();
+        this.notifyObservers();
     }
 
     baltek.rules.Engine.prototype.roundInit = function(){
@@ -225,6 +229,7 @@ baltek.rules.Engine.__initClass = function(){
                     this.roundInit();
                 }
             }
+            this.notifyObservers();
         }
     }
 

@@ -16,10 +16,10 @@ baltek.draw.Circle.__initClass = function(){
     baltek.draw.Circle.prototype.__initObject = function(){
         baltek.draw.Circle.super.__initObject.call(this);
 
+        this.box = null;
         this.x = undefined;
         this.y = undefined;
         this.text = null;
-        this.box = null;
 
         this.radius = baltek.draw.circleRadius;
 
@@ -42,7 +42,7 @@ baltek.draw.Circle.__initClass = function(){
 
     baltek.draw.Circle.prototype.draw = function(){
 
-        if ( this.x !== undefined && this.y !== undefined ) {
+        if ( this.box !== null && this.x !== undefined && this.y !== undefined ) {
 
             baltek.draw.drawer.strokeStyle = this.strokeStyle;
             baltek.draw.drawer.fillStyle = this.fillStyle;
