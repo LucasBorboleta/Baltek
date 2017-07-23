@@ -28,18 +28,21 @@ baltek.draw.Selectable.__initClass = function(){
         return false;
     }
 
-    baltek.draw.Selectable.prototype.disableSelection = function(){
-        baltek.draw.canvas.removeEventListener('click', this.onClickWrapper , false);
-        this.selectable = false;
-        this.draw();
-    }
-
     baltek.draw.Selectable.prototype.draw = function(){
     }
 
-    baltek.draw.Selectable.prototype.enableSelection = function(){
-        baltek.draw.canvas.addEventListener('click', this.onClickWrapper , false);
-        this.selectable = true;
+    baltek.draw.Selectable.prototype.enableSelection = function(condition){
+        if ( condition ) {
+            baltek.draw.canvas.addEventListener('click', this.onClickWrapper , false);
+        } else {
+            baltek.draw.canvas.removeEventListener('click', this.onClickWrapper , false);
+        }
+        this.selectable = condition;
+        this.draw();
+    }
+
+    baltek.draw.Selectable.prototype.select = function(condition){
+        this.selected = condition;
         this.draw();
     }
 

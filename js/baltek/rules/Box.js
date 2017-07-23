@@ -11,9 +11,10 @@ baltek.rules.Box.__initClass = function(){
     if ( baltek.rules.Box.__initClassCalled ) return;
     baltek.rules.Box.__initClassCalled = true;
 
-    baltek.utils.inherit(baltek.rules.Box, Object);
+    baltek.utils.inherit(baltek.rules.Box, baltek.rules.Selectable);
 
     baltek.rules.Box.prototype.__initObject = function(engine, ix, iy){
+        baltek.rules.Box.super.__initObject.call(this);
         this.engine = engine;
         this.ix = ix ;
         this.iy = iy ;
@@ -23,6 +24,11 @@ baltek.rules.Box.__initClass = function(){
         this.footballers = [] ;
         this.footballers.push(null);
         this.footballers.push(null);
+    }
+
+    baltek.rules.Box.prototype.exportState = function(){
+        var state = baltek.rules.Box.super.exportState.call(this);
+        return state;
     }
 
     baltek.rules.Box.prototype.getActiveFootballer = function(){
@@ -92,7 +98,7 @@ baltek.rules.Box.__initClass = function(){
     baltek.rules.Box.prototype.setPassiveFootballer = function(footballer){
         baltek.utils.assert( footballer !== null );
         baltek.utils.assert( footballer.team.teamIndex === this.engine.passiveTeam.teamIndex );
-        this.setFootballer(footballer);        
+        this.setFootballer(footballer);
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

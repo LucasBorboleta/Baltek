@@ -43,6 +43,7 @@ baltek.rules.Engine.__initClass = function(){
         state.teams = [];
         state.teams[0] = this.teams[0].exportState();
         state.teams[1] = this.teams[1].exportState();
+        state.field = this.field.exportState();
         return state;
     }
 
@@ -54,26 +55,6 @@ baltek.rules.Engine.__initClass = function(){
         state.teams[0] = this.teams[0].getState();
         state.teams[1] = this.teams[1].getState();
         return state;
-    }
-
-    baltek.rules.Engine.prototype.importState = function(state){
-        this.field.clearBallAndFootballerBoxes();
-        this.setActiveTeam(this.teams[state.activeTeamIndex]);
-        this.ball.importState(state.ball, this.field);
-        this.teams[0].importState(state.teams[0], this.field);
-        this.teams[1].importState(state.teams[1], this.field);
-    }
-
-    baltek.rules.Engine.prototype.getActiveTeamIndex = function(){
-        return this.activeTeam.teamIndex;
-    }
-
-    baltek.rules.Engine.prototype.getBallBoxIndices = function(){
-        return this.ball.box.getBoxIndices();
-    }
-
-    baltek.rules.Engine.prototype.getCredit = function(teamIndex){
-        return this.teams[teamIndex].credit;
     }
 
     baltek.rules.Engine.prototype.getCreditMax = function(){
@@ -88,21 +69,12 @@ baltek.rules.Engine.__initClass = function(){
         return this.field.ny;
     }
 
-    baltek.rules.Engine.prototype.getFooballerBoxIndices = function(teamIndex, footballerIndex){
-        var box = this.teams[teamIndex].footballers[footballerIndex].box;
-        return { ix:box.ix, iy:box.iy };
-    }
-
     baltek.rules.Engine.prototype.getFooballerCount = function(teamIndex){
         return this.teams[teamIndex].footballers.length;
     }
 
     baltek.rules.Engine.prototype.getFooballerForce = function(teamIndex, footballerIndex){
         return this.teams[teamIndex].footballers[footballerIndex].force;
-    }
-
-    baltek.rules.Engine.prototype.getScore = function(teamIndex){
-        return this.teams[teamIndex].score;
     }
 
     baltek.rules.Engine.prototype.getScoreMax = function(){
@@ -139,8 +111,6 @@ baltek.rules.Engine.__initClass = function(){
         this.activeTeam = this.oldPassiveTeam;
         this.passiveTeam = this.oldActiveTeam;
     }
-
-    // TODO: clean the next methods
 
     baltek.rules.Engine.prototype.matchInit = function(){
         this.match = {};
@@ -180,8 +150,20 @@ baltek.rules.Engine.__initClass = function(){
         this.activeTeam.credit = this.CREDIT_MAX;
         this.passiveTeam.credit = 0;
 
-        this.teams[0].initFootballerCapabilities();
-        this.teams[1].initFootballerCapabilities();
+        this.activeTeam.enableFootballers(false);
+        this.passiveTeam.enableFootballers(false);
+
+        this.activeTeam.initFootballerCapabilities(true);
+        this.passiveTeam.initFootballerCapabilities(false);
+
+        this.activeTeam.selectFootballers(false);
+        this.passiveTeam.selectFootballers(false);
+
+        this.field.enableBoxes(false);
+        this.field.selectBoxes(false);
+
+        this.ball.selectable = false;
+        this.ball.selected = false;
 
         this.moveInit();
     }
@@ -199,13 +181,9 @@ baltek.rules.Engine.__initClass = function(){
         this.move.LEN_RUN = 1;
         this.move.LEN_SPRINT = 2;
 
-        this.move.sources = null;
-        this.move.kindsWithCosts = null;
-        this.move.destinationsWithCosts = null;
-
-        this.move.sourceBox = null;
         this.move.kind = null;
-        this.move.kindCost = 0;
+        this.move.sourceBox = null;
+        this.move.sourceCost = 0;
         this.move.destinationBox = null;
         this.move.destinationCost = 0;
     }
@@ -286,116 +264,57 @@ baltek.rules.Engine.__initClass = function(){
     baltek.rules.Engine.prototype.moveUpdate = function(){
         if ( this.move.isActive ) {
 
-            if ( this.move.sourceBox !== null ) {
-
-                if ( this.move.kind !== null ) {
-
-                    if ( this.move.destinationBox !== null ) {
-                        this.move.isActive = false;
-
-                        if ( this.move.kind == this.move.KIND_RUN || this.move.kind == this.move.KIND_SPRINT ) {
-                            this.move.sourceBox.getActiveFootballer().canRun = false;
-                            this.move.destinationBox.setActiveFootballer(this.move.sourceBox.getActiveFootballer());
-
-                        } else if ( this.move.kind == this.move.KIND_KICK ) {
-                            this.move.sourceBox.getActiveFootballer().canKick = false;
-                            this.move.destinationBox.setBall(this.move.sourceBox.getBall());
-                        }
-
-                        this.activeTeam.credit -= ( this.move.kindCost + this.move.destinationCost );
-
-                        if ( this.move.kind == this.move.KIND_SPRINT ) {
-                            this.activeTeam.canSprint = false;
-                        }
-
-                        if (this.move.destinationBox === this.passiveTeam.goalBox ) {
-                            this.activeTeam.haveGoaled = true;
-                        }
-
-                    } else {
-                        // this.move.destinationBox === null
-                        this.move.destinationsWithCosts = this.moveFindDestinationsWithCosts();
-                        // notify the player of the activeTeam
-                    }
-
-                } else {
-                    // this.move.kind === null
-                    this.move.kindsWithCosts = this.moveFindKindsWithCosts();
-                    // notify the player of the activeTeam
-
-                }
-            } else {
-                // this.move.sourceBox === null
-                this.move.sources = this.moveFindSources();
-                // notify the player of the activeTeam
-
-            }
-        }
-    }
-
-    baltek.rules.Engine.prototype.moveSelectSource = function(source){
-        // Triggered by the player of the activeTeam
-
-        if ( this.move.isActive ) {
             if ( this.move.sourceBox === null ) {
-                if ( Baltek.Utils.hasValue(this.move.sources, source) ) {
-                    this.move.sourceBox = source;
-                    this.matchUpdate();
+                this.moveFindSources();
+
+            } else if ( this.move.destinationBox === null ) {
+                this.moveFindDestinations();
+
+            } else {
+                this.move.isActive = false;
+
+                if ( this.move.kind == this.move.KIND_RUN || this.move.kind == this.move.KIND_SPRINT ) {
+                    this.move.sourceBox.getActiveFootballer().canRun = false;
+                    this.move.destinationBox.setActiveFootballer(this.move.sourceBox.getActiveFootballer());
+
+                } else if ( this.move.kind == this.move.KIND_KICK ) {
+                    this.move.sourceBox.getActiveFootballer().canKick = false;
+                    this.move.destinationBox.setBall(this.move.sourceBox.getBall());
+                }
+
+                this.activeTeam.credit -= ( this.move.sourceCost + this.move.destinationCost );
+
+                if ( this.move.kind == this.move.KIND_SPRINT ) {
+                    this.activeTeam.canSprint = false;
+                }
+
+                if (this.move.destinationBox === this.passiveTeam.goalBox ) {
+                    this.activeTeam.haveGoaled = true;
                 }
             }
         }
     }
 
-    baltek.rules.Engine.prototype.moveUnselectSource = function(source){
+    baltek.rules.Engine.prototype.moveSelectBall = function(condition){
         // Triggered by the player of the activeTeam
 
-        if ( this.move.isActive ) {
-            if ( this.move.sourceBox !== null ) {
-                // this.move.sources is kept
-                this.move.kindsWithCosts = null;
-                this.move.destinationsWithCosts = null;
+        baltek.utils.assert( this.move.isActive );
 
-                this.move.sourceBox = null;
-                this.move.kind = null;
-                this.move.kindCost = 0;
-                this.move.destinationBox = null;
-                this.move.destinationCost = 0;
+        if ( condition ) {
+            baltek.utils.assert( this.move.sourceBox === null );
+            baltek.utils.assert( this.ball.selectable );
+            this.move.kind = this.move.KIND_KICK;
+            this.move.sourceBox = this.ball.box;
+            this.ball.selected = true;
+            this.matchUpdate();
 
-                this.matchUpdate();
-            }
-        }
-    }
-
-    baltek.rules.Engine.prototype.moveSelectKind = function(kindWithCost){
-        // Triggered by the player of the activeTeam
-
-        if ( this.move.isActive && this.move.sourceBox !== null ) {
-            if ( this.move.kind === null ) {
-                if ( Baltek.Utils.hasValue(this.move.kindsWithCosts, kindWithCost) ) {
-                    this.move.kind = kindWithCost.kind;
-                    this.move.kindCost = kindWithCost.kindCost;
-                    this.matchUpdate();
-                }
-            }
-        }
-    }
-
-    baltek.rules.Engine.prototype.moveUnselectKind = function(){
-        // Triggered by the player of the activeTeam
-
-        if ( this.move.isActive && this.move.sourceBox !== null ) {
-            if ( this.move.kind !== null ) {
-                // this.move.sources is kept
-                // this.move.kindsWithCosts is kept;
-                this.move.destinationsWithCosts = null;
-
-                this.move.kind = null;
-                this.move.kindCost = 0;
-                this.move.destinationBox = null;
-                this.move.destinationCost = 0;
-
-                this.matchUpdate();
-            }
+        } else {
+            baltek.utils.assert( this.move.sourceBox !== null );
+            baltek.utils.assert( this.ball.selected );
+            this.move.kind = null;
+            this.move.sourceBox = null;
+            this.ball.selected = false;
+            this.matchUpdate();
         }
     }
 
@@ -414,69 +333,61 @@ baltek.rules.Engine.__initClass = function(){
     }
 
     baltek.rules.Engine.prototype.moveFindSources = function(){
-        var sources = [];
+        baltek.debug.writeMessage("moveFindSources: enter");
+
         if ( this.move.isActive && this.move.sourceBox === null ) {
+            var activeFootballer = null;
+            var passiveFootballer = null;
+            var cost = 0;
             var n = this.activeTeam.footballers.length;
             var i;
-            var footballer;
+
+            this.ball.cost = 0;
+            this.ball.selectable = false;
+
             for ( i=0; i<n; i++ ) {
-                footballer = this.activeTeam.footballers[i];
+                activeFootballer = this.activeTeam.footballers[i];
 
-                if ( footballer.canRun ) {
-                    // The footballer has not run during this turn
-                    sources.push(footballer.box);
-
-                } else if ( footballer.canKick && footballer.box.hasBall() ) {
-                    // The footballer has not kick during this turn
-                    sources.push(footballer.box);
+                if ( activeFootballer.canRun ) {
+                    // The activeFootballer has not run during this turn
+                    activeFootballer.cost = 0;
+                    activeFootballer.selectable = true;
                 }
-            }
-        }
-        return sources;
-    }
 
-    baltek.rules.Engine.prototype.moveFindKindsWithCosts = function(){
+                if ( activeFootballer.canKick && activeFootballer.box.hasBall() ) {
+                    // The activeFootballer has not kick during this turn
+                    passiveFootballer = activeFootballer.box.getPassiveFootballer();
 
-        var kindsWithCosts = [];
+                    if ( passiveFootballer === null ) {
+                        this.ball.cost = 0;
+                        this.ball.selectable = true;
 
-        if ( this.move.isActive && this.move.sourceBox !== null && this.move.kind === null ) {
+                    } else if ( activeFootballer.force >= passiveFootballer.force ) {
+                        this.ball.cost = 0;
+                        this.ball.selectable = true;
 
-            var activeFootballer = this.move.sourceBox.getActiveFootballer();
-            var passiveFootballer = this.move.sourceBox.getPassiveFootballer();
-            var sourceHasBall = this.move.sourceBox.hasBall();
-
-            if ( activeFootballer.canRun ) {
-                kindsWithCosts.push( { kind: this.move.KIND_RUN, cost: 0} );
-
-                if ( this.activeTeam.canSprint ) {
-                    kindsWithCosts.push( { kind: this.move.KIND_SPRINT, cost: 0} );
-                }
-            }
-
-            if ( activeFootballer.canKick && sourceHasBall ) {
-                if ( passiveFootballer === null ) {
-                    kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: 0} );
-
-                } else if ( activeFootballer.force >= passiveFootballer.force ) {
-                    kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: 0} );
-
-                } else {
-                    var cost = passiveFootballer.force - activeFootballer.force;
-                    if ( this.activeTeam.credit >= cost ) {
-                        kindsWithCosts.push( { kind: this.move.KIND_KICK, cost: cost} );
+                    } else {
+                        this.ball.cost = passiveFootballer.force - activeFootballer.force;
+                        if ( this.activeTeam.credit >= this.ball.cost ) {
+                            this.ball.selectable = true;
+                        } else {
+                            this.ball.selectable = false;
+                        }
                     }
                 }
             }
         }
-        return kindsWithCosts;
+
+        baltek.debug.writeMessage("moveFindSources: exit");
     }
 
-    baltek.rules.Engine.prototype.moveFindDestinationsWithCosts = function(){
+    baltek.rules.Engine.prototype.moveFindDestinations = function(){
+        baltek.debug.writeMessage("moveFindDestinations: enter");
+
         var destinationsWithCosts = [] ;
 
         var preconditions = (   this.move.isActive &&
                                 this.move.sourceBox !== null &&
-                                this.move.kind !== null &&
                                 this.move.destinationBox === null );
 
         if ( ! preconditions ) {
@@ -540,7 +451,7 @@ baltek.rules.Engine.__initClass = function(){
 
                                      } else {
                                          var cost = strongestPassiveFootballer.force - activeFootballer.force;
-                                         if ( this.activeTeam.credit >= this.move.kindCost + cost ) {
+                                         if ( this.activeTeam.credit >= this.move.sourceCost + cost ) {
                                              destinationsWithCosts.push( {box: box, cost: kickCost} );
                                          }
                                      }
@@ -589,6 +500,7 @@ baltek.rules.Engine.__initClass = function(){
                 }
             }
         }
+        baltek.debug.writeMessage("moveFindDestinations: exit");
         return destinationsWithCosts;
     }
 }

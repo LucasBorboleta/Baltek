@@ -31,6 +31,7 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.what.enable(true);
 
         this.presenter.rulesEngine.matchInit();
+        this.presenter.rulesEngine.matchUpdate();
     }
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){

@@ -18,6 +18,7 @@ baltek.rules.__initModule = function(){
     baltek.rules.Engine.__initClass();
     baltek.rules.Field.__initClass();
     baltek.rules.Footballer.__initClass();
+    baltek.rules.Selectable.__initClass();
     baltek.rules.Team.__initClass();
 }
 ///////////////////////////////////////////////////////////////////////////////

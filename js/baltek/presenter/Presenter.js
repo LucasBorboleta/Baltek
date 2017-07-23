@@ -305,9 +305,32 @@ baltek.presenter.Presenter.__initClass = function(){
     }
 
     baltek.presenter.Presenter.prototype.updateFromEngineBallState = function(state){
+        baltek.debug.writeMessage("updateFromEngineBallState: enter");
         var ballIndices = state.boxIndices;
         var ballBox = this.draw.boxesByIndices[ballIndices.ix][ballIndices.iy];
         ballBox.setBall(this.draw.ball);
+        this.draw.ball.enableSelection(state.selectable);
+        this.draw.ball.select(state.selected);
+        baltek.debug.writeMessage("updateFromEngineBallState: this.draw.ball.selectable=" +
+        this.draw.ball.selectable);
+        baltek.debug.writeMessage("updateFromEngineBallState: this.draw.ball.selected=" +
+        this.draw.ball.selected);
+        baltek.debug.writeMessage("updateFromEngineBallState: exit");
+    }
+
+    baltek.presenter.Presenter.prototype.updateFromEngineFieldState = function(state){
+        var ix = 0;
+        var iy = 0;
+        var box = null;
+        for (ix=0; ix < this.draw.fieldNx; ix++) {
+            for (iy=0; iy < this.draw.fieldNy; iy++) {
+                box = this.draw.boxesByIndices[ix][iy];
+                if ( box !== null ) {
+                    box.enableSelection(state.boxesByIndices[ix][iy].selectable);
+                    box.select(state.boxesByIndices[ix][iy].selected);
+                }
+            }
+        }
     }
 
     baltek.presenter.Presenter.prototype.updateFromEngineTeamState = function(state){
@@ -326,6 +349,8 @@ baltek.presenter.Presenter.__initClass = function(){
             footballerIndices = footballerState.boxIndices;
             footballerBox = this.draw.boxesByIndices[footballerIndices.ix][footballerIndices.iy];
             footballerBox.setFootballer(footballer);
+            footballer.enableSelection(footballerState.selectable);
+            footballer.select(footballerState.selected);
         }
     }
 
@@ -357,13 +382,11 @@ baltek.presenter.Presenter.__initClass = function(){
         this.cancel.enable(true);
 
         this.clearBoxes();
-        this.updateFromEngineBallState(state.ball);
 
-        var teamIndex = 0;
-        var teamCount = this.draw.teams.length;
-        for (teamIndex=0; teamIndex<teamCount; teamIndex++) {
-            this.updateFromEngineTeamState(state.teams[teamIndex]);
-        }
+        this.updateFromEngineBallState(state.ball);
+        this.updateFromEngineFieldState(state.field);
+        this.updateFromEngineTeamState(state.teams[0]);
+        this.updateFromEngineTeamState(state.teams[1]);
 
         baltek.debug.writeMessage( "updateFromEngineState: exit" );
     }

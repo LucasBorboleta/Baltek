@@ -111,6 +111,43 @@ baltek.rules.Field.__initClass = function(){
         }
     }
 
+    baltek.rules.Field.prototype.enableBoxes = function(condition){
+        var box = null;
+        var ix = 0;
+        var iy = 0;
+        for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
+            for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
+                box = this.boxesByIndices[ix][iy];
+                if ( box !== null ) {
+                    box.selectable = condition;
+                }
+            }
+        }
+    }
+
+    baltek.rules.Field.prototype.exportState = function(){
+        var state = {};
+        state.boxesByIndices = [];
+
+        var ix = 0;
+        var iy = 0;
+        var box = null;
+        for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
+            state.boxesByIndices.push([]);
+
+            for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
+                this.boxesByIndices[ix].push(null);
+
+                box = this.boxesByIndices[ix][iy];
+                if ( box !== null ) {
+                    state.boxesByIndices[ix][iy] = box.exportState();
+                }
+            }
+        }
+
+        return state;
+    }
+
     baltek.rules.Field.prototype.initBallAndFootballerBoxes = function(){
 
         // First: clear all boxes, from field, ball and teams
@@ -141,6 +178,20 @@ baltek.rules.Field.__initClass = function(){
         this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer1t);
         this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer1m);
         this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer1b);
+    }
+
+    baltek.rules.Field.prototype.selectBoxes = function(condition){
+        var box = null;
+        var ix = 0;
+        var iy = 0;
+        for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
+            for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
+                box = this.boxesByIndices[ix][iy];
+                if ( box !== null ) {
+                    box.selected = condition;
+                }
+            }
+        }
     }
 }
 ///////////////////////////////////////////////////////////////////////////////

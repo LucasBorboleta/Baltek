@@ -11,21 +11,17 @@ baltek.rules.Ball.__initClass = function(){
     if ( baltek.rules.Ball.__initClassCalled ) return;
     baltek.rules.Ball.__initClassCalled = true;
 
-    baltek.utils.inherit(baltek.rules.Ball, Object);
+    baltek.utils.inherit(baltek.rules.Ball, baltek.rules.Selectable);
 
     baltek.rules.Ball.prototype.__initObject = function(){
+        baltek.rules.Ball.super.__initObject.call(this);
         this.box = null;
     }
 
     baltek.rules.Ball.prototype.exportState = function(){
-        var state = {};
+        var state = baltek.rules.Ball.super.exportState.call(this);
         state.boxIndices = this.box.getBoxIndices();
         return state;
-    }
-
-    baltek.rules.Ball.prototype.importState = function(state, field){
-        var box = field.boxesByIndices[state.boxIndices.ix][state.boxIndices.iy];
-        box.setBall(this);
     }
 
     baltek.rules.Ball.prototype.getState = function(){

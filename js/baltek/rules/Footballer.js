@@ -11,9 +11,10 @@ baltek.rules.Footballer.__initClass = function(){
     if ( baltek.rules.Footballer.__initClassCalled ) return;
     baltek.rules.Footballer.__initClassCalled = true;
 
-    baltek.utils.inherit(baltek.rules.Footballer, Object);
+    baltek.utils.inherit(baltek.rules.Footballer, baltek.rules.Selectable);
 
     baltek.rules.Footballer.prototype.__initObject = function(team, force){
+        baltek.rules.Footballer.super.__initObject.call(this);
         this.team = team;
         this.force = force;
         this.box = null;
@@ -22,18 +23,11 @@ baltek.rules.Footballer.__initClass = function(){
     }
 
     baltek.rules.Footballer.prototype.exportState = function(){
-        var state = {};
+        var state = baltek.rules.Footballer.super.exportState.call(this);
         state.boxIndices = this.box.getBoxIndices();
         state.canKick = this.canKick;
         state.canRun = this.canRun;
         return state;
-    }
-
-    baltek.rules.Footballer.prototype.importState = function(state, field){
-        var box = field.boxesByIndices[state.boxIndices.ix][state.boxIndices.iy];
-        box.setFootballer(this);
-        this.canKick = state.canKick;
-        this.canRun = state.canRun;
     }
 
     baltek.rules.Footballer.prototype.getState = function(){
