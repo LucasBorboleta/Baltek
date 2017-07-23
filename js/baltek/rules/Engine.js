@@ -214,16 +214,17 @@ baltek.rules.Engine.__initClass = function(){
                 if ( this.match.isActive ) {
                     this.switchActiveAndPassiveTeams();
                     this.roundInit();
+                } else {
+                    baltek.debug.writeMessage("matchUpdate: this.match.isActive=" + this.match.isActive);
+                    this.field.enableBoxes(false);
+                    this.activeTeam.enableFootballers(false);
+                    this.activeTeam.selectFootballers(false);
+                    this.ball.selected = false;
+                    this.ball.selectable = false;
                 }
             }
-        } else {
-            baltek.debug.writeMessage("matchUpdate: this.match.isActive=" + this.match.isActive);
-            this.field.enableBoxes(false);
-            this.activeTeam.enableFootballers(false);
-            this.activeTeam.selectFootballers(false);
-            this.ball.selected = false;
-            this.ball.selectable = false;
         }
+
         this.notifyObservers();
         baltek.debug.writeMessage("matchUpdate: exit");
     }
@@ -475,6 +476,7 @@ baltek.rules.Engine.__initClass = function(){
         if ( this.ball.selected ) {
             this.ball.selectable = true;
         } else {
+            this.ball.selectable = false;
             this.move.sourceBox.getActiveFootballer().selectable = true;
         }
 
@@ -537,7 +539,7 @@ baltek.rules.Engine.__initClass = function(){
                                          box.cost = 1;
 
                                      } else {
-                                         box.cost = strongestPassiveFootballer.force - activeFootballer.force;
+                                         box.cost = 1 + strongestPassiveFootballer.force - activeFootballer.force;
                                          if ( this.activeTeam.credit >= this.move.sourceCost + box.cost ) {
                                              box.selectable = true;
                                          } else {
