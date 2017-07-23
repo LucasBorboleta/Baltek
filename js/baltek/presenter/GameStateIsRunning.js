@@ -31,7 +31,6 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.what.enable(true);
 
         this.presenter.rulesEngine.matchInit();
-        this.presenter.rulesEngine.matchUpdate();
     }
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
@@ -43,20 +42,26 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
             var state = this.presenter.rulesEngine.exportState();
             this.presenter.updateFromEngineState(state);
 
+            if ( ! this.presenter.rulesEngine.match.isActive) {
+                this.setState(this.superState.gameStateIsFinished);
+            }
+
         } else if ( observable === this.presenter.ballWatcher ) {
-            baltek.debug.writeMessage( "GameStateIsRunning: ball selected=" +
-                observable.ball.selected +
-                " at box(" + observable.ball.box.ix + ","  + observable.ball.box.iy + ")" );
+            this.presenter.rulesEngine.moveSelectBall(observable.ball.selected);
 
         } else if ( observable === this.presenter.footballerWatcher ) {
-            baltek.debug.writeMessage( "GameStateIsRunning: footballer selected=" +
-                observable.footballer.selected +
-                " at box(" + observable.footballer.box.ix + ","  + observable.footballer.box.iy + ")" );
+            var boxIndices = {ix:observable.footballer.box.ix, iy:observable.footballer.box.iy};
+            this.presenter.rulesEngine.moveSelectFootballer(boxIndices, observable.footballer.selected);
 
         } else if ( observable === this.presenter.boxWatcher ) {
-            baltek.debug.writeMessage( "GameStateIsRunning: box selected=" +
-                observable.box.selected +
-                " at (" + observable.box.ix + ","  + observable.box.iy + ")" );
+            var boxIndices = {ix:observable.box.ix, iy:observable.box.iy};
+            this.presenter.rulesEngine.moveSelectBox(boxIndices);
+
+        } else if ( observable === this.presenter.sprint ) {
+            this.presenter.rulesEngine.moveSprint( observable.getSelection() === "yes" );
+
+        } else if ( observable === this.presenter.confirm ) {
+            this.presenter.rulesEngine.turnConfirm();
 
         } else {
 

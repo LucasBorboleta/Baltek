@@ -61,7 +61,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     font-size:18px;
 }
 
-.baltek-button-class:disabled{
+.baltek-button-class:disabled, .baltek-select-class:disabled{
     opacity:0.5;
 }
 

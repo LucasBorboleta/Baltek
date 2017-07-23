@@ -305,17 +305,11 @@ baltek.presenter.Presenter.__initClass = function(){
     }
 
     baltek.presenter.Presenter.prototype.updateFromEngineBallState = function(state){
-        baltek.debug.writeMessage("updateFromEngineBallState: enter");
         var ballIndices = state.boxIndices;
         var ballBox = this.draw.boxesByIndices[ballIndices.ix][ballIndices.iy];
         ballBox.setBall(this.draw.ball);
         this.draw.ball.enableSelection(state.selectable);
         this.draw.ball.select(state.selected);
-        baltek.debug.writeMessage("updateFromEngineBallState: this.draw.ball.selectable=" +
-        this.draw.ball.selectable);
-        baltek.debug.writeMessage("updateFromEngineBallState: this.draw.ball.selected=" +
-        this.draw.ball.selected);
-        baltek.debug.writeMessage("updateFromEngineBallState: exit");
     }
 
     baltek.presenter.Presenter.prototype.updateFromEngineFieldState = function(state){
@@ -355,8 +349,6 @@ baltek.presenter.Presenter.__initClass = function(){
     }
 
     baltek.presenter.Presenter.prototype.updateFromEngineState = function(state){
-        baltek.debug.writeMessage( "updateFromEngineState: enter" );
-
         this.team0Score.show(true);
         this.team1Score.show(true);
         this.team0Score.setCount( state.teams[0].score );
@@ -375,6 +367,12 @@ baltek.presenter.Presenter.__initClass = function(){
         this.sprint.show(true);
         this.sprint.enable(state.teams[activeTeamIndex].canSprint);
 
+        if ( this.rulesEngine.move.sprint ) {
+            this.sprint.setSelection( "yes" );
+        } else {
+            this.sprint.setSelection( "no" );
+        }
+
         this.confirm.show(true);
         this.confirm.enable(true);
 
@@ -387,8 +385,6 @@ baltek.presenter.Presenter.__initClass = function(){
         this.updateFromEngineFieldState(state.field);
         this.updateFromEngineTeamState(state.teams[0]);
         this.updateFromEngineTeamState(state.teams[1]);
-
-        baltek.debug.writeMessage( "updateFromEngineState: exit" );
     }
 }
 ///////////////////////////////////////////////////////////////////////////////
