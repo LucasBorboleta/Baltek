@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.Button = function(id, i18nTranslator){
     this.__initObject(id, i18nTranslator);
-}
+};
 
 baltek.widget.Button.__initClassCalled = false;
 
@@ -22,10 +22,10 @@ baltek.widget.Button.__initClass = function(){
         var thisSaved = this;
         var eventHandler = function(event){ thisSaved.notifyObservers(); };
         this.element.onclick = eventHandler;
-    }
+    };
 
     baltek.widget.Button.prototype.updateFromI18nTranslator = function(){
         this.element.innerHTML = this.getI18nValueForKeySuffix( "button" );
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

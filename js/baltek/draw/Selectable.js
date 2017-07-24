@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.draw.Selectable = function(){
     this.__initObject();
-}
+};
 
 baltek.draw.Selectable.__initClassCalled = false;
 
@@ -22,42 +22,42 @@ baltek.draw.Selectable.__initClass = function(){
 
         var thisSaved = this;
         this.onClickWrapper = function(event){ thisSaved.onclick(event); };
-    }
+    };
 
     baltek.draw.Selectable.prototype.contains = function(point){
         return false;
-    }
+    };
 
     baltek.draw.Selectable.prototype.draw = function(){
-    }
+    };
 
     baltek.draw.Selectable.prototype.enableSelection = function(condition){
         if ( condition ) {
-            baltek.draw.canvas.addEventListener('click', this.onClickWrapper , false);
+            baltek.draw.canvas.addEventListener( "click" , this.onClickWrapper , false);
         } else {
-            baltek.draw.canvas.removeEventListener('click', this.onClickWrapper , false);
+            baltek.draw.canvas.removeEventListener( "click" , this.onClickWrapper , false);
         }
         this.selectable = condition;
         this.draw();
-    }
+    };
 
     baltek.draw.Selectable.prototype.select = function(condition){
         this.selected = condition;
         this.draw();
-    }
+    };
 
     baltek.draw.Selectable.prototype.onclick = function(event){
-        baltek.utils.assert(this.selectable);
+        if (this.selectable) {
+            var mousePosition = baltek.draw.getMousePosition(event);
+            var clicked = this.contains(mousePosition);
 
-        var mousePosition = baltek.draw.getMousePosition(event);
-        var clicked = this.contains(mousePosition);
-
-        if ( clicked ) {
-            // Inverse the selection status
-            this.selected = (! this.selected);
-            this.draw();
-            this.notifyObservers();
+            if ( clicked ) {
+                // Inverse the selection status
+                this.selected = (! this.selected);
+                this.draw();
+                this.notifyObservers();
+            }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

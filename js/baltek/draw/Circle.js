@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.draw.Circle = function(){
     this.__initObject();
-}
+};
 
 baltek.draw.Circle.__initClassCalled = false;
 
@@ -27,7 +27,7 @@ baltek.draw.Circle.__initClass = function(){
         this.strokeStyleSelected = baltek.style.colors.CIRCLE_BORDER_SELECTED;
         this.fillStyle = baltek.style.colors.CIRCLE_BACKGROUND;
         this.fillStyleSelected = baltek.style.colors.CIRCLE_BACKGROUND;
-    }
+    };
 
     baltek.draw.Circle.prototype.contains = function(point){
         var contains = false;
@@ -38,7 +38,7 @@ baltek.draw.Circle.__initClass = function(){
             contains = ( (dx*dx + dy*dy) < r*r );
         }
         return contains;
-    }
+    };
 
     baltek.draw.Circle.prototype.draw = function(){
 
@@ -69,6 +69,6 @@ baltek.draw.Circle.__initClass = function(){
                 baltek.draw.drawer.fillText(this.text, this.x, this.y);
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

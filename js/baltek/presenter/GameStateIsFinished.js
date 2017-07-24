@@ -15,7 +15,7 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
 
     baltek.presenter.GameStateIsFinished.prototype.__initObject = function(presenter, superState){
         baltek.presenter.GameStateIsFinished.super.__initObject.call(this, presenter, superState);
-    }
+    };
 
     baltek.presenter.GameStateIsFinished.prototype.enter = function(){
         this.presenter.hideAllButtons();
@@ -31,7 +31,7 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
         this.presenter.coordinates.enable(true);
         this.presenter.language.enable(true);
         this.presenter.what.enable(true);
-    }
+    };
 
     baltek.presenter.GameStateIsFinished.prototype.updateFromObservable = function(observable){
 
@@ -49,6 +49,6 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

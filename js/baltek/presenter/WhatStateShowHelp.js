@@ -15,7 +15,7 @@ baltek.presenter.WhatStateShowHelp.__initClass = function(){
 
     baltek.presenter.WhatStateShowHelp.prototype.__initObject = function(presenter, superState){
         baltek.presenter.WhatStateShowHelp.super.__initObject.call(this, presenter, superState);
-    }
+    };
 
     baltek.presenter.WhatStateShowHelp.prototype.enter = function(){
         this.presenter.helpIFrame.show(true);
@@ -23,7 +23,7 @@ baltek.presenter.WhatStateShowHelp.__initClass = function(){
         this.presenter.rules.enable(true);
         this.presenter.help.enable(false);
         this.presenter.about.enable(true);
-    }
+    };
 
     baltek.presenter.WhatStateShowHelp.prototype.exit = function(){
         this.presenter.helpIFrame.show(false);
@@ -31,7 +31,7 @@ baltek.presenter.WhatStateShowHelp.__initClass = function(){
         this.presenter.rules.enable(false);
         this.presenter.help.enable(false);
         this.presenter.about.enable(false);
-    }
+    };
 
     baltek.presenter.WhatStateShowHelp.prototype.updateFromObservable = function(observable){
 
@@ -52,6 +52,6 @@ baltek.presenter.WhatStateShowHelp.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

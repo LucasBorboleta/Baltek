@@ -24,46 +24,46 @@ baltek.rules.Box.__initClass = function(){
         this.footballers = [] ;
         this.footballers.push(null);
         this.footballers.push(null);
-    }
+    };
 
     baltek.rules.Box.prototype.exportState = function(){
         var state = baltek.rules.Box.super.exportState.call(this);
         return state;
-    }
+    };
 
     baltek.rules.Box.prototype.getActiveFootballer = function(){
         return this.footballers[this.engine.activeTeam.teamIndex];
-    }
+    };
 
     baltek.rules.Box.prototype.getBall = function(){
         return this.ball;
-    }
+    };
 
     baltek.rules.Box.prototype.getBoxIndices = function(){
         return { ix:this.ix, iy:this.iy };
-    }
+    };
 
     baltek.rules.Box.prototype.getPassiveFootballer = function(){
         return this.footballers[this.engine.passiveTeam.teamIndex];
-    }
+    };
 
     baltek.rules.Box.prototype.hasActiveFootballer = function(){
         return ( this.footballers[this.engine.activeTeam.teamIndex] !== null );
-    }
+    };
 
     baltek.rules.Box.prototype.hasBall = function(){
         return ( this.ball !== null );
-    }
+    };
 
     baltek.rules.Box.prototype.hasPassiveFootballer = function(){
         return ( this.footballers[this.engine.passiveTeam.teamIndex] !== null );
-    }
+    };
 
     baltek.rules.Box.prototype.setActiveFootballer = function(footballer){
         baltek.utils.assert( footballer !== null ),
         baltek.utils.assert( footballer.team.teamIndex === this.engine.activeTeam.teamIndex );
         this.setFootballer(footballer);
-    }
+    };
 
     baltek.rules.Box.prototype.setBall = function(ball){
         baltek.utils.assert( this.canHostBall );
@@ -78,7 +78,7 @@ baltek.rules.Box.__initClass = function(){
             this.ball = ball;
             ball.box = this;
         }
-    }
+    };
 
     baltek.rules.Box.prototype.setFootballer = function(footballer){
         baltek.utils.assert( this.canHostFootballer );
@@ -93,12 +93,12 @@ baltek.rules.Box.__initClass = function(){
             this.footballers[footballer.team.teamIndex] = footballer;
             footballer.box = this;
         }
-    }
+    };
 
     baltek.rules.Box.prototype.setPassiveFootballer = function(footballer){
         baltek.utils.assert( footballer !== null );
         baltek.utils.assert( footballer.team.teamIndex === this.engine.passiveTeam.teamIndex );
         this.setFootballer(footballer);
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

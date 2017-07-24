@@ -17,7 +17,7 @@ baltek.rules.Selectable.__initClass = function(){
         this.selected = false;
         this.selectable = false;
         this.cost = 0;
-    }
+    };
 
     baltek.rules.Selectable.prototype.exportState = function(){
         var state = {};
@@ -25,6 +25,6 @@ baltek.rules.Selectable.__initClass = function(){
         state.selectable = this.selectable;
         state.cost = this.cost;
         return state;
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

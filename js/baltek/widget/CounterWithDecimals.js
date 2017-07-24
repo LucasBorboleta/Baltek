@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.CounterWithDecimals = function(id, i18nTranslator, maximum){
     this.__initObject(id, i18nTranslator, maximum);
-}
+};
 
 baltek.widget.CounterWithDecimals.__initClassCalled = false;
 
@@ -23,7 +23,7 @@ baltek.widget.CounterWithDecimals.__initClass = function(){
 
         // Finalize the construction regarding i18n.
         this.updateFromI18nTranslator();
-    }
+    };
 
     baltek.widget.CounterWithDecimals.prototype.setCount = function(count){
         baltek.utils.assert( count >= 0 );
@@ -32,9 +32,9 @@ baltek.widget.CounterWithDecimals.__initClass = function(){
         var zeroSymbol = "0";
         text = baltek.utils.repeatString(zeroSymbol, this.numberOfDigits - text.length) + text;
         this.element.innerHTML = text;
-    }
+    };
 
     baltek.widget.CounterWithDecimals.prototype.updateFromI18nTranslator = function(){
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

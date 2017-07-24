@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.CounterWithSymbols = function(id, i18nTranslator, maximum, zeroSymbol, oneSymbol){
     this.__initObject(id, i18nTranslator, maximum, zeroSymbol, oneSymbol);
-}
+};
 
 baltek.widget.CounterWithSymbols.__initClassCalled = false;
 
@@ -27,7 +27,7 @@ baltek.widget.CounterWithSymbols.__initClass = function(){
 
         // Finalize the construction regarding i18n.
         this.updateFromI18nTranslator();
-    }
+    };
 
     baltek.widget.CounterWithSymbols.prototype.setCount = function(count){
         baltek.utils.assert( count >= 0 );
@@ -36,9 +36,9 @@ baltek.widget.CounterWithSymbols.__initClass = function(){
         var text = baltek.utils.repeatString(this.oneSymbol, count) +
                    baltek.utils.repeatString(this.zeroSymbol, this.maximum - count);
         this.element.innerHTML = text;
-    }
+    };
 
     baltek.widget.CounterWithSymbols.prototype.updateFromI18nTranslator = function(){
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

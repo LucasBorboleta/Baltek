@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.draw.Ball = function(){
     this.__initObject();
-}
+};
 
 baltek.draw.Ball.__initClassCalled = false;
 
@@ -22,6 +22,6 @@ baltek.draw.Ball.__initClass = function(){
         this.strokeStyleSelected = baltek.style.colors.BALL_BORDER_SELECTED;
 
         this.text = "@";
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

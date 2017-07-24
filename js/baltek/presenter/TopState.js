@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.presenter.TopState = function(presenter, superState){
     this.__initObject(presenter, superState);
-}
+};
 
 baltek.presenter.TopState.__initClassCalled = false;
 
@@ -16,16 +16,16 @@ baltek.presenter.TopState.__initClass = function(){
     baltek.presenter.TopState.prototype.__initObject = function(presenter, superState){
         baltek.presenter.TopState.super.__initObject.call(this, presenter, superState);
         this.enableHistory(true);
-    }
+    };
 
     baltek.presenter.TopState.prototype.initSubstates = function(){
         this.gameTopState = new baltek.presenter.GameTopState(this.presenter, this);
         this.whatTopState = new baltek.presenter.WhatTopState(this.presenter, this);
-    }
+    };
 
     baltek.presenter.TopState.prototype.getDefaultSubstate = function(){
         return this.gameTopState;
-    }
+    };
 
     baltek.presenter.TopState.prototype.updateFromObservable = function(observable){
 
@@ -40,6 +40,6 @@ baltek.presenter.TopState.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

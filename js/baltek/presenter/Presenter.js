@@ -48,17 +48,17 @@ baltek.presenter.Presenter.__initClass = function(){
         this.game.registerObserver(this);
 
         this.team0Kind = new baltek.widget.Selector( "baltek-select-team0Kind", this.i18nTranslator,
-                                             [ "human", "ai1", "ai2", "ai3" ] );
+            [ "human", "ai1", "ai2", "ai3" ] );
         this.team0Kind.registerObserver(this);
         this.team0Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
 
         this.team1Kind = new baltek.widget.Selector( "baltek-select-team1Kind", this.i18nTranslator,
-                                            [ "human", "ai1", "ai2", "ai3" ] );
+            [ "human", "ai1", "ai2", "ai3" ] );
         this.team1Kind.registerObserver(this);
         this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
 
         this.team0Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team0Bonus" , this.i18nTranslator,
-                                                    BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
+            BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
         this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
 
         this.team0Score = new baltek.widget.CounterWithDecimals( "baltek-counter-team0Score" , this.i18nTranslator, SCORE_MAX);
@@ -68,11 +68,11 @@ baltek.presenter.Presenter.__initClass = function(){
         this.team1Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
 
         this.team1Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team1Bonus" , this.i18nTranslator,
-                                                    BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
+            BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
         this.team1Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
 
         this.sprint = new baltek.widget.Selector( "baltek-select-sprint", this.i18nTranslator,
-                                             [ "no", "yes" ] );
+            [ "no", "yes" ] );
         this.sprint.registerObserver(this);
 
         this.confirm = new baltek.widget.Button( "baltek-button-confirm" , this.i18nTranslator);
@@ -82,15 +82,15 @@ baltek.presenter.Presenter.__initClass = function(){
         this.cancel.registerObserver(this);
 
         this.credit = new baltek.widget.CounterWithSymbols( "baltek-counter-credit" , this.i18nTranslator,
-                                                    CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
+            CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
 
         this.language = new baltek.widget.Selector( "baltek-select-language", this.i18nTranslator,
-                                             this.i18nTranslator.getAvailableLanguages() );
+            this.i18nTranslator.getAvailableLanguages() );
         this.language.registerObserver(this);
         this.language.setSelection(this.i18nTranslator.getLanguage());
 
         this.coordinates = new baltek.widget.Selector( "baltek-select-coordinates", this.i18nTranslator,
-                                                 [ "no", "yes" ] );
+            [ "no", "yes" ] );
         this.coordinates.registerObserver(this);
         this.coordinates.setSelection("no");
 
@@ -125,7 +125,7 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.state = new baltek.presenter.TopState(this, null);
         this.state.enter();
-    }
+    };
 
     baltek.presenter.Presenter.prototype.clearBoxes = function(){
         var ix = 0;
@@ -139,7 +139,7 @@ baltek.presenter.Presenter.__initClass = function(){
                 }
             }
         }
-    }
+    };
 
     baltek.presenter.Presenter.prototype.disableAllButtons = function(){
         this.startGame.enable(false);
@@ -166,7 +166,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.rules.enable(false);
         this.help.enable(false);
         this.about.enable(false);
-    }
+    };
 
     baltek.presenter.Presenter.prototype.drawField = function(){
         var ix = 0;
@@ -180,7 +180,7 @@ baltek.presenter.Presenter.__initClass = function(){
                 }
             }
         }
-    }
+    };
 
     baltek.presenter.Presenter.prototype.hideAllButtons = function(){
         this.startGame.show(false);
@@ -209,12 +209,12 @@ baltek.presenter.Presenter.__initClass = function(){
         this.rules.show(false);
         this.help.show(false);
         this.about.show(false);
-    }
+    };
 
     baltek.presenter.Presenter.prototype.initBall = function(){
         this.draw.ball = new baltek.draw.Ball();
         this.draw.ball.registerObserver(this.ballWatcher);
-    }
+    };
 
     baltek.presenter.Presenter.prototype.initField = function(){
         this.draw = {};
@@ -256,7 +256,7 @@ baltek.presenter.Presenter.__initClass = function(){
                 }
             }
         }
-    }
+    };
 
     baltek.presenter.Presenter.prototype.initFootballers = function(){
         this.draw.teams = [];
@@ -284,7 +284,7 @@ baltek.presenter.Presenter.__initClass = function(){
                 this.draw.teams[teamIndex].footballers[footballerIndex] = footballer;
             }
         }
-    }
+    };
 
     baltek.presenter.Presenter.prototype.showXYLabels = function(condition){
         var ix = 0;
@@ -292,17 +292,17 @@ baltek.presenter.Presenter.__initClass = function(){
         var box = null;
         for (ix=0; ix < this.draw.fieldNx; ix++) {
             for (iy=0; iy < this.draw.fieldNy; iy++) {
-                box = this.draw.boxesByIndices[ix][iy]
+                box = this.draw.boxesByIndices[ix][iy];
                 if ( box !== null ) {
                     box.showXYLabel(condition);
                 }
             }
         }
-    }
+    };
 
     baltek.presenter.Presenter.prototype.updateFromObservable = function(observable){
         this.state.updateFromObservable(observable);
-    }
+    };
 
     baltek.presenter.Presenter.prototype.updateFromEngineBallState = function(state){
         var ballIndices = state.boxIndices;
@@ -310,7 +310,7 @@ baltek.presenter.Presenter.__initClass = function(){
         ballBox.setBall(this.draw.ball);
         this.draw.ball.enableSelection(state.selectable);
         this.draw.ball.select(state.selected);
-    }
+    };
 
     baltek.presenter.Presenter.prototype.updateFromEngineFieldState = function(state){
         var ix = 0;
@@ -325,7 +325,7 @@ baltek.presenter.Presenter.__initClass = function(){
                 }
             }
         }
-    }
+    };
 
     baltek.presenter.Presenter.prototype.updateFromEngineTeamState = function(state){
         var teamIndex = state.teamIndex;
@@ -346,7 +346,7 @@ baltek.presenter.Presenter.__initClass = function(){
             footballer.enableSelection(footballerState.selectable);
             footballer.select(footballerState.selected);
         }
-    }
+    };
 
     baltek.presenter.Presenter.prototype.updateFromEngineState = function(state){
         this.team0Score.show(true);
@@ -385,6 +385,6 @@ baltek.presenter.Presenter.__initClass = function(){
         this.updateFromEngineFieldState(state.field);
         this.updateFromEngineTeamState(state.teams[0]);
         this.updateFromEngineTeamState(state.teams[1]);
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

@@ -13,7 +13,7 @@ baltek.utils.__initModule = function(){
 
     // Init inner classes
     baltek.utils.Observable.__initClass();
-}
+};
 
 baltek.utils.assert = function(condition, message){
     if ( ! condition ) {
@@ -29,12 +29,11 @@ baltek.utils.assert = function(condition, message){
         var error = new Error();
         text += "\n\n STACK TRACE: " + error.stack;
 
-        console.log(text);
         baltek.debug.writeMessage(text);
         alert(text);
         throw text;
     }
-}
+};
 
 baltek.utils.getOwnProperties = function(anObject){
     var properties = [];
@@ -46,12 +45,12 @@ baltek.utils.getOwnProperties = function(anObject){
     }
     properties.sort();
     return properties;
-}
+};
 
 baltek.utils.hasValue = function(array, value){
-    baltek.utils.assert( Array.isArray(array) )
+    baltek.utils.assert( Array.isArray(array) );
     return (array.indexOf(value) > -1);
-}
+};
 
 baltek.utils.inherit = function(childConstructor, parentConstructor){
     if ( childConstructor.prototype !== childConstructor ) {
@@ -77,7 +76,7 @@ baltek.utils.inherit = function(childConstructor, parentConstructor){
         // statement.
         childConstructor.super = parentConstructor.prototype;
     }
-}
+};
 
 baltek.utils.repeatString = function(value, count){
     // Workaround because not support of String.repeat in Internet-Explorer-11
@@ -87,5 +86,5 @@ baltek.utils.repeatString = function(value, count){
         text += value;
     }
     return text;
-}
+};
 ///////////////////////////////////////////////////////////////////////////////

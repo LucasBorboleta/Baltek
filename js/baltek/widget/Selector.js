@@ -25,16 +25,16 @@ baltek.widget.Selector.__initClass = function(){
         var thisSaved = this;
         var eventHandler = function(event){ thisSaved.notifyObservers(); };
         this.element.onchange = eventHandler;
-    }
+    };
 
     baltek.widget.Selector.prototype.getSelection = function(){
         return this.element.value;
-    }
+    };
 
     baltek.widget.Selector.prototype.setSelection = function(selection){
         baltek.utils.assert( baltek.utils.hasValue(this.values, selection) );
         this.element.value = selection;
-    }
+    };
 
     baltek.widget.Selector.prototype.updateFromI18nTranslator = function(){
         var selection = this.element.value;
@@ -55,6 +55,6 @@ baltek.widget.Selector.__initClass = function(){
         }
 
         this.element.value = selection;
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

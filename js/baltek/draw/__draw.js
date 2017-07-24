@@ -34,7 +34,7 @@ baltek.draw.__initModule = function(){
 
     if ( baltek.debug.isEnabled ) {
 
-        baltek.draw.canvas.addEventListener('mousemove',
+        baltek.draw.canvas.addEventListener( "mousemove" ,
             function(event){
                 var mousePosition = baltek.draw.getMousePosition(event);
                 baltek.debug.mousePosition.innerHTML = "Mouse(x,y) = (" +
@@ -43,7 +43,7 @@ baltek.draw.__initModule = function(){
             },
             false);
     }
-}
+};
 
 baltek.draw.getMousePosition = function(event){
     var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
@@ -51,7 +51,7 @@ baltek.draw.getMousePosition = function(event){
         x: event.clientX - canvasRectangle.left,
         y: event.clientY - canvasRectangle.top
     };
-}
+};
 
 baltek.draw.setBoxLatticeDimensions = function(nx, ny){
     var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
@@ -68,5 +68,5 @@ baltek.draw.setBoxLatticeDimensions = function(nx, ny){
 
     baltek.draw.circleQuantum = baltek.draw.boxQuantum/4 ;
     baltek.draw.circleRadius = baltek.draw.circleQuantum*0.75 ;
-}
+};
 ///////////////////////////////////////////////////////////////////////////////

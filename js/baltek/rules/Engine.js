@@ -34,7 +34,7 @@ baltek.rules.Engine.__initClass = function(){
 
         this.field = new baltek.rules.Field(this);
         this.field.initBallAndFootballerBoxes();
-    }
+    };
 
     baltek.rules.Engine.prototype.exportState = function(){
         var state = {};
@@ -45,7 +45,7 @@ baltek.rules.Engine.__initClass = function(){
         state.teams[1] = this.teams[1].exportState();
         state.field = this.field.exportState();
         return state;
-    }
+    };
 
     baltek.rules.Engine.prototype.getState = function(){
         var state = {};
@@ -55,47 +55,47 @@ baltek.rules.Engine.__initClass = function(){
         state.teams[0] = this.teams[0].getState();
         state.teams[1] = this.teams[1].getState();
         return state;
-    }
+    };
 
     baltek.rules.Engine.prototype.getCreditMax = function(){
         return this.CREDIT_MAX;
-    }
+    };
 
     baltek.rules.Engine.prototype.getFieldNx = function(){
         return this.field.nx;
-    }
+    };
 
     baltek.rules.Engine.prototype.getFieldNy = function(){
         return this.field.ny;
-    }
+    };
 
     baltek.rules.Engine.prototype.getFooballerCount = function(teamIndex){
         return this.teams[teamIndex].footballers.length;
-    }
+    };
 
     baltek.rules.Engine.prototype.getFooballerForce = function(teamIndex, footballerIndex){
         return this.teams[teamIndex].footballers[footballerIndex].force;
-    }
+    };
 
     baltek.rules.Engine.prototype.getScoreMax = function(){
         return this.SCORE_MAX;
-    }
+    };
 
     baltek.rules.Engine.prototype.hasFieldBox = function(ix, iy){
         return ( this.field.boxesByIndices[ix][iy] !== null );
-    }
+    };
 
     baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){
         if ( activeTeam !== this.activeTeam ) {
             this.switchActiveAndPassiveTeams();
         }
-    }
+    };
 
     baltek.rules.Engine.prototype.setPassiveTeam = function(passiveTeam){
         if ( passiveTeam !== this.passiveTeam ) {
             this.switchActiveAndPassiveTeams();
         }
-    }
+    };
 
     baltek.rules.Engine.prototype.setState = function(state){
         this.field.clearBallAndFootballerBoxes();
@@ -103,14 +103,14 @@ baltek.rules.Engine.__initClass = function(){
         this.ball.setState(state.ball);
         this.teams[0].setState(state.teams[0]);
         this.teams[1].setState(state.teams[1]);
-    }
+    };
 
     baltek.rules.Engine.prototype.switchActiveAndPassiveTeams = function(){
         var oldActiveTeam = this.activeTeam;
         var oldPassiveTeam = this.passiveTeam;
         this.activeTeam = oldPassiveTeam;
         this.passiveTeam = oldActiveTeam;
-    }
+    };
 
     baltek.rules.Engine.prototype.matchInit = function(){
         baltek.debug.writeMessage("matchInit: enter");
@@ -127,7 +127,7 @@ baltek.rules.Engine.__initClass = function(){
         this.roundInit();
         this.matchUpdate();
         baltek.debug.writeMessage("matchInit: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.roundInit = function(){
         baltek.debug.writeMessage("roundInit: enter");
@@ -145,7 +145,7 @@ baltek.rules.Engine.__initClass = function(){
         this.turnInit();
         this.roundUpdate();
         baltek.debug.writeMessage("roundInit: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.turnInit = function(){
         baltek.debug.writeMessage("turnInit: enter");
@@ -174,7 +174,7 @@ baltek.rules.Engine.__initClass = function(){
         this.moveInit();
         this.turnUpdate();
         baltek.debug.writeMessage("turnInit: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.moveInit = function(){
         baltek.debug.writeMessage("moveInit: enter");
@@ -194,7 +194,7 @@ baltek.rules.Engine.__initClass = function(){
 
         this.moveUpdate();
         baltek.debug.writeMessage("moveInit: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.matchUpdate = function(){
         baltek.debug.writeMessage("matchUpdate: enter");
@@ -204,7 +204,7 @@ baltek.rules.Engine.__initClass = function(){
             if ( ! this.round.isActive ) {
 
                 if ( this.activeTeam.haveGoaled ) {
-                    this.activeTeam.score += 1
+                    this.activeTeam.score += 1;
 
                     if ( this.activeTeam.score >= this.SCORE_MAX || this.passiveTeam.score >= this.SCORE_MAX ) {
                         this.match.isActive = false;
@@ -227,7 +227,7 @@ baltek.rules.Engine.__initClass = function(){
 
         this.notifyObservers();
         baltek.debug.writeMessage("matchUpdate: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.roundUpdate = function(){
         baltek.debug.writeMessage("roundUpdate: enter");
@@ -248,7 +248,7 @@ baltek.rules.Engine.__initClass = function(){
             }
         }
         baltek.debug.writeMessage("roundUpdate: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.turnUpdate = function(){
         baltek.debug.writeMessage("turnUpdate: enter");
@@ -272,7 +272,7 @@ baltek.rules.Engine.__initClass = function(){
             }
         }
         baltek.debug.writeMessage("turnUpdate: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.turnConfirm = function(){
         // Triggered by the player of the activeTeam
@@ -280,7 +280,7 @@ baltek.rules.Engine.__initClass = function(){
         baltek.utils.assert( this.move.isActive );
         this.turn.isActive = false;
         this.matchUpdate();
-    }
+    };
 
     baltek.rules.Engine.prototype.moveUpdate = function(){
         baltek.debug.writeMessage("moveUpdate: enter");
@@ -316,7 +316,7 @@ baltek.rules.Engine.__initClass = function(){
             }
         }
         baltek.debug.writeMessage("moveUpdate: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.moveSprint = function(condition){
         // Triggered by the player of the activeTeam
@@ -330,7 +330,7 @@ baltek.rules.Engine.__initClass = function(){
             this.move.sprint = false;
         }
         this.matchUpdate();
-    }
+    };
 
     baltek.rules.Engine.prototype.moveSelectBall = function(condition){
         // Triggered by the player of the activeTeam
@@ -355,7 +355,7 @@ baltek.rules.Engine.__initClass = function(){
             this.ball.selected = false;
             this.matchUpdate();
         }
-    }
+    };
 
     baltek.rules.Engine.prototype.moveSelectFootballer = function(boxIndices, condition){
         // Triggered by the player of the activeTeam
@@ -386,7 +386,7 @@ baltek.rules.Engine.__initClass = function(){
             activeFootballer.selected = false;
             this.matchUpdate();
         }
-    }
+    };
 
     baltek.rules.Engine.prototype.moveSelectBox = function(boxIndices){
         // Triggered by the player of the activeTeam
@@ -405,7 +405,7 @@ baltek.rules.Engine.__initClass = function(){
         box.selected = true;
 
         this.matchUpdate();
-    }
+    };
 
     baltek.rules.Engine.prototype.moveFindSources = function(){
         baltek.debug.writeMessage("moveFindSources: enter");
@@ -419,7 +419,6 @@ baltek.rules.Engine.__initClass = function(){
 
             var activeFootballer = null;
             var passiveFootballer = null;
-            var cost = 0;
             var n = this.activeTeam.footballers.length;
             var i;
 
@@ -460,7 +459,7 @@ baltek.rules.Engine.__initClass = function(){
         }
 
         baltek.debug.writeMessage("moveFindSources: exit");
-    }
+    };
 
     baltek.rules.Engine.prototype.moveFindDestinations = function(){
         baltek.debug.writeMessage("moveFindDestinations: enter");
@@ -481,17 +480,19 @@ baltek.rules.Engine.__initClass = function(){
         }
 
         var activeFootballer = this.move.sourceBox.footballers[this.activeTeam.teamIndex];
+        
+        var ux=0;
+        var uy=0;
+        var d=0;
+        var dx=0;
+        var dy=0;
+        var ix=0;
+        var iy=0;
+        var box=null;
 
         if ( this.ball.selected ) {
             // The ball moves along a vector of size this.move.LEN_KICK or less
-            var ux;
-            var uy;
-            var d;
-            var dx;
-            var dy;
-            var ix;
-            var iy;
-            var box;
+
             for ( ux=-1; ux<=1; ux++ ) {
                 for ( uy=-1; uy<=1; uy++ ) {
                     for ( d=1; d <= this.move.LEN_KICK; d++) {
@@ -500,54 +501,54 @@ baltek.rules.Engine.__initClass = function(){
                         ix = this.move.sourceBox.ix + dx;
                         iy = this.move.sourceBox.iy + dy;
                         if ( ix >= this.field.firstX && ix <= this.field.lastX && iy >= this.field.firstY && iy <= this.field.lastY ) {
-                             box = this.field.boxesByIndices[ix][iy];
-                             if ( box !== null && box != this.move.sourceBox && box.canHostBall && box !== this.activeTeam.goalBox ) {
-                                 if ( d <= 1) {
-                                     box.selectable = true;
-                                     box.cost = 1;
-                                 } else {
-                                     // Find the passiveFootballer with the strongest force
-                                     // on the trajectory
-                                     var strongestPassiveFootballer = null;
-                                     var t;
-                                     var tx;
-                                     var ty;
-                                     var jx;
-                                     var jy;
-                                     var tbox;
-                                     for ( t=1; t < d; t++ ) {
-                                         tx = t*ux;
-                                         ty = t*uy;
-                                         jx = this.move.sourceBox.ix + tx;
-                                         jy = this.move.sourceBox.iy + ty;
-                                         tbox = this.field.boxesByIndices[jx][jy];
-                                         if ( tbox !== null && tbox.hasPassiveFootballer() ) {
-                                             if ( strongestPassiveFootballer === null ) {
-                                                 strongestPassiveFootballer = tbox.getPassiveFootballer();
-                                             } else if ( tbox.getPassiveFootballer().force > strongestPassiveFootballer ) {
-                                                 strongestPassiveFootballer = tbox.getPassiveFootballer();
-                                             }
-                                         }
-                                     }
+                            box = this.field.boxesByIndices[ix][iy];
+                            if ( box !== null && box != this.move.sourceBox && box.canHostBall && box !== this.activeTeam.goalBox ) {
+                                if ( d <= 1) {
+                                    box.selectable = true;
+                                    box.cost = 1;
+                                } else {
+                                    // Find the passiveFootballer with the strongest force
+                                    // on the trajectory
+                                    var strongestPassiveFootballer = null;
+                                    var t;
+                                    var tx;
+                                    var ty;
+                                    var jx;
+                                    var jy;
+                                    var tbox;
+                                    for ( t=1; t < d; t++ ) {
+                                        tx = t*ux;
+                                        ty = t*uy;
+                                        jx = this.move.sourceBox.ix + tx;
+                                        jy = this.move.sourceBox.iy + ty;
+                                        tbox = this.field.boxesByIndices[jx][jy];
+                                        if ( tbox !== null && tbox.hasPassiveFootballer() ) {
+                                            if ( strongestPassiveFootballer === null ) {
+                                                strongestPassiveFootballer = tbox.getPassiveFootballer();
+                                            } else if ( tbox.getPassiveFootballer().force > strongestPassiveFootballer ) {
+                                                strongestPassiveFootballer = tbox.getPassiveFootballer();
+                                            }
+                                        }
+                                    }
 
-                                     if ( strongestPassiveFootballer === null ) {
-                                         box.selectable = true;
-                                         box.cost = 1;
+                                    if ( strongestPassiveFootballer === null ) {
+                                        box.selectable = true;
+                                        box.cost = 1;
 
-                                     } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
-                                         box.selectable = true;
-                                         box.cost = 1;
+                                    } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
+                                        box.selectable = true;
+                                        box.cost = 1;
 
-                                     } else {
-                                         box.cost = 1 + strongestPassiveFootballer.force - activeFootballer.force;
-                                         if ( this.activeTeam.credit >= this.move.sourceCost + box.cost ) {
-                                             box.selectable = true;
-                                         } else {
-                                             box.selectable = false;
-                                         }
-                                     }
-                                 }
-                             }
+                                    } else {
+                                        box.cost = 1 + strongestPassiveFootballer.force - activeFootballer.force;
+                                        if ( this.activeTeam.credit >= this.move.sourceCost + box.cost ) {
+                                            box.selectable = true;
+                                        } else {
+                                            box.selectable = false;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -559,12 +560,8 @@ baltek.rules.Engine.__initClass = function(){
             }  else {
                 runLength = this.move.LEN_RUN;
             }
-            baltek.debug.writeMessage("runLength=" + runLength);
 
             // The footballer moves freely inside a square of size runLength or less
-            var ix;
-            var iy;
-            var box;
             for ( ix=this.move.sourceBox.ix - runLength; ix <= this.move.sourceBox.ix + runLength; ix++ ) {
                 if ( ix >= this.field.firstX && ix <= this.field.lastX) {
                     for ( iy=this.move.sourceBox.iy - runLength; iy <= this.move.sourceBox.iy + runLength; iy++ ) {
@@ -581,6 +578,6 @@ baltek.rules.Engine.__initClass = function(){
             }
         }
         baltek.debug.writeMessage("moveFindDestinations: exit");
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

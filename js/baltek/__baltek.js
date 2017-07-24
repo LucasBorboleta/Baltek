@@ -17,5 +17,5 @@ baltek.__initModule = function(){
 
     baltek.thePresenter = new baltek.presenter.Presenter();
     baltek.debug.writeMessage( "baltek.__initModule(): done" );
-}
+};
 ///////////////////////////////////////////////////////////////////////////////

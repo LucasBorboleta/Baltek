@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.draw.Box = function(ix, iy, xyLabel){
     this.__initObject(ix, iy, xyLabel);
-}
+};
 
 baltek.draw.Box.__initClassCalled = false;
 
@@ -38,7 +38,7 @@ baltek.draw.Box.__initClass = function(){
         }
         this.strokeStyle = this.fillStyle;
         this.strokeStyleSelected = baltek.style.colors.BOX_BORDER_SELECTED;
-    }
+    };
 
     baltek.draw.Box.prototype.clear = function(){
 
@@ -58,13 +58,13 @@ baltek.draw.Box.__initClass = function(){
         }
 
         this.draw();
-    }
+    };
 
     baltek.draw.Box.prototype.contains = function(point){
         var contains = (point.x > this.x) && (point.x < (this.x + this.side)) &&
                        (point.y > this.y) && (point.y < (this.y + this.side));
         return contains;
-    }
+    };
 
     baltek.draw.Box.prototype.distributeBallAndFootballers = function(){
         var dx = baltek.draw.circleQuantum;
@@ -149,7 +149,7 @@ baltek.draw.Box.__initClass = function(){
         if ( this.footballers[1] !== null ) {
             this.footballers[1].draw();
         }
-    }
+    };
 
     baltek.draw.Box.prototype.setBall = function(ball){
         baltek.utils.assert( ball !== null );
@@ -166,7 +166,7 @@ baltek.draw.Box.__initClass = function(){
             this.ball = ball;
             this.draw();
         }
-    }
+    };
 
     baltek.draw.Box.prototype.setFootballer = function(footballer){
         baltek.utils.assert( footballer !== null );
@@ -183,11 +183,11 @@ baltek.draw.Box.__initClass = function(){
             this.footballers[footballer.teamIndex] = footballer;
             this.draw();
         }
-    }
+    };
 
     baltek.draw.Box.prototype.showXYLabel = function(condition){
         this.doShowXYLabel = condition;
         this.draw();
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

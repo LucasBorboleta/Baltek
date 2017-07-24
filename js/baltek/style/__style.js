@@ -52,9 +52,9 @@ baltek.style.__initModule = function(){
     baltek.style.colors.BOX_1 = BALTEK_GREEN_1;
 
     baltek.style.colors.TEAM_COLORS = [];
-    baltek.style.colors.TEAM_COLORS.push(null)
-    baltek.style.colors.TEAM_COLORS.push(null)
+    baltek.style.colors.TEAM_COLORS.push(null);
+    baltek.style.colors.TEAM_COLORS.push(null);
     baltek.style.colors.TEAM_COLORS[0] = baltek.style.colors.TEAM_0;
     baltek.style.colors.TEAM_COLORS[1] = baltek.style.colors.TEAM_1;
-}
+};
 ///////////////////////////////////////////////////////////////////////////////

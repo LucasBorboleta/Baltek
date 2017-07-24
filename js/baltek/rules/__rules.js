@@ -5,7 +5,7 @@ baltek.rules.__initModuleCalled = false;
 
 baltek.rules.__initModule = function(){
 
-    if ( baltek.rules.__initModuleCalled ) return
+    if ( baltek.rules.__initModuleCalled ) return;
     baltek.rules.__initModuleCalled = true;
 
     // Init required modules
@@ -20,5 +20,5 @@ baltek.rules.__initModule = function(){
     baltek.rules.Footballer.__initClass();
     baltek.rules.Selectable.__initClass();
     baltek.rules.Team.__initClass();
-}
+};
 ///////////////////////////////////////////////////////////////////////////////

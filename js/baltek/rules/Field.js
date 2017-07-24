@@ -65,7 +65,6 @@ baltek.rules.Field.__initClass = function(){
 
         var activeIndex = this.engine.activeTeam.teamIndex;
         var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
-        var activeDirectionX = 1 - 2*activeIndex
 
         var agix =  activeOriginX;
         var agiy = this.middleY;
@@ -73,12 +72,11 @@ baltek.rules.Field.__initClass = function(){
 
         var passiveIndex = this.engine.passiveTeam.teamIndex;
         var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
-        var passiveDirectionX = 1 - 2*passiveIndex
 
         var pgix =  passiveOriginX;
         var pgiy = this.middleY;
         this.engine.passiveTeam.goalBox = this.boxesByIndices[pgix][pgiy] ;
-    }
+    };
 
     baltek.rules.Field.prototype.clearBallAndFootballerBoxes = function(){
         var box = null;
@@ -109,7 +107,7 @@ baltek.rules.Field.__initClass = function(){
         for ( i=0; i<n; i++) {
             this.engine.passiveTeam.footballers[i].box = null;
         }
-    }
+    };
 
     baltek.rules.Field.prototype.enableBoxes = function(condition){
         var box = null;
@@ -123,7 +121,7 @@ baltek.rules.Field.__initClass = function(){
                 }
             }
         }
-    }
+    };
 
     baltek.rules.Field.prototype.exportState = function(){
         var state = {};
@@ -146,7 +144,7 @@ baltek.rules.Field.__initClass = function(){
         }
 
         return state;
-    }
+    };
 
     baltek.rules.Field.prototype.initBallAndFootballerBoxes = function(){
 
@@ -157,7 +155,7 @@ baltek.rules.Field.__initClass = function(){
 
         var activeIndex = this.engine.activeTeam.teamIndex;
         var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
-        var activeDirectionX = 1 - 2*activeIndex
+        var activeDirectionX = 1 - 2*activeIndex;
 
         this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.middleY].setBall(this.engine.ball);
 
@@ -170,7 +168,7 @@ baltek.rules.Field.__initClass = function(){
 
         var passiveIndex = this.engine.passiveTeam.teamIndex;
         var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
-        var passiveDirectionX = 1 - 2*passiveIndex
+        var passiveDirectionX = 1 - 2*passiveIndex;
 
         this.boxesByIndices[passiveOriginX + (this.TSS - 1)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer3);
         this.boxesByIndices[passiveOriginX + this.TSS*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer2t);
@@ -178,7 +176,7 @@ baltek.rules.Field.__initClass = function(){
         this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer1t);
         this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer1m);
         this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer1b);
-    }
+    };
 
     baltek.rules.Field.prototype.selectBoxes = function(condition){
         var box = null;
@@ -192,6 +190,6 @@ baltek.rules.Field.__initClass = function(){
                 }
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

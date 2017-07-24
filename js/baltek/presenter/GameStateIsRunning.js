@@ -15,7 +15,7 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
 
     baltek.presenter.GameStateIsRunning.prototype.__initObject = function(presenter, superState){
         baltek.presenter.GameStateIsRunning.super.__initObject.call(this, presenter, superState);
-    }
+    };
 
     baltek.presenter.GameStateIsRunning.prototype.enter = function(){
         this.presenter.hideAllButtons();
@@ -31,9 +31,10 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.what.enable(true);
 
         this.presenter.rulesEngine.matchInit();
-    }
+    };
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
+        var boxIndices = null;
 
         if ( observable === this.presenter.quitGame ) {
             this.setState(this.superState.gameStateIsReadyToQuit);
@@ -50,11 +51,11 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
             this.presenter.rulesEngine.moveSelectBall(observable.ball.selected);
 
         } else if ( observable === this.presenter.footballerWatcher ) {
-            var boxIndices = {ix:observable.footballer.box.ix, iy:observable.footballer.box.iy};
+            boxIndices = {ix:observable.footballer.box.ix, iy:observable.footballer.box.iy};
             this.presenter.rulesEngine.moveSelectFootballer(boxIndices, observable.footballer.selected);
 
         } else if ( observable === this.presenter.boxWatcher ) {
-            var boxIndices = {ix:observable.box.ix, iy:observable.box.iy};
+            boxIndices = {ix:observable.box.ix, iy:observable.box.iy};
             this.presenter.rulesEngine.moveSelectBox(boxIndices);
 
         } else if ( observable === this.presenter.sprint ) {
@@ -71,6 +72,6 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

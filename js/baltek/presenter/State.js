@@ -21,7 +21,7 @@ baltek.presenter.State.__initClass = function(){
         } else {
             this.superState = null;
         }
-    }
+    };
 
     baltek.presenter.State.prototype.setState = function(newState){
         // newState and "this" must be sibbling states
@@ -33,13 +33,13 @@ baltek.presenter.State.__initClass = function(){
         newState.superState.substate = newState;
         this.presenter.state = newState;
         this.presenter.state.enter();
-    }
+    };
 
     baltek.presenter.State.prototype.enter = function(){
-    }
+    };
 
     baltek.presenter.State.prototype.exit = function(){
-    }
+    };
 
     baltek.presenter.State.prototype.updateFromObservable = function(observable){
         if ( this.superState !== null ) {
@@ -47,6 +47,6 @@ baltek.presenter.State.__initClass = function(){
         } else {
             baltek.utils.assert( false, "observable not managed" );
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

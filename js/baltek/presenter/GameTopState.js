@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.presenter.GameTopState = function(presenter, superState){
     this.__initObject(presenter, superState);
-}
+};
 
 baltek.presenter.GameTopState.__initClassCalled = false;
 
@@ -16,26 +16,26 @@ baltek.presenter.GameTopState.__initClass = function(){
     baltek.presenter.GameTopState.prototype.__initObject = function(presenter, superState){
         baltek.presenter.GameTopState.super.__initObject.call(this, presenter, superState);
         this.enableHistory(true);
-    }
+    };
 
     baltek.presenter.GameTopState.prototype.atEnter = function(){
         baltek.draw.canvas.style.display = "inherit";
-    }
+    };
 
     baltek.presenter.GameTopState.prototype.atExit = function(){
         baltek.draw.canvas.style.display = "none";
-    }
+    };
 
     baltek.presenter.GameTopState.prototype.initSubstates = function(){
         this.gameStateIsFinished = new baltek.presenter.GameStateIsFinished(this.presenter, this);
         this.gameStateIsReadyToStart = new baltek.presenter.GameStateIsReadyToStart(this.presenter, this);
         this.gameStateIsRunning = new baltek.presenter.GameStateIsRunning(this.presenter, this);
         this.gameStateIsReadyToQuit = new baltek.presenter.GameStateIsReadyToQuit(this.presenter, this);
-    }
+    };
 
     baltek.presenter.GameTopState.prototype.getDefaultSubstate = function(){
         return this.gameStateIsReadyToStart;
-    }
+    };
 
     baltek.presenter.GameTopState.prototype.updateFromObservable = function(observable){
 
@@ -53,6 +53,6 @@ baltek.presenter.GameTopState.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

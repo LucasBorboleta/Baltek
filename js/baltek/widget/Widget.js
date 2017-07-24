@@ -24,32 +24,32 @@ baltek.widget.Widget.__initClass = function(){
         this.i18nLanguageAspect = this.i18nTranslator.getAspect("languageAspect");
         this.i18nTranslator.registerObserver(this, this.i18nLanguageAspect);
 
-    }
+    };
 
     baltek.widget.Widget.prototype.enable = function(condition){
         this.element.disabled = ( ! condition );
-    }
+    };
 
     baltek.widget.Widget.prototype.getI18nValueForKeySuffix = function(i18nKeySuffix){
         var translatedText = this.i18nTranslator.getValueForKey(this.i18nKeyPrefix, i18nKeySuffix);
         return translatedText;
-    }
+    };
 
     baltek.widget.Widget.prototype.isEnabled = function(){
         return this.element.disabled;
-    }
+    };
 
     baltek.widget.Widget.prototype.isShowed = function(){
         return ( this.element.style.display !== "none" );
-    }
+    };
 
     baltek.widget.Widget.prototype.setBackgroundColor  = function(color){
         this.element.style.backgroundColor = color ;
-    }
+    };
 
     baltek.widget.Widget.prototype.setColor = function(color){
         this.element.style.color = color ;
-    }
+    };
 
     baltek.widget.Widget.prototype.show = function(condition){
         if ( condition ) {
@@ -57,11 +57,11 @@ baltek.widget.Widget.__initClass = function(){
         } else {
             this.element.style.display = "none";
         }
-    }
+    };
 
     baltek.widget.Widget.prototype.updateFromI18nTranslator = function(){
         baltek.utils.assert( false, "must not be called" );
-    }
+    };
 
     baltek.widget.Widget.prototype.updateFromObservable = function(observable, aspect){
         if ( observable === this.i18nTranslator && aspect === this.i18nLanguageAspect ) {
@@ -69,6 +69,6 @@ baltek.widget.Widget.__initClass = function(){
         } else {
             baltek.utils.assert( false, "observable/aspect not managed" );
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

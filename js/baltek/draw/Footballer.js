@@ -2,7 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 baltek.draw.Footballer = function(teamIndex, force){
     this.__initObject(teamIndex, force);
-}
+};
 
 baltek.draw.Footballer.__initClassCalled = false;
 
@@ -17,7 +17,7 @@ baltek.draw.Footballer.__initClass = function(){
         baltek.draw.Footballer.super.__initObject.call(this);
 
         baltek.utils.assert( teamIndex === 0 || teamIndex === 1 );
-        this.teamIndex = teamIndex
+        this.teamIndex = teamIndex;
 
         this.text = force.toString();
 
@@ -26,6 +26,6 @@ baltek.draw.Footballer.__initClass = function(){
         this.fillStyleSelected = teamColor ;
         this.strokeStyle = teamColor;
         this.strokeStyleSelected = baltek.style.colors.CIRCLE_BORDER_SELECTED;
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

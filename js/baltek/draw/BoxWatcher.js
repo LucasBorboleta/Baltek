@@ -18,16 +18,16 @@ baltek.draw.BoxWatcher.__initClass = function(){
         this.boxWatcherAspect = this.newAspect("boxWatcherAspect");
 
         this.box = null;
-    }
+    };
 
     baltek.draw.BoxWatcher.prototype.getBox = function(){
         return this.box;
-    }
+    };
 
     baltek.draw.BoxWatcher.prototype.updateFromObservable = function(observable){
         // The observable is assumed of type baltek.draw.Box
         this.box = observable;
         this.notifyObservers();
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

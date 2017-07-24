@@ -16,7 +16,7 @@ baltek.presenter.WhatTopState.__initClass = function(){
     baltek.presenter.WhatTopState.prototype.__initObject = function(presenter, superState){
         baltek.presenter.WhatTopState.super.__initObject.call(this, presenter, superState);
         this.enableHistory(true);
-    }
+    };
 
     baltek.presenter.WhatTopState.prototype.atEnter = function(){
         this.presenter.rulesIFrame.show(false);
@@ -33,23 +33,23 @@ baltek.presenter.WhatTopState.__initClass = function(){
         this.presenter.disableAllButtons();
         this.presenter.language.enable(true);
         this.presenter.game.enable(true);
-    }
+    };
 
     baltek.presenter.WhatTopState.prototype.atExit = function(){
         this.presenter.rulesIFrame.show(false);
         this.presenter.helpIFrame.show(false);
         this.presenter.aboutIFrame.show(false);
-    }
+    };
 
     baltek.presenter.WhatTopState.prototype.initSubstates = function(){
         this.whatStateShowRules = new baltek.presenter.WhatStateShowRules(this.presenter, this);
         this.whatStateShowHelp = new baltek.presenter.WhatStateShowHelp(this.presenter, this);
         this.whatStateShowAbout = new baltek.presenter.WhatStateShowAbout(this.presenter, this);
-    }
+    };
 
     baltek.presenter.WhatTopState.prototype.getDefaultSubstate = function(){
         return this.whatStateShowAbout;
-    }
+    };
 
     baltek.presenter.WhatTopState.prototype.updateFromObservable = function(observable){
 
@@ -64,6 +64,6 @@ baltek.presenter.WhatTopState.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

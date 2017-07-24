@@ -15,7 +15,7 @@ baltek.presenter.WhatStateShowRules.__initClass = function(){
 
     baltek.presenter.WhatStateShowRules.prototype.__initObject = function(presenter, superState){
         baltek.presenter.WhatStateShowRules.super.__initObject.call(this, presenter, superState);
-    }
+    };
 
     baltek.presenter.WhatStateShowRules.prototype.enter = function(){
         this.presenter.rulesIFrame.show(true);
@@ -23,7 +23,7 @@ baltek.presenter.WhatStateShowRules.__initClass = function(){
         this.presenter.rules.enable(false);
         this.presenter.help.enable(true);
         this.presenter.about.enable(true);
-    }
+    };
 
     baltek.presenter.WhatStateShowRules.prototype.exit = function(){
         this.presenter.rulesIFrame.show(false);
@@ -31,7 +31,7 @@ baltek.presenter.WhatStateShowRules.__initClass = function(){
         this.presenter.rules.enable(false);
         this.presenter.help.enable(false);
         this.presenter.about.enable(false);
-    }
+    };
 
     baltek.presenter.WhatStateShowRules.prototype.updateFromObservable = function(observable){
 
@@ -52,6 +52,6 @@ baltek.presenter.WhatStateShowRules.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

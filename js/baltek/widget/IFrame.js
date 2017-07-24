@@ -22,7 +22,7 @@ baltek.widget.IFrame.__initClass = function(){
 
         // Finalize the construction regarding i18n.
         this.updateFromI18nTranslator();
-    }
+    };
 
     baltek.widget.IFrame.prototype.show = function(condition){
         baltek.widget.IFrame.super.show.call(this, condition);
@@ -30,7 +30,7 @@ baltek.widget.IFrame.__initClass = function(){
         if ( this.isShowed() ) {
             this.element.src = this.src;
         }
-    }
+    };
 
     baltek.widget.IFrame.prototype.updateFromI18nTranslator = function(){
         this.src = this.getI18nValueForKeySuffix( "file" );
@@ -38,6 +38,6 @@ baltek.widget.IFrame.__initClass = function(){
         if ( this.isShowed() ) {
             this.element.src = this.src;
         }
-    }
-}
+    };
+};
 ///////////////////////////////////////////////////////////////////////////////

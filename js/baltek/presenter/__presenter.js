@@ -30,5 +30,5 @@ baltek.presenter.__initModule = function(){
     baltek.presenter.WhatStateShowHelp.__initClass();
     baltek.presenter.WhatStateShowRules.__initClass();
     baltek.presenter.WhatTopState.__initClass();
-}
+};
 ///////////////////////////////////////////////////////////////////////////////

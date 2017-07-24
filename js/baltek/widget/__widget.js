@@ -21,12 +21,12 @@ baltek.widget.__initModule = function(){
     baltek.widget.Widget.__initClass();
 
 
-}
+};
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.getStylePropertyValue = function(elementId, propertyName){
     var element = document.getElementById(elementId);
     var style = window.getComputedStyle(element, null);
     var propertyValue = style.getPropertyValue(propertyName);
     return propertyValue;
-}
+};
 ///////////////////////////////////////////////////////////////////////////////
