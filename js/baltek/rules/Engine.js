@@ -431,7 +431,7 @@ baltek.rules.Engine.__initClass = function(){
                 if ( activeFootballer.canRun ) {
                     // The activeFootballer has not run during this turn
                     activeFootballer.cost = 0;
-                    activeFootballer.selectable = true;
+                    activeFootballer.selectable = ( this.activeTeam.credit >= activeFootballer.cost );
                 }
 
                 if ( activeFootballer.canKick && activeFootballer.box.hasBall() ) {
@@ -440,19 +440,15 @@ baltek.rules.Engine.__initClass = function(){
 
                     if ( passiveFootballer === null ) {
                         this.ball.cost = 0;
-                        this.ball.selectable = true;
+                        this.ball.selectable = ( this.activeTeam.credit >= this.ball.cost );
 
                     } else if ( activeFootballer.force >= passiveFootballer.force ) {
                         this.ball.cost = 0;
-                        this.ball.selectable = true;
+                        this.ball.selectable = ( this.activeTeam.credit >= this.ball.cost );
 
                     } else {
                         this.ball.cost = passiveFootballer.force - activeFootballer.force;
-                        if ( this.activeTeam.credit >= this.ball.cost ) {
-                            this.ball.selectable = true;
-                        } else {
-                            this.ball.selectable = false;
-                        }
+                        this.ball.selectable = ( this.activeTeam.credit >= this.ball.cost );
                     }
                 }
             }
@@ -480,7 +476,7 @@ baltek.rules.Engine.__initClass = function(){
         }
 
         var activeFootballer = this.move.sourceBox.footballers[this.activeTeam.teamIndex];
-        
+
         var ux=0;
         var uy=0;
         var d=0;
@@ -504,8 +500,8 @@ baltek.rules.Engine.__initClass = function(){
                             box = this.field.boxesByIndices[ix][iy];
                             if ( box !== null && box != this.move.sourceBox && box.canHostBall && box !== this.activeTeam.goalBox ) {
                                 if ( d <= 1) {
-                                    box.selectable = true;
                                     box.cost = 1;
+                                    box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
                                 } else {
                                     // Find the passiveFootballer with the strongest force
                                     // on the trajectory
@@ -532,20 +528,16 @@ baltek.rules.Engine.__initClass = function(){
                                     }
 
                                     if ( strongestPassiveFootballer === null ) {
-                                        box.selectable = true;
                                         box.cost = 1;
+                                        box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
 
                                     } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
-                                        box.selectable = true;
                                         box.cost = 1;
+                                        box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
 
                                     } else {
                                         box.cost = 1 + strongestPassiveFootballer.force - activeFootballer.force;
-                                        if ( this.activeTeam.credit >= this.move.sourceCost + box.cost ) {
-                                            box.selectable = true;
-                                        } else {
-                                            box.selectable = false;
-                                        }
+                                        box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
                                     }
                                 }
                             }
@@ -569,8 +561,8 @@ baltek.rules.Engine.__initClass = function(){
                             box = this.field.boxesByIndices[ix][iy];
                             if ( box !== null && box != this.move.sourceBox ) {
                                 if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
-                                    box.selectable = true;
                                     box.cost = 1;                                }
+                                    box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
                             }
                         }
                     }

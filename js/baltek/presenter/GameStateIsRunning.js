@@ -30,7 +30,11 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.language.enable(true);
         this.presenter.what.enable(true);
 
-        this.presenter.rulesEngine.matchInit();
+        if ( this.presenter.rulesEngine.match === undefined ) {
+            this.presenter.rulesEngine.matchInit();
+        } else {
+            this.presenter.rulesEngine.matchUpdate();
+        }
     };
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
