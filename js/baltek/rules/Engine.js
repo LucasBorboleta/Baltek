@@ -125,8 +125,6 @@ baltek.rules.Engine.__initClass = function(){
         this.passiveTeam.score = 0;
 
         this.roundInit();
-        this.matchUpdate();
-        baltek.debug.writeMessage("matchInit: exit");
     };
 
     baltek.rules.Engine.prototype.roundInit = function(){
@@ -143,13 +141,13 @@ baltek.rules.Engine.__initClass = function(){
 
         this.field.initBallAndFootballerBoxes();
         this.turnInit();
-        this.roundUpdate();
-        baltek.debug.writeMessage("roundInit: exit");
     };
 
     baltek.rules.Engine.prototype.turnInit = function(){
         baltek.debug.writeMessage("turnInit: enter");
         this.turn = {};
+
+        this.turn.state = this.getState();
 
         this.turn.isActive = true;
 
@@ -172,8 +170,6 @@ baltek.rules.Engine.__initClass = function(){
         this.ball.selected = false;
 
         this.moveInit();
-        this.turnUpdate();
-        baltek.debug.writeMessage("turnInit: exit");
     };
 
     baltek.rules.Engine.prototype.moveInit = function(){
@@ -191,9 +187,6 @@ baltek.rules.Engine.__initClass = function(){
         this.move.sourceCost = 0;
         this.move.destinationBox = null;
         this.move.destinationCost = 0;
-
-        this.moveUpdate();
-        baltek.debug.writeMessage("moveInit: exit");
     };
 
     baltek.rules.Engine.prototype.matchUpdate = function(){
@@ -214,6 +207,7 @@ baltek.rules.Engine.__initClass = function(){
                 if ( this.match.isActive ) {
                     this.switchActiveAndPassiveTeams();
                     this.roundInit();
+                    this.roundUpdate();
                 } else {
                     baltek.debug.writeMessage("matchUpdate: this.match.isActive=" + this.match.isActive);
                     this.field.enableBoxes(false);
@@ -226,7 +220,6 @@ baltek.rules.Engine.__initClass = function(){
         }
 
         this.notifyObservers();
-        baltek.debug.writeMessage("matchUpdate: exit");
     };
 
     baltek.rules.Engine.prototype.roundUpdate = function(){
@@ -244,10 +237,10 @@ baltek.rules.Engine.__initClass = function(){
                 if ( this.round.isActive ) {
                     this.switchActiveAndPassiveTeams();
                     this.turnInit();
+                    this.turnUpdate();
                 }
             }
         }
-        baltek.debug.writeMessage("roundUpdate: exit");
     };
 
     baltek.rules.Engine.prototype.turnUpdate = function(){
@@ -257,26 +250,26 @@ baltek.rules.Engine.__initClass = function(){
             this.moveUpdate();
 
             if ( ! this.move.isActive ) {
-
-                if ( this.activeTeam.credit <= 0 ) {
-                    this.turn.isActive = false;
-                }
-
-                if ( this.activeTeam.haveGoaled ) {
-                    this.turn.isActive = false;
-                }
-
                 if ( this.turn.isActive ) {
                     this.moveInit();
+                    this.moveUpdate();
                 }
             }
         }
-        baltek.debug.writeMessage("turnUpdate: exit");
+    };
+
+    baltek.rules.Engine.prototype.turnCancel = function(){
+        // Triggered by the player of the activeTeam
+        baltek.debug.writeMessage("turnCancel:");
+        baltek.utils.assert( this.move.isActive );
+        this.setState(this.turn.state);
+        this.turnInit();
+        this.matchUpdate();
     };
 
     baltek.rules.Engine.prototype.turnConfirm = function(){
         // Triggered by the player of the activeTeam
-
+        baltek.debug.writeMessage("turnConfirm:");
         baltek.utils.assert( this.move.isActive );
         this.turn.isActive = false;
         this.matchUpdate();
@@ -315,7 +308,6 @@ baltek.rules.Engine.__initClass = function(){
                 this.activeTeam.credit -= ( this.move.sourceCost + this.move.destinationCost );
             }
         }
-        baltek.debug.writeMessage("moveUpdate: exit");
     };
 
     baltek.rules.Engine.prototype.moveSprint = function(condition){
@@ -344,7 +336,6 @@ baltek.rules.Engine.__initClass = function(){
             this.move.sourceBox = this.ball.box;
             this.move.sourceCost = this.ball.cost;
             this.ball.selected = true;
-            this.matchUpdate();
 
         } else {
             baltek.utils.assert( this.move.sourceBox !== null );
@@ -353,8 +344,8 @@ baltek.rules.Engine.__initClass = function(){
             this.move.sourceBox = null;
             this.move.sourceCost = 0;
             this.ball.selected = false;
-            this.matchUpdate();
         }
+        this.matchUpdate();
     };
 
     baltek.rules.Engine.prototype.moveSelectFootballer = function(boxIndices, condition){
@@ -375,7 +366,6 @@ baltek.rules.Engine.__initClass = function(){
             this.move.sourceBox = box;
             this.move.sourceCost = activeFootballer.cost;
             activeFootballer.selected = true;
-            this.matchUpdate();
 
         } else {
             baltek.utils.assert( this.move.sourceBox !== null );
@@ -384,8 +374,8 @@ baltek.rules.Engine.__initClass = function(){
             this.move.sourceBox = null;
             this.move.sourceCost = 0;
             activeFootballer.selected = false;
-            this.matchUpdate();
         }
+        this.matchUpdate();
     };
 
     baltek.rules.Engine.prototype.moveSelectBox = function(boxIndices){
@@ -453,8 +443,6 @@ baltek.rules.Engine.__initClass = function(){
                 }
             }
         }
-
-        baltek.debug.writeMessage("moveFindSources: exit");
     };
 
     baltek.rules.Engine.prototype.moveFindDestinations = function(){
@@ -561,15 +549,15 @@ baltek.rules.Engine.__initClass = function(){
                             box = this.field.boxesByIndices[ix][iy];
                             if ( box !== null && box != this.move.sourceBox ) {
                                 if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
-                                    box.cost = 1;                                }
+                                    box.cost = 1;
                                     box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        baltek.debug.writeMessage("moveFindDestinations: exit");
     };
 };
 ///////////////////////////////////////////////////////////////////////////////

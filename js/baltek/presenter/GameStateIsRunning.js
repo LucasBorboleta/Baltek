@@ -32,9 +32,8 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
 
         if ( this.presenter.rulesEngine.match === undefined ) {
             this.presenter.rulesEngine.matchInit();
-        } else {
-            this.presenter.rulesEngine.matchUpdate();
         }
+        this.presenter.rulesEngine.matchUpdate();
     };
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
@@ -64,6 +63,9 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
 
         } else if ( observable === this.presenter.sprint ) {
             this.presenter.rulesEngine.moveSprint( observable.getSelection() === "yes" );
+
+        } else if ( observable === this.presenter.cancel ) {
+            this.presenter.rulesEngine.turnCancel();
 
         } else if ( observable === this.presenter.confirm ) {
             this.presenter.rulesEngine.turnConfirm();

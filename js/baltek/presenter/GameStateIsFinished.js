@@ -36,6 +36,7 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
     baltek.presenter.GameStateIsFinished.prototype.updateFromObservable = function(observable){
 
         if ( observable === this.presenter.restartGame ) {
+            this.presenter.rulesEngine.matchInit();
             this.setState(this.superState.gameStateIsReadyToStart);
 
         } else if ( observable === this.presenter.quitGame ) {

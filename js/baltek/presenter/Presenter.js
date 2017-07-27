@@ -377,7 +377,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.confirm.enable(true);
 
         this.cancel.show(true);
-        this.cancel.enable(true);
+        this.cancel.enable( state.teams[activeTeamIndex].credit < this.rulesEngine.getCreditMax() );
 
         this.clearBoxes();
 
