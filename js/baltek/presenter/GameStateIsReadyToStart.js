@@ -36,12 +36,18 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsReadyToStart.prototype.updateFromObservable = function(observable){
-
+        var isImplemented = true;
         if ( observable === this.presenter.team0Kind ) {
             this.presenter.team0Agent.kind = this.presenter.team0Kind.getSelection();
+            isImplemented = ( this.presenter.team0Agent.kind == "human");
+            baltek.debug.writeMessage( "GameStateIsReadyToStart: team0Kind=" + this.presenter.team0Agent.kind +
+                                            " ; implemented=" + isImplemented);
 
         } else if ( observable === this.presenter.team1Kind ) {
             this.presenter.team1Agent.kind = this.presenter.team1Kind.getSelection();
+            isImplemented = ( this.presenter.team0Agent.kind == "human");
+            baltek.debug.writeMessage( "GameStateIsReadyToStart: team1Kind=" + this.presenter.team1Agent.kind +
+                                            " ; implemented=" + isImplemented);
 
         } else if ( observable === this.presenter.startGame ) {
             this.presenter.team0Agent.kind = this.presenter.team0Kind.getSelection();
