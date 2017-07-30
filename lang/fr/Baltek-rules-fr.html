@@ -2,14 +2,182 @@
 <html lang="eo">
 	<head>
 	    <meta charset="UTF-8">
-		<title>Règles de  Baltek</title>
+		<title>Règles de Baltek</title>
 	</head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../../baltek.css">
 
 	<body>
-	    <h1>Règles de Baltek</h1>
-	    <p>Voir le fichier PDF.</p>
+	    <h1>Le matériel : balle, footballeurs, terrain et buts</h1>
+
+			<img border=0 src="../../pictures/starting-positions-with-coordinates.jpg" />
+			<p>Voici le matériel, illustré sur le schéma ci-dessus :</p>
+			<ul>
+				<li>1 balle blanche.</li>
+				<li>Une équipe de 6 footballeurs bleus.</li>
+				<li>Une équipe 6 footballeurs rouges.</li>
+				<li>Chaque équipe se compose de :</li>
+					<ul>
+						<li>1 avant-centre de force 3.</li>
+						<li>2 ailiers de force 2.</li>
+						<li>3 arrières de force 1.</li>
+					</ul>
+				<li>Le terrain est construit à l'aide de 52 cases vertes.</li>
+				<li>La case "a3" est le but défendu par l'équipe bleue.</li>
+				<li>La case "l3"  est le but défendu par l'équipe rouge.</li>
+			</ul>
+
+		<h1>But du jeu</h1>
+			<ul>
+				<li>Baltek se joue à deux joueurs.</li>
+				<li>Chaque joueur dirige une équipe de 6 footballeurs.</li>
+				<li>Les joueurs décident de l’attribution des équipes.</li>
+
+				<li>À son tour de jeu, chaque joueur déplace la balle et ses footballeurs,
+					et tente d'envoyer la balle dans le but adverse.</li>
+
+				<li>Le gagnant est le joueur qui atteint en premier le score de 2 buts.</li>
+			</ul>
+
+		<h1>Mise en place</h1>
+			<ul>
+				<li>En début de partie, et après chaque but marqué, les footballeurs sont placés
+					sur le terrain à leurs positions d’engagement.</li>
+
+				<li>Les positions d’engagement sont fixes.</li>
+
+				<li>Les positions d’engagement des deux équipes sont symétriques
+					sauf pour celles des avant-centres.</li>
+
+				<li>L'équipe bleue effectue toujours le premier engagement de la partie.</li>
+				<li>L'équipe qui vient de marquer un but laisse l'autre équipe engager.</li>
+
+				<li>La figure suivante représente l’engagement par l’équipe bleue.</li> 
+					<img border=0 src="../../pictures/starting-positions-for-blue-team.jpg" />
+
+				<li>La figure suivante représente l’engagement par l’équipe rouge.</li>
+					<img border=0 src="../../pictures/starting-positions-for-red-team.jpg" />
+			</ul>
+
+		<h1>Tour de jeu</h1>
+
+			<h2>Vue d'ensemble des actions, options et compensations</h2>
+				<ul>
+					<li>À son tour de jeu, l’équipe peut dépenser 0, 1, 2 ou 3 crédits d’action,
+						et 0 ou 1 bonus d'action.</li>
+
+					<li>Les actions, options et compensations sont les suivantes :</li>
+						<ul>
+							<li><strong>Courir</strong> : déplacer un footballeur ;
+								coût : <strong>1 crédit</strong>.</li>
+
+							<li><strong>Sprint</strong> : option pour augmenter le déplacement d'un footballeur ;
+								coût : <strong>1 bonus</strong>.</li>
+
+							<li><strong>Passer/tirer</strong> : déplacer la balle ;
+								coût : <strong>1 crédit</strong>.</li>
+
+							<li><strong>Duel</strong> : compensation de force pour posséder la balle ;
+								coût : <strong>1 crédit</strong>.</li>
+
+							<li><strong>Lob</strong> : compensation de force pour transmettre la balle ;
+								coût : <strong>1 crédit</strong>.</li>
+						</ul>
+				</ul>
+
+			<h2>Action « courir »</h2>
+				<ul>
+					<li>L’action « courir » coûte 1 crédit et permet de déplacer un footballeur de 1 case.</li>
+
+					<li>Chacune des cases du carré 3 x 3, centré sur le footballeur déplacé,
+						sont des destinations possibles, sauf si :</li>
+
+						<ul>
+							<li>cette case est en dehors du terrain ;</li>
+							<li>cette case est une case de but ;</li>
+							<li>cette case accueille déjà un footballeur de la même équipe.</li>
+						</ul>
+
+					<li>Un footballeur ne peut pas « courir » plus de une fois par tour.</li>
+					<li>L’action « courir » ne déplace pas la balle.</li>
+				</ul>
+
+				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu "3".</p>
+				<img border=0 src="../../pictures/run-allowed-destinations.jpg" />
+
+			<h2>Option « sprint »</h2>
+				<ul>
+					<li>L'option « sprint » coûte 1 bonus et étend à 2 cases le déplacement d'un footballeur.</li>
+					<li>L'option « sprint » doit toujours être combinée à l'action « courir ».</li>
+
+					<li>Chacune des cases du carré 5 x 5, centré sur le footballeur déplacé,
+						sont des destinations possibles, sauf si :</li>
+						<ul>
+							<li>cette case est en dehors du terrain ;</li>
+							<li>cette case est une case de but ;</li>
+							<li>cette case accueille déjà un footballeur de la même équipe.</li>
+						</ul>
+
+					<li>L'équipe peut dépenser son bonus d'action une seule fois entre deux engagements.</li>
+				</ul>
+
+				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu "3".</p>
+				<img border=0 src="../../pictures/sprint-allowed-destinations.jpg" />
+
+			<h2>Action « passer/tirer »</h2>
+				<ul>
+					<li>Les actions « passer à un footballeur » et « tirer au but » obéissent aux mêmes règles.</li>
+
+					<li>L’action « passer/tirer » coûte 1 crédit et permet, si les conditions sont satisfaites,
+						de déplacer la balle de 1 ou 2 cases en horizontal, vertical ou diagonal,
+						mais sans bifurcation.</li>
+
+						<li>La case d’arrivée de la balle doit être sur le terrain.</li>
+						<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
+					<li>Un footballeur ne peut « passer/tirer » plus de une fois par tour.</li>
+
+					<li>Les conditions à satisfaire :</li>
+						<ul>
+							<li>Un footballeur de l'équipe doit occuper la case de la balle.
+								Appelons-le « passeur/tireur ».</li>
+
+							<li>Si le « passeur/tireur » partage sa case avec un adversaire,
+								alors le « passeur/tireur » doit :</li>
+								<ul>
+									<li>soit égaler ou surpasser la force de son adversaire,</li>
+									<li>soit compenser son déficit de force par un « duel ».</li>
+								</ul>
+
+							<li>Si le « passeur/tireur » déplace la balle par-dessus un adversaire,
+								alors le « passeur/tireur » doit :</li>
+								<ul>
+									<li>soit égaler ou surpasser la force de son adversaire,</li>
+									<li>soit compenser son déficit de force par un « lob ».</li>
+								</ul>
+						</ul>
+				</ul>
+
+
+			<h2>Compensation « duel »</h2>
+				<ul>
+					<li>Cette compensation peut être requise par l’action « tirer/passer ».</li>
+
+					<li>Le « duel » coûte 1 crédit et compense 1 unité de déficit de force
+						du « passeur/tireur » vis-à-vis de l’adversaire qui partage sa case.</li>
+				</ul>
+
+			<h2>Compensation « lob »</h2>
+				<ul>
+					<li>Cette compensation peut être requise par l’action « tirer/passer ».</li>
+
+					<li>Le « lob » coûte 1 crédit et compense 1 unité de déficit de force
+						du « passeur/tireur » vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
+
+					<li>La compensation de lob n'est pas nécessaire pour passer par-dessus
+						un footballeur de son équipe.</li>
+				</ul>
+
+
 	</body>
 </html>

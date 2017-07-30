@@ -140,7 +140,7 @@ baltek.i18n.translations.fr = {
 
     "baltek-iframe-about:file"         : "./lang/fr/Baltek-about-fr.html" ,
     "baltek-iframe-help:file"          : "./lang/fr/Baltek-help-fr.html" ,
-    "baltek-iframe-rules:file"         : "./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf"
+    "baltek-iframe-rules:file"         : "./lang/fr/Baltek-rules-fr.html"
 };
 
 baltek.i18n.translations.pt = {
