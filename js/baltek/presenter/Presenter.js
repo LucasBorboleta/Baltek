@@ -242,6 +242,7 @@ baltek.presenter.Presenter.__initClass = function(){
         var iy = 0;
         var box = null;
         var xyLabel = "";
+        var text = "";
         for (ix=0; ix < this.draw.fieldNx; ix++) {
             this.draw.boxesByIndices.push([]);
 
@@ -250,7 +251,12 @@ baltek.presenter.Presenter.__initClass = function(){
 
                 if ( this.rulesEngine.hasFieldBox(ix, iy) ) {
                     xyLabel = this.draw.xLabels[ix] + this.draw.yLabels[iy];
-                    box = new baltek.draw.Box(ix, iy, xyLabel);
+                    if ( this.rulesEngine.hasGoaldBox(ix, iy) ) {
+                        text = "#";
+                    } else {
+                        text = "";
+                    }
+                    box = new baltek.draw.Box(ix, iy, xyLabel, text);
                     box.registerObserver(this.boxWatcher);
                     this.draw.boxesByIndices[ix][iy] = box;
                 }

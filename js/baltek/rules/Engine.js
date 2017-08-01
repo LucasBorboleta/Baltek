@@ -85,6 +85,11 @@ baltek.rules.Engine.__initClass = function(){
         return ( this.field.boxesByIndices[ix][iy] !== null );
     };
 
+    baltek.rules.Engine.prototype.hasGoaldBox = function(ix, iy){
+        var box = this.field.boxesByIndices[ix][iy];
+        return ( box !== null && ( box === this.activeTeam.goalBox || box === this.passiveTeam.goalBox ) );
+    };
+
     baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){
         if ( activeTeam !== this.activeTeam ) {
             this.switchActiveAndPassiveTeams();

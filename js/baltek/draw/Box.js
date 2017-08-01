@@ -1,7 +1,7 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-baltek.draw.Box = function(ix, iy, xyLabel){
-    this.__initObject(ix, iy, xyLabel);
+baltek.draw.Box = function(ix, iy, xyLabel, text){
+    this.__initObject(ix, iy, xyLabel, text);
 };
 
 baltek.draw.Box.__initClassCalled = false;
@@ -13,7 +13,7 @@ baltek.draw.Box.__initClass = function(){
 
     baltek.utils.inherit(baltek.draw.Box, baltek.draw.Selectable);
 
-    baltek.draw.Box.prototype.__initObject = function(ix, iy, xyLabel){
+    baltek.draw.Box.prototype.__initObject = function(ix, iy, xyLabel, text){
         baltek.draw.Box.super.__initObject.call(this);
 
         this.ball = null ;
@@ -25,6 +25,7 @@ baltek.draw.Box.__initClass = function(){
         this.iy = iy;
         this.xyLabel = xyLabel;
         this.doShowXYLabel = false;
+        this.text = text;
 
         this.x = this.ix * baltek.draw.boxSide;
         this.y = this.iy * baltek.draw.boxSide;
@@ -134,6 +135,14 @@ baltek.draw.Box.__initClass = function(){
             baltek.draw.drawer.textBaseline = "bottom";
             baltek.draw.drawer.textAlign = "start";
             baltek.draw.drawer.fillText(this.xyLabel, this.x + this.side/16, this.y + this.side*(1 - 1/16));
+        }
+
+        if ( this.text !== "" ) {
+            baltek.draw.drawer.fillStyle = baltek.style.colors.BOX_TEXT;
+            baltek.draw.drawer.font = baltek.style.fonts.BOX_TEXT;
+            baltek.draw.drawer.textBaseline = "middle";
+            baltek.draw.drawer.textAlign = "center";
+            baltek.draw.drawer.fillText(this.text, this.x + this.side/2, this.y + this.side/2);
         }
 
         this.distributeBallAndFootballers();
