@@ -9,9 +9,19 @@
 	<link rel="stylesheet" href="../../baltek.css">
 
 	<body>
-	    <h1>Le matériel : balle, footballeurs, terrain et buts</h1>
+		<span class="baltek-doc-hyperlink-group-class">
+			<a class="baltek-doc-hyperlink-class" href="#material">Le matériel</a>
+			<a class="baltek-doc-hyperlink-class" href="#objective">Objectif du jeu</a>
+			<a class="baltek-doc-hyperlink-class" href="#setup">Mise en place</a>
+			<a class="baltek-doc-hyperlink-class" href="#turn">Tour de jeu</a>
+		</span>
 
-			<img border=0 src="../../pictures/starting-positions-with-coordinates.png" />
+	    <h1 id="material">Le matériel</h1>
+
+			<div class="baltek-doc-hasImage-class">
+				<img class="baltek-doc-image-class" src="../../pictures/starting-positions-with-coordinates.png" />
+			</div>
+
 			<p>Voici le matériel, illustré sur le schéma ci-dessus :</p>
 			<ul>
 				<li>1 balle blanche, avec l'étiquette "@".</li>
@@ -24,14 +34,13 @@
 						<li>3 arrières de force 1.</li>
 					</ul>
 				<li>Le terrain est construit à l'aide de 52 cases vertes.</li>
-				<li>La case "a3", avec l'étiquette "#", est le but défendu par l'équipe bleue.</li>
-				<li>La case "l3", avec l'étiquette "#",  est le but défendu par l'équipe rouge.</li>
+				<li>La case "a3", avec une étiquette "#", est le but défendu par l'équipe bleue.</li>
+				<li>La case "l3", avec une étiquette "#",  est le but défendu par l'équipe rouge.</li>
 			</ul>
 
 			<p>Les coordonnées ainsi que les étiquettes "@" et "#" sont utilisées pour la notation des coups.</p>
 
-
-		<h1>Objectif du jeu</h1>
+		<h1 id="objective">Objectif du jeu</h1>
 			<ul>
 				<li>Baltek se joue à deux joueurs.</li>
 				<li>Chaque joueur dirige une équipe de 6 footballeurs.</li>
@@ -43,7 +52,7 @@
 				<li>Le gagnant est le joueur qui atteint en premier le score de 2 buts.</li>
 			</ul>
 
-		<h1>Mise en place</h1>
+		<h1 id="setup">Mise en place</h1>
 			<ul>
 				<li>En début de partie, ainsi qu'après chaque but marqué, les footballeurs sont placés
 					sur le terrain à leurs positions d’engagement.</li>
@@ -51,19 +60,24 @@
 				<li>Les positions d’engagement sont fixes.</li>
 
 				<li>Les positions d’engagement des deux équipes sont symétriques,
-					sauf pour celles des avant-centres.</li>
+					sauf celles des avant-centres.</li>
 
 				<li>L'équipe bleue effectue toujours le premier engagement de la partie.</li>
 				<li>L'équipe qui vient de marquer un but laisse l'autre équipe engager.</li>
 
-				<li>La figure suivante représente l’engagement par l’équipe bleue.</li> 
-					<img border=0 src="../../pictures/starting-positions-for-blue-team.png" />
+				<li>La figure suivante représente l’engagement par l’équipe bleue.</li>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/starting-positions-for-blue-team.png" />
+					</div>
 
 				<li>La figure suivante représente l’engagement par l’équipe rouge.</li>
-					<img border=0 src="../../pictures/starting-positions-for-red-team.png" />
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/starting-positions-for-red-team.png" />
+					</div>
+
 			</ul>
 
-		<h1>Tour de jeu</h1>
+		<h1 id="turn">Tour de jeu</h1>
 
 			<h2>Les actions, options, compensations, crédits et bonus</h2>
 				<ul>
@@ -118,7 +132,9 @@
 				</ul>
 
 				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu "3".</p>
-				<img border=0 src="../../pictures/run-allowed-destinations.jpg" />
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/run-allowed-destinations.png" />
+					</div>
 
 			<h2>Option « sprint »</h2>
 				<ul>
@@ -137,7 +153,9 @@
 				</ul>
 
 				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu "3".</p>
-				<img border=0 src="../../pictures/sprint-allowed-destinations.jpg" />
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/sprint-allowed-destinations.png" />
+					</div>
 
 			<h2>Action « passer/tirer »</h2>
 				<ul>
@@ -151,7 +169,7 @@
 						<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
 					<li>Un footballeur ne peut « passer/tirer » plus de une fois par tour.</li>
 
-					<li>Les conditions à satisfaire :</li>
+					<li>Voici les conditions à satisfaire :</li>
 						<ul>
 							<li>Un footballeur du joueur doit occuper la même case que la balle.
 								Appelons-le « passeur/tireur ».</li>
@@ -172,6 +190,12 @@
 						</ul>
 				</ul>
 
+				<p>Exemple : avec des bordures jaunes, les destinations possibles pour la balle
+					         par le footballeur bleu "3" ; aucune n'exige duel ou lob.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/kick-allowed-destinations.png" />
+					</div>
+
 
 			<h2>Compensation « duel »</h2>
 				<ul>
@@ -182,6 +206,13 @@
 
 					<li>Le « duel » coûte 1 crédit par unité de force compensée.</li>
 				</ul>
+				<p>Exemples : pour posséder la balle, le footballeur bleu "2" doit livrer 1 duel ;
+					          et footballeur bleu "1" doit livrer 2 duels.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/one-required-duel.png" />
+						<img class="baltek-doc-image-class" src="../../pictures/two-required-duels.png" />
+					</div>
+
 
 			<h2>Compensation « lob »</h2>
 				<ul>
@@ -196,6 +227,13 @@
 						un footballeur de son équipe.</li>
 				</ul>
 
+				<p>Exemples : pour transmettre la balle au footballeur beu "2", le footballeur bleu "1"
+					          doit effectuer 1 lob, dans le contexte de gauche,
+							  et 2 lobs dans le contexte de droite.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/one-required-lob.png" />
+						<img class="baltek-doc-image-class" src="../../pictures/two-required-lobs.png" />
+					</div>
 
 	</body>
 </html>

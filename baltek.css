@@ -129,5 +129,24 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     font-size:18px;
     padding-left:8px;
     padding-right:8px;
-    text-align:center
+    text-align:center;
+}
+
+.baltek-doc-hyperlink-group-class{
+    word-spacing:16px;
+}
+
+.baltek-doc-hyperlink-class{
+    word-spacing:2px;
+}
+
+.baltek-doc-hasImage-class{
+    text-align:center;
+}
+
+.baltek-doc-image-class{
+    height:auto;
+    width:auto;
+    padding-left:8px;
+    padding-right:8px;
 }
