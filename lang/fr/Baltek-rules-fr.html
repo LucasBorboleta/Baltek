@@ -300,7 +300,7 @@
 
 			<h1 id="notation">Notation</h1>
 				<p>Si utile, la partie se note comme dans l'exemple suivant.</p>
-<pre>
+<pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
 e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @e4  @g4+       / g3g4 i5i4 @i4
@@ -308,7 +308,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @# /
 </pre>
 				<p>Optionellement, des précisions sont apportées comme dans l'exemple suivant.</p>
-<pre>
+<pre class="w3-code">
 #! baltek 1.1
 #@ bernard@bois.fr robert@riviere.fr
 #: 2014-12-24 11:09:30
@@ -323,7 +323,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 
 					<p>Voici les conventions de ce format de notation structuré en lignes :</p>
 					<ul>
-						<li>Le caractère " ", optionnellement répété, est utilisé en sépéarateur de champs.</li>
+						<li>Le caractère " ", optionnellement répété, est utilisé en sépéarateur de mots.</li>
 
 						<li>Une ligne commençant par "#" est un commentaire ou pseudo-commentaire,
 							et est toujours optionnel.</li>
@@ -332,7 +332,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 								<li>"# " annonce un commentaire libre.</li>
 
 								<li>"#! baltek i.j" annonce
-									la version "i.j" du format de notation ;
+									la version "i.j" du format de notation "baltek" ;
 									utilisable une seule fois, en première ligne.</li>
 
 								<li>"#@" annonce
@@ -354,29 +354,31 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 						<li>Chaque tour est composé de 0, 1, 2 ou 3 actions.</li>
 
 							<ul>
-								<li>L'action "courir" est notée par la case de départ suivie de la case d’arrivée.
-									Exemple : <code>g3f3</code></li>
+								<li>L'action "courir" est notée en un mot
+									formé de la case de départ, et suivie de la case d’arrivée.
+									Exemple : <code class="w3-codespan">g3f3</code></li>
 
-								<li>Pour l'option "sprint", le caractère "*" est ajouté  à l'action.
-									Exemple : <code>g3e2*</code></li>
+								<li>Pour l'option "sprint", le caractère "*" est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">g3e2*</code></li>
 
-								<li>L’action "passer/tirer" est notée par le caractère de la balle "@"
-									suivie de sa case d’arrivée.
-									Exemple : <code>@c3</code></li>
+								<li>L’action "passer/tirer" est notée en un mot
+									formé du caractère "@" de la balle et suivi de sa case d’arrivée.
+									Exemple : <code class="w3-codespan">@c3</code></li>
 
-								<li>Le "tir au but" est noté "@#".
+								<li>Le "tir au but" est abrégé par le mot suivant :
+									<code class="w3-codespan">@#</code>
 
-								<li>Pour la compensation de "duel", le caractère "+" est ajouté à l'action.
+								<li>Pour la compensation de "duel", le caractère "+" est ajouté au mot de l'action.
 									Pour deux duels, "++" est ajouté.
-									Exemple : <code>@c3++</code></li>
+									Exemple : <code class="w3-codespan">@c3++</code></li>
 
-								<li>Pour la compensation de "lob", le caractère "!" est ajouté à l'action.
-									Pour deux lobs, "!!" est ajouté.
-									Exemple : <code>@c3!!</code></li>
+								<li>Pour la compensation de "lob", le caractère "!" est ajouté au mot de l'action.
+									Pour deux lobs, "!!" est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3!!</code></li>
 
 								<li>Pour les compensations cumulées de "duel" et "lob",
-									la chaîne "+!" est ajoutée à l'action.
-									Exemple : <code>@c3+!</code></li>
+									la chaîne "+!" est ajoutée au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3+!</code></li>
 
 							</ul>
 
