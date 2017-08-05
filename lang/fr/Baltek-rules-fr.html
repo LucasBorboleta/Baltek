@@ -12,17 +12,19 @@
 	<body>
 		<span class="baltek-doc-hyperlink-group-class">
 			<a class="baltek-doc-hyperlink-class" href="#introduction">Introduction</a>
+			<a class="baltek-doc-hyperlink-class" href="#revisions">Révisions</a>
 			<a class="baltek-doc-hyperlink-class" href="#material">Le matériel</a>
 			<a class="baltek-doc-hyperlink-class" href="#objective">Objectif du jeu</a>
 			<a class="baltek-doc-hyperlink-class" href="#setup">Mise en place</a>
 			<a class="baltek-doc-hyperlink-class" href="#turn">Tour de jeu</a>
+			<a class="baltek-doc-hyperlink-class" href="#notation">Notation</a>
 			<a class="baltek-doc-hyperlink-class" href="#versioning">Versionnage</a>
 			<a class="baltek-doc-hyperlink-class" href="#tanks">Remerciements</a>
 		</span>
 
 		<h1 id="introduction">Introduction</h1>
 
-		<p>« Baltek » est un jeu de réflexion, en tour par tour, inspiré du football et conçu
+		<p>"Baltek" est un jeu de réflexion, en tour par tour, inspiré du football et conçu
 			d'après les principes suivants :</p>
 
 		    <ul>
@@ -39,9 +41,38 @@
 		        <li>La coordination des footballeurs est essentielle.</li>
 		    </ul>
 
-		<p>Le nom du jeu est construit avec des sons de « balle » (BAL) et de « technique » (TEK).</p>
+		<p>Le nom du jeu est construit avec des sons de "balle" (BAL) et de "technique" (TEK).</p>
 
-		<p>Ce texte est la version 1.1 des règles de Baltek.</p>
+
+		<h1 id="revisions">Révisions</h1>
+
+			<p>Ce document est la version 1.1 des règles de Baltek en français.</p>
+			<p>La table ci-dessous résume les motivations de chaque version.</p>
+
+			<table class="w3-table-all">
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>1.0</td>
+						<td>Création.</td>
+					</tr>
+
+					<tr>
+						<td>1.1</td>
+						<td>Clarification de l'option de sprint.
+							Notation plus compacte des coups.
+						    Rédaction en HTML.
+						    Copies d'écran depuis l'implémentaiton HTML/Javascript.</td>
+					</tr>
+
+				</tbody>
+			</table>
 
 	    <h1 id="material">Le matériel</h1>
 
@@ -141,9 +172,9 @@
 						</ul>
 				</ul>
 
-			<h2>Action « courir »</h2>
+			<h2>Action "courir"</h2>
 				<ul>
-					<li>L’action « courir » coûte 1 crédit et permet de déplacer un footballeur de 1 case.</li>
+					<li>L’action "courir" coûte 1 crédit et permet de déplacer un footballeur de 1 case.</li>
 
 					<li>Chacune des cases du carré 3 x 3, centré sur le footballeur déplacé,
 						sont des destinations possibles, sauf si :</li>
@@ -154,8 +185,8 @@
 							<li>celle-ci accueille déjà un footballeur de la même équipe.</li>
 						</ul>
 
-					<li>Un footballeur ne peut pas « courir » plus de une fois par tour.</li>
-					<li>L’action « courir » ne déplace pas la balle.</li>
+					<li>Un footballeur ne peut pas "courir" plus de une fois par tour.</li>
+					<li>L’action "courir" ne déplace pas la balle.</li>
 				</ul>
 
 				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu "3".</p>
@@ -163,10 +194,10 @@
 						<img class="baltek-doc-image-class" src="../../pictures/run-allowed-destinations.png" />
 					</div>
 
-			<h2>Option « sprint »</h2>
+			<h2>Option "sprint"</h2>
 				<ul>
-					<li>L'option « sprint » coûte 1 bonus et étend à 2 cases le déplacement d'un footballeur.</li>
-					<li>L'option « sprint » doit toujours être combinée à l'action « courir ».</li>
+					<li>L'option "sprint" coûte 1 bonus et étend à 2 cases le déplacement d'un footballeur.</li>
+					<li>L'option "sprint" doit toujours être combinée à l'action "courir".</li>
 
 					<li>Chacune des cases du carré 5 x 5, centré sur le footballeur déplacé,
 						sont des destinations possibles, sauf si :</li>
@@ -184,35 +215,40 @@
 						<img class="baltek-doc-image-class" src="../../pictures/sprint-allowed-destinations.png" />
 					</div>
 
-			<h2>Action « passer/tirer »</h2>
+			<h2>Action "passer/tirer"</h2>
 				<ul>
-					<li>Les actions « passer à un footballeur » et « tirer au but » obéissent aux mêmes règles.</li>
+					<li>Les actions "passer à un footballeur", "envoyer sur une case vide" et "tirer au but"
+						obéissent aux mêmes règles.</li>
 
-					<li>L’action « passer/tirer » coûte 1 crédit et permet, si les conditions sont satisfaites,
+					<li>L’action "passer/tirer" coûte 1 crédit et permet,
+						si les rapports de forces sont satisfaits,
 						de déplacer la balle de 1 ou 2 cases en horizontal, vertical ou diagonal,
 						mais sans courber sa trajectoire.</li>
 
-						<li>La case d’arrivée de la balle doit être sur le terrain.</li>
-						<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
-					<li>Un footballeur ne peut « passer/tirer » plus de une fois par tour.</li>
+					<li>La case de départ de la balle doit avoir un footballeur du joueur.
+						Appelons-le "passeur/tireur".</li>
 
-					<li>Voici les conditions à satisfaire :</li>
+					<li>La case d’arrivée de la balle doit être sur le terrain.</li>
+					<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
+
+					<li>Un footballeur ne peut "passer/tirer" plus de une fois par tour.</li>
+
+					<li>Un footballeur ne peut marquer contre son camp.</li>
+
+					<li>Voici les rapports de forces à satisfaire :</li>
 						<ul>
-							<li>Un footballeur du joueur doit occuper la même case que la balle.
-								Appelons-le « passeur/tireur ».</li>
-
-							<li>Si le « passeur/tireur » partage sa case avec un adversaire,
-								alors le « passeur/tireur » doit :</li>
+							<li>Si le "passeur/tireur" partage sa case avec un adversaire,
+								alors le "passeur/tireur" doit :</li>
 								<ul>
 									<li>soit égaler ou surpasser la force de son adversaire,</li>
-									<li>soit compenser son déficit de force par un « duel ».</li>
+									<li>soit compenser son déficit de force par "duel".</li>
 								</ul>
 
-							<li>Si le « passeur/tireur » déplace la balle par-dessus un adversaire,
-								alors le « passeur/tireur » doit :</li>
+							<li>Si le "passeur/tireur" déplace la balle par-dessus un adversaire,
+								alors le "passeur/tireur" doit :</li>
 								<ul>
 									<li>soit égaler ou surpasser la force de son adversaire,</li>
-									<li>soit compenser son déficit de force par un « lob ».</li>
+									<li>soit compenser son déficit de force par "lob".</li>
 								</ul>
 						</ul>
 				</ul>
@@ -224,14 +260,14 @@
 					</div>
 
 
-			<h2>Compensation « duel »</h2>
+			<h2>Compensation "duel"</h2>
 				<ul>
-					<li>Cette compensation peut être exigée par l’action « tirer/passer ».</li>
+					<li>Cette compensation peut être exigée par l’action "tirer/passer".</li>
 
-					<li>Le « duel » compense le déficit de force du « passeur/tireur »
+					<li>Le "duel" compense le déficit de force du "passeur/tireur"
 						vis-à-vis de l’adversaire qui partage sa case.</li>
 
-					<li>Le « duel » coûte 1 crédit par unité de force compensée.</li>
+					<li>Le "duel" coûte 1 crédit par unité de force compensée.</li>
 				</ul>
 				<p>Exemples : pour posséder la balle, le footballeur bleu "2" doit livrer 1 duel ;
 					          et footballeur bleu "1" doit livrer 2 duels.</p>
@@ -241,14 +277,14 @@
 					</div>
 
 
-			<h2>Compensation « lob »</h2>
+			<h2>Compensation "lob"</h2>
 				<ul>
-					<li>Cette compensation peut être exigée par l’action « tirer/passer ».</li>
+					<li>Cette compensation peut être exigée par l’action "tirer/passer".</li>
 
-					<li>Le « lob » compense le déficit de force
-						du « passeur/tireur » vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
+					<li>Le "lob" compense le déficit de force
+						du "passeur/tireur" vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
 
-					<li>Le « lob » coûte 1 crédit par unité de force compensée.</li>
+					<li>Le "lob" coûte 1 crédit par unité de force compensée.</li>
 
 					<li>La compensation de lob n'est pas nécessaire pour passer par-dessus
 						un footballeur de son équipe.</li>
@@ -262,26 +298,111 @@
 						<img class="baltek-doc-image-class" src="../../pictures/two-required-lobs.png" />
 					</div>
 
+			<h1 id="notation">Notation</h1>
+				<p>Si utile, la partie se note comme dans l'exemple suivant.</p>
+<pre>
+@d3  f3g3 d1e1  / h3g3 g5f5 i3h3
+e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
+@e4  @g4+       / g3g4 i5i4 @i4
+...
+@# /
+</pre>
+				<p>Optionellement, des précisions sont apportées comme dans l'exemple suivant.</p>
+<pre>
+#! baltek 1.1
+#@ bernard@bois.fr robert@riviere.fr
+#: 2014-12-24 11:09:30
+@d3  f3g3 d1e1  / h3g3 g5f5 i3h3
+e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
+@e4  @g4+       / g3g4 i5i4 @i4
+...
+@# /
+#: 2014-12-24 11:30:00
+# Le bonus des rouges a été bien joué.
+</pre>
+
+					<p>Voici les conventions de ce format de notation structuré en lignes :</p>
+					<ul>
+						<li>Le caractère " ", optionnellement répété, est utilisé en sépéarateur de champs.</li>
+
+						<li>Une ligne commençant par "#" est un commentaire ou pseudo-commentaire,
+							et est toujours optionnel.</li>
+
+							<ul>
+								<li>"# " annonce un commentaire libre.</li>
+
+								<li>"#! baltek i.j" annonce
+									la version "i.j" du format de notation ;
+									utilisable une seule fois, en première ligne.</li>
+
+								<li>"#@" annonce
+									les identifiants choisis par les deux joueurs,
+									dans l'ordre "bleu", puis "rouge" ;
+									utilisable une seule fois, .</li>
+
+								<li>"#:" annonce
+									la date, puis optionnellement l'heure, dans un format ISO ;
+									utilisable plusieurs fois.</li>
+
+							</ul>
+
+						<li>Une ligne non-vide, qui n'est pas un commentaire,
+							décrit un tour "bleu", suivi d'un tour "rouge" optionnel.
+
+						<li>Le caractère "/" termine le tour "bleu".
+
+						<li>Chaque tour est composé de 0, 1, 2 ou 3 actions.</li>
+
+							<ul>
+								<li>L'action "courir" est notée par la case de départ suivie de la case d’arrivée.
+									Exemple : <code>g3f3</code></li>
+
+								<li>Pour l'option "sprint", le caractère "*" est ajouté  à l'action.
+									Exemple : <code>g3e2*</code></li>
+
+								<li>L’action "passer/tirer" est notée par le caractère de la balle "@"
+									suivie de sa case d’arrivée.
+									Exemple : <code>@c3</code></li>
+
+								<li>Le "tir au but" est noté "@#".
+
+								<li>Pour la compensation de "duel", le caractère "+" est ajouté à l'action.
+									Pour deux duels, "++" est ajouté.
+									Exemple : <code>@c3++</code></li>
+
+								<li>Pour la compensation de "lob", le caractère "!" est ajouté à l'action.
+									Pour deux lobs, "!!" est ajouté.
+									Exemple : <code>@c3!!</code></li>
+
+								<li>Pour les compensations cumulées de "duel" et "lob",
+									la chaîne "+!" est ajoutée à l'action.
+									Exemple : <code>@c3+!</code></li>
+
+							</ul>
+
+		   		</ul>
+
+
 			<h1 id="versioning">Versionnage</h1>
 				<ul>
-					<li>Les versions des règles sont identifiées avec deux indices entiers « i.j ».</li>
-					<li>La première version est « 1.0 ».</li>
+					<li>Les versions des règles sont identifiées avec deux indices entiers "i.j".</li>
+					<li>La première version est "1.0".</li>
 
-					<li>L'indice majeur « i » est incrémenté de 1 lorsque les règles du jeu sont modifiées.
-						L'indice mineur « j » est alors réinitialisé à 0.</li>
+					<li>L'indice majeur "i" est incrémenté de 1 lorsque les règles du jeu sont modifiées.
+						L'indice mineur "j" est alors réinitialisé à 0.</li>
 
-					<li>L'indice mineur « j » est incrémenté de 1 lorsque les textes ou les illustrations
-						ou la structure changent, mais pas les règles.</li>
+					<li>L'indice mineur "j" est incrémenté de 1 lorsque les textes ou les illustrations
+						ou le format de notation ou la structure du document changent, mais pas les règles.</li>
 
-					<li>Chaque traduction fait évoluer son indice mineur « j » en partant de 0.</li>
+					<li>Chaque traduction fait évoluer son indice mineur "j" en partant de 0.</li>
 				</ul>
 
 
 			<h1 id="tanks">Remerciements</h1>
-				<p>Je remercie mes fils « A » et « C » pour leurs patiences et commentaires
+				<p>Je remercie mes fils "A" et "C" pour leurs patiences et commentaires
 					lors des parties d'essais de Baltek et autres tentatives de jeu de football.
-					Ma compagne « P » avec sa durée de réflexion de joueuse d'échecs a suscité
-					la création du « bonus de sprint » afin de dynamiser les parties de Baltek ;
+					Ma compagne "P" avec sa durée de réflexion de joueuse d'échecs a suscité
+					la création du "bonus de sprint" afin de dynamiser les parties de Baltek ;
 				    je la remercie.
 				</p>
 
