@@ -61,7 +61,7 @@ baltek.utils.inherit = function(childConstructor, parentConstructor){
 
         // Copied from: http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
         // OOP In JavaScript: What You NEED to Know
-        // march. 19 2013 215
+        // march. 19 2013
         // (Object Oriented JavaScript: Only Two Techniques Matter)
 
         var copyOfParent = Object.create(parentConstructor.prototype);

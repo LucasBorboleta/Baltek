@@ -1,0 +1,117 @@
+
+.baltek-buttonZone-class{
+    display:inline;
+}
+
+.baltek-logo-class{
+    background-color:white;
+    border-radius:8px;
+    color:black;
+    float:right;
+    font-size:24px;
+    padding-left:8px;
+    padding-right:8px;
+    text-transform: uppercase;
+    text-align:center
+}
+
+.baltek-buttonGroup-class
+{
+    display:inherit;
+    padding-right:24px;
+}
+
+.baltek-button-class, .baltek-select-class{
+    background-color:khaki;
+    border-radius:8px;
+    color:black;
+    font-size:18px;
+}
+
+.baltek-button-class:disabled, .baltek-select-class:disabled{
+    opacity:0.5;
+}
+
+.baltek-team-0-background-class{
+    background-color:#0099CC;
+}
+
+.baltek-team-1-background-class{
+    background-color:#E62E00;
+}
+
+.baltek-counter-class{
+    border-radius:8px;
+    color:white;
+    font-size:24px;
+    padding-left:8px;
+    padding-right:8px;
+    text-align:center
+}
+
+.baltek-drawZone-class{
+    margin:4px;
+    height:500px;
+    width:1200px;
+}
+
+.baltek-canvas-class{
+    /* Using Javascript, the dimensions of the canvas are forced to those
+     of the element with "id=Baltek_DrawZone"
+    */
+}
+
+.baltek-help-frame-class{
+    border:none;
+    height:100%;
+    width:100%;
+}
+
+.baltek-debugZone-class{
+    background-color:lavender;
+    color:black;
+    border-style:solid;
+    border-width:1px;
+    border-color:gray;
+}
+
+.baltek-debug-logo-class{
+     float:right;
+     font-size:24px;
+     padding-left:8px;
+     padding-right:8px;
+     text-transform:uppercase;
+     text-align:center;
+}
+
+.baltek-debug-messages-class{
+    background-color:inherit;
+    color:inherit;
+}
+
+.baltek-debug-mousePosition-class{
+    background-color:black;
+    border-radius:8px;
+    color:white;
+    font-size:18px;
+    padding-left:8px;
+    padding-right:8px;
+    text-align:center;
+}
+
+.baltek-doc-hyperlink-group-class{
+    word-spacing:16px;
+}
+
+.baltek-doc-hyperlink-class{
+    word-spacing:2px;
+}
+
+.baltek-doc-hasImage-class{
+    text-align:center;
+}
+
+.baltek-doc-image-class{
+    height:auto;
+    width:auto;
+}

@@ -1,15 +1,34 @@
 # Introduction
 
-This document collects principles for the design of BALTEK.
+This document aims at collecting implementation principles and choices, as well as thoughts for not yet implemented features.  Therefore the audience of this document is the interested developers in contributing to *Baltek* , but not the end-users of *Baltek*.
+
+# Implementation
+
+## CSS
+
+*w3.css* is used for the general settings, like fonts, but no *w3* style item is used. .
+
+*normalize.css* is not directly used, but  *w3.css* uses  some extract of *normalize.css*.
+
+## JS
+
+*JavaScript.isSexy* (http://javascriptissexy.com/)  is a blog on modern JavaScript and modern web application development. A chunk of code is used for implemented OOP inheritance in the *Baltek* classes.*Richard*,  the author of the blog, also quotes *Douglas Crockford*.
+
+
+
+
+
+
 
 # General design
 
-Let us decouple the various aspects of the software in order achieved the following objectives:
+*Baltek* aims at decoupling its modules  in order to implement, as easy as possible,  the following features or changes:
 
-- Playing against an AI.
-- Playing against a remote player.
-- Playing either on a desktop computer or a smart phone.
-- Changing the visual aspect of the software.
+- The user plays against another player seating in front of the same  desktop computer.
+- The user plays against an Artificial Intelligence (AI).
+- The user plays against a remote player.
+- *Baltek*  adapts  the visual aspect to either desktop or smart phone.
+- The developer decides to use another User Interface (UI) framework.
 
 Let us get inspiration from the **Model View Presenter (MVP)**
 
@@ -31,16 +50,16 @@ Let us get inspiration from the **Model View Presenter (MVP)**
 
 Let us translate such diagram into a table of events:
 
-Step | View             | Presenter                   | Model
----- | ---------------- | --------------------------- | -----------------------
-1    | sends user event |                             |
-2    |                  | receives user event         |
-3    |                  | requests model change       |
-4    |                  |                             | updates model
-5    |                  |                             | send state-change event
-6    |                  | receives state-change event |
-7    |                  | request view change         |
-8    | updates view     |                             |
+| Step | View             | Presenter                   | Model                   |
+| ---- | ---------------- | --------------------------- | ----------------------- |
+| 1    | sends user event |                             |                         |
+| 2    |                  | receives user event         |                         |
+| 3    |                  | requests model change       |                         |
+| 4    |                  |                             | updates model           |
+| 5    |                  |                             | send state-change event |
+| 6    |                  | receives state-change event |                         |
+| 7    |                  | request view change         |                         |
+| 8    | updates view     |                             |                         |
 
 The previous objectives implies the following cluster of classes:
 
@@ -214,17 +233,17 @@ Use priorities in the states of options:
 
   # Regarding the move, other idea for organizing the interaction between the engine and the player
 
-Step | Engine                                            | Player
----- | ------------------------------------------------- | -----------------------------------------------
-1    | Find the selectable sources that run and/or kick. |
-2    |                                                   | Select one of the selectable source.
-3    | Find the selectable options (run/sprint/kick).    |
-4    | Select the first selectable option.               |
-5    | Find the selectable destinations.                 |
-6    |                                                   | Change the option among the selectable options.
-7    | Find the selectable destinations.                 |
-8    |                                                   | Select one of the selectable destination.
-9    | Play the move.                                    |
+| Step | Engine                                   | Player                                   |
+| ---- | ---------------------------------------- | ---------------------------------------- |
+| 1    | Find the selectable sources that run and/or kick. |                                          |
+| 2    |                                          | Select one of the selectable source.     |
+| 3    | Find the selectable options (run/sprint/kick). |                                          |
+| 4    | Select the first selectable option.      |                                          |
+| 5    | Find the selectable destinations.        |                                          |
+| 6    |                                          | Change the option among the selectable options. |
+| 7    | Find the selectable destinations.        |                                          |
+| 8    |                                          | Select one of the selectable destination. |
+| 9    | Play the move.                           |                                          |
 
 When finding selectable options or finding selectable destinations, the costs are evaluated.
 
