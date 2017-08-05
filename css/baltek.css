@@ -112,6 +112,6 @@
 }
 
 .baltek-doc-image-class{
-    height:auto;
-    width:auto;
+    max-width:100%;
+    height:auto
 }

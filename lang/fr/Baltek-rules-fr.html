@@ -17,7 +17,7 @@
 			<a class="baltek-doc-hyperlink-class" href="#objective">Objectif du jeu</a>
 			<a class="baltek-doc-hyperlink-class" href="#setup">Mise en place</a>
 			<a class="baltek-doc-hyperlink-class" href="#turn">Tour de jeu</a>
-			<a class="baltek-doc-hyperlink-class" href="#notation">Notation</a>
+			<a class="baltek-doc-hyperlink-class" href="#notation">Notation des coups</a>
 			<a class="baltek-doc-hyperlink-class" href="#versioning">Versionnage</a>
 			<a class="baltek-doc-hyperlink-class" href="#tanks">Remerciements</a>
 		</span>
@@ -221,21 +221,21 @@
 						obéissent aux mêmes règles.</li>
 
 					<li>L’action "passer/tirer" coûte 1 crédit et permet,
-						si les rapports de forces sont satisfaits,
+						si les conditions générales et de forces sont satisfaites,
 						de déplacer la balle de 1 ou 2 cases en horizontal, vertical ou diagonal,
 						mais sans courber sa trajectoire.</li>
 
-					<li>La case de départ de la balle doit avoir un footballeur du joueur.
-						Appelons-le "passeur/tireur".</li>
+					<li>Voici les conditions générales à satisfaire :</li>
 
-					<li>La case d’arrivée de la balle doit être sur le terrain.</li>
-					<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
+						<ul>
+							<li>Le joueur a un footballeur "passeur/tireur" dans la case de départ de la balle.</li>
+							<li>Dans ce tour, le "passeur/tireur" n'a pas déjà "passé/tiré".</li>
+							<li>La case d’arrivée de la balle doit être sur le terrain.</li>
+							<li>La case d’arrivée de la balle n'est pas le but défendu par le joueur.</li>
+							<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
+						</ul>
 
-					<li>Un footballeur ne peut "passer/tirer" plus de une fois par tour.</li>
-
-					<li>Un footballeur ne peut marquer contre son camp.</li>
-
-					<li>Voici les rapports de forces à satisfaire :</li>
+					<li>Voici les conditions de forces à satisfaire :</li>
 						<ul>
 							<li>Si le "passeur/tireur" partage sa case avec un adversaire,
 								alors le "passeur/tireur" doit :</li>
@@ -298,8 +298,9 @@
 						<img class="baltek-doc-image-class" src="../../pictures/two-required-lobs.png" />
 					</div>
 
-			<h1 id="notation">Notation</h1>
+			<h1 id="notation">Notation des coups</h1>
 				<p>Si utile, la partie se note comme dans l'exemple suivant.</p>
+
 <pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
 e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
@@ -307,7 +308,9 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 ...
 @# /
 </pre>
+
 				<p>Optionellement, des précisions sont apportées comme dans l'exemple suivant.</p>
+
 <pre class="w3-code">
 #! baltek 1.1
 #@ bernard@bois.fr robert@riviere.fr
@@ -323,25 +326,26 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 
 					<p>Voici les conventions de ce format de notation structuré en lignes :</p>
 					<ul>
-						<li>Le caractère " ", optionnellement répété, est utilisé en sépéarateur de mots.</li>
+						<li>Le caractère " ", optionnellement répété, sépare les mots.</li>
 
 						<li>Une ligne commençant par "#" est un commentaire ou pseudo-commentaire,
 							et est toujours optionnel.</li>
 
 							<ul>
-								<li>"# " annonce un commentaire libre.</li>
+								<li>"<code class="w3-codespan"># </code>" annonce un commentaire libre.</li>
 
-								<li>"#! baltek i.j" annonce
+								<li>"<code class="w3-codespan">#! baltek i.j</code>" annonce
 									la version "i.j" du format de notation "baltek" ;
 									utilisable une seule fois, en première ligne.</li>
 
-								<li>"#@" annonce
+								<li>"<code class="w3-codespan">#@</code>" annonce
 									les identifiants choisis par les deux joueurs,
 									dans l'ordre "bleu", puis "rouge" ;
-									utilisable une seule fois, .</li>
+									utilisable une seule fois.</li>
 
-								<li>"#:" annonce
-									la date, puis optionnellement l'heure, dans un format ISO ;
+								<li>"<code class="w3-codespan">#:</code>" annonce
+									, dans un format ISO,
+									la date, puis optionnellement l'heure ;
 									utilisable plusieurs fois.</li>
 
 							</ul>
@@ -349,35 +353,39 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 						<li>Une ligne non-vide, qui n'est pas un commentaire,
 							décrit un tour "bleu", suivi d'un tour "rouge" optionnel.
 
-						<li>Le caractère "/" termine le tour "bleu".
+						<li>"<code class="w3-codespan">/</code>" termine le tour "bleu".
+						     La fin de ligne termine le tour "rouge".</li>
 
 						<li>Chaque tour est composé de 0, 1, 2 ou 3 actions.</li>
 
 							<ul>
 								<li>L'action "courir" est notée en un mot
-									formé de la case de départ, et suivie de la case d’arrivée.
+									commençant par la case de départ et finissant par la case d’arrivée.
 									Exemple : <code class="w3-codespan">g3f3</code></li>
 
-								<li>Pour l'option "sprint", le caractère "*" est ajouté au mot de l'action.
+								<li>Pour l'option "sprint", "*" est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">g3e2*</code></li>
 
 								<li>L’action "passer/tirer" est notée en un mot
-									formé du caractère "@" de la balle et suivi de sa case d’arrivée.
+									commençant par "@" et finissant par la case d’arrivée.
 									Exemple : <code class="w3-codespan">@c3</code></li>
 
 								<li>Le "tir au but" est abrégé par le mot suivant :
 									<code class="w3-codespan">@#</code>
 
-								<li>Pour la compensation de "duel", le caractère "+" est ajouté au mot de l'action.
-									Pour deux duels, "++" est ajouté.
+								<li>Pour la compensation de "duel", "+" est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3+</code></li>
+
+								<li>Pour deux duels, "++" est ajouté.
 									Exemple : <code class="w3-codespan">@c3++</code></li>
 
-								<li>Pour la compensation de "lob", le caractère "!" est ajouté au mot de l'action.
-									Pour deux lobs, "!!" est ajouté au mot de l'action.
+								<li>Pour la compensation de "lob", "!" est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3!</code></li>
+
+								<li>Pour deux lobs, "!!" est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3!!</code></li>
 
-								<li>Pour les compensations cumulées de "duel" et "lob",
-									la chaîne "+!" est ajoutée au mot de l'action.
+								<li>Pour cumuler "duel" et "lob", "+!" est ajoutée au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3+!</code></li>
 
 							</ul>
@@ -411,7 +419,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 
 			<p><a href="http://creativecommons.org/licenses/by-sa/3.0/">
 			  	<img border=0 width=132 height=47 src="../../pictures/CC-BY-SA.gif" /></a>
-			  	Copyright <a href="http://lucas.borboleta.blog.free.fr/">Lucas Borboleta</a> 2017-0803-2354
+			  	Copyright <a href="http://lucas.borboleta.blog.free.fr/">Lucas Borboleta</a> 2017-0805-2146
 			</p>
 
 
