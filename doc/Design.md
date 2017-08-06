@@ -6,7 +6,7 @@ This document aims at collecting implementation principles and choices, as well 
 
 ## CSS
 
-*w3.css* is used for the general settings, like fonts, but no *w3* style item is used. .
+*w3.css* is used mainly for formatting texts, but not for buttons and selectors.
 
 *normalize.css* is not directly used, but  *w3.css* uses  some extract of *normalize.css*.
 
