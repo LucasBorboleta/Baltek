@@ -1,20 +1,22 @@
 # Introduction
 
-This project is an HTML and JavaScript implementation of the _Baltek_ board game.
+This project is an HTML and JavaScript implementation of the _BALTEK_ board game.
 
-_Baltek_ is a soccer strategy game, turn based, obeying the following principles:
+BALTEK is a turn-based board game, inspired from football, which relies on the following principles:
 
-- Board game with a very few rules and equipment.
+- game easily made by hand,
 
-- No hazard involved in the turn.
+- with a few rules,
 
-- Multiple actions per turn.
+- without random item,
 
-- The ball moves faster than footballers.
+- with several actions per turn.
 
-- Coordination of players is essential.
+- The ball moves faster than the footballers.
 
-The name of the game is inspired by the sounds of "ball" (BAL) and "tactical" (TK-TK).
+- The coordination of footballers is essential.
+
+The name of the game is built with "ball" (BAL) and "technical" (TEK) sounds.
 
 # Status
 

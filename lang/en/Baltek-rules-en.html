@@ -2,15 +2,427 @@
 <html lang="en">
 	<head>
 	    <meta charset="UTF-8">
-		<title>Baltek Rules</title>
+		<title>BALTEK rules</title>
 	</head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../../css/w3.css">
 	<link rel="stylesheet" href="../../css/baltek.css">
+
 	<body>
-	    <h1>Baltek Rules</h1>
-        <p>TODO: to be written.</p>
+		<span class="baltek-doc-hyperlink-group-class">
+			<a class="baltek-doc-hyperlink-class" href="#introduction">Introduction</a>
+			<a class="baltek-doc-hyperlink-class" href="#revisions">Revisions</a>
+			<a class="baltek-doc-hyperlink-class" href="#material">Material</a>
+			<a class="baltek-doc-hyperlink-class" href="#purpose">Purpose of the game</a>
+			<a class="baltek-doc-hyperlink-class" href="#setup">Setting up</a>
+			<a class="baltek-doc-hyperlink-class" href="#turn">Turn of game</a>
+			<a class="baltek-doc-hyperlink-class" href="#notation">Moves notation</a>
+			<a class="baltek-doc-hyperlink-class" href="#versioning">Versioning</a>
+			<a class="baltek-doc-hyperlink-class" href="#thanks">Thanks</a>
+		</span>
+
+		<h1 id="introduction">Introduction</h1>
+
+		<p>BALTEK is a turn-based board game, inspired from football,
+		   which relies on the following principles:</p>
+
+		    <ul>
+		        <li>game easily made by hand,</li>
+
+		        <li>with a few rules,</li>
+
+		        <li>without random item,</li>
+
+		        <li>with several actions per turn.</li>
+
+		        <li>The ball moves faster than the footballers.</li>
+
+		        <li>The coordination of footballers is essential.</li>
+		    </ul>
+
+		<p>The name of the game is built with <q>ball</q> (BAL) and <q>technical</q> (TEK) sounds.</p>
+
+
+		<h1 id="revisions">Revisions</h1>
+
+			<p>This document is version 1.1 of the BALTEK rules in English.</p>
+			<p>The table below summarizes the motivations for each version.</p>
+
+			<table class="w3-table-all">
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>1.0</td>
+						<td>Creation.</td>
+					</tr>
+
+					<tr>
+						<td>1.1</td>
+						<td>Clarification of the sprint option.
+							More compact notation of moves.
+							Writing in HTML.
+							Screenshots of the HTML / JavaScript implementation.</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+	    <h1 id="material">Material</h1>
+
+			<div class="baltek-doc-hasImage-class">
+				<img class="baltek-doc-image-class" src="../../pictures/starting-positions-with-coordinates.png" />
+			</div>
+
+			<p>Here is the material, shown in the image above:</p>
+			<ul>
+				<li>1 white ball, with the label <q>@</q>.</li>
+				<li>A team of 6 blue footballers.</li>
+				<li>A team of 6 red footballers.</li>
+				<li>Each team consists of:</li>
+					<ul>
+						<li>1 striker, of force 3.</li>
+						<li>2 wingers, of force 2.</li>
+						<li>3 defenders, of force 1.</li>
+					</ul>
+				<li>The field is built using 52 green boxes.</li>
+				<li>Box <q>a3</q>, with the label <q>#</q>, is the goal defended by the blue team.</li>
+				<li>Box <q>l3</q>, with the label <q>#</q>, is the goal defended by the red team.</li>
+			</ul>
+
+			<p>The coordinates and labels <q>@</q> and <q>#</q> are used for notation of moves.</p>
+
+
+		<h1 id="purpose">Purpose of the game</h1>
+			<ul>
+				<li>BALTEK is played by two players.</li>
+				<li>Each player leads a team of 6 footballers.</li>
+				<li>The players decide the assignment of the teams.</li>
+
+				<li>In turn, each player moves the ball and his/her footballers,
+					trying to send the ball into the opponent's goal.</li>
+
+				<li>The winner is the player who first scored 2 goals.</li>
+			</ul>
+
+
+		<h1 id="setup">Setting up</h1>
+			<ul>
+				<li>At the beginning of the game, as well as after each goal scored,
+					the footballers are set up at their kick-off positions.</li>
+
+				<li>The kick-off  positions are fixed.</li>
+
+				<li>The kick-off  positions of the two teams are symmetrical,
+					except those of the strikers.</li>
+
+				<li>The blue team always makes the first kick-off of the game.</li>
+
+				<li>The team that has just scored a goal lets the other team kicks off.</li>
+			</ul>
+
+			<p>The following picture shows the kick-off positions of the blue team.</p>
+				<div class="baltek-doc-hasImage-class">
+					<img class="baltek-doc-image-class" src="../../pictures/starting-positions-for-blue-team.png" />
+				</div>
+
+			<p>The following picture shows the kick-off positions of the red team.</p>
+				<div class="baltek-doc-hasImage-class">
+					<img class="baltek-doc-image-class" src="../../pictures/starting-positions-for-red-team.png" />
+				</div>
+
+
+		<h1 id="turn">Turn of game</h1>
+
+			<h2>Actions, options, compensations, credits and bonuses</h2>
+				<ul>
+					<li>In turn, each player chooses actions and options, which,
+						depending on the context, require compensations.</li>
+
+					<li>These choices cost credits or bonuses.</li>
+
+					<li>Each player has:</li>
+						<ul>
+							<li>3 credits, at the beginning of each turn;</li>
+							<li>1 bonus, at each kick-off.</li>
+						</ul>
+
+					<li>In turn, each player can spend 0, 1, 2 or 3 credits, and 0 or 1 bonus.</li>
+
+					<li>The actions, options and compensations are as follows:</li>
+						<ul>
+							<li><strong>Run</strong>: moving a footballer; cost: <strong>1 credit</strong>.</li>
+
+							<li><strong>Sprint</strong>: option to increase the move of a footballer;
+								cost: <strong>1 bonus</strong>.</li>
+
+							<li><strong>Pass/Shoot</strong>: move the ball;
+								cost: <strong>1 credit</strong>.</li>
+
+							<li><strong>Duel</strong>: compensation of force to own the ball;
+								cost: <strong>1 credit per unit of force</strong>.</li>
+
+							<li><strong>Lob</strong>: compensation of force to move the ball;
+								cost: <strong>1 credit per unit of force</strong>.</li>
+						</ul>
+				</ul>
+
+			<h2>Action <q>courir</q></h2>
+				<ul>
+					<li>L’action <q>courir</q> coûte 1 crédit et permet de déplacer un footballeur de 1 case.</li>
+
+					<li>Chacune des cases du carré 3 x 3, centré sur le footballeur déplacé,
+						sont des destinations possibles, sauf si :</li>
+
+						<ul>
+							<li>celle-ci est en dehors du terrain ;</li>
+							<li>celle-ci est une case de but ;</li>
+							<li>celle-ci accueille déjà un footballeur de la même équipe.</li>
+						</ul>
+
+					<li>Un footballeur ne peut pas <q>courir</q> plus de une fois par tour.</li>
+					<li>L’action <q>courir</q> ne déplace pas la balle.</li>
+				</ul>
+
+				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu <q>3</q>.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/run-allowed-destinations.png" />
+					</div>
+
+			<h2>Option <q>sprint</q></h2>
+				<ul>
+					<li>L'option <q>sprint</q> coûte 1 bonus et étend à 2 cases le déplacement d'un footballeur.</li>
+					<li>L'option <q>sprint</q> doit toujours être combinée à l'action <q>courir</q>.</li>
+
+					<li>Chacune des cases du carré 5 x 5, centré sur le footballeur déplacé,
+						sont des destinations possibles, sauf si :</li>
+						<ul>
+							<li>celle-ci est en dehors du terrain ;</li>
+							<li>celle-ci est une case de but ;</li>
+							<li>celle-ci accueille déjà un footballeur de la même équipe.</li>
+						</ul>
+
+					<li>Le joueur ne peut dépenser son bonus qu'une seule fois entre deux engagements.</li>
+				</ul>
+
+				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu <q>3</q>.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/sprint-allowed-destinations.png" />
+					</div>
+
+			<h2>Action <q>passer/tirer</q></h2>
+				<ul>
+					<li>Les actions <q>passer à un footballeur</q>, <q>envoyer sur une case vide</q> et <q>tirer au but</q>
+						obéissent aux mêmes règles.</li>
+
+					<li>L’action <q>passer/tirer</q> coûte 1 crédit et permet,
+						si les conditions générales et de forces sont satisfaites,
+						de déplacer la balle de 1 ou 2 cases en horizontal, vertical ou diagonal,
+						mais sans courber sa trajectoire.</li>
+
+					<li>Voici les conditions générales à satisfaire :</li>
+
+						<ul>
+							<li>Le joueur a un footballeur <q>passeur/tireur</q> dans la case de départ de la balle.</li>
+							<li>Dans ce tour, le <q>passeur/tireur</q> n'a pas déjà <q>passé/tiré</q>.</li>
+							<li>La case d’arrivée de la balle doit être sur le terrain.</li>
+							<li>La case d’arrivée de la balle n'est pas le but défendu par le joueur.</li>
+							<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
+						</ul>
+
+					<li>Voici les conditions de forces à satisfaire :</li>
+						<ul>
+							<li>Si le <q>passeur/tireur</q> partage sa case avec un adversaire,
+								alors le <q>passeur/tireur</q> doit :</li>
+								<ul>
+									<li>soit égaler ou surpasser la force de son adversaire,</li>
+									<li>soit compenser son déficit de force par <q>duel</q>.</li>
+								</ul>
+
+							<li>Si le <q>passeur/tireur</q> déplace la balle par-dessus un adversaire,
+								alors le <q>passeur/tireur</q> doit :</li>
+								<ul>
+									<li>soit égaler ou surpasser la force de son adversaire,</li>
+									<li>soit compenser son déficit de force par <q>lob</q>.</li>
+								</ul>
+						</ul>
+				</ul>
+
+				<p>Exemple : avec des bordures jaunes, les destinations possibles pour la balle
+					         par le footballeur bleu <q>3</q> ; aucune n'exige duel ou lob.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/kick-allowed-destinations.png" />
+					</div>
+
+
+			<h2>Compensation <q>duel</q></h2>
+				<ul>
+					<li>Cette compensation peut être exigée par l’action <q>tirer/passer</q>.</li>
+
+					<li>Le <q>duel</q> compense le déficit de force du <q>passeur/tireur</q>
+						vis-à-vis de l’adversaire qui partage sa case.</li>
+
+					<li>Le <q>duel</q> coûte 1 crédit par unité de force compensée.</li>
+				</ul>
+				<p>Exemples : pour posséder la balle, le footballeur bleu <q>2</q> doit livrer 1 duel ;
+					          et footballeur bleu <q>1</q> doit livrer 2 duels.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/one-required-duel.png" />
+						<img class="baltek-doc-image-class" src="../../pictures/two-required-duels.png" />
+					</div>
+
+
+			<h2>Compensation <q>lob</q></h2>
+				<ul>
+					<li>Cette compensation peut être exigée par l’action <q>tirer/passer</q>.</li>
+
+					<li>Le <q>lob</q> compense le déficit de force
+						du <q>passeur/tireur</q> vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
+
+					<li>Le <q>lob</q> coûte 1 crédit par unité de force compensée.</li>
+
+					<li>La compensation de lob n'est pas nécessaire pour passer par-dessus
+						un footballeur de son équipe.</li>
+				</ul>
+
+				<p>Exemples : pour transmettre la balle au footballeur bleu <q>2</q>, le footballeur bleu <q>1</q>
+					          doit effectuer 1 lob, dans le contexte de gauche,
+							  et 2 lobs dans le contexte de droite.</p>
+					<div class="baltek-doc-hasImage-class">
+						<img class="baltek-doc-image-class" src="../../pictures/one-required-lob.png" />
+						<img class="baltek-doc-image-class" src="../../pictures/two-required-lobs.png" />
+					</div>
+
+			<h1 id="notation">Notation des coups</h1>
+				<p>Si utile, la partie se note comme dans l'exemple suivant.</p>
+
+<pre class="w3-code">
+@d3  f3g3 d1e1  / h3g3 g5f5 i3h3
+e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
+@e4  @g4+       / g3g4 i5i4 @i4
+...
+@# /
+</pre>
+
+				<p>Optionnellement, des précisions sont apportées comme dans l'exemple suivant.</p>
+
+<pre class="w3-code">
+#! BALTEK 1.1
+#@ bernard@bois.fr robert@riviere.fr
+#: 2014-12-24 11:09:30
+@d3  f3g3 d1e1  / h3g3 g5f5 i3h3
+e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
+@e4  @g4+       / g3g4 i5i4 @i4
+...
+@# /
+#: 2014-12-24 11:30:00
+# Le bonus des rouges a été bien joué.
+</pre>
+
+					<p>Voici les conventions de ce format de notation structuré en lignes :</p>
+					<ul>
+						<li>Le caractère <q> </q>, optionnellement répété, sépare les mots.</li>
+
+						<li>Une ligne commençant par <q>#</q> est un commentaire ou pseudo-commentaire,
+							et est toujours optionnel.</li>
+
+							<ul>
+								<li><q><code class="w3-codespan"># </code></q> annonce un commentaire libre.</li>
+
+								<li><q><code class="w3-codespan">#! BALTEK i.j</code></q> annonce
+									la version <q>i.j</q> du format de notation BALTEK ;
+									utilisable une seule fois, en première ligne.</li>
+
+								<li><q><code class="w3-codespan">#@</code></q> annonce
+									les identifiants choisis par les deux joueurs,
+									dans l'ordre <q>bleu</q>, puis <q>rouge</q> ;
+									utilisable une seule fois.</li>
+
+								<li><q><code class="w3-codespan">#:</code></q> annonce,
+									dans un format ISO,
+									la date, puis optionnellement l'heure ;
+									utilisable plusieurs fois.</li>
+
+							</ul>
+
+						<li>Une ligne non-vide, qui n'est pas un commentaire,
+							décrit un tour <q>bleu</q>, suivi d'un tour <q>rouge</q>.
+
+						<li><q><code class="w3-codespan">/</code></q> termine le tour <q>bleu</q>.
+						     La fin de ligne termine le tour <q>rouge</q>.</li>
+
+						<li>Chaque tour est composé de 0, 1, 2 ou 3 actions.</li>
+
+							<ul>
+								<li>L'action <q>courir</q> est notée en un mot
+									commençant par la case de départ et finissant par la case d’arrivée.
+									Exemple : <code class="w3-codespan">g3f3</code></li>
+
+								<li>Pour l'option <q>sprint</q>, <q>*</q> est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">g3e2*</code></li>
+
+								<li>L’action <q>passer/tirer</q> est notée en un mot
+									commençant par <q>@</q> et finissant par la case d’arrivée.
+									Exemple : <code class="w3-codespan">@c3</code></li>
+
+								<li>Le <q>tir au but</q> est abrégé par le mot suivant :
+									<code class="w3-codespan">@#</code>
+
+								<li>Pour la compensation de <q>duel</q>, <q>+</q> est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3+</code></li>
+
+								<li>Pour deux duels, <q>++</q> est ajouté.
+									Exemple : <code class="w3-codespan">@c3++</code></li>
+
+								<li>Pour la compensation de <q>lob</q>, <q>!</q> est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3!</code></li>
+
+								<li>Pour deux lobs, <q>!!</q> est ajouté au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3!!</code></li>
+
+								<li>Pour cumuler <q>duel</q> et <q>lob</q>, <q>+!</q> est ajoutée au mot de l'action.
+									Exemple : <code class="w3-codespan">@c3+!</code></li>
+
+							</ul>
+
+		   		</ul>
+
+
+			<h1 id="versioning">Versionnement</h1>
+				<ul>
+					<li>Les versions des règles sont identifiées avec deux indices entiers <q>i.j</q>.</li>
+					<li>La première version est <q>1.0</q>.</li>
+
+					<li>L'indice majeur <q>i</q> est incrémenté de 1 lorsque les règles du jeu sont modifiées.
+						L'indice mineur <q>j</q> est alors réinitialisé à 0.</li>
+
+					<li>L'indice mineur <q>j</q> est incrémenté de 1 lorsque les textes ou les illustrations
+						ou le format de notation ou la structure du document changent, mais pas les règles.</li>
+
+					<li>Chaque traduction fait évoluer son indice mineur <q>j</q> en partant de 0.</li>
+				</ul>
+
+
+			<h1 id="thanks">Remerciements</h1>
+				<p>Je remercie mes fils <q>A</q> et <q>C</q> pour leurs patiences et commentaires
+					lors des parties d'essais de BALTEK et autres tentatives de jeu de football.
+					Ma compagne <q>P</q> avec sa durée de réflexion de joueuse d'échecs a suscité
+					la création du <q>bonus de sprint</q> afin de dynamiser les parties de BALTEK ;
+				    je la remercie.
+				</p>
+
+
+			<p><a href="http://creativecommons.org/licenses/by-sa/3.0/">
+			  	<img border=0 width=132 height=47 src="../../pictures/CC-BY-SA.gif" /></a>
+			  	Copyright <a href="http://lucas.borboleta.blog.free.fr/">Lucas Borboleta</a> 2017-0808-1713
+			</p>
+
 
 	</body>
 </html>
