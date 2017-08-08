@@ -1,6 +1,6 @@
 # Introduction
 
-This project is an HTML and JavaScript implementation of the _BALTEK_ board game.
+This project is an HTML and JavaScript implementation of the BALTEK board game.
 
 BALTEK is a turn-based board game, inspired from football, which relies on the following principles:
 
