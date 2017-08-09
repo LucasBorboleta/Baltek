@@ -78,8 +78,8 @@ baltek.presenter.Presenter.__initClass = function(){
         this.confirm = new baltek.widget.Button( "baltek-button-confirm" , this.i18nTranslator);
         this.confirm.registerObserver(this);
 
-        this.cancel = new baltek.widget.Button( "baltek-button-cancel" , this.i18nTranslator);
-        this.cancel.registerObserver(this);
+        this.undo = new baltek.widget.Button( "baltek-button-undo" , this.i18nTranslator);
+        this.undo.registerObserver(this);
 
         this.credit = new baltek.widget.CounterWithSymbols( "baltek-counter-credit" , this.i18nTranslator,
             CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
@@ -156,7 +156,7 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.sprint.enable(false);
         this.confirm.enable(false);
-        this.cancel.enable(false);
+        this.undo.enable(false);
         this.credit.enable(false);
 
         this.language.enable(false);
@@ -199,7 +199,7 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.sprint.show(false);
         this.confirm.show(false);
-        this.cancel.show(false);
+        this.undo.show(false);
         this.credit.show(false);
 
         this.language.show(false);
@@ -382,8 +382,8 @@ baltek.presenter.Presenter.__initClass = function(){
         this.confirm.show(true);
         this.confirm.enable(true);
 
-        this.cancel.show(true);
-        this.cancel.enable( state.teams[activeTeamIndex].credit < this.rulesEngine.getCreditMax() );
+        this.undo.show(true);
+        this.undo.enable( state.teams[activeTeamIndex].credit < this.rulesEngine.getCreditMax() );
 
         this.clearBoxes();
 

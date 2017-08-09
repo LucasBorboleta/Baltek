@@ -7,7 +7,7 @@ baltek.i18n.translations.en = {
     "baltek-button-help:button"        : "Help" ,
     "baltek-button-rules:button"       : "Rules" ,
 
-    "baltek-button-cancel:button"      : "Cancel" ,
+    "baltek-button-undo:button"        : "Undo" ,
     "baltek-button-confirm:button"     : "OK" ,
 
     "baltek-button-goToGame:button"    : "< Game" ,
@@ -50,7 +50,7 @@ baltek.i18n.translations.eo = {
     "baltek-button-help:button"        : "Helpo" ,
     "baltek-button-rules:button"       : "Reguloj" ,
 
-    "baltek-button-cancel:button"      : "Rezigni" ,
+    "baltek-button-undo:button"        : "Malfari" ,
     "baltek-button-confirm:button"     : "Akcepti" ,
 
     "baltek-button-goToGame:button"    : "< Ludo" ,
@@ -74,8 +74,8 @@ baltek.i18n.translations.eo = {
     "baltek-select-language:fr"        : "Français" ,
     "baltek-select-language:pt"        : "Português" ,
 
-    "baltek-select-sprint:no"          : "Rapidigi: ne" ,
-    "baltek-select-sprint:yes"         : "Rapidigi: jes" ,
+    "baltek-select-sprint:no"          : "Akcelo: ne" ,
+    "baltek-select-sprint:yes"         : "Akcelo: jes" ,
 
     "baltek-select-team0Kind:ai1"      : "AI1" ,
     "baltek-select-team0Kind:ai2"      : "AI2" ,
@@ -93,7 +93,7 @@ baltek.i18n.translations.fr = {
     "baltek-button-help:button"        : "Aide" ,
     "baltek-button-rules:button"       : "Règles" ,
 
-    "baltek-button-cancel:button"      : "Annuler" ,
+    "baltek-button-undo:button"        : "Défaire" ,
     "baltek-button-confirm:button"     : "OK" ,
 
     "baltek-select-coordinates:no"     : "Coordonnées : non" ,
@@ -136,7 +136,7 @@ baltek.i18n.translations.pt = {
     "baltek-button-help:button"        : "Ajuda" ,
     "baltek-button-rules:button"       : "Regras" ,
 
-    "baltek-button-cancel:button"      : "Desfazer" ,
+    "baltek-button-undo:button"        : "Desfazer" ,
     "baltek-button-confirm:button"     : "OK" ,
 
     "baltek-button-goToGame:button"    : "< Jogo" ,

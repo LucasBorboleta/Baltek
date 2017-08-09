@@ -64,8 +64,8 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         } else if ( observable === this.presenter.sprint ) {
             this.presenter.rulesEngine.moveSprint( observable.getSelection() === "yes" );
 
-        } else if ( observable === this.presenter.cancel ) {
-            this.presenter.rulesEngine.turnCancel();
+        } else if ( observable === this.presenter.undo ) {
+            this.presenter.rulesEngine.turnUndo();
 
         } else if ( observable === this.presenter.confirm ) {
             this.presenter.rulesEngine.turnConfirm();

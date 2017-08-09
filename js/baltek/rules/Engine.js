@@ -263,9 +263,9 @@ baltek.rules.Engine.__initClass = function(){
         }
     };
 
-    baltek.rules.Engine.prototype.turnCancel = function(){
+    baltek.rules.Engine.prototype.turnUndo = function(){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("turnCancel:");
+        baltek.debug.writeMessage("turnUndo:");
         baltek.utils.assert( this.move.isActive );
         this.setState(this.turn.state);
         this.turnInit();
