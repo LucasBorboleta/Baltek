@@ -32,7 +32,7 @@
 
 		        <li>with a few rules,</li>
 
-		        <li>without random item,</li>
+		        <li>without randomizing device,</li>
 
 		        <li>with several actions per turn.</li>
 
@@ -46,7 +46,7 @@
 
 		<h1 id="revisions">Revisions</h1>
 
-			<p>This document is version 1.1 of the BALTEK rules in English.</p>
+			<p>This document is version 1.0 of the BALTEK rules in English.</p>
 			<p>The table below summarizes the motivations for each version.</p>
 
 			<table class="w3-table-all">
@@ -60,17 +60,8 @@
 				<tbody>
 					<tr>
 						<td>1.0</td>
-						<td>Creation.</td>
+						<td>Creation from translation of the version 1.1 of the French rules.</td>
 					</tr>
-
-					<tr>
-						<td>1.1</td>
-						<td>Clarification of the sprint option.
-							More compact notation of moves.
-							Writing in HTML.
-							Screenshots of the HTML / JavaScript implementation.</td>
-					</tr>
-
 				</tbody>
 			</table>
 
@@ -87,13 +78,13 @@
 				<li>A team of 6 red footballers.</li>
 				<li>Each team consists of:</li>
 					<ul>
-						<li>1 striker, of force 3.</li>
-						<li>2 wingers, of force 2.</li>
-						<li>3 defenders, of force 1.</li>
+						<li>1 centre forward of force 3.</li>
+						<li>2 wingers of force 2.</li>
+						<li>3 fullbacks of force 1.</li>
 					</ul>
-				<li>The field is built using 52 green boxes.</li>
-				<li>Box <q>a3</q>, with the label <q>#</q>, is the goal defended by the blue team.</li>
-				<li>Box <q>l3</q>, with the label <q>#</q>, is the goal defended by the red team.</li>
+				<li>The field is built using 52 green squares.</li>
+				<li>The square <q>a3</q>, with the label <q>#</q>, is the goal defended by the blue team.</li>
+				<li>The square <q>l3</q>, with the label <q>#</q>, is the goal defended by the red team.</li>
 			</ul>
 
 			<p>The coordinates and labels <q>@</q> and <q>#</q> are used for notation of moves.</p>
@@ -120,7 +111,7 @@
 				<li>The kickoff  positions are fixed.</li>
 
 				<li>The kickoff  positions of the two teams are symmetrical,
-					except those of the strikers.</li>
+					except those of the centre forwards.</li>
 
 				<li>The blue team always makes the first kickoff of the game.</li>
 
@@ -147,7 +138,7 @@
 
 					<li>These choices cost credits or bonuses.</li>
 
-					<li>Each player has:</li>
+					<li>Each player receives:</li>
 						<ul>
 							<li>3 credits, at the beginning of each turn;</li>
 							<li>1 bonus, at each kickoff.</li>
@@ -162,7 +153,7 @@
 							<li><strong>Sprint</strong>: option to increase the move of a footballer;
 								cost: <strong>1 bonus</strong>.</li>
 
-							<li><strong>Pass/Shoot</strong>: move the ball;
+							<li><strong>Shoot</strong>: move the ball;
 								cost: <strong>1 credit</strong>.</li>
 
 							<li><strong>Duel</strong>: compensation of force to own the ball;
@@ -175,14 +166,14 @@
 
 			<h2>Action <q>run</q></h2>
 				<ul>
-					<li>The action <q>run</q> costs 1 credit and allows to move a footballer by 1 box.</li>
+					<li>The action <q>run</q> costs 1 credit and allows to move a footballer by 1 square.</li>
 
-					<li>Each box of the square 3 x 3, centered on the moved footballer,
+					<li>Each square of the zone 3 x 3, centered on the moved footballer,
 						are possible destinations, unless:</li>
 
 						<ul>
 							<li>it is outside the field;</li>
-							<li>this is a goal box;</li>
+							<li>this is a goal square;</li>
 							<li>it already hosts a footballer of the same team.</li>
 						</ul>
 
@@ -197,14 +188,14 @@
 
 			<h2>Option <q>sprint</q></h2>
 				<ul>
-					<li>The option <q>sprint</q> costs 1 bonus and extends to 2 boxes the move of a footballer.</li>
+					<li>The option <q>sprint</q> costs 1 bonus and extends to 2 squares the move of a footballer.</li>
 					<li>The option <q>sprint</q> must always be combined with the action <q>run</q>.</li>
 
-					<li>Each box of the 5 x 5 square, centered on the moved footballer,
+					<li>Each square of the 5 x 5 zone, centered on the moved footballer,
 					are possible destinations, unless:</li>
 						<ul>
 							<li>it is outside the field;</li>
-							<li>this is a goal box;</li>
+							<li>this is a goal square;</li>
 							<li>it already hosts a footballer of the same team.</li>
 						</ul>
 
@@ -216,37 +207,39 @@
 						<img class="baltek-doc-image-class" src="../../pictures/sprint-allowed-destinations.png" />
 					</div>
 
-			<h2>Action <q>pass/shoot</q></h2>
+			<h2>Action <q>shoot</q></h2>
 				<ul>
-					<li>The actions <q>pass to a footballer</q>, <q>send on an empty box</q> and <q>shoot at the goal</q>
+					<li>The actions <q>transmit the ball to a footballer</q>,
+						<q>send the ball to an empty square</q>
+						and <q>shoot at the goal</q>
 					 	obey the same rules.</li>
 
-					<li>The action <q>pass/shoot</q> costs 1 credit and allows,
-						if the general conditions and forces are satisfied,
-						to move the ball of 1 or 2 boxes in horizontal, vertical or diagonal directions,
+					<li>The action <q>shoot</q> costs 1 credit and allows,
+						if the general conditions and the force conditions are satisfied,
+						to move the ball of 1 or 2 squares in horizontal, vertical or diagonal directions,
 						but without curving its trajectory.</li>
 
 					<li>Here are the general conditions to be met:</li>
 
 						<ul>
-							<li>The player has a <q>passer/shooter</q> in the starting box of the ball.</li>
-							<li>In this turn, the <q>passer/shooter</q> has not already <q>passed/shot</q>.</li>
-							<li>The box of the ball must be in the field.</li>
-							<li>The box of the ball is not the goal defended by the player.</li>
-							<li>The box of the ball may be empty or occupied.</li>
+							<li>The player has a <q>shooter</q> in the starting square of the ball.</li>
+							<li>In this turn, the <q>shooter</q> has not already <q>shot</q>.</li>
+							<li>The square of the ball must be in the field.</li>
+							<li>The square of the ball is not the goal defended by the player.</li>
+							<li>The square of the ball may be empty or occupied.</li>
 						</ul>
 
-					<li>Here are the conditions of forces to be met:</li>
+					<li>Here are the force conditions to be met:</li>
 						<ul>
-							<li>If the <q>passer/shooter</q> shares his/ber box with an opponent,
-							then the <q>passer/shooter</q> must:</li>
+							<li>If the <q>shooter</q> shares his/ber square with an opponent,
+							then the <q>shooter</q> must:</li>
 								<ul>
 									<li>either equal or surpass the force of his/her opponent,</li>
-									<li>or to compensate for his/ber force deficit by <q>duel</q>.</li>
+									<li>or compensate for his/ber force deficit by <q>duel</q>.</li>
 								</ul>
 
-							<li>If the <q>passer/shooter</q> moves the ball over an opponent,
-							    then the <q>passer/shooter</q> must:</li>
+							<li>If the <q>shooter</q> moves the ball over an opponent,
+							    then the <q>shooter</q> must:</li>
 								<ul>
 									<li>either equal or surpass the force of his/her opponent,</li>
 									<li>or compensate for his/her deficit of force by <q>lob</q>.</li>
@@ -255,7 +248,7 @@
 				</ul>
 
 				<p>Example: with yellow borders, the possible destinations for the ball
-						    by the blue footballer <q>3</q>; none requires duel or lob.</p>
+						    by the blue <q>shooter 3</q>; none requires duel or lob.</p>
 					<div class="baltek-doc-hasImage-class">
 						<img class="baltek-doc-image-class" src="../../pictures/kick-allowed-destinations.png" />
 					</div>
@@ -263,15 +256,15 @@
 
 			<h2>Compensation <q>duel</q></h2>
 				<ul>
-					<li>Cette compensation peut être exigée par l’action <q>tirer/passer</q>.</li>
+					<li>This compensation may be required by the action <q>shoot</q>.</li>
 
-					<li>Le <q>duel</q> compense le déficit de force du <q>passeur/tireur</q>
-						vis-à-vis de l’adversaire qui partage sa case.</li>
+					<li>The <q>duel</q> compensates for the lack of force of the <q>shooter</q>
+						with respect to the opponent sharing his/her square.</li>
 
-					<li>Le <q>duel</q> coûte 1 crédit par unité de force compensée.</li>
+					<li>The <q>duel</q> costs 1 credit per unit of compensated force.</li>
 				</ul>
-				<p>Exemples : pour posséder la balle, le footballeur bleu <q>2</q> doit livrer 1 duel ;
-					          et footballeur bleu <q>1</q> doit livrer 2 duels.</p>
+				<p>Examples: to own the ball, the blue <q>shooter 2</q> must engage in 1 duel;
+						     and the blue <q>shooter 1</q> must engage in 2 duels.</p>
 					<div class="baltek-doc-hasImage-class">
 						<img class="baltek-doc-image-class" src="../../pictures/one-required-duel.png" />
 						<img class="baltek-doc-image-class" src="../../pictures/two-required-duels.png" />
@@ -280,27 +273,27 @@
 
 			<h2>Compensation <q>lob</q></h2>
 				<ul>
-					<li>Cette compensation peut être exigée par l’action <q>tirer/passer</q>.</li>
+					<li>This compensation may be required by the action <q>shoot</q>.</li>
 
-					<li>Le <q>lob</q> compense le déficit de force
-						du <q>passeur/tireur</q> vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
+					<li>The lob compensates for the force deficit of the <q>shooter</q>
+						with respect to the opponent over which the ball passes.</li>
 
-					<li>Le <q>lob</q> coûte 1 crédit par unité de force compensée.</li>
+					<li>The <q>lob</q> costs 1 credit per unit of compensated force.</li>
 
-					<li>La compensation de lob n'est pas nécessaire pour passer par-dessus
-						un footballeur de son équipe.</li>
+					<li>The <q>lob</q> compensation is not necessary to pass over a footballer of his/her team.</li>
 				</ul>
 
-				<p>Exemples : pour transmettre la balle au footballeur bleu <q>2</q>, le footballeur bleu <q>1</q>
-					          doit effectuer 1 lob, dans le contexte de gauche,
-							  et 2 lobs dans le contexte de droite.</p>
+				<p>Examples: to transmit the ball to the blue footballer <q>2</q>,
+						     the blue <q>shooter 1</q> must perform 1 lob in the left context
+						     and 2 lobs in the right context.</p>
 					<div class="baltek-doc-hasImage-class">
 						<img class="baltek-doc-image-class" src="../../pictures/one-required-lob.png" />
 						<img class="baltek-doc-image-class" src="../../pictures/two-required-lobs.png" />
 					</div>
 
-			<h1 id="notation">Notation des coups</h1>
-				<p>Si utile, la partie se note comme dans l'exemple suivant.</p>
+
+			<h1 id="notation">Moves notation</h1>
+				<p>If useful, the moves of the game are noted as in the following example.</p>
 
 <pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
@@ -310,7 +303,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @# /
 </pre>
 
-				<p>Optionnellement, des précisions sont apportées comme dans l'exemple suivant.</p>
+				<p>Optionally, precisions are provided as in the following example.</p>
 
 <pre class="w3-code">
 #! BALTEK 1.1
@@ -322,72 +315,71 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 ...
 @# /
 #: 2014-12-24 11:30:00
-# Le bonus des rouges a été bien joué.
+# The red bonus has been well played.
 </pre>
 
-					<p>Voici les conventions de ce format de notation structuré en lignes :</p>
+					<p>Here are the conventions of this format of notation structured in rows:</p>
 					<ul>
-						<li>Le caractère <q> </q>, optionnellement répété, sépare les mots.</li>
+						<li>The <q> </q> character, optionally repeated, separates the words.</li>
 
-						<li>Une ligne commençant par <q>#</q> est un commentaire ou pseudo-commentaire,
-							et est toujours optionnel.</li>
+						<li>A line beginning with <q><code class="w3-codespan"># </code></q>
+							is a comment or pseudo-comment, and is always optional.</li>
 
 							<ul>
-								<li><q><code class="w3-codespan"># </code></q> annonce un commentaire libre.</li>
+								<li><q><code class="w3-codespan"># </code></q> announces a free comment.</li>
 
-								<li><q><code class="w3-codespan">#! BALTEK i.j</code></q> annonce
-									la version <q>i.j</q> du format de notation BALTEK ;
-									utilisable une seule fois, en première ligne.</li>
+								<li><q><code class="w3-codespan">#! BALTEK i.j</code></q> announces the
+									version  <q>i.j</q> of the BALTEK notation format;
+									usable only once, in the first row.</li>
 
-								<li><q><code class="w3-codespan">#@</code></q> annonce
-									les identifiants choisis par les deux joueurs,
-									dans l'ordre <q>bleu</q>, puis <q>rouge</q> ;
-									utilisable une seule fois.</li>
+								<li><q><code class="w3-codespan">#@</code></q> announces
+									the identifiers chosen by the two players,
+									in order <q>blue</q> then <q>red</q>;
+									usable only once.</li>
 
-								<li><q><code class="w3-codespan">#:</code></q> annonce,
-									dans un format ISO,
-									la date, puis optionnellement l'heure ;
-									utilisable plusieurs fois.</li>
-
+								<li><q><code class="w3-codespan">#:</code></q> announces,
+									in an ISO format, the date, then optionally the time;
+									usable several times.</li>
 							</ul>
 
-						<li>Une ligne non-vide, qui n'est pas un commentaire,
-							décrit un tour <q>bleu</q>, suivi d'un tour <q>rouge</q>.
+						<li>A non-empty line, which is not a comment,
+							describes a <q>blue</q> turn, followed by a <q>red</q> turn.</li>
 
-						<li><q><code class="w3-codespan">/</code></q> termine le tour <q>bleu</q>.
-						     La fin de ligne termine le tour <q>rouge</q>.</li>
+						<li><q><code class="w3-codespan">/</code></q> ends the <q>blue</q> turn.
+						     The end of the line ends the <q>red</q> turn .</li>
 
-						<li>Chaque tour est composé de 0, 1, 2 ou 3 actions.</li>
+						<li>Each turn is composed of 0, 1, 2 ou 3 actions.</li>
 
 							<ul>
-								<li>L'action <q>courir</q> est notée en un mot
-									commençant par la case de départ et finissant par la case d’arrivée.
-									Exemple : <code class="w3-codespan">g3f3</code></li>
+								<li>The action <q>run</q> is noted using one word
+									beginning with the starting square and ending with the arriving square.
+									Example: <code class="w3-codespan">g3f3</code></li>
 
-								<li>Pour l'option <q>sprint</q>, <q>*</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">g3e2*</code></li>
+								<li>For the option <q>sprint</q>, <q>*</q> is appended to the action word.
+									Example: <code class="w3-codespan">g3e2*</code></li>
 
-								<li>L’action <q>passer/tirer</q> est notée en un mot
-									commençant par <q>@</q> et finissant par la case d’arrivée.
-									Exemple : <code class="w3-codespan">@c3</code></li>
+								<li>The action <q>shot</q> is noted using one word
+									beginning with <q>@</q> and ending with the arriving square.
+									Example: <code class="w3-codespan">@c3</code></li>
 
-								<li>Le <q>tir au but</q> est abrégé par le mot suivant :
+								<li>The <q>shot at goal</q> is abbreviated as follows:
 									<code class="w3-codespan">@#</code>
 
-								<li>Pour la compensation de <q>duel</q>, <q>+</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3+</code></li>
+								<li>For the compensation <q>duel</q>, <q>+</q> is appended to the action word.
+									Example: <code class="w3-codespan">@c3+</code></li>
 
-								<li>Pour deux duels, <q>++</q> est ajouté.
-									Exemple : <code class="w3-codespan">@c3++</code></li>
+								<li>For two duels, <q>++</q> is appended.
+									Example: <code class="w3-codespan">@c3++</code></li>
 
-								<li>Pour la compensation de <q>lob</q>, <q>!</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3!</code></li>
+								<li>For the compensation <q>lob</q>, <q>!</q> is appended to the action word.
+									Example: <code class="w3-codespan">@c3!</code></li>
 
-								<li>Pour deux lobs, <q>!!</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3!!</code></li>
+								<li>For two lobs, <q>!!</q> is appended to the action word.
+									Example: <code class="w3-codespan">@c3!!</code></li>
 
-								<li>Pour cumuler <q>duel</q> et <q>lob</q>, <q>+!</q> est ajoutée au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3+!</code></li>
+								<li>For the combination <q>duel</q> plus <q>lob</q>,
+									<q>+!</q> is appended to the action word.
+									Example: <code class="w3-codespan">@c3+!</code></li>
 
 							</ul>
 
@@ -419,7 +411,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 
 			<p><a href="http://creativecommons.org/licenses/by-sa/3.0/">
 			  	<img border=0 width=132 height=47 src="../../pictures/CC-BY-SA.gif" /></a>
-			  	Copyright <a href="http://lucas.borboleta.blog.free.fr/">Lucas Borboleta</a> 2017-0808-1713
+			  	Copyright <a href="http://lucas.borboleta.blog.free.fr/">Lucas Borboleta</a> 2017-0810-1234
 			</p>
 
 

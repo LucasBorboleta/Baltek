@@ -8,7 +8,7 @@ BALTEK is a turn-based board game, inspired from football, which relies on the f
 
 - with a few rules,
 
-- without random item,
+- without randomizing device,
 
 - with several actions per turn.
 

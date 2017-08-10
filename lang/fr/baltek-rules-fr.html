@@ -144,7 +144,7 @@
 
 					<li>Ces choix coûtent des crédits ou bonus.</li>
 
-					<li>Chaque joueur dispose de :</li>
+					<li>Chaque joueur reçoit :</li>
 						<ul>
 							<li>3 crédits, au début de chaque tour ;</li>
 							<li>1 bonus, au début de chaque engagement.</li>
@@ -161,7 +161,7 @@
 							<li><strong>Sprint</strong> : option pour augmenter le déplacement d'un footballeur ;
 								coût : <strong>1 bonus</strong>.</li>
 
-							<li><strong>Passer/tirer</strong> : déplacer la balle ;
+							<li><strong>Tirer</strong> : déplacer la balle ;
 								coût : <strong>1 crédit</strong>.</li>
 
 							<li><strong>Duel</strong> : compensation de force pour posséder la balle ;
@@ -176,7 +176,7 @@
 				<ul>
 					<li>L’action <q>courir</q> coûte 1 crédit et permet de déplacer un footballeur de 1 case.</li>
 
-					<li>Chacune des cases du carré 3 x 3, centré sur le footballeur déplacé,
+					<li>Chacune des cases de la zone 3 x 3, centrée sur le footballeur déplacé,
 						sont des destinations possibles, sauf si :</li>
 
 						<ul>
@@ -199,7 +199,7 @@
 					<li>L'option <q>sprint</q> coûte 1 bonus et étend à 2 cases le déplacement d'un footballeur.</li>
 					<li>L'option <q>sprint</q> doit toujours être combinée à l'action <q>courir</q>.</li>
 
-					<li>Chacune des cases du carré 5 x 5, centré sur le footballeur déplacé,
+					<li>Chacune des cases de la zone 5 x 5, centrée sur le footballeur déplacé,
 						sont des destinations possibles, sauf si :</li>
 						<ul>
 							<li>celle-ci est en dehors du terrain ;</li>
@@ -215,21 +215,23 @@
 						<img class="baltek-doc-image-class" src="../../pictures/sprint-allowed-destinations.png" />
 					</div>
 
-			<h2>Action <q>passer/tirer</q></h2>
+			<h2>Action <q>tirer</q></h2>
 				<ul>
-					<li>Les actions <q>passer à un footballeur</q>, <q>envoyer sur une case vide</q> et <q>tirer au but</q>
+					<li>Les actions <q>transmettre la balle à un footballeur</q>,
+						<q>envoyer la balle sur une case vide</q>
+						et <q>tirer au but</q>
 						obéissent aux mêmes règles.</li>
 
-					<li>L’action <q>passer/tirer</q> coûte 1 crédit et permet,
-						si les conditions générales et de forces sont satisfaites,
+					<li>L’action <q>tirer</q> coûte 1 crédit et permet,
+						si les conditions générales et les conditions de forces sont satisfaites,
 						de déplacer la balle de 1 ou 2 cases en horizontal, vertical ou diagonal,
 						mais sans courber sa trajectoire.</li>
 
 					<li>Voici les conditions générales à satisfaire :</li>
 
 						<ul>
-							<li>Le joueur a un footballeur <q>passeur/tireur</q> dans la case de départ de la balle.</li>
-							<li>Dans ce tour, le <q>passeur/tireur</q> n'a pas déjà <q>passé/tiré</q>.</li>
+							<li>Le joueur a un <q>tireur</q> dans la case de départ de la balle.</li>
+							<li>Dans ce tour, le <q>tireur</q> n'a pas déjà <q>tiré</q>.</li>
 							<li>La case d’arrivée de la balle doit être sur le terrain.</li>
 							<li>La case d’arrivée de la balle n'est pas le but défendu par le joueur.</li>
 							<li>La case d’arrivée de la balle peut être vide ou occupée.</li>
@@ -237,15 +239,15 @@
 
 					<li>Voici les conditions de forces à satisfaire :</li>
 						<ul>
-							<li>Si le <q>passeur/tireur</q> partage sa case avec un adversaire,
-								alors le <q>passeur/tireur</q> doit :</li>
+							<li>Si le <q>tireur</q> partage sa case avec un adversaire,
+								alors le <q>tireur</q> doit :</li>
 								<ul>
 									<li>soit égaler ou surpasser la force de son adversaire,</li>
 									<li>soit compenser son déficit de force par <q>duel</q>.</li>
 								</ul>
 
-							<li>Si le <q>passeur/tireur</q> déplace la balle par-dessus un adversaire,
-								alors le <q>passeur/tireur</q> doit :</li>
+							<li>Si le <q>tireur</q> déplace la balle par-dessus un adversaire,
+								alors le <q>tireur</q> doit :</li>
 								<ul>
 									<li>soit égaler ou surpasser la force de son adversaire,</li>
 									<li>soit compenser son déficit de force par <q>lob</q>.</li>
@@ -254,7 +256,7 @@
 				</ul>
 
 				<p>Exemple : avec des bordures jaunes, les destinations possibles pour la balle
-					         par le footballeur bleu <q>3</q> ; aucune n'exige duel ou lob.</p>
+					         par le <q>tireur 3</q> bleu ; aucune n'exige duel ou lob.</p>
 					<div class="baltek-doc-hasImage-class">
 						<img class="baltek-doc-image-class" src="../../pictures/kick-allowed-destinations.png" />
 					</div>
@@ -262,15 +264,15 @@
 
 			<h2>Compensation <q>duel</q></h2>
 				<ul>
-					<li>Cette compensation peut être exigée par l’action <q>tirer/passer</q>.</li>
+					<li>Cette compensation peut être exigée par l’action <q>tirer</q>.</li>
 
-					<li>Le <q>duel</q> compense le déficit de force du <q>passeur/tireur</q>
+					<li>Le <q>duel</q> compense le déficit de force du <q>tireur</q>
 						vis-à-vis de l’adversaire qui partage sa case.</li>
 
 					<li>Le <q>duel</q> coûte 1 crédit par unité de force compensée.</li>
 				</ul>
-				<p>Exemples : pour posséder la balle, le footballeur bleu <q>2</q> doit livrer 1 duel ;
-					          et footballeur bleu <q>1</q> doit livrer 2 duels.</p>
+				<p>Exemples : pour posséder la balle, le <q>tireur 2</q> bleu doit livrer 1 duel ;
+					          et le <q>tireur 1</q> bleu doit livrer 2 duels.</p>
 					<div class="baltek-doc-hasImage-class">
 						<img class="baltek-doc-image-class" src="../../pictures/one-required-duel.png" />
 						<img class="baltek-doc-image-class" src="../../pictures/two-required-duels.png" />
@@ -279,10 +281,10 @@
 
 			<h2>Compensation <q>lob</q></h2>
 				<ul>
-					<li>Cette compensation peut être exigée par l’action <q>tirer/passer</q>.</li>
+					<li>Cette compensation peut être exigée par l’action <q>tirer</q>.</li>
 
 					<li>Le <q>lob</q> compense le déficit de force
-						du <q>passeur/tireur</q> vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
+						du <q>tireur</q> vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
 
 					<li>Le <q>lob</q> coûte 1 crédit par unité de force compensée.</li>
 
@@ -290,7 +292,7 @@
 						un footballeur de son équipe.</li>
 				</ul>
 
-				<p>Exemples : pour transmettre la balle au footballeur bleu <q>2</q>, le footballeur bleu <q>1</q>
+				<p>Exemples : pour transmettre la balle au footballeur bleu <q>2</q>, le <q>tireur 1</q> bleu
 					          doit effectuer 1 lob, dans le contexte de gauche,
 							  et 2 lobs dans le contexte de droite.</p>
 					<div class="baltek-doc-hasImage-class">
@@ -299,7 +301,7 @@
 					</div>
 
 			<h1 id="notation">Notation des coups</h1>
-				<p>Si utile, la partie se note comme dans l'exemple suivant.</p>
+				<p>Si utile, les coups de la partie se notent comme dans l'exemple suivant.</p>
 
 <pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
@@ -309,7 +311,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @# /
 </pre>
 
-				<p>Optionnellement, des précisions sont apportées comme dans l'exemple suivant.</p>
+				<p>Optionnellement, des précisions sont fournies comme dans l'exemple suivant.</p>
 
 <pre class="w3-code">
 #! BALTEK 1.1
@@ -385,7 +387,8 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 								<li>Pour deux lobs, <q>!!</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3!!</code></li>
 
-								<li>Pour cumuler <q>duel</q> et <q>lob</q>, <q>+!</q> est ajoutée au mot de l'action.
+								<li>Pour la combinaison <q>duel</q> plus <q>lob</q>,
+									<q>+!</q> est ajoutée au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3+!</code></li>
 
 							</ul>
@@ -419,7 +422,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 
 			<p><a href="http://creativecommons.org/licenses/by-sa/3.0/">
 			  	<img border=0 width=132 height=47 src="../../pictures/CC-BY-SA.gif" /></a>
-			  	Copyright <a href="http://lucas.borboleta.blog.free.fr/">Lucas Borboleta</a> 2017-0808-1713
+			  	Copyright <a href="http://lucas.borboleta.blog.free.fr/">Lucas Borboleta</a> 2017-0810-1234
 			</p>
 
 	</body>
