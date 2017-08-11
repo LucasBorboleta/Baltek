@@ -15,12 +15,13 @@ This document collects the milestones and the tasks for the current milestone.
 
 # Tasks
 
-1. In JavaScript, rename Box as Square.
-2. Translate rules, help and about in Esperanto.
-3. Translate rules, help and about in Portuguese.
-4. Create or update screenshots for help in all translations (e.g. Undo/Refaire/Malfari/Desfazer)
-5. Clean the first implementation of BALTEK mode "two close players".
-6. Write unit tests using QUnit.
-7. Update "Design.md".
-8. Automate a "release" using Python (collecting and minifying released files, ...).
-9. Describe the file tree in the README.md file.
+1. Replace folders "lang/*/" by "html/" 
+2. In JavaScript, rename Box as Square.
+3. Create or update screenshots for help in all translations (e.g. Undo/Refaire/Malfari/Desfazer)
+4. Translate rules, help and about in Esperanto.
+5. Translate rules, help and about in Portuguese.
+6. Clean the first implementation of BALTEK mode "two close players".
+7. Write unit tests using QUnit.
+8. Update "Design.md".
+9. Automate a "release" using Python (collecting and minifying released files, ...).
+10. Describe the file tree in the README.md file.
