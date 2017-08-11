@@ -15,23 +15,23 @@ baltek.rules.Ball.__initClass = function(){
 
     baltek.rules.Ball.prototype.__initObject = function(){
         baltek.rules.Ball.super.__initObject.call(this);
-        this.box = null;
+        this.square = null;
     };
 
     baltek.rules.Ball.prototype.exportState = function(){
         var state = baltek.rules.Ball.super.exportState.call(this);
-        state.boxIndices = this.box.getBoxIndices();
+        state.squareIndices = this.square.getSquareIndices();
         return state;
     };
 
     baltek.rules.Ball.prototype.getState = function(){
         var state = {};
-        state.box = this.box;
+        state.square = this.square;
         return state;
     };
 
     baltek.rules.Ball.prototype.setState = function(state){
-        state.box.setBall(this);
+        state.square.setBall(this);
     };
 };
 ///////////////////////////////////////////////////////////////////////////////

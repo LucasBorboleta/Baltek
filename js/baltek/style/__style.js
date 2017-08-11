@@ -42,14 +42,14 @@ baltek.style.__initModule = function(){
     baltek.style.colors.BALL_BORDER_SELECTED = BALTEK_YELLOW;
     baltek.style.colors.BALL_BACKGROUND_SELECTED = BALTEK_YELLOW;
 
-    baltek.style.colors.BOX_TEXT = "white";
-    baltek.style.fonts.BOX_TEXT = "16px" + " " + BALTEK_FONT;
-    baltek.style.widths.BOX_BORDER = "5";
+    baltek.style.colors.SQUARE_TEXT = "white";
+    baltek.style.fonts.SQUARE_TEXT = "16px" + " " + BALTEK_FONT;
+    baltek.style.widths.SQUARE_BORDER = "5";
 
-    baltek.style.colors.BOX_BORDER_SELECTED = BALTEK_YELLOW;
+    baltek.style.colors.SQUARE_BORDER_SELECTED = BALTEK_YELLOW;
 
-    baltek.style.colors.BOX_0 = BALTEK_GREEN_0;
-    baltek.style.colors.BOX_1 = BALTEK_GREEN_1;
+    baltek.style.colors.SQUARE_0 = BALTEK_GREEN_0;
+    baltek.style.colors.SQUARE_1 = BALTEK_GREEN_1;
 
     baltek.style.colors.TEAM_COLORS = [];
     baltek.style.colors.TEAM_COLORS.push(null);

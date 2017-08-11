@@ -15,7 +15,7 @@ baltek.rules.Team.__initClass = function(){
 
     baltek.rules.Team.prototype.__initObject = function(teamIndex){
         this.teamIndex = teamIndex ;
-        this.goalBox = null; // the box to be defended by the team
+        this.goalSquare = null; // the square to be defended by the team
         this.score = 0;
         this.canSprint = false;
         this.haveGoaled = false;

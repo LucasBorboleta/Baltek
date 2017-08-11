@@ -14,11 +14,11 @@ baltek.rules.__initModule = function(){
 
     // Init inner classes
     baltek.rules.Ball.__initClass();
-    baltek.rules.Box.__initClass();
     baltek.rules.Engine.__initClass();
     baltek.rules.Field.__initClass();
     baltek.rules.Footballer.__initClass();
     baltek.rules.Selectable.__initClass();
+    baltek.rules.Square.__initClass();
     baltek.rules.Team.__initClass();
 };
 ///////////////////////////////////////////////////////////////////////////////

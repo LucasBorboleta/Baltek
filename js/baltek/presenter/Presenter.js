@@ -112,8 +112,8 @@ baltek.presenter.Presenter.__initClass = function(){
         this.ballWatcher = new baltek.draw.BallWatcher();
         this.ballWatcher.registerObserver(this);
 
-        this.boxWatcher = new baltek.draw.BoxWatcher();
-        this.boxWatcher.registerObserver(this);
+        this.squareWatcher = new baltek.draw.SquareWatcher();
+        this.squareWatcher.registerObserver(this);
 
         this.footballerWatcher = new baltek.draw.FootballerWatcher();
         this.footballerWatcher.registerObserver(this);
@@ -127,15 +127,15 @@ baltek.presenter.Presenter.__initClass = function(){
         this.state.enter();
     };
 
-    baltek.presenter.Presenter.prototype.clearBoxes = function(){
+    baltek.presenter.Presenter.prototype.clearSquares = function(){
         var ix = 0;
         var iy = 0;
-        var box = null;
+        var square = null;
         for (ix=0; ix < this.draw.fieldNx; ix++) {
             for (iy=0; iy < this.draw.fieldNy; iy++) {
-                box = this.draw.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    box.clear();
+                square = this.draw.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    square.clear();
                 }
             }
         }
@@ -171,12 +171,12 @@ baltek.presenter.Presenter.__initClass = function(){
     baltek.presenter.Presenter.prototype.drawField = function(){
         var ix = 0;
         var iy = 0;
-        var box = null;
+        var square = null;
         for (ix=0; ix < this.draw.fieldNx; ix++) {
             for (iy=0; iy < this.draw.fieldNy; iy++) {
-                box = this.draw.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    box.draw();
+                square = this.draw.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    square.draw();
                 }
             }
         }
@@ -220,7 +220,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.draw = {};
         this.draw.fieldNx = this.rulesEngine.getFieldNx();
         this.draw.fieldNy = this.rulesEngine.getFieldNy();
-        baltek.draw.setBoxLatticeDimensions(this.draw.fieldNx, this.draw.fieldNy);
+        baltek.draw.setSquareLatticeDimensions(this.draw.fieldNx, this.draw.fieldNy);
 
         this.draw.xLabels = [];
         var letters = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -236,29 +236,29 @@ baltek.presenter.Presenter.__initClass = function(){
             this.draw.yLabels[iy] = digits[this.draw.fieldNy - iy - 1];
         }
 
-        this.draw.boxesByIndices = [] ;
+        this.draw.squaresByIndices = [] ;
 
         var ix = 0;
         var iy = 0;
-        var box = null;
+        var square = null;
         var xyLabel = "";
         var text = "";
         for (ix=0; ix < this.draw.fieldNx; ix++) {
-            this.draw.boxesByIndices.push([]);
+            this.draw.squaresByIndices.push([]);
 
             for (iy=0; iy < this.draw.fieldNy; iy++) {
-                this.draw.boxesByIndices[ix].push(null);
+                this.draw.squaresByIndices[ix].push(null);
 
-                if ( this.rulesEngine.hasFieldBox(ix, iy) ) {
+                if ( this.rulesEngine.hasFieldSquare(ix, iy) ) {
                     xyLabel = this.draw.xLabels[ix] + this.draw.yLabels[iy];
-                    if ( this.rulesEngine.hasGoaldBox(ix, iy) ) {
+                    if ( this.rulesEngine.hasGoalSquare(ix, iy) ) {
                         text = "#";
                     } else {
                         text = "";
                     }
-                    box = new baltek.draw.Box(ix, iy, xyLabel, text);
-                    box.registerObserver(this.boxWatcher);
-                    this.draw.boxesByIndices[ix][iy] = box;
+                    square = new baltek.draw.Square(ix, iy, xyLabel, text);
+                    square.registerObserver(this.squareWatcher);
+                    this.draw.squaresByIndices[ix][iy] = square;
                 }
             }
         }
@@ -295,12 +295,12 @@ baltek.presenter.Presenter.__initClass = function(){
     baltek.presenter.Presenter.prototype.showXYLabels = function(condition){
         var ix = 0;
         var iy = 0;
-        var box = null;
+        var square = null;
         for (ix=0; ix < this.draw.fieldNx; ix++) {
             for (iy=0; iy < this.draw.fieldNy; iy++) {
-                box = this.draw.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    box.showXYLabel(condition);
+                square = this.draw.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    square.showXYLabel(condition);
                 }
             }
         }
@@ -311,9 +311,9 @@ baltek.presenter.Presenter.__initClass = function(){
     };
 
     baltek.presenter.Presenter.prototype.updateFromEngineBallState = function(state){
-        var ballIndices = state.boxIndices;
-        var ballBox = this.draw.boxesByIndices[ballIndices.ix][ballIndices.iy];
-        ballBox.setBall(this.draw.ball);
+        var ballIndices = state.squareIndices;
+        var ballSquare = this.draw.squaresByIndices[ballIndices.ix][ballIndices.iy];
+        ballSquare.setBall(this.draw.ball);
         this.draw.ball.enableSelection(state.selectable);
         this.draw.ball.select(state.selected);
     };
@@ -321,13 +321,13 @@ baltek.presenter.Presenter.__initClass = function(){
     baltek.presenter.Presenter.prototype.updateFromEngineFieldState = function(state){
         var ix = 0;
         var iy = 0;
-        var box = null;
+        var square = null;
         for (ix=0; ix < this.draw.fieldNx; ix++) {
             for (iy=0; iy < this.draw.fieldNy; iy++) {
-                box = this.draw.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    box.enableSelection(state.boxesByIndices[ix][iy].selectable);
-                    box.select(state.boxesByIndices[ix][iy].selected);
+                square = this.draw.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    square.enableSelection(state.squaresByIndices[ix][iy].selectable);
+                    square.select(state.squaresByIndices[ix][iy].selected);
                 }
             }
         }
@@ -341,14 +341,14 @@ baltek.presenter.Presenter.__initClass = function(){
         var footballer = null;
         var footballerState = null;
         var footballerIndices = null;
-        var footballerBox = null;
+        var footballerSquare = null;
 
         for (footballerIndex=0; footballerIndex<footballerCount; footballerIndex++) {
             footballer = team.footballers[footballerIndex];
             footballerState = state.footballers[footballerIndex];
-            footballerIndices = footballerState.boxIndices;
-            footballerBox = this.draw.boxesByIndices[footballerIndices.ix][footballerIndices.iy];
-            footballerBox.setFootballer(footballer);
+            footballerIndices = footballerState.squareIndices;
+            footballerSquare = this.draw.squaresByIndices[footballerIndices.ix][footballerIndices.iy];
+            footballerSquare.setFootballer(footballer);
             footballer.enableSelection(footballerState.selectable);
             footballer.select(footballerState.selected);
         }
@@ -385,7 +385,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.undo.show(true);
         this.undo.enable( state.teams[activeTeamIndex].credit < this.rulesEngine.getCreditMax() );
 
-        this.clearBoxes();
+        this.clearSquares();
 
         this.updateFromEngineBallState(state.ball);
         this.updateFromEngineFieldState(state.field);

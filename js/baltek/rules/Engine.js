@@ -33,7 +33,7 @@ baltek.rules.Engine.__initClass = function(){
         this.ball = new baltek.rules.Ball();
 
         this.field = new baltek.rules.Field(this);
-        this.field.initBallAndFootballerBoxes();
+        this.field.initBallAndFootballerSquares();
     };
 
     baltek.rules.Engine.prototype.exportState = function(){
@@ -81,14 +81,14 @@ baltek.rules.Engine.__initClass = function(){
         return this.SCORE_MAX;
     };
 
-    baltek.rules.Engine.prototype.hasFieldBox = function(ix, iy){
-        return ( this.field.boxesByIndices[ix][iy] !== null );
+    baltek.rules.Engine.prototype.hasFieldSquare = function(ix, iy){
+        return ( this.field.squaresByIndices[ix][iy] !== null );
     };
 
-    baltek.rules.Engine.prototype.hasGoaldBox = function(ix, iy){
-        var box = this.field.boxesByIndices[ix][iy];
-        return ( box !== null && ( box === this.activeTeam.goalBox || box === this.passiveTeam.goalBox ) );
-    };
+    baltek.rules.Engine.prototype.hasGoalSquare = function(ix, iy){
+            var square = this.field.squaresByIndices[ix][iy];
+            return ( square !== null && ( square === this.activeTeam.goalSquare || square === this.passiveTeam.goalSquare ) );
+        };
 
     baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){
         if ( activeTeam !== this.activeTeam ) {
@@ -103,7 +103,7 @@ baltek.rules.Engine.__initClass = function(){
     };
 
     baltek.rules.Engine.prototype.setState = function(state){
-        this.field.clearBallAndFootballerBoxes();
+        this.field.clearBallAndFootballerSquares();
         this.setActiveTeam(state.activeTeam);
         this.ball.setState(state.ball);
         this.teams[0].setState(state.teams[0]);
@@ -144,7 +144,7 @@ baltek.rules.Engine.__initClass = function(){
         this.activeTeam.haveGoaled = false;
         this.passiveTeam.haveGoaled = false;
 
-        this.field.initBallAndFootballerBoxes();
+        this.field.initBallAndFootballerSquares();
         this.turnInit();
     };
 
@@ -168,8 +168,8 @@ baltek.rules.Engine.__initClass = function(){
         this.activeTeam.selectFootballers(false);
         this.passiveTeam.selectFootballers(false);
 
-        this.field.enableBoxes(false);
-        this.field.selectBoxes(false);
+        this.field.enableSquares(false);
+        this.field.selectSquares(false);
 
         this.ball.selectable = false;
         this.ball.selected = false;
@@ -188,9 +188,9 @@ baltek.rules.Engine.__initClass = function(){
         this.move.LEN_SPRINT = 2;
 
         this.move.sprint = false;
-        this.move.sourceBox = null;
+        this.move.sourceSquare = null;
         this.move.sourceCost = 0;
-        this.move.destinationBox = null;
+        this.move.destinationSquare = null;
         this.move.destinationCost = 0;
     };
 
@@ -215,7 +215,7 @@ baltek.rules.Engine.__initClass = function(){
                     this.roundUpdate();
                 } else {
                     baltek.debug.writeMessage("matchUpdate: this.match.isActive=" + this.match.isActive);
-                    this.field.enableBoxes(false);
+                    this.field.enableSquares(false);
                     this.activeTeam.enableFootballers(false);
                     this.activeTeam.selectFootballers(false);
                     this.ball.selected = false;
@@ -263,9 +263,9 @@ baltek.rules.Engine.__initClass = function(){
         }
     };
 
-    baltek.rules.Engine.prototype.turnUndo = function(){
+    baltek.rules.Engine.prototype.turnCancel = function(){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("turnUndo:");
+        baltek.debug.writeMessage("turnCancel:");
         baltek.utils.assert( this.move.isActive );
         this.setState(this.turn.state);
         this.turnInit();
@@ -284,26 +284,26 @@ baltek.rules.Engine.__initClass = function(){
         baltek.debug.writeMessage("moveUpdate: enter");
         if ( this.move.isActive ) {
 
-            if ( this.move.sourceBox === null ) {
+            if ( this.move.sourceSquare === null ) {
                 this.moveFindSources();
 
-            } else if ( this.move.destinationBox === null ) {
+            } else if ( this.move.destinationSquare === null ) {
                 this.moveFindDestinations();
 
             } else {
                 this.move.isActive = false;
 
                 if ( this.ball.selected ) {
-                    this.move.sourceBox.getActiveFootballer().canKick = false;
-                    this.move.destinationBox.setBall(this.ball);
+                    this.move.sourceSquare.getActiveFootballer().canKick = false;
+                    this.move.destinationSquare.setBall(this.ball);
 
-                    if (this.move.destinationBox === this.passiveTeam.goalBox ) {
+                    if (this.move.destinationSquare === this.passiveTeam.goalSquare ) {
                         this.activeTeam.haveGoaled = true;
                     }
 
                 } else {
-                    this.move.sourceBox.getActiveFootballer().canRun = false;
-                    this.move.destinationBox.setActiveFootballer(this.move.sourceBox.getActiveFootballer());
+                    this.move.sourceSquare.getActiveFootballer().canRun = false;
+                    this.move.destinationSquare.setActiveFootballer(this.move.sourceSquare.getActiveFootballer());
 
                     if ( this.move.sprint ) {
                         this.activeTeam.canSprint = false;
@@ -336,68 +336,68 @@ baltek.rules.Engine.__initClass = function(){
         baltek.utils.assert( this.move.isActive );
 
         if ( condition ) {
-            baltek.utils.assert( this.move.sourceBox === null );
+            baltek.utils.assert( this.move.sourceSquare === null );
             baltek.utils.assert( this.ball.selectable );
-            this.move.sourceBox = this.ball.box;
+            this.move.sourceSquare = this.ball.square;
             this.move.sourceCost = this.ball.cost;
             this.ball.selected = true;
 
         } else {
-            baltek.utils.assert( this.move.sourceBox !== null );
-            baltek.utils.assert( this.move.sourceBox === this.ball.box );
+            baltek.utils.assert( this.move.sourceSquare !== null );
+            baltek.utils.assert( this.move.sourceSquare === this.ball.square );
             baltek.utils.assert( this.ball.selected );
-            this.move.sourceBox = null;
+            this.move.sourceSquare = null;
             this.move.sourceCost = 0;
             this.ball.selected = false;
         }
         this.matchUpdate();
     };
 
-    baltek.rules.Engine.prototype.moveSelectFootballer = function(boxIndices, condition){
+    baltek.rules.Engine.prototype.moveSelectFootballer = function(squareIndices, condition){
         // Triggered by the player of the activeTeam
         baltek.debug.writeMessage("moveSelectFootballer: condition=" + condition);
 
         baltek.utils.assert( this.move.isActive );
 
-        var box = this.field.boxesByIndices[boxIndices.ix][boxIndices.iy];
-        baltek.utils.assert( box !== null );
+        var square = this.field.squaresByIndices[squareIndices.ix][squareIndices.iy];
+        baltek.utils.assert( square !== null );
 
-        var activeFootballer = box.getActiveFootballer();
+        var activeFootballer = square.getActiveFootballer();
         baltek.utils.assert( activeFootballer !== null );
 
         if ( condition ) {
-            baltek.utils.assert( this.move.sourceBox === null );
+            baltek.utils.assert( this.move.sourceSquare === null );
             baltek.utils.assert( activeFootballer.selectable );
-            this.move.sourceBox = box;
+            this.move.sourceSquare = square;
             this.move.sourceCost = activeFootballer.cost;
             activeFootballer.selected = true;
 
         } else {
-            baltek.utils.assert( this.move.sourceBox !== null );
-            baltek.utils.assert( this.move.sourceBox === box );
+            baltek.utils.assert( this.move.sourceSquare !== null );
+            baltek.utils.assert( this.move.sourceSquare === square );
             baltek.utils.assert( activeFootballer.selected );
-            this.move.sourceBox = null;
+            this.move.sourceSquare = null;
             this.move.sourceCost = 0;
             activeFootballer.selected = false;
         }
         this.matchUpdate();
     };
 
-    baltek.rules.Engine.prototype.moveSelectBox = function(boxIndices){
+    baltek.rules.Engine.prototype.moveSelectSquare = function(squareIndices){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("moveSelectBox:");
+        baltek.debug.writeMessage("moveSelectSquare:");
 
         baltek.utils.assert( this.move.isActive );
-        baltek.utils.assert( this.move.sourceBox !== null );
-        baltek.utils.assert( this.move.destinationBox === null );
+        baltek.utils.assert( this.move.sourceSquare !== null );
+        baltek.utils.assert( this.move.destinationSquare === null );
 
-        var box = this.field.boxesByIndices[boxIndices.ix][boxIndices.iy];
-        baltek.utils.assert( box !== null );
-        baltek.utils.assert( box.selectable );
+        var square = this.field.squaresByIndices[squareIndices.ix][squareIndices.iy];
+        baltek.utils.assert( square !== null );
+        baltek.utils.assert( square.selectable );
 
-        this.move.destinationBox = box;
-        this.move.destinationCost = box.cost;
-        box.selected = true;
+        this.move.destinationSquare = square;
+        this.move.destinationCost = square.cost;
+        square.selected = true;
 
         this.matchUpdate();
     };
@@ -405,8 +405,8 @@ baltek.rules.Engine.__initClass = function(){
     baltek.rules.Engine.prototype.moveFindSources = function(){
         baltek.debug.writeMessage("moveFindSources: enter");
 
-        if ( this.move.isActive && this.move.sourceBox === null ) {
-            this.field.enableBoxes(false);
+        if ( this.move.isActive && this.move.sourceSquare === null ) {
+            this.field.enableSquares(false);
             this.activeTeam.enableFootballers(false);
             this.activeTeam.selectFootballers(false);
             this.ball.selected = false;
@@ -429,9 +429,9 @@ baltek.rules.Engine.__initClass = function(){
                     activeFootballer.selectable = ( this.activeTeam.credit >= activeFootballer.cost );
                 }
 
-                if ( activeFootballer.canKick && activeFootballer.box.hasBall() ) {
+                if ( activeFootballer.canKick && activeFootballer.square.hasBall() ) {
                     // The activeFootballer has not kick during this turn
-                    passiveFootballer = activeFootballer.box.getPassiveFootballer();
+                    passiveFootballer = activeFootballer.square.getPassiveFootballer();
 
                     if ( passiveFootballer === null ) {
                         this.ball.cost = 0;
@@ -454,10 +454,10 @@ baltek.rules.Engine.__initClass = function(){
         baltek.debug.writeMessage("moveFindDestinations: enter");
 
         if ( ! this.move.isActive ) return;
-        if ( this.move.sourceBox === null ) return;
-        if ( this.move.destinationBox !== null ) return;
+        if ( this.move.sourceSquare === null ) return;
+        if ( this.move.destinationSquare !== null ) return;
 
-        this.field.enableBoxes(false);
+        this.field.enableSquares(false);
         this.activeTeam.enableFootballers(false);
 
         // Let actual source selectable in order to allowing unselect it
@@ -465,10 +465,10 @@ baltek.rules.Engine.__initClass = function(){
             this.ball.selectable = true;
         } else {
             this.ball.selectable = false;
-            this.move.sourceBox.getActiveFootballer().selectable = true;
+            this.move.sourceSquare.getActiveFootballer().selectable = true;
         }
 
-        var activeFootballer = this.move.sourceBox.footballers[this.activeTeam.teamIndex];
+        var activeFootballer = this.move.sourceSquare.footballers[this.activeTeam.teamIndex];
 
         var ux=0;
         var uy=0;
@@ -477,7 +477,7 @@ baltek.rules.Engine.__initClass = function(){
         var dy=0;
         var ix=0;
         var iy=0;
-        var box=null;
+        var square=null;
 
         if ( this.ball.selected ) {
             // The ball moves along a vector of size this.move.LEN_KICK or less
@@ -487,14 +487,14 @@ baltek.rules.Engine.__initClass = function(){
                     for ( d=1; d <= this.move.LEN_KICK; d++) {
                         dx = d*ux;
                         dy = d*uy;
-                        ix = this.move.sourceBox.ix + dx;
-                        iy = this.move.sourceBox.iy + dy;
+                        ix = this.move.sourceSquare.ix + dx;
+                        iy = this.move.sourceSquare.iy + dy;
                         if ( ix >= this.field.firstX && ix <= this.field.lastX && iy >= this.field.firstY && iy <= this.field.lastY ) {
-                            box = this.field.boxesByIndices[ix][iy];
-                            if ( box !== null && box != this.move.sourceBox && box.canHostBall && box !== this.activeTeam.goalBox ) {
+                            square = this.field.squaresByIndices[ix][iy];
+                            if ( square !== null && square != this.move.sourceSquare && square.canHostBall && square !== this.activeTeam.goalSquare ) {
                                 if ( d <= 1) {
-                                    box.cost = 1;
-                                    box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
+                                    square.cost = 1;
+                                    square.selectable = ( this.activeTeam.credit >= this.move.sourceCost + square.cost );
                                 } else {
                                     // Find the passiveFootballer with the strongest force
                                     // on the trajectory
@@ -504,33 +504,33 @@ baltek.rules.Engine.__initClass = function(){
                                     var ty;
                                     var jx;
                                     var jy;
-                                    var tbox;
+                                    var tsquare;
                                     for ( t=1; t < d; t++ ) {
                                         tx = t*ux;
                                         ty = t*uy;
-                                        jx = this.move.sourceBox.ix + tx;
-                                        jy = this.move.sourceBox.iy + ty;
-                                        tbox = this.field.boxesByIndices[jx][jy];
-                                        if ( tbox !== null && tbox.hasPassiveFootballer() ) {
+                                        jx = this.move.sourceSquare.ix + tx;
+                                        jy = this.move.sourceSquare.iy + ty;
+                                        tsquare = this.field.squaresByIndices[jx][jy];
+                                        if ( tsquare !== null && tsquare.hasPassiveFootballer() ) {
                                             if ( strongestPassiveFootballer === null ) {
-                                                strongestPassiveFootballer = tbox.getPassiveFootballer();
-                                            } else if ( tbox.getPassiveFootballer().force > strongestPassiveFootballer ) {
-                                                strongestPassiveFootballer = tbox.getPassiveFootballer();
+                                                strongestPassiveFootballer = tsquare.getPassiveFootballer();
+                                            } else if ( tsquare.getPassiveFootballer().force > strongestPassiveFootballer ) {
+                                                strongestPassiveFootballer = tsquare.getPassiveFootballer();
                                             }
                                         }
                                     }
 
                                     if ( strongestPassiveFootballer === null ) {
-                                        box.cost = 1;
-                                        box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
+                                        square.cost = 1;
+                                        square.selectable = ( this.activeTeam.credit >= this.move.sourceCost + square.cost );
 
                                     } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
-                                        box.cost = 1;
-                                        box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
+                                        square.cost = 1;
+                                        square.selectable = ( this.activeTeam.credit >= this.move.sourceCost + square.cost );
 
                                     } else {
-                                        box.cost = 1 + strongestPassiveFootballer.force - activeFootballer.force;
-                                        box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
+                                        square.cost = 1 + strongestPassiveFootballer.force - activeFootballer.force;
+                                        square.selectable = ( this.activeTeam.credit >= this.move.sourceCost + square.cost );
                                     }
                                 }
                             }
@@ -547,15 +547,15 @@ baltek.rules.Engine.__initClass = function(){
             }
 
             // The footballer moves freely inside a square of size runLength or less
-            for ( ix=this.move.sourceBox.ix - runLength; ix <= this.move.sourceBox.ix + runLength; ix++ ) {
+            for ( ix=this.move.sourceSquare.ix - runLength; ix <= this.move.sourceSquare.ix + runLength; ix++ ) {
                 if ( ix >= this.field.firstX && ix <= this.field.lastX) {
-                    for ( iy=this.move.sourceBox.iy - runLength; iy <= this.move.sourceBox.iy + runLength; iy++ ) {
+                    for ( iy=this.move.sourceSquare.iy - runLength; iy <= this.move.sourceSquare.iy + runLength; iy++ ) {
                         if ( iy >= this.field.firstY && iy <= this.field.lastY) {
-                            box = this.field.boxesByIndices[ix][iy];
-                            if ( box !== null && box != this.move.sourceBox ) {
-                                if ( box.canHostFootballer && ! box.hasActiveFootballer() ) {
-                                    box.cost = 1;
-                                    box.selectable = ( this.activeTeam.credit >= this.move.sourceCost + box.cost );
+                            square = this.field.squaresByIndices[ix][iy];
+                            if ( square !== null && square != this.move.sourceSquare ) {
+                                if ( square.canHostFootballer && ! square.hasActiveFootballer() ) {
+                                    square.cost = 1;
+                                    square.selectable = ( this.activeTeam.credit >= this.move.sourceCost + square.cost );
                                 }
                             }
                         }

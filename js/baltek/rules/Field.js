@@ -17,14 +17,14 @@ baltek.rules.Field.__initClass = function(){
         this.engine = engine;
 
         // Team square side
-        // (The team square is the set of boxes that can be occupied by the
+        // (The team square is the set of squares that can be occupied by the
         // footballers of a given team at each kickoff)
         this.TSS = 5;
 
-        // Number of box rows
+        // Number of square rows
         this.ny = this.TSS ;
 
-        // Number of box rows, including goal boxes
+        // Number of square rows, including goal squares
         this.nx = 2*( this.TSS + 1 ) ;
 
         this.firstX = 0;
@@ -35,30 +35,30 @@ baltek.rules.Field.__initClass = function(){
         this.lastY = this.ny - 1;
         this.middleY = Math.round((this.firstY + this.lastY)/2);
 
-        this.boxesByIndices = [] ;
+        this.squaresByIndices = [] ;
 
-        var box = null;
+        var square = null;
         var ix = 0;
         var iy = 0;
 
         for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
-            this.boxesByIndices.push([]);
+            this.squaresByIndices.push([]);
 
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
-                this.boxesByIndices[ix].push(null);
+                this.squaresByIndices[ix].push(null);
 
                 if ( ix === this.firstX || ix === this.lastX ) {
                     if ( iy === this.middleY ) {
-                        box = new baltek.rules.Box(this.engine, ix , iy);
-                        box.canHostBall = true;
-                        box.canHostFootballer = false;
-                        this.boxesByIndices[ix][iy] = box;
+                        square = new baltek.rules.Square(this.engine, ix , iy);
+                        square.canHostBall = true;
+                        square.canHostFootballer = false;
+                        this.squaresByIndices[ix][iy] = square;
                     }
                 } else {
-                    box = new baltek.rules.Box(this.engine, ix , iy);
-                    box.canHostBall = true;
-                    box.canHostFootballer = true;
-                    this.boxesByIndices[ix][iy] = box;
+                    square = new baltek.rules.Square(this.engine, ix , iy);
+                    square.canHostBall = true;
+                    square.canHostFootballer = true;
+                    this.squaresByIndices[ix][iy] = square;
                 }
             }
         }
@@ -68,56 +68,56 @@ baltek.rules.Field.__initClass = function(){
 
         var agix =  activeOriginX;
         var agiy = this.middleY;
-        this.engine.activeTeam.goalBox = this.boxesByIndices[agix][agiy] ;
+        this.engine.activeTeam.goalSquare = this.squaresByIndices[agix][agiy] ;
 
         var passiveIndex = this.engine.passiveTeam.teamIndex;
         var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
 
         var pgix =  passiveOriginX;
         var pgiy = this.middleY;
-        this.engine.passiveTeam.goalBox = this.boxesByIndices[pgix][pgiy] ;
+        this.engine.passiveTeam.goalSquare = this.squaresByIndices[pgix][pgiy] ;
     };
 
-    baltek.rules.Field.prototype.clearBallAndFootballerBoxes = function(){
-        var box = null;
+    baltek.rules.Field.prototype.clearBallAndFootballerSquares = function(){
+        var square = null;
         var ix = 0;
         var iy = 0;
         for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
-                box = this.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    box.ball = null;
-                    box.footballers[this.engine.activeTeam.teamIndex] = null;
-                    box.footballers[this.engine.passiveTeam.teamIndex] = null;
+                square = this.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    square.ball = null;
+                    square.footballers[this.engine.activeTeam.teamIndex] = null;
+                    square.footballers[this.engine.passiveTeam.teamIndex] = null;
                 }
             }
         }
 
-        this.engine.ball.box = null;
+        this.engine.ball.square = null;
 
         var n = 0;
         var i = 0;
 
         n = this.engine.activeTeam.footballers.length;
         for ( i=0; i<n; i++) {
-            this.engine.activeTeam.footballers[i].box = null;
+            this.engine.activeTeam.footballers[i].square = null;
         }
 
         n = this.engine.passiveTeam.footballers.length;
         for ( i=0; i<n; i++) {
-            this.engine.passiveTeam.footballers[i].box = null;
+            this.engine.passiveTeam.footballers[i].square = null;
         }
     };
 
-    baltek.rules.Field.prototype.enableBoxes = function(condition){
-        var box = null;
+    baltek.rules.Field.prototype.enableSquares = function(condition){
+        var square = null;
         var ix = 0;
         var iy = 0;
         for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
-                box = this.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    box.selectable = condition;
+                square = this.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    square.selectable = condition;
                 }
             }
         }
@@ -125,20 +125,20 @@ baltek.rules.Field.__initClass = function(){
 
     baltek.rules.Field.prototype.exportState = function(){
         var state = {};
-        state.boxesByIndices = [];
+        state.squaresByIndices = [];
 
         var ix = 0;
         var iy = 0;
-        var box = null;
+        var square = null;
         for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
-            state.boxesByIndices.push([]);
+            state.squaresByIndices.push([]);
 
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
-                this.boxesByIndices[ix].push(null);
+                this.squaresByIndices[ix].push(null);
 
-                box = this.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    state.boxesByIndices[ix][iy] = box.exportState();
+                square = this.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    state.squaresByIndices[ix][iy] = square.exportState();
                 }
             }
         }
@@ -146,47 +146,47 @@ baltek.rules.Field.__initClass = function(){
         return state;
     };
 
-    baltek.rules.Field.prototype.initBallAndFootballerBoxes = function(){
+    baltek.rules.Field.prototype.initBallAndFootballerSquares = function(){
 
-        // First: clear all boxes, from field, ball and teams
-        this.clearBallAndFootballerBoxes();
+        // First: clear all squares, from field, ball and teams
+        this.clearBallAndFootballerSquares();
 
-        // Second: set boxes for the active and passive teams
+        // Second: set squares for the active and passive teams
 
         var activeIndex = this.engine.activeTeam.teamIndex;
         var activeOriginX = (1 - activeIndex)*this.firstX + activeIndex*this.lastX;
         var activeDirectionX = 1 - 2*activeIndex;
 
-        this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.middleY].setBall(this.engine.ball);
+        this.squaresByIndices[activeOriginX + this.TSS*activeDirectionX][this.middleY].setBall(this.engine.ball);
 
-        this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.middleY].setActiveFootballer(this.engine.activeTeam.footballer3);
-        this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.firstY].setActiveFootballer(this.engine.activeTeam.footballer2t);
-        this.boxesByIndices[activeOriginX + this.TSS*activeDirectionX][this.lastY].setActiveFootballer(this.engine.activeTeam.footballer2b);
-        this.boxesByIndices[activeOriginX + (this.TSS - 2)*activeDirectionX][this.firstY].setActiveFootballer(this.engine.activeTeam.footballer1t);
-        this.boxesByIndices[activeOriginX + (this.TSS - 2)*activeDirectionX][this.middleY].setActiveFootballer(this.engine.activeTeam.footballer1m);
-        this.boxesByIndices[activeOriginX + (this.TSS - 2)*activeDirectionX][this.lastY].setActiveFootballer(this.engine.activeTeam.footballer1b);
+        this.squaresByIndices[activeOriginX + this.TSS*activeDirectionX][this.middleY].setActiveFootballer(this.engine.activeTeam.footballer3);
+        this.squaresByIndices[activeOriginX + this.TSS*activeDirectionX][this.firstY].setActiveFootballer(this.engine.activeTeam.footballer2t);
+        this.squaresByIndices[activeOriginX + this.TSS*activeDirectionX][this.lastY].setActiveFootballer(this.engine.activeTeam.footballer2b);
+        this.squaresByIndices[activeOriginX + (this.TSS - 2)*activeDirectionX][this.firstY].setActiveFootballer(this.engine.activeTeam.footballer1t);
+        this.squaresByIndices[activeOriginX + (this.TSS - 2)*activeDirectionX][this.middleY].setActiveFootballer(this.engine.activeTeam.footballer1m);
+        this.squaresByIndices[activeOriginX + (this.TSS - 2)*activeDirectionX][this.lastY].setActiveFootballer(this.engine.activeTeam.footballer1b);
 
         var passiveIndex = this.engine.passiveTeam.teamIndex;
         var passiveOriginX = (1 - passiveIndex)*this.firstX + passiveIndex*this.lastX;
         var passiveDirectionX = 1 - 2*passiveIndex;
 
-        this.boxesByIndices[passiveOriginX + (this.TSS - 1)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer3);
-        this.boxesByIndices[passiveOriginX + this.TSS*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer2t);
-        this.boxesByIndices[passiveOriginX + this.TSS*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer2b);
-        this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer1t);
-        this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer1m);
-        this.boxesByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer1b);
+        this.squaresByIndices[passiveOriginX + (this.TSS - 1)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer3);
+        this.squaresByIndices[passiveOriginX + this.TSS*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer2t);
+        this.squaresByIndices[passiveOriginX + this.TSS*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer2b);
+        this.squaresByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.firstY].setPassiveFootballer(this.engine.passiveTeam.footballer1t);
+        this.squaresByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.middleY].setPassiveFootballer(this.engine.passiveTeam.footballer1m);
+        this.squaresByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer1b);
     };
 
-    baltek.rules.Field.prototype.selectBoxes = function(condition){
-        var box = null;
+    baltek.rules.Field.prototype.selectSquares = function(condition){
+        var square = null;
         var ix = 0;
         var iy = 0;
         for ( ix=this.firstX; ix<=this.lastX; ix++ ) {
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
-                box = this.boxesByIndices[ix][iy];
-                if ( box !== null ) {
-                    box.selected = condition;
+                square = this.squaresByIndices[ix][iy];
+                if ( square !== null ) {
+                    square.selected = condition;
                 }
             }
         }

@@ -16,13 +16,13 @@ baltek.draw.__initModule = function(){
     // Init inner classes
     baltek.draw.Ball.__initClass();
     baltek.draw.BallWatcher.__initClass();
-    baltek.draw.Box.__initClass();
-    baltek.draw.BoxWatcher.__initClass();
     baltek.draw.Circle.__initClass();
     baltek.draw.Footballer.__initClass();
     baltek.draw.FootballerWatcher.__initClass();
     baltek.draw.Selectable.__initClass();
-
+    baltek.draw.Square.__initClass();
+    baltek.draw.SquareWatcher.__initClass();
+    
     baltek.draw.canvas = document.getElementById( "baltek-canvas-field" );
 
     // Force the dimensions of the canvas
@@ -53,20 +53,20 @@ baltek.draw.getMousePosition = function(event){
     };
 };
 
-baltek.draw.setBoxLatticeDimensions = function(nx, ny){
+baltek.draw.setSquareLatticeDimensions = function(nx, ny){
     var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
 
     baltek.draw.nx = nx;
     baltek.draw.ny = ny;
 
-    // From the lattice dimension (nx, ny) computes the boxSide, etc.
-    baltek.draw.boxQuantum = Math.min(
+    // From the lattice dimension (nx, ny) computes the squareSide, etc.
+    baltek.draw.squareQuantum = Math.min(
         (canvasRectangle.right  - canvasRectangle.left)/baltek.draw.nx,
         (canvasRectangle.bottom - canvasRectangle.top )/baltek.draw.ny ) ;
 
-    baltek.draw.boxSide = baltek.draw.boxQuantum ;
+    baltek.draw.squareSide = baltek.draw.squareQuantum ;
 
-    baltek.draw.circleQuantum = baltek.draw.boxQuantum/4 ;
+    baltek.draw.circleQuantum = baltek.draw.squareQuantum/4 ;
     baltek.draw.circleRadius = baltek.draw.circleQuantum*0.75 ;
 };
 ///////////////////////////////////////////////////////////////////////////////

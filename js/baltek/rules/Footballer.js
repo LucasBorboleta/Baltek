@@ -17,14 +17,14 @@ baltek.rules.Footballer.__initClass = function(){
         baltek.rules.Footballer.super.__initObject.call(this);
         this.team = team;
         this.force = force;
-        this.box = null;
+        this.square = null;
         this.canKick = false;
         this.canRun = false;
     };
 
     baltek.rules.Footballer.prototype.exportState = function(){
         var state = baltek.rules.Footballer.super.exportState.call(this);
-        state.boxIndices = this.box.getBoxIndices();
+        state.squareIndices = this.square.getSquareIndices();
         state.canKick = this.canKick;
         state.canRun = this.canRun;
         return state;
@@ -32,14 +32,14 @@ baltek.rules.Footballer.__initClass = function(){
 
     baltek.rules.Footballer.prototype.getState = function(){
         var state = {};
-        state.box = this.box;
+        state.square = this.square;
         state.canKick = this.canKick;
         state.canRun = this.canRun;
         return state;
     };
 
     baltek.rules.Footballer.prototype.setState = function(state){
-        state.box.setFootballer(this);
+        state.square.setFootballer(this);
         this.canKick = state.canKick;
         this.canRun = state.canRun;
     };
