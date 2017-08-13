@@ -1,35 +1,35 @@
 "use strict";
 ///////////////////////////////////////////////////////////////////////////////
-baltek.draw.Circle = function(){
+baltek.draw.Disk = function(){
     this.__initObject();
 };
 
-baltek.draw.Circle.__initClassCalled = false;
+baltek.draw.Disk.__initClassCalled = false;
 
-baltek.draw.Circle.__initClass = function(){
+baltek.draw.Disk.__initClass = function(){
 
-    if ( baltek.draw.Circle.__initClassCalled ) return;
-    baltek.draw.Circle.__initClassCalled = true;
+    if ( baltek.draw.Disk.__initClassCalled ) return;
+    baltek.draw.Disk.__initClassCalled = true;
 
-    baltek.utils.inherit(baltek.draw.Circle, baltek.draw.Selectable);
+    baltek.utils.inherit(baltek.draw.Disk, baltek.draw.Selectable);
 
-    baltek.draw.Circle.prototype.__initObject = function(){
-        baltek.draw.Circle.super.__initObject.call(this);
+    baltek.draw.Disk.prototype.__initObject = function(){
+        baltek.draw.Disk.super.__initObject.call(this);
 
         this.square = null;
         this.x = undefined;
         this.y = undefined;
         this.text = null;
 
-        this.radius = baltek.draw.circleRadius;
+        this.radius = baltek.draw.diskRadius;
 
-        this.strokeStyle = baltek.style.colors.CIRCLE_BORDER;
-        this.strokeStyleSelected = baltek.style.colors.CIRCLE_BORDER_SELECTED;
-        this.fillStyle = baltek.style.colors.CIRCLE_BACKGROUND;
-        this.fillStyleSelected = baltek.style.colors.CIRCLE_BACKGROUND;
+        this.strokeStyle = baltek.style.colors.DISK_BORDER;
+        this.strokeStyleSelected = baltek.style.colors.DISK_BORDER_SELECTED;
+        this.fillStyle = baltek.style.colors.DISK_BACKGROUND;
+        this.fillStyleSelected = baltek.style.colors.DISK_BACKGROUND;
     };
 
-    baltek.draw.Circle.prototype.contains = function(point){
+    baltek.draw.Disk.prototype.contains = function(point){
         var contains = false;
         if ( this.x !== undefined && this.y !== undefined ) {
             var dx = point.x - this.x;
@@ -40,7 +40,7 @@ baltek.draw.Circle.__initClass = function(){
         return contains;
     };
 
-    baltek.draw.Circle.prototype.draw = function(){
+    baltek.draw.Disk.prototype.draw = function(){
 
         if ( this.square !== null && this.x !== undefined && this.y !== undefined ) {
 
@@ -51,7 +51,7 @@ baltek.draw.Circle.__initClass = function(){
                 baltek.draw.drawer.fillStyle = this.fillStyleSelected;
             }
 
-            baltek.draw.drawer.lineWidth = baltek.style.widths.CIRCLE_BORDER;
+            baltek.draw.drawer.lineWidth = baltek.style.widths.DISK_BORDER;
 
             var lw = baltek.draw.drawer.lineWidth;
             baltek.draw.drawer.beginPath();
@@ -62,8 +62,8 @@ baltek.draw.Circle.__initClass = function(){
             baltek.draw.drawer.fill();
 
             if ( this.text !== null ) {
-                baltek.draw.drawer.fillStyle = baltek.style.colors.CIRCLE_TEXT;
-                baltek.draw.drawer.font = baltek.style.fonts.CIRCLE_TEXT;
+                baltek.draw.drawer.fillStyle = baltek.style.colors.DISK_TEXT;
+                baltek.draw.drawer.font = baltek.style.fonts.DISK_TEXT;
                 baltek.draw.drawer.textBaseline = "middle";
                 baltek.draw.drawer.textAlign = "center";
                 baltek.draw.drawer.fillText(this.text, this.x, this.y);

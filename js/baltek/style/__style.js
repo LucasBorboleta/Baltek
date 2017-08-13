@@ -24,13 +24,13 @@ baltek.style.__initModule = function(){
     var BALTEK_GREEN_0 = "#006600";
     var BALTEK_GREEN_1 = "#5C8A00";
 
-    baltek.style.colors.CIRCLE_BACKGROUND = "gray";
-    baltek.style.colors.CIRCLE_BORDER = "black";
-    baltek.style.colors.CIRCLE_TEXT = "black";
-    baltek.style.fonts.CIRCLE_TEXT = "24px" + " " + BALTEK_FONT;
-    baltek.style.widths.CIRCLE_BORDER = "5";
+    baltek.style.colors.DISK_BACKGROUND = "gray";
+    baltek.style.colors.DISK_BORDER = "black";
+    baltek.style.colors.DISK_TEXT = "black";
+    baltek.style.fonts.DISK_TEXT = "24px" + " " + BALTEK_FONT;
+    baltek.style.widths.DISK_BORDER = "5";
 
-    baltek.style.colors.CIRCLE_BORDER_SELECTED = BALTEK_YELLOW;
+    baltek.style.colors.DISK_BORDER_SELECTED = BALTEK_YELLOW;
 
     // Retrieve team colors from existing HTML elements that are already parmetrized thanks to CCS
     baltek.style.colors.TEAM_0 = baltek.widget.getStylePropertyValue( "baltek-counter-team0Score", "background-color" );

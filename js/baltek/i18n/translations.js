@@ -51,7 +51,7 @@ baltek.i18n.translations.eo = {
     "baltek-button-rules:button"       : "Reguloj" ,
 
     "baltek-button-undo:button"        : "Malfari" ,
-    "baltek-button-confirm:button"     : "Akcepti" ,
+    "baltek-button-confirm:button"     : "Bone" ,
 
     "baltek-button-goToGame:button"    : "< Ludo" ,
     "baltek-button-goToHelp:button"    : "?" ,

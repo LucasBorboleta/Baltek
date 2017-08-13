@@ -68,8 +68,8 @@ baltek.draw.Square.__initClass = function(){
     };
 
     baltek.draw.Square.prototype.distributeBallAndFootballers = function(){
-        var dx = baltek.draw.circleQuantum;
-        var dy = baltek.draw.circleQuantum;
+        var dx = baltek.draw.diskQuantum;
+        var dy = baltek.draw.diskQuantum;
 
         var guestCount = 0;
 

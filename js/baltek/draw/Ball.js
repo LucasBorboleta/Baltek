@@ -11,7 +11,7 @@ baltek.draw.Ball.__initClass = function(){
     if ( baltek.draw.Ball.__initClassCalled ) return;
     baltek.draw.Ball.__initClassCalled = true;
 
-    baltek.utils.inherit(baltek.draw.Ball, baltek.draw.Circle);
+    baltek.utils.inherit(baltek.draw.Ball, baltek.draw.Disk);
 
     baltek.draw.Ball.prototype.__initObject = function(){
         baltek.draw.Ball.super.__initObject.call(this);

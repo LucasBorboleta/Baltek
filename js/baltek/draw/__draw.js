@@ -16,7 +16,7 @@ baltek.draw.__initModule = function(){
     // Init inner classes
     baltek.draw.Ball.__initClass();
     baltek.draw.BallWatcher.__initClass();
-    baltek.draw.Circle.__initClass();
+    baltek.draw.Disk.__initClass();
     baltek.draw.Footballer.__initClass();
     baltek.draw.FootballerWatcher.__initClass();
     baltek.draw.Selectable.__initClass();
@@ -66,7 +66,7 @@ baltek.draw.setSquareLatticeDimensions = function(nx, ny){
 
     baltek.draw.squareSide = baltek.draw.squareQuantum ;
 
-    baltek.draw.circleQuantum = baltek.draw.squareQuantum/4 ;
-    baltek.draw.circleRadius = baltek.draw.circleQuantum*0.75 ;
+    baltek.draw.diskQuantum = baltek.draw.squareQuantum/4 ;
+    baltek.draw.diskRadius = baltek.draw.diskQuantum*0.75 ;
 };
 ///////////////////////////////////////////////////////////////////////////////
