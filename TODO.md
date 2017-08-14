@@ -15,9 +15,9 @@ This document collects the milestones and the tasks for the current milestone.
 
 # Tasks
 
-1. Use the latest CC version in all four languages.
-2. Translate rules, help and about in Esperanto.
-3. Translate rules, help and about in Portuguese.
+1. Translate help in Portuguese.
+2. Translate rules in Esperanto.
+3. Translate rules in Portuguese.
 4. Clean the first implementation of BALTEK mode "two close players".
 5. Write unit tests using QUnit.
 6. Update "Design.md".

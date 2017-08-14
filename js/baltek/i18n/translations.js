@@ -132,7 +132,7 @@ baltek.i18n.translations.fr = {
 };
 
 baltek.i18n.translations.pt = {
-    "baltek-button-about:button"       : "Acerca" ,
+    "baltek-button-about:button"       : "Sobre" ,
     "baltek-button-help:button"        : "Ajuda" ,
     "baltek-button-rules:button"       : "Regras" ,
 
