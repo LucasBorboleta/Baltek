@@ -15,11 +15,10 @@ This document collects the milestones and the tasks for the current milestone.
 
 # Tasks
 
-1. Translate help in Portuguese.
-2. Translate rules in Esperanto.
-3. Translate rules in Portuguese.
-4. Clean the first implementation of BALTEK mode "two close players".
-5. Write unit tests using QUnit.
-6. Update "Design.md".
-7. Automate a "release" using Python (collecting and minifying released files, ...).
-8. Describe the file tree in the README.md file.
+1. Translate rules in Esperanto.
+2. Translate rules in Portuguese.
+3. Clean the first implementation of BALTEK mode "two close players".
+4. Write unit tests using QUnit.
+5. Update "Design.md".
+6. Automate a "release" using Python (collecting and minifying released files, ...).
+7. Describe the file tree in the README.md file.
