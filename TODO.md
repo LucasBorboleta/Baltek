@@ -19,7 +19,8 @@ This document collects the milestones and the tasks for the current milestone.
 2. Translate rules in Esperanto.
 3. Translate rules in Portuguese.
 4. Clean the first implementation of BALTEK mode "two close players".
-5. Write unit tests using QUnit.
-6. Update "Design.md".
-7. Automate a "release" using Python (collecting and minifying released files, ...).
-8. Describe the file tree in the README.md file.
+5. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
+6. Write unit tests using QUnit.
+7. Update "Design.md".
+8. Automate a "release" using Python (collecting and minifying released files, ...).
+9. Describe the file tree in the README.md file.

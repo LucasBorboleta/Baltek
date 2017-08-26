@@ -1,0 +1,6 @@
+Copyright (C) 2017  Lucas Borboleta (lucas.borboleta@free.fr)
+
+This file is part of BALTEK, the football rules.
+
+BALTEK by Lucas Borboleta is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.

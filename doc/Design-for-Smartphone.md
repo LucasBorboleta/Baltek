@@ -19,14 +19,32 @@ Hereafter is a possible design for the screen.
   * the last touch unselect the Footballer.
 * The "$$$" box has two roles : 
   * display the remaining credits;
-  * cancel the moves of the active turn.
+  * cancel/undo the moves of the active turn.
 * The "*" box has two roles :
   * display the remaining bonus;
   * select the bonus ; the selected status is rendered by the yellow colour, also used for the selected Field box.
 * The "OK" box acts as a button used for confirm the active turn.
 * The "$$$" and the "OK" boxes are displayed on the side of the active player, and using the colour of the active player.
 * The two remaining boxes, in grey colour, "///" and "..." are respectively used for a general menu (IA levels or remote player request; help; rules; about; language settings; display coordinates) and for a few quick actions (e.g. new game).  
+* Another option is that:
+  *  "$$$" and "*" boxes are just counters. 
+  * The "cancel/undo" and "select bonus" are available from the "..." quick menu.
 * The grey boxes are display on the side of the non-active player.
+
+# Markers on footballers 
+
+![markers-on-footballers](C:\Users\leandre\Documents\GitHub\Baltek\doc\markers-on-footballers.png)
+
+* Each footballer, says "F" is displayed with his/her actual capabilities:
+  * ".F" : means "F" can kick the ball on this turn.
+  * "F." : means that "F" can run on this turn.
+  * ".F." : means that "F" can do both on this turn: kick the ball and run.
+  * "F" : means that "F" can do nothing on thus turn.
+* Symbolically, the dot before of the digit is like the ball in front of the footballer.
+* Symbolically, the dot after the digit is like some pushing force behind the footballer.
+* Such feature can be implemented both in the desktop and smartphone configurations.
+
+
 
 # BALTEK as an Android App
 
