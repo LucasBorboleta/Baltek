@@ -28,12 +28,12 @@ Hereafter is a possible design for the screen.
 * The two remaining boxes, in grey colour, "///" and "..." are respectively used for a general menu (IA levels or remote player request; help; rules; about; language settings; display coordinates) and for a few quick actions (e.g. new game).  
 * Another option is that:
   *  "$$$" and "*" boxes are just counters. 
-  * The "cancel/undo" and "select bonus" are available from the "..." quick menu.
+  *  The "cancel/undo" and "select bonus" are available from the "..." quick menu.
 * The grey boxes are display on the side of the non-active player.
 
 # Markers on footballers 
 
-![markers-on-footballers](C:\Users\leandre\Documents\GitHub\Baltek\doc\markers-on-footballers.png)
+![markers-on-footballers](./markers-on-footballers.png)
 
 * Each footballer, says "F" is displayed with his/her actual capabilities:
   * ".F" : means "F" can kick the ball on this turn.
