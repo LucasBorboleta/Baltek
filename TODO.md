@@ -15,12 +15,13 @@ This document collects the milestones and the tasks for the current milestone.
 
 # Tasks
 
-1. Study other possible license than "Creative Commons license" such as "GNU General Public License" and "GNU Free Documentation License". Indeed, CC does not recommend using CC for software. Hints: Keep CC-BY-SA for the rules and use GPL for the software; this way the rules can be reused independently from the software.
-2. Translate rules in Esperanto.
-3. Translate rules in Portuguese.
-4. Clean the first implementation of BALTEK mode "two close players".
-5. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
-6. Write unit tests using QUnit.
-7. Update "Design.md".
-8. Automate a "release" using Python (collecting and minifying released files, ...).
-9. Describe the file tree in the README.md file.
+1. Use the "Creative Commons license" for the text and pictures of the rule text.
+2. Use "GNU General Public License" for the code HTML5/JavaScript.
+3. Translate rules in Esperanto.
+4. Translate rules in Portuguese.
+5. Clean the first implementation of BALTEK mode "two close players".
+6. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
+7. Write unit tests using QUnit.
+8. Update "Design.md".
+9. Automate a "release" using Python (collecting and minifying released files, ...).
+10. Describe the file tree in the README.md file.
