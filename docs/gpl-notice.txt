@@ -1,7 +1,7 @@
-BALTEK is a program implementing the rules of the football game also named BALTEK.
+BALTEK (the program) implements BALTEK (the rules), a turn-based board game, inspired from football.
 Copyright (C) 2017  Lucas Borboleta (lucas.borboleta@free.fr)
 
-This file is part of BALTEK.
+This file is part of BALTEK (the program).
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

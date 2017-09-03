@@ -1,0 +1,23 @@
+.baltek-rules-hyperlink-group-class{
+    word-spacing:16px;
+}
+
+.baltek-rules-hyperlink-class{
+    word-spacing:2px;
+}
+
+.baltek-rules-hasImage-class{
+    text-align:center;
+}
+
+.baltek-rules-image-class{
+    max-width:100%;
+    height:auto
+}
+
+.baltek-rules-logo-class{
+    background-color:khaki;
+    border-radius:8px;
+    font-size:32px;
+    text-align:center
+}

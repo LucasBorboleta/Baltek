@@ -1,0 +1,7 @@
+BALTEK (the rules) describes a turn-based board game, inspired from football.
+Copyright (C) 2017  Lucas Borboleta (lucas.borboleta@free.fr)
+
+This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
+
+Attribute work to URL "https://github.com/LucasBorboleta/Baltek".
