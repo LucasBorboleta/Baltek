@@ -32,10 +32,8 @@ Right now the rules are only written in French. I would like them to be translat
 
 By end of year 2015, a software prototype has been started, but with a slow rhythm. I used this project for learning about JavaScript and improving my skills in software design and automated testing. So I would like to move alone on a working branch until the game becomes useable. When this point will be reached, then the code will be merged on _master_ branch, and I will appreciate contributions. Well, this is my current vision by now.
 
-# License
+# Licenses
 
-_Copyright_ [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
+* BALTEK (_the program_) is licensed under the [GNU General Public License](http://www.gnu.org/licenses/). 
+* BALTEK (_the rules_) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
-[![](./pictures/CC-BY-SA.gif)](http://creativecommons.org/licenses/by-sa/3.0/)
-
-This work by [Lucas Borboleta](http://lucas.borboleta.blog.free.fr/) – the rules document and the HTML/Javascript application – is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/) .
