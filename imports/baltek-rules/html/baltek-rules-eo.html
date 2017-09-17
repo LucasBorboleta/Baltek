@@ -20,14 +20,14 @@
 			<a class="baltek-rules-hyperlink-class" href="#purpose">Celo</a>
 			<a class="baltek-rules-hyperlink-class" href="#setup">Preparado</a>
 			<a class="baltek-rules-hyperlink-class" href="#turn">Ludo-agoj</a>
-			<a class="baltek-rules-hyperlink-class" href="#notation">Notacio de agoj</a>
+			<a class="baltek-rules-hyperlink-class" href="#notation">Notacio de movoj</a>
 			<a class="baltek-rules-hyperlink-class" href="#versioning">Notacio de versioj</a>
 			<a class="baltek-rules-hyperlink-class" href="#thanks">Dankoj</a>
 		</span>
 
 		<h1 id="introduction">Enkonduko</h1>
 
-		<p>BALTEK estas tabulludo pri futbalo, vico-bazita. Jen ĝia principoj:</p>
+		<p>BALTEK estas tabulludo pri futbalo, alternante ludvicoj. Jen ĝia principoj:</p>
 
 		    <ul>
 		        <li>Ludo facile mane farita,</li>
@@ -302,8 +302,8 @@
 						<img class="baltek-rules-image-class" src="../pictures/two-required-lobs.png" />
 					</div>
 
-			<h1 id="notation">Notacio de agoj</h1>
-				<p>Se utila, la agoj de la ludbatalo estas notitaj kiel en la sekva ekzemplo.</p>
+			<h1 id="notation">Notacio de movoj</h1>
+				<p>Laŭbezone, la movoj de la ludbatalo estas priskribitaj kiel en la sekva ekzemplo.</p>
 
 <pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
@@ -313,7 +313,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @# /
 </pre>
 
-				<p>Laŭvole, detaloj estas provizitaj kiel en la sekva ekzemplo.</p>
+				<p>Laŭvole, komentarioj estas aldonitaj kiel en la sekva ekzemplo.</p>
 
 <pre class="w3-code">
 #! BALTEK 1.1
@@ -328,7 +328,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 # La bonuson bone ludis la ruĝaj.
 </pre>
 
-					<p>Jen la konvencioj de ĉi tiu formato de notacio strukturita laŭ linioj:</p>
+					<p>La notacio estas strukturita laŭ linioj. Jen ĝiaj konvencioj:</p>
 					<ul>
 						<li>La spaceto, signo <q> </q>, laŭvole ripetita, disigas la vortojn.</li>
 
@@ -350,22 +350,22 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 								<li><q><code class="w3-codespan">#:</code></q> anoncas,
 									pere <q>ISO</q> formato,
 									la daton, kaj laŭvole la tempon;
-									uzebla plurajn fojojn.</li>									  
+									uzebla plurfoje.</li>
 
 							</ul>
 
-						<li>Une ligne non-vide, qui n'est pas un commentaire,
-							décrit un tour <q>bleu</q>, suivi d'un tour <q>rouge</q>.
+						<li>Neplena linio, kiu ne estas komento,
+							priskribas <q>bluan</q> ludvicon, kaj poste, <q>ruĝan</q> ludvicon.</li>
 
-						<li><q><code class="w3-codespan">/</code></q> termine le tour <q>bleu</q>.
-						     La fin de ligne termine le tour <q>rouge</q>.</li>
+						<li><q><code class="w3-codespan">/</code></q> finas la <q>bluan</q> ludvicon.
+						     La fino de la linio finas la <q>ruĝan</q> ludvicon.</li>
 
-						<li>Chaque tour est composé de 0, 1, 2 ou 3 actions.</li>
+						<li>Ĉiu ludvico konsistas de 0, 1, 2 aŭ 3 agoj.</li>
 
 							<ul>
-								<li>L'action <q>courir</q> est notée en un mot
-									commençant par la case de départ et finissant par la case d’arrivée.
-									Exemple : <code class="w3-codespan">g3f3</code></li>
+								<li>La ago <q>kuri</q> estas notita per vorto
+									komencante per la startinta ĉelo kaj finante per la alveninta ĉelo.
+									Ekzemplo: <code class="w3-codespan">g3f3</code></li>
 
 								<li>Pour l'option <q>sprint</q>, <q>*</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">g3e2*</code></li>
@@ -406,10 +406,10 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 
 					<li>Kiam la logiko de reguloj ŝanĝiĝas,
 						la unua indekso <q>i</q> estas pliigita de 1,
-						kaj la dua indekso <q>j</q> estas rekomencita al 0.</li>
+						kaj la dua indekso <q>j</q> estas rekomencita de 0.</li>
 
 					<li>La dua indekso <q>j</q> estas pliigita de 1 kiam la tekstoj aŭ la ilustraĵoj
-						aŭ la notacio de agoj aŭ la strukturo de la dokumento evoluas,
+						aŭ la notacio de movoj aŭ la strukturo de la dokumento evoluas,
 						sed sen ŝanĝi la logikon de la reguloj.
 					</li>
 
