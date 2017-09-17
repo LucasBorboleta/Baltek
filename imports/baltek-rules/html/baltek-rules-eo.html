@@ -18,10 +18,10 @@
 			<a class="baltek-rules-hyperlink-class" href="#revisions">Revizioj</a>
 			<a class="baltek-rules-hyperlink-class" href="#material">Materialo</a>
 			<a class="baltek-rules-hyperlink-class" href="#purpose">Celo</a>
-			<a class="baltek-rules-hyperlink-class" href="#setup">Preparado</a>
-			<a class="baltek-rules-hyperlink-class" href="#turn">Ludo-agoj</a>
+			<a class="baltek-rules-hyperlink-class" href="#setup">Preparo</a>
+			<a class="baltek-rules-hyperlink-class" href="#turn">Ludagoj</a>
 			<a class="baltek-rules-hyperlink-class" href="#notation">Notacio de movoj</a>
-			<a class="baltek-rules-hyperlink-class" href="#versioning">Notacio de versioj</a>
+			<a class="baltek-rules-hyperlink-class" href="#indexing">Indeksoj de versioj</a>
 			<a class="baltek-rules-hyperlink-class" href="#thanks">Dankoj</a>
 		</span>
 
@@ -102,17 +102,17 @@
 
 		<h1 id="purpose">Celo</h1>
 			<ul>
-				<li>BALTEK se joue à deux joueurs.</li>
-				<li>Chaque joueur dirige une équipe de 6 footballeurs.</li>
-				<li>Les joueurs décident de l’attribution des équipes.</li>
+				<li>BALTEK estas ludo por du ludantoj.</li>
+				<li>Ĉiu ludanto estras teamon de 6 futbalistoj.</li>
+				<li>La ludantoj decidas la distribuadon de la teamoj.</li>
 
-				<li>À son tour de jeu, chaque joueur déplace la balle et ses footballeurs,
-					en cherchant à envoyer la balle dans le but adverse.</li>
+				<li>Siavice, ĉiu ludanto movas la pilkon kaj siajn futbalistojn,
+					provante sendi la pilkon en la kontraŭa golejo.</li>
 
-				<li>Le gagnant est le joueur qui atteint en premier le score de 2 buts.</li>
+				<li>La gajninto estas la ludanto, kiu unue gajnis 2 goloj.</li>
 			</ul>
 
-		<h1 id="setup">Preparado</h1>
+		<h1 id="setup">Preparo</h1>
 			<ul>
 				<li>En début de partie, ainsi qu'après chaque but marqué, les footballeurs sont placés
 					sur le terrain à leurs positions d’engagement.</li>
@@ -137,7 +137,7 @@
 				</div>
 
 
-		<h1 id="turn">Ludo-agoj</h1>
+		<h1 id="turn">Ludagoj</h1>
 
 			<h2>Les actions, options, compensations, crédits et bonus</h2>
 				<ul>
@@ -191,7 +191,7 @@
 					<li>L’action <q>courir</q> ne déplace pas la balle.</li>
 				</ul>
 
-				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu <q>3</q>.</p>
+				<p>Ekzemplo: avec des bordures jaunes, les destinations possibles pour le footballeur bleu <q>3</q>.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/run-allowed-destinations.png" />
 					</div>
@@ -212,7 +212,7 @@
 					<li>Le joueur ne peut dépenser son bonus qu'une seule fois entre deux engagements.</li>
 				</ul>
 
-				<p>Exemple : avec des bordures jaunes, les destinations possibles pour le footballeur bleu <q>3</q>.</p>
+				<p>Ekzemplo: avec des bordures jaunes, les destinations possibles pour le footballeur bleu <q>3</q>.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/sprint-allowed-destinations.png" />
 					</div>
@@ -257,7 +257,7 @@
 						</ul>
 				</ul>
 
-				<p>Exemple : avec des bordures jaunes, les destinations possibles pour la balle
+				<p>Ekzemplo: avec des bordures jaunes, les destinations possibles pour la balle
 					         par le <q>tireur 3</q> bleu ; aucune n'exige duel ou lob.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/kick-allowed-destinations.png" />
@@ -348,7 +348,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 									uzebla nur unufoje.</li>
 
 								<li><q><code class="w3-codespan">#:</code></q> anoncas,
-									pere <q>ISO</q> formato,
+									pere de <q>ISO</q> formato,
 									la daton, kaj laŭvole la tempon;
 									uzebla plurfoje.</li>
 
@@ -360,47 +360,47 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 						<li><q><code class="w3-codespan">/</code></q> finas la <q>bluan</q> ludvicon.
 						     La fino de la linio finas la <q>ruĝan</q> ludvicon.</li>
 
-						<li>Ĉiu ludvico konsistas de 0, 1, 2 aŭ 3 agoj.</li>
+						<li>Ĉiu ludvico konsistas el 0, 1, 2 aŭ 3 agoj.</li>
 
 							<ul>
 								<li>La ago <q>kuri</q> estas notita per vorto
-									komencante per la startinta ĉelo kaj finante per la alveninta ĉelo.
+									komencante de la startinta ĉelo kaj finante de la alveninta ĉelo.
 									Ekzemplo: <code class="w3-codespan">g3f3</code></li>
 
-								<li>Pour l'option <q>sprint</q>, <q>*</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">g3e2*</code></li>
+								<li>Por la <q>sprinto</q>, <q>*</q> plilongigas la vorton.
+									Ekzemplo: <code class="w3-codespan">g3e2 *</code></li>
 
-								<li>L’action <q>passer/tirer</q> est notée en un mot
-									commençant par <q>@</q> et finissant par la case d’arrivée.
-									Exemple : <code class="w3-codespan">@c3</code></li>
+								<li>La ago <q>ŝoti</q> estas priskribita per vorto
+									komencante de la signo <q>@</q> kaj finante de la alveninta ĉelo.
+									Ekzemplo: <code class="w3-codespan">@c3</code></li>
 
-								<li>Le <q>tir au but</q> est abrégé par le mot suivant :
+								<li>La ago <q>ŝoti al golejo</q> estas mallongigita per la sekva vorto:
 									<code class="w3-codespan">@#</code>
 
-								<li>Pour la compensation de <q>duel</q>, <q>+</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3+</code></li>
+								<li>Por kompenso de <q>duelo</q>, <q>+</q> plilongigas la vorton.
+									Ekzemplo: <code class="w3-codespan">@c3+</code></li>
 
-								<li>Pour deux duels, <q>++</q> est ajouté.
-									Exemple : <code class="w3-codespan">@c3++</code></li>
+								<li>Por du dueloj, <q>++</q> plilongigas la vorton.
+									Ekzemplo: <code class="w3-codespan">@c3++</code></li>
 
-								<li>Pour la compensation de <q>lob</q>, <q>!</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3!</code></li>
+								<li>Por kompenso de <q>pilkarko</q>, <q>!</q> plilongigas la vorton.
+									Ekzemplo: <code class="w3-codespan">@c3!</code></li>
 
-								<li>Pour deux lobs, <q>!!</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3!!</code></li>
+								<li>Por du pilkarkoj, <q>!!</q> plilongigas la vorton.
+									Ekzemplo: <code class="w3-codespan">@c3!!</code></li>
 
-								<li>Pour la combinaison <q>duel</q> plus <q>lob</q>,
-									<q>+!</q> est ajoutée au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3+!</code></li>
+								<li>Por la kombinaĵo de <q>duelo</q> kaj <q>pilkarko</q>,
+									<q>+!</q> plilongigas la vorton.
+									Ekzemplo: <code class="w3-codespan">@c3+!</code></li>
 
 							</ul>
 
 		   		</ul>
 
 
-			<h1 id="versioning">Notacio de versioj</h1>
+			<h1 id="indexing">Indeksoj de versioj</h1>
 				<ul>
-					<li>La versioj de la reguloj estas identigitaj pere du entjeraj indeksoj <q>i.j</q>.</li>
+					<li>La versioj de la reguloj estas identigitaj per du entjeraj indeksoj <q>i.j</q>.</li>
 
 					<li>La unua versio estas <q>1.0</q>.</li>
 
