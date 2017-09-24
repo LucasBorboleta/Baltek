@@ -165,7 +165,7 @@
 							<li><strong>Shoot</strong>: move the ball;
 								cost: <strong>1 credit</strong>.</li>
 
-							<li><strong>Duel</strong>: compensation of force to own the ball;
+							<li><strong>Dribble</strong>: compensation of force to own the ball;
 								cost: <strong>1 credit per unit of force</strong>.</li>
 
 							<li><strong>Lob</strong>: compensation of force to move the ball;
@@ -244,7 +244,7 @@
 							then the <q>shooter</q> must:</li>
 								<ul>
 									<li>either equal or surpass the force of his/her opponent,</li>
-									<li>or compensate for his/ber force deficit by <q>duel</q>.</li>
+									<li>or compensate for his/ber force deficit by <q>dribble</q>.</li>
 								</ul>
 
 							<li>If the <q>shooter</q> moves the ball over an opponent,
@@ -257,26 +257,26 @@
 				</ul>
 
 				<p>Example: with yellow borders, the possible destinations for the ball
-						    by the blue <q>shooter 3</q>; none requires duel or lob.</p>
+						    by the blue <q>shooter 3</q>; none requires dribble or lob.</p>
 					<div class="baltek-rules-hasImage-class">
-						<img class="baltek-rules-image-class" src="../pictures/kick-allowed-destinations.png" />
+						<img class="baltek-rules-image-class" src="../pictures/shoot-allowed-destinations.png" />
 					</div>
 
 
-			<h2>Compensation <q>duel</q></h2>
+			<h2>Compensation <q>dribble</q></h2>
 				<ul>
 					<li>This compensation may be required by the action <q>shoot</q>.</li>
 
-					<li>The <q>duel</q> compensates for the lack of force of the <q>shooter</q>
+					<li>The <q>dribble</q> compensates for the lack of force of the <q>shooter</q>
 						with respect to the opponent sharing his/her square.</li>
 
-					<li>The <q>duel</q> costs 1 credit per unit of compensated force.</li>
+					<li>The <q>dribble</q> costs 1 credit per unit of compensated force.</li>
 				</ul>
-				<p>Examples: to own the ball, the blue <q>shooter 2</q> must engage in 1 duel;
-						     and the blue <q>shooter 1</q> must engage in 2 duels.</p>
+				<p>Examples: to own the ball, the blue <q>shooter 2</q> must engage a dribble costing 1 credit;
+						     and the blue <q>shooter 1</q> must engage a dribble costing 2 credits.</p>
 					<div class="baltek-rules-hasImage-class">
-						<img class="baltek-rules-image-class" src="../pictures/one-required-duel.png" />
-						<img class="baltek-rules-image-class" src="../pictures/two-required-duels.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-one-credit.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-two-credits.png" />
 					</div>
 
 
@@ -293,11 +293,11 @@
 				</ul>
 
 				<p>Examples: to transmit the ball to the blue footballer <q>2</q>,
-						     the blue <q>shooter 1</q> must perform 1 lob in the left context
-						     and 2 lobs in the right context.</p>
+						     the blue <q>shooter 1</q> must perform a lob costing 1 credit in the left context
+						     and a lob costing 2 credits in the right context.</p>
 					<div class="baltek-rules-hasImage-class">
-						<img class="baltek-rules-image-class" src="../pictures/one-required-lob.png" />
-						<img class="baltek-rules-image-class" src="../pictures/two-required-lobs.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-one-credit.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-two-credits.png" />
 					</div>
 
 
@@ -335,7 +335,8 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 							is a comment or pseudo-comment, and is always optional.</li>
 
 							<ul>
-								<li><q><code class="w3-codespan"># </code></q> announces a free comment.</li>
+								<li><q><code class="w3-codespan"># </code></q>, sharp followed by space,
+									announces a free comment.</li>
 
 								<li><q><code class="w3-codespan">#! BALTEK i.j</code></q> announces the
 									version  <q>i.j</q> of the BALTEK notation format;
@@ -374,19 +375,19 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 								<li>The <q>shot at goal</q> is abbreviated as follows:
 									<code class="w3-codespan">@#</code>
 
-								<li>For the compensation <q>duel</q>, <q>+</q> is appended to the action word.
+								<li>For a <q>dribble</q> costing 1 credit, <q>+</q> is appended to the action word.
 									Example: <code class="w3-codespan">@c3+</code></li>
 
-								<li>For two duels, <q>++</q> is appended.
+								<li>For a <q>dribble</q> costing 2 credits, <q>++</q> is appended to the action word.
 									Example: <code class="w3-codespan">@c3++</code></li>
 
-								<li>For the compensation <q>lob</q>, <q>!</q> is appended to the action word.
+								<li>For a <q>lob</q> costing 1 credit, <q>!</q> is appended to the action word.
 									Example: <code class="w3-codespan">@c3!</code></li>
 
-								<li>For two lobs, <q>!!</q> is appended to the action word.
+								<li>For a <q>lob</q> costing 2 credits, <q>!!</q> is appended to the action word.
 									Example: <code class="w3-codespan">@c3!!</code></li>
 
-								<li>For the combination <q>duel</q> and <q>lob</q>,
+								<li>For a combination <q>dribble</q> and <q>lob</q>, each one costing 1 credit,
 									<q>+!</q> is appended to the action word.
 									Example: <code class="w3-codespan">@c3+!</code></li>
 

@@ -93,8 +93,8 @@ baltek.i18n.translations.eo = {
     "baltek-select-language:fr"        : "Français" ,
     "baltek-select-language:pt"        : "Português" ,
 
-    "baltek-select-sprint:no"          : "Akcelo: ne" ,
-    "baltek-select-sprint:yes"         : "Akcelo: jes" ,
+    "baltek-select-sprint:no"          : "Sprinto: ne" ,
+    "baltek-select-sprint:yes"         : "Sprinto: jes" ,
 
     "baltek-select-team0Kind:ai1"      : "AI1" ,
     "baltek-select-team0Kind:ai2"      : "AI2" ,

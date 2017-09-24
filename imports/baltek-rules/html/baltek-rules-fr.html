@@ -75,6 +75,7 @@
 					<tr>
 						<td>1.1</td>
 						<td>Clarification de l'option de sprint.
+							Dribble comme nouveau nom du duel.
 							Notation plus compacte des coups.
 						    Rédaction en HTML.
 						    Copies d'écran depuis l'implémentation HTML/JavaScript.</td>
@@ -173,7 +174,7 @@
 							<li><strong>Tirer</strong> : déplacer la balle ;
 								coût : <strong>1 crédit</strong>.</li>
 
-							<li><strong>Duel</strong> : compensation de force pour posséder la balle ;
+							<li><strong>Dribble</strong> : compensation de force pour posséder la balle ;
 								coût : <strong>1 crédit par unité de force</strong>.</li>
 
 							<li><strong>Lob</strong> : compensation de force pour déplacer la balle ;
@@ -252,7 +253,7 @@
 								alors le <q>tireur</q> doit :</li>
 								<ul>
 									<li>soit égaler ou surpasser la force de son adversaire,</li>
-									<li>soit compenser son déficit de force par <q>duel</q>.</li>
+									<li>soit compenser son déficit de force par <q>dribble</q>.</li>
 								</ul>
 
 							<li>Si le <q>tireur</q> déplace la balle par-dessus un adversaire,
@@ -265,26 +266,26 @@
 				</ul>
 
 				<p>Exemple : avec des bordures jaunes, les destinations possibles pour la balle
-					         par le <q>tireur 3</q> bleu ; aucune n'exige duel ou lob.</p>
+					         par le <q>tireur 3</q> bleu ; aucune n'exige dribble ou lob.</p>
 					<div class="baltek-rules-hasImage-class">
-						<img class="baltek-rules-image-class" src="../pictures/kick-allowed-destinations.png" />
+						<img class="baltek-rules-image-class" src="../pictures/shoot-allowed-destinations.png" />
 					</div>
 
 
-			<h2>Compensation <q>duel</q></h2>
+			<h2>Compensation <q>dribble</q></h2>
 				<ul>
 					<li>Cette compensation peut être exigée par l’action <q>tirer</q>.</li>
 
-					<li>Le <q>duel</q> compense le déficit de force du <q>tireur</q>
+					<li>Le <q>dribble</q> compense le déficit de force du <q>tireur</q>
 						vis-à-vis de l’adversaire qui partage sa case.</li>
 
-					<li>Le <q>duel</q> coûte 1 crédit par unité de force compensée.</li>
+					<li>Le <q>dribble</q> coûte 1 crédit par unité de force compensée.</li>
 				</ul>
-				<p>Exemples : pour posséder la balle, le <q>tireur 2</q> bleu doit livrer 1 duel ;
-					          et le <q>tireur 1</q> bleu doit livrer 2 duels.</p>
+				<p>Exemples : pour posséder la balle, le <q>tireur 2</q> bleu doit effectuer un dribble coûtant 1 crédit ;
+					          et le <q>tireur 1</q> bleu doit effectuer un dribble coûtant 2 crédits.</p>
 					<div class="baltek-rules-hasImage-class">
-						<img class="baltek-rules-image-class" src="../pictures/one-required-duel.png" />
-						<img class="baltek-rules-image-class" src="../pictures/two-required-duels.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-one-credit.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-two-credits.png" />
 					</div>
 
 
@@ -302,11 +303,11 @@
 				</ul>
 
 				<p>Exemples : pour transmettre la balle au footballeur bleu <q>2</q>, le <q>tireur 1</q> bleu
-					          doit effectuer 1 lob, dans le contexte de gauche,
-							  et 2 lobs dans le contexte de droite.</p>
+					          doit effectuer un lob coûtant 1 crédit, dans le contexte de gauche,
+							  et un lob coûtant 2 crédits  dans le contexte de droite.</p>
 					<div class="baltek-rules-hasImage-class">
-						<img class="baltek-rules-image-class" src="../pictures/one-required-lob.png" />
-						<img class="baltek-rules-image-class" src="../pictures/two-required-lobs.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-one-credit.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-two-credits.png" />
 					</div>
 
 			<h1 id="notation">Notation des coups</h1>
@@ -343,7 +344,8 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 							et est toujours optionnel.</li>
 
 							<ul>
-								<li><q><code class="w3-codespan"># </code></q> annonce un commentaire libre.</li>
+								<li><q><code class="w3-codespan"># </code></q>, dièse suivi d'un espace,
+									annonce un commentaire libre.</li>
 
 								<li><q><code class="w3-codespan">#! BALTEK i.j</code></q> annonce
 									la version <q>i.j</q> du format de notation BALTEK ;
@@ -384,20 +386,20 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 								<li>Le <q>tir au but</q> est abrégé par le mot suivant :
 									<code class="w3-codespan">@#</code>
 
-								<li>Pour la compensation de <q>duel</q>, <q>+</q> est ajouté au mot de l'action.
+								<li>Pour un <q>dribble</q> coûtant 1 crédit, <q>+</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3+</code></li>
 
-								<li>Pour deux duels, <q>++</q> est ajouté.
+								<li>Pour un <q>dribble</q> coûtant 2 crédits, <q>++</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3++</code></li>
 
-								<li>Pour la compensation de <q>lob</q>, <q>!</q> est ajouté au mot de l'action.
+								<li>Pour un <q>lob</q> coûtant 1 crédit, <q>!</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3!</code></li>
 
-								<li>Pour deux lobs, <q>!!</q> est ajouté au mot de l'action.
+								<li>Pour un <q>lob</q> coûtant 2 crédits, <q>!!</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3!!</code></li>
 
-								<li>Pour la combinaison <q>duel</q> et <q>lob</q>,
-									<q>+!</q> est ajoutée au mot de l'action.
+								<li>Pour une combinaison <q>duel</q> et <q>lob</q>, coûtant chacun 1 crédit,
+									<q>+!</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3+!</code></li>
 
 							</ul>

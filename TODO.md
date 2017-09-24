@@ -16,7 +16,7 @@ This document collects the milestones and the tasks for the current milestone.
 # Tasks
 
 1. Translate rules in Esperanto.
-2. Use "sprinto-bonuso" in Esperanto ; change interface button and help.
+2. Use "sprinto-bonuso" in Esperanto.
 3. Translate rules in Portuguese.
 4. Clean the first implementation of BALTEK mode "two close players".
 5. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
