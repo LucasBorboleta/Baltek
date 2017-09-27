@@ -112,7 +112,7 @@ baltek.i18n.translations.fr = {
     "baltek-button-help:button"        : "Aide" ,
     "baltek-button-rules:button"       : "Règles" ,
 
-    "baltek-button-undo:button"        : "Défaire" ,
+    "baltek-button-undo:button"        : "Annuler" ,
     "baltek-button-confirm:button"     : "OK" ,
 
     "baltek-select-coordinates:no"     : "Coordonnées : non" ,
@@ -155,7 +155,7 @@ baltek.i18n.translations.pt = {
     "baltek-button-help:button"        : "Ajuda" ,
     "baltek-button-rules:button"       : "Regras" ,
 
-    "baltek-button-undo:button"        : "Desfazer" ,
+    "baltek-button-undo:button"        : "Anular" ,
     "baltek-button-confirm:button"     : "OK" ,
 
     "baltek-button-goToGame:button"    : "< Jogo" ,
