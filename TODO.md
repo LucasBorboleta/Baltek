@@ -15,13 +15,12 @@ This document collects the milestones and the tasks for the current milestone.
 
 # Tasks
 
-1. Translate rules in Esperanto.
-2. Use "sprinto-bonuso" in Esperanto.
-3. Translate rules in Portuguese.
+1. Check rules in Esperanto.
+2. Translate rules in Portuguese.
+3. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
 4. Clean the first implementation of BALTEK mode "two close players".
-5. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
-6. Write unit tests using QUnit.
+5. Write unit tests using QUnit.
+6. Automate a "release" using Python (collecting and minifying released files, ...).
 7. Update "Design.md".
 8. Describe in a CONTRIBUTING.txt file the rules for contributing (copyright, etc.)
-9. Automate a "release" using Python (collecting and minifying released files, ...).
-10. Describe the file tree in the README.md file.
+9. Describe the file tree in the README.md file.
