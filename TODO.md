@@ -15,11 +15,15 @@ This document collects the milestones and the tasks for the current milestone.
 
 # Tasks
 
-1. Translate rules in Portuguese.
-2. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
-3. Clean the first implementation of BALTEK mode "two close players".
-4. Write unit tests using QUnit.
-5. Automate a "release" using Python (collecting and minifying released files, ...).
-6. Update "Design.md".
-7. Describe in a CONTRIBUTING.txt file the rules for contributing (copyright, etc.)
-8. Describe the file tree in the README.md file.
+1. Change the versioning of rules as follows:
+   * Indexes "i.j" apply to the set of translations; there is no indexes "i.j" per translation.
+   * The "#!BALTEK i.j" format is named according to the first indexes "i.j" of the set of translation that describes it.
+   * Consider to handle "Baltek (the rules)" into a dedicated Git depot.
+2. Translate rules in Portuguese.
+3. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
+4. Clean the first implementation of BALTEK mode "two close players".
+5. Write unit tests using QUnit.
+6. Automate a "release" using Python (collecting and minifying released files, ...).
+7. Update "Design.md".
+8. Describe in a CONTRIBUTING.txt file the rules for contributing (copyright, etc.)
+9. Describe the file tree in the README.md file.
