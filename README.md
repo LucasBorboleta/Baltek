@@ -23,7 +23,7 @@ Such tests were performed using handcrafted material (paper sheet and wooden pie
 
 By end of year 2015, a software prototype has been started, but with a slow rhythm. I used this project for learning about JavaScript and improving my skills in software design and automated testing. 
 
-Since Summer 2017, the full rules have been implemented and two humans sitting in front of the same computer to play BALTEK match. However, the code should be polished and equipped with automated tests prior to move of master branch and receive a release tag !
+Since Summer 2017, the full rules have been implemented and two humans sitting in front of the same computer can play a BALTEK match. However, the code should be polished and equipped with automated tests prior to move on master branch and receive a release tag !
 
 During Fall 2017, the effort was on translating of the rules text and selection of licenses.
 
