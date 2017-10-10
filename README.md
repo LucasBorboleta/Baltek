@@ -1,39 +1,36 @@
 # Introduction
 
-This project is an HTML and JavaScript implementation of the BALTEK board game.
+This project, named **Baltek**,  implements the BALTEK board game, using **HTML** and **JavaScript**. 
 
-BALTEK is a turn-based board game, inspired from football, which relies on the following principles:
+BALTEK is a turn-based board game, inspired from **football**. Here are its principles:
 
-- game easily made by hand,
-
-- with a few rules,
-
-- without randomizing device,
-
-- with several actions per turn.
-
+- Game easily made by hand,
+- defined by a few rules,
+- without randomizing device.
+- The game allows several actions per turn.
 - The ball moves faster than the footballers.
-
 - The coordination of footballers is essential.
 
-The name of the game is built with "ball" (BAL) and "technical" (TEK) sounds.
+The name of the game is built using sounds of the words ball (BAL) and technical (TEK).
 
-# Status
+The **atmosphere** of the matches is reminiscent of the game of **chess**.
 
-## Rules of Baltek
+# History
 
 During year 2015, the rules of the game have been tested within the limited circle of my family and office colleagues. The rules have been found balanced and fun.
 
 Such tests were performed using handcrafted material (paper sheet and wooden pieces). See also the [pictures](http://lucas.borboleta.blog.free.fr/public/Baltek/2016-01--Baltek-Prototype-2/Diaporama.htm) from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr)
 
-Right now the rules are only written in French. I would like them to be translated in English, Esperanto and Portuguese. For such translations, I would appreciate contributions. Rules can be found in [./lang/fr](./lang/fr/LucasBorboleta_Baltek--fr--Jeu-de-football-tactique_LB_2015-1129-1050.pdf) or at <http://lucas.borboleta.blog.free.fr/>.
+By end of year 2015, a software prototype has been started, but with a slow rhythm. I used this project for learning about JavaScript and improving my skills in software design and automated testing. 
 
-## Software implementation
+Since Summer 2017, the full rules have been implemented and two humans sitting in front of the same computer to play BALTEK match. However, the code should be polished and equipped with automated tests prior to move of master branch and receive a release tag !
 
-By end of year 2015, a software prototype has been started, but with a slow rhythm. I used this project for learning about JavaScript and improving my skills in software design and automated testing. So I would like to move alone on a working branch until the game becomes useable. When this point will be reached, then the code will be merged on _master_ branch, and I will appreciate contributions. Well, this is my current vision by now.
+During Fall 2017, the effort was on translating of the rules text and selection of licenses.
+
+In October 2017, the description of the **rules** was moved in a separate project, named  **BaltekTheRules** in order to finalize their translations and to promote them.
 
 # Licenses
 
-* BALTEK (_the program_) is licensed under the [GNU General Public License](http://www.gnu.org/licenses/). 
-* BALTEK (_the rules_) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+BALTEK (_the program_) is licensed under the [GNU General Public License](http://www.gnu.org/licenses/). 
 
+BALTEK (_the rules_) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
