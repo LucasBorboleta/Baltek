@@ -1,6 +1,6 @@
 # Introduction
 
-This project, named **Baltek**,  implements the BALTEK board game, using **HTML** and **JavaScript**. 
+This project, named **BaltekTheProgam**,  implements the BALTEK board game, using **HTML** and **JavaScript**. 
 
 BALTEK is a turn-based board game, inspired from **football**. Here are its principles:
 
