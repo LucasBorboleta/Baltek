@@ -39,7 +39,7 @@ baltek.i18n.translations.en = {
 
     "baltek-iframe-about:file"         : "./html/en/baltek-about-en.html" ,
     "baltek-iframe-help:file"          : "./html/en/baltek-help-en.html" ,
-    "baltek-iframe-rules:file"         : "./imports/baltek-rules/html/baltek-rules-en.html" ,
+    "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-en.html" ,
 
     "baltek-select-coordinates:no"     : "Coordinates: no" ,
     "baltek-select-coordinates:yes"    : "Coordinates: yes" ,
@@ -82,7 +82,7 @@ baltek.i18n.translations.eo = {
 
     "baltek-iframe-about:file"         : "./html/eo/baltek-about-eo.html" ,
     "baltek-iframe-help:file"          : "./html/eo/baltek-help-eo.html" ,
-    "baltek-iframe-rules:file"         : "./imports/baltek-rules/html/baltek-rules-eo.html" ,
+    "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-eo.html" ,
 
     "baltek-select-coordinates:no"     : "Koordinatoj: ne" ,
     "baltek-select-coordinates:yes"    : "Koordinatoj: jes" ,
@@ -123,7 +123,7 @@ baltek.i18n.translations.fr = {
 
     "baltek-iframe-about:file"         : "./html/fr/baltek-about-fr.html" ,
     "baltek-iframe-help:file"          : "./html/fr/baltek-help-fr.html" ,
-    "baltek-iframe-rules:file"         : "./imports/baltek-rules/html/baltek-rules-fr.html" ,
+    "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-fr.html" ,
 
     "baltek-select-language:name"      : "Français" ,
     "baltek-select-language:en"        : "English" ,
@@ -174,7 +174,7 @@ baltek.i18n.translations.pt = {
 
     "baltek-iframe-about:file"         : "./html/pt/baltek-about-pt.html" ,
     "baltek-iframe-help:file"          : "./html/pt/baltek-help-pt.html" ,
-    "baltek-iframe-rules:file"         : "./imports/baltek-rules/html/baltek-rules-pt.html" ,
+    "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-pt.html" ,
 
     "baltek-select-language:name"      : "Português" ,
     "baltek-select-language:en"        : "English" ,

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<!--
+	BALTEK (the program) implements BALTEK (the rules), a turn-based board game, inspired from football.
+	Copyright (C) 2017  Lucas Borboleta (lucas.borboleta@free.fr)
+
+	This file is part of BALTEK (the program).
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	-->
+
+	<head>
+	    <meta charset="UTF-8">
+		<title>Baltek</title>
+	</head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../../packages/w3.css/css/w3.css">
+	<link rel="stylesheet" href="./css/baltek.css">
+
+	<body onload="baltek.__initModule();">
+
+		<div id="baltek-buttonZone" class="baltek-buttonZone-class" >
+
+			<div class="baltek-logo-class">
+				<span>Baltek</span>
+				<span>&#x26BD;&#127939;</span>
+			</div>
+
+			<!-- 1) Game handling -->
+			<div class="baltek-buttonGroup-class">
+				<button class="baltek-button-class" type="button" id="baltek-button-startGame" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-restartGame" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-resumeGame" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-quitGame" ></button>
+
+				<select class="baltek-select-class baltek-team-0-background-class" id="baltek-select-team0Kind" ></select>
+				<select class="baltek-select-class baltek-team-1-background-class" id="baltek-select-team1Kind"  ></select>
+
+				<button class="baltek-button-class"  type="button" id="baltek-button-goToGame" ></button>
+			</div>
+
+			<!-- 2) Scores and bonuses -->
+			<div class="baltek-buttonGroup-class" >
+				<span class="baltek-counter-class baltek-team-0-background-class" id="baltek-counter-team0Bonus" ></span>
+				<span class="baltek-counter-class baltek-team-0-background-class" id="baltek-counter-team0Score" ></span>
+				<span class="baltek-counter-class baltek-team-1-background-class" id="baltek-counter-team1Score" ></span>
+				<span class="baltek-counter-class baltek-team-1-background-class" id="baltek-counter-team1Bonus" ></span>
+			</div>
+
+			<!-- 3) Turn and Move handling -->
+			<div class="baltek-buttonGroup-class" >
+				<select class="baltek-select-class" id="baltek-select-sprint" ></select>
+				<button class="baltek-button-class" type="button" id="baltek-button-confirm" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-undo" ></button>
+
+				<span class="baltek-counter-class" id="baltek-counter-credit" ></span>
+			</div>
+
+			<!-- 4) Preferences -->
+			<div class="baltek-buttonGroup-class" >
+				<select  class="baltek-select-class" id="baltek-select-coordinates" ></select>
+				<select  class="baltek-select-class" id="baltek-select-language" ></select>
+			</div>
+
+			<!-- 5) Help -->
+			<div class="baltek-buttonGroup-class" >
+				<button class="baltek-button-class" type="button" id="baltek-button-goToHelp" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-rules" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-help" ></button>
+	        	<button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
+			</div>
+		</div>
+
+		<div class="baltek-drawZone-class" id="baltek-drawZone">
+			<canvas class="baltek-canvas-class" id="baltek-canvas-field"></canvas>
+			<iframe class="baltek-help-frame-class" id="baltek-iframe-rules" ></iframe>
+			<iframe class="baltek-help-frame-class" id="baltek-iframe-help" ></iframe>
+			<iframe class="baltek-help-frame-class" id="baltek-iframe-about"></iframe>
+		</div>
+
+		<div class="baltek-debugZone-class" id="baltek-debugZone" >
+
+			<div class="baltek-debug-logo-class">
+				<span>Baltek</span>
+				<span>Debug</span>
+				<span>Zone</span>
+				<span>&#x26BD;&#127939;</span>
+			</div>
+
+			<button class="baltek-button-class" type="button" id="baltek-debug-clearMessages"
+				    onclick="baltek.debug.clearMessages()" >Clear messages</button>
+
+			<span class="baltek-debug-mousePosition-class" id="baltek-debug-mousePosition" >Mouse(x,y) = (?, ?)</span>
+
+			<p class="baltek-debug-messages-class" id="baltek-debug-messages" ></p>
+		</div>
+
+		<!-- The "*.js" baltek files must be loaded in lexicographical order -->
+		<script src="./js/baltek/__baltek.js"></script>
+
+		<script src="./js/baltek/debug/__debug.js"></script>
+
+		<script src="./js/baltek/draw/__draw.js"></script>
+		<script src="./js/baltek/draw/Ball.js"></script>
+		<script src="./js/baltek/draw/BallWatcher.js"></script>
+		<script src="./js/baltek/draw/Disk.js"></script>
+		<script src="./js/baltek/draw/Footballer.js"></script>
+		<script src="./js/baltek/draw/FootballerWatcher.js"></script>
+		<script src="./js/baltek/draw/Selectable.js"></script>
+		<script src="./js/baltek/draw/Square.js"></script>
+		<script src="./js/baltek/draw/SquareWatcher.js"></script>
+
+		<script src="./js/baltek/i18n/__i18n.js"></script>
+		<script src="./js/baltek/i18n/translations.js"></script>
+		<script src="./js/baltek/i18n/Translator.js"></script>
+
+		<script src="./js/baltek/presenter/__presenter.js"></script>
+		<script src="./js/baltek/presenter/GameStateIsFinished.js"></script>
+		<script src="./js/baltek/presenter/GameStateIsReadyToStart.js"></script>
+		<script src="./js/baltek/presenter/GameStateIsReadyToQuit.js"></script>
+		<script src="./js/baltek/presenter/GameStateIsRunning.js"></script>
+		<script src="./js/baltek/presenter/GameTopState.js"></script>
+		<script src="./js/baltek/presenter/Presenter.js"></script>
+		<script src="./js/baltek/presenter/State.js"></script>
+		<script src="./js/baltek/presenter/SuperState.js"></script>
+		<script src="./js/baltek/presenter/TopState.js"></script>
+		<script src="./js/baltek/presenter/WhatStateShowAbout.js"></script>
+		<script src="./js/baltek/presenter/WhatStateShowHelp.js"></script>
+		<script src="./js/baltek/presenter/WhatStateShowRules.js"></script>
+		<script src="./js/baltek/presenter/WhatTopState.js"></script>
+
+		<script src="./js/baltek/rules/__rules.js"></script>
+		<script src="./js/baltek/rules/Ball.js"></script>
+		<script src="./js/baltek/rules/Engine.js"></script>
+		<script src="./js/baltek/rules/Field.js"></script>
+		<script src="./js/baltek/rules/Footballer.js"></script>
+		<script src="./js/baltek/rules/Selectable.js"></script>
+		<script src="./js/baltek/rules/Square.js"></script>
+		<script src="./js/baltek/rules/Team.js"></script>
+
+		<script src="./js/baltek/style/__style.js"></script>
+
+		<script src="./js/baltek/utils/__utils.js"></script>
+		<script src="./js/baltek/utils/Observable.js"></script>
+
+		<script src="./js/baltek/widget/__widget.js"></script>
+		<script src="./js/baltek/widget/Button.js"></script>
+		<script src="./js/baltek/widget/CounterWithDecimals.js"></script>
+		<script src="./js/baltek/widget/CounterWithSymbols.js"></script>
+		<script src="./js/baltek/widget/IFrame.js"></script>
+		<script src="./js/baltek/widget/Selector.js"></script>
+		<script src="./js/baltek/widget/Widget.js"></script>
+	</body>
+</html>
