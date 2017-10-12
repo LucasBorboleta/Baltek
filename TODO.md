@@ -15,8 +15,8 @@ This document collects the milestones and the tasks for the current milestone.
 
 # Tasks
 
-1. Check URL in license notifications.
-2. Update the rules from the BaltelTheRules repository.
+1. Translate rules in Portuguese, but in the "baltek-the-rules" repository.
+2. Update the rules from the "baltek-the-rules" repository.
 3. Display footballers capabilities "can kick" and "can run" as dots (see also "doc/...")
 4. Clean the first implementation of BALTEK mode "two close players".
 5. Write unit tests using QUnit.
