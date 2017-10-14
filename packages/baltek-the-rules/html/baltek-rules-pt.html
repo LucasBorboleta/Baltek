@@ -206,7 +206,7 @@
 
 				</ul>
 
-				<p>Exemplo: Possíveis destinos para o futebolista azul <q>3</q> têm bordas amarelas.</p>
+				<p>Exemplo: Possíveis destinos para o futebolista azul 3 têm bordas amarelas.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/run-allowed-destinations.png" />
 					</div>
@@ -230,7 +230,7 @@
 					<li>O jogador só pode gastar o seu bônus uma vez entre dois inícios.</li>
 				</ul>
 
-				<p>Exemplo: Possíveis destinos para o futebolista azul <q>3</q> têm bordas amarelas.</p>
+				<p>Exemplo: Possíveis destinos para o futebolista azul 3 têm bordas amarelas.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/sprint-allowed-destinations.png" />
 					</div>
@@ -238,47 +238,48 @@
 
 			<h2>Ação <q>chutar</q></h2>
 				<ul>
-					<li>Les actions <q>transmettre la balle à un footballeur</q>,
-						<q>envoyer la balle sur une case vide</q>
-						et <q>chutar au but</q>
-						obéissent aux mêmes règles.</li>
+					<li>As ações <q>transmitir a bola para um futebolista</q>,
+						<q>enviar a bola em um quadrado vazio</q>
+						e <q>chutar a bola para o golo</q>
+						obedecem às mesmas regras.</li>
 
-					<li>L’action <q>chutar</q> coûte 1 crédit.
-						Si les conditions générales et les conditions de forces sont satisfaites,
-						l'action permet de déplacer la balle jusqu'à 2 cases en horizontal, vertical ou diagonal.
-						Cependant, la trajectoire de la balle n'est jamais courbée.</li>
+					<li>A ação <q>chutar</q> custa 1 crédito.
+						Se as condições gerais e as condições da força forem satisfeitas,
+						a ação pode mover a bola até 2 quadrados horizontalmente, verticalmente ou diagonalmente.
+						No entanto, a trajetória da bola nunca é curvada.</li>
 
-					<li>Voici les conditions générales à satisfaire :</li>
+					<li>Aqui estão as condições gerais para ser satisfeitas:</li>
 
 						<ul>
-							<li>Le joueur a un <q>tireur</q> dans la case de départ de la balle.</li>
-							<li>Dans ce tour, le <q>tireur</q> n'a pas déjà <q>tiré</q>.</li>
-							<li>La case d’arrivée de la balle est sur le terrain.</li>
-							<li>La case d’arrivée de la balle n'est pas le but défendu par le joueur.</li>
-							<li>La case d’arrivée de la balle peut être vide ou pas.</li>
+							<li>O jogador têm um <q>executor</q> (um futebolista pronta a chutar) no quadrado inicial da bola.</li>
+							<li>Neste turno, o <q>executor</q> ainda não <q>chutou</q>.</li>
+							<li>O quadrado de chegada da bola está no campo.</li>
+							<li>O quadrado de chegada da bola não é o golo defendido pelo jogador.</li>
+							<li>O quadrado de chegada da bola pode ser vazio ou não.</li>
 						</ul>
 
-					<li>Voici les conditions de forces à satisfaire :</li>
+					<li>Aqui estão as condições da força para ser satisfeitas:</li>
 						<ul>
-							<li>Si le <q>tireur</q> partage sa case avec un adversaire,
-								alors le <q>tireur</q> doit :</li>
+							<li>Se o <q>executor</q> compartilhe o seu quadrado com um oponente,
+								o <q>executor</q> deve:</li>
 								<ul>
-									<li>soit égaler ou surpasser la force de son adversaire,</li>
-									<li>soit compenser sa faiblesse par <q>dribble</q>.</li>
+									<li>igualar ou superar a força do seu oponente,</li>
+									<li>ou compensar a sua fraqueza por <q>drible</q></li>
 								</ul>
 
-							<li>Si le <q>tireur</q> déplace la balle par-dessus un adversaire,
-								alors le <q>tireur</q> doit :</li>
+							<li>Se o <q>executor</q> move a bola sobre um oponente,
+								o <q>executor</q> deve:</li>
 								<ul>
-									<li>soit égaler ou surpasser la force de son adversaire,</li>
-									<li>soit compenser sa faiblesse par <q>lob</q>.</li>
+									<li>igualar ou superar a força do seu oponente,</li>
+									<li>ou compensar a sua fraqueza por <q>lençol</q>.</li>
 								</ul>
 						</ul>
 				</ul>
 
-				<p>Exemple : les destinations possibles pour la balle par le <q>tireur 3</q> bleu
-					         ont des bordures jaunes ;
-							 aucune de ces destinations n'exige dribble ou lob.</p>
+				<p>Exemplo: os possíveis destinos para a bola pelo <q>executor</q> azul 3
+						     tem bordas amarelas;
+							 nenhum desses destinos exige drible ou lençol.</p>
+
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/shoot-allowed-destinations.png" />
 					</div>
@@ -286,15 +287,15 @@
 
 			<h2>Opção <q>dribble</q></h2>
 				<ul>
-					<li>L’action <q>chutar</q> peut exiger cette compensation.</li>
+					<li>A ação <q>chutar</q> pode exigir essa compensação.</li>
 
-					<li>Le <q>dribble</q> compense la faiblesse du <q>tireur</q>
-						vis-à-vis de l’adversaire qui partage sa case.</li>
+					<li>O <q>drible</q> compensa a fraqueza do <q>executor</q>
+						contra o oponente que compartilha o seu quadrado.</li>
 
-					<li>Le <q>dribble</q> coûte 1 crédit par unité de force compensée.</li>
+					<li>O <q>drible</q> custa 1 crédito por unidade de força compensada.</li>
 				</ul>
-				<p>Exemples : pour posséder la balle, le <q>tireur 2</q> bleu doit effectuer un dribble coûtant 1 crédit ;
-					          et le <q>tireur 1</q> bleu doit effectuer un dribble coûtant 2 crédits.</p>
+				<p>Exemplos: para possuir a bola, o <q>executor</q> azul 2  deve realizar um drible custando 1 crédito;
+					         e o <q>executor</q> azul 1 deve realizar um drible custando 2 créditos.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-one-credit.png" />
 						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-two-credits.png" />
@@ -303,24 +304,25 @@
 
 			<h2>Opção <q>lençol</q></h2>
 				<ul>
-					<li>L’action <q>chutar</q> peut exiger cette compensation.</li>
+					<li>A ação <q>chutar</q> pode exigir essa compensação.</li>
 
-					<li>Le <q>lob</q> compense la faiblesse
-						du <q>tireur</q> vis-à-vis de l’adversaire par-dessus lequel passe la balle.</li>
+					<li>O <q>lençol</q> compensa a fraqueza
+					 	do <q>executo</q> em relação ao adversário sobre o qual passa a bola.</li>
 
-					<li>Le <q>lob</q> coûte 1 crédit par unité de force compensée.</li>
+					<li>O <q>lençol</q> custa 1 crédito por unidade de força compensada.</li>
 
-					<li>La compensation de <q>lob</q> n'est pas nécessaire pour passer par-dessus
-						un footballeur de son équipe.</li>
+					<li>Quando o <q>executor</q> senda a bola sobre um futebolista da sua equipe,
+						então o jogador não precisa pagar o <q>lençol</q>.</li>
 				</ul>
 
-				<p>Exemples : pour transmettre la balle au footballeur bleu <q>2</q>, le <q>tireur 1</q> bleu
-					          doit effectuer un lob coûtant 1 crédit, dans le contexte de gauche,
-							  et un lob coûtant 2 crédits  dans le contexte de droite.</p>
+				<p>Exemplos: para transmitir a bola para o futebolista azul 2, o <q>executo</q> azul 1
+					deve levar um lençol de 1 crédito no contexto à esquerda,
+					e um lençol de 2 créditos no contexto à direita.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-one-credit.png" />
 						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-two-credits.png" />
 					</div>
+
 
 			<h1 id="notationOfMoves">Notação dos movimentos</h1>
 				<p>Si utile, les coups de la partie se notent comme dans l'exemple suivant.</p>
