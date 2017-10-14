@@ -1,6 +1,6 @@
 # Introduction
 
-This project, named **BaltekTheProgam**,  implements the BALTEK board game, using **HTML** and **JavaScript**. 
+This project, named **baltek-the-program**,  implements the BALTEK board game, using **HTML** and **JavaScript**. 
 
 BALTEK is a turn-based board game, inspired from **football**. Here are its principles:
 
@@ -27,7 +27,7 @@ Since Summer 2017, the full rules have been implemented and two humans sitting i
 
 During Fall 2017, the effort was on translating of the rules text and selection of licenses.
 
-In October 2017, the description of the **rules** was moved in a separate project, named  **baltek-the-rules** in order to finalize their translations and to promote them.
+In October 2017, the description of the **rules** was moved in a separate project, named  **[baltek-the-rules](https://github.com/LucasBorboleta/baltek-the-rules)** in order to finalize their translations and to promote them.
 
 # Licenses
 
