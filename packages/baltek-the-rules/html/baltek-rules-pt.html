@@ -74,7 +74,8 @@
 
 						<tr>
 							<td>1.1</td>
-							<td>Esclarecimento da opção de sprint. Dribble como o novo nome para o duelo.
+							<td>Esclarecimento da opção de sprint.
+								Dribble e efeito como os novos nomes para as compensações.
 								Notação mais compacta de movimentos.
 								Escrevendo em HTML. Capturas de tela da implementação HTML / JavaScript.
 								Traduções em inglês, esperanto e português.
@@ -124,7 +125,7 @@
 
 		<h1 id="howtoStart">Como começar</h1>
 			<ul>
-				<li>Os jogadores decidem o líder de cada time.haque équipe.</li>
+				<li>Os jogadores decidem o líder de cada equipe.</li>
 
 				<li>A equipe azul sempre começa o jogo.</li>
 
@@ -181,7 +182,7 @@
 							<li><strong>Dribble</strong>: compensação de força para possuir a bola;
 								custo: <strong>1 crédito por unidade de força</strong>.</li>
 
-							<li><strong>Lençol</strong>: compensação de força para mover a bola;
+							<li><strong>Efeito</strong>: compensação de força para mover a bola;
 								custo: <strong>1 crédito por unidade de força</strong>.</li>
 
 						</ul>
@@ -239,7 +240,7 @@
 			<h2>Ação <q>chutar</q></h2>
 				<ul>
 					<li>As ações <q>transmitir a bola para um futebolista</q>,
-						<q>enviar a bola em um quadrado vazio</q>
+						<q>enviar a bola num quadrado vazio</q>
 						e <q>chutar a bola para o golo</q>
 						obedecem às mesmas regras.</li>
 
@@ -251,8 +252,8 @@
 					<li>Aqui estão as condições gerais para ser satisfeitas:</li>
 
 						<ul>
-							<li>O jogador têm um <q>executor</q> (um futebolista pronta a chutar) no quadrado inicial da bola.</li>
-							<li>Neste turno, o <q>executor</q> ainda não <q>chutou</q>.</li>
+							<li>O jogador têm um <q>batedor</q> (um futebolista pronta a chutar) no quadrado inicial da bola.</li>
+							<li>Neste turno, o <q>batedor</q> ainda não <q>chutou</q>.</li>
 							<li>O quadrado de chegada da bola está no campo.</li>
 							<li>O quadrado de chegada da bola não é o golo defendido pelo jogador.</li>
 							<li>O quadrado de chegada da bola pode ser vazio ou não.</li>
@@ -260,67 +261,67 @@
 
 					<li>Aqui estão as condições da força para ser satisfeitas:</li>
 						<ul>
-							<li>Se o <q>executor</q> compartilhe o seu quadrado com um oponente,
-								o <q>executor</q> deve:</li>
+							<li>Se o <q>batedor</q> compartilhe o seu quadrado com um oponente,
+								o <q>batedor</q> deve:</li>
 								<ul>
 									<li>igualar ou superar a força do seu oponente,</li>
-									<li>ou compensar a sua fraqueza por <q>drible</q></li>
+									<li>ou compensar a sua inferioridade por <q>drible</q></li>
 								</ul>
 
-							<li>Se o <q>executor</q> move a bola sobre um oponente,
-								o <q>executor</q> deve:</li>
+							<li>Se o <q>batedor</q> move a bola sobre um oponente,
+								o <q>batedor</q> deve:</li>
 								<ul>
 									<li>igualar ou superar a força do seu oponente,</li>
-									<li>ou compensar a sua fraqueza por <q>lençol</q>.</li>
+									<li>ou compensar a sua inferioridade para um <q>efeito</q>.</li>
 								</ul>
 						</ul>
 				</ul>
 
-				<p>Exemplo: os possíveis destinos para a bola pelo <q>executor</q> azul 3
+				<p>Exemplo: os possíveis destinos para a bola pelo <q>batedor</q> azul 3
 						     tem bordas amarelas;
-							 nenhum desses destinos exige drible ou lençol.</p>
+							 nenhum desses destinos exige <q>drible</q> ou <q>efeito</q>.</p>
 
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/shoot-allowed-destinations.png" />
 					</div>
 
 
-			<h2>Opção <q>dribble</q></h2>
+			<h2>Compensação para <q>dribble</q></h2>
 				<ul>
 					<li>A ação <q>chutar</q> pode exigir essa compensação.</li>
 
-					<li>O <q>drible</q> compensa a fraqueza do <q>executor</q>
+					<li>O <q>drible</q> compensa a inferioridade do <q>batedor</q>
 						contra o oponente que compartilha o seu quadrado.</li>
 
 					<li>O <q>drible</q> custa 1 crédito por unidade de força compensada.</li>
 				</ul>
-				<p>Exemplos: para possuir a bola, o <q>executor</q> azul 2  deve realizar um drible custando 1 crédito;
-					         e o <q>executor</q> azul 1 deve realizar um drible custando 2 créditos.</p>
+				<p>Exemplos: para possuir a bola, o <q>batedor</q> azul 2  deve realizar um <q>drible</q> custando 1 crédito;
+					         e o <q>batedor</q> azul 1 deve realizar um <q>drible</q> custando 2 créditos.</p>
 					<div class="baltek-rules-hasImage-class">
 						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-one-credit.png" />
 						<img class="baltek-rules-image-class" src="../pictures/requiring-dribble-of-two-credits.png" />
 					</div>
 
 
-			<h2>Opção <q>lençol</q></h2>
+			<h2>Compensação para <q>efeito</q></h2>
 				<ul>
 					<li>A ação <q>chutar</q> pode exigir essa compensação.</li>
 
-					<li>O <q>lençol</q> compensa a fraqueza
-					 	do <q>executo</q> em relação ao adversário sobre o qual passa a bola.</li>
+					<li>O <q>efeito</q> compensa a inferioridade
+					 	do <q>batedor</q> em relação ao adversário sobre o qual passa a bola.</li>
 
-					<li>O <q>lençol</q> custa 1 crédito por unidade de força compensada.</li>
+					<li>O <q>efeito</q> custa 1 crédito por unidade de força compensada.</li>
 
-					<li>Quando o <q>executor</q> senda a bola sobre um futebolista da sua equipe,
-						então o jogador não precisa pagar o <q>lençol</q>.</li>
+					<li>Quando o <q>batedor</q> senda a bola sobre um futebolista da sua equipe,
+						então o jogador não precisa pagar o <q>efeito</q>.</li>
 				</ul>
 
-				<p>Exemplos: para transmitir a bola para o futebolista azul 2, o <q>executo</q> azul 1
-					deve levar um lençol de 1 crédito no contexto à esquerda,
-					e um lençol de 2 créditos no contexto à direita.</p>
+				<p>Exemplos: para transmitir a bola para o futebolista azul 2, o <q>batedor</q> azul 1
+					deve fazer um <q>efeito</q> de 1 crédito no contexto à esquerda,
+					e um <q>efeito</q> de 2 créditos no contexto à direita.</p>
 					<div class="baltek-rules-hasImage-class">
-						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-one-credit.png" />
-						<img class="baltek-rules-image-class" src="../pictures/requiring-lob-of-two-credits.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-effect-of-one-credit.png" />
+						<img class="baltek-rules-image-class" src="../pictures/requiring-effect-of-two-credits.png" />
 					</div>
 
 
@@ -406,13 +407,13 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 								<li>Pour un <q>dribble</q> coûtant 2 crédits, <q>++</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3++</code></li>
 
-								<li>Pour un <q>lob</q> coûtant 1 crédit, <q>!</q> est ajouté au mot de l'action.
+								<li>Pour un <q>effect</q> coûtant 1 crédit, <q>!</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3!</code></li>
 
-								<li>Pour un <q>lob</q> coûtant 2 crédits, <q>!!</q> est ajouté au mot de l'action.
+								<li>Pour un <q>effect</q> coûtant 2 crédits, <q>!!</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3!!</code></li>
 
-								<li>Pour une combinaison <q>duel</q> et <q>lob</q>, coûtant chacun 1 crédit,
+								<li>Pour une combinaison <q>duel</q> et <q>effect</q>, coûtant chacun 1 crédit,
 									<q>+!</q> est ajouté au mot de l'action.
 									Exemple : <code class="w3-codespan">@c3+!</code></li>
 

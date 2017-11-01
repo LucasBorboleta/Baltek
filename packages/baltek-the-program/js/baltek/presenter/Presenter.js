@@ -369,6 +369,8 @@ baltek.presenter.Presenter.__initClass = function(){
             footballerSquare = this.draw.squaresByIndices[footballerIndices.ix][footballerIndices.iy];
             footballerSquare.setFootballer(footballer);
             footballer.enableSelection(footballerState.selectable);
+            footballer.enableKick(footballerState.canKick);
+            footballer.enableRun(footballerState.canRun);
             footballer.select(footballerState.selected);
         }
     };

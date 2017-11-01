@@ -38,7 +38,10 @@ baltek.draw.Footballer.__initClass = function(){
         baltek.utils.assert( teamIndex === 0 || teamIndex === 1 );
         this.teamIndex = teamIndex;
 
-        this.text = force.toString();
+        this.force = force;
+        this.canRun = false;
+        this.canKick = false;
+        this.updateText();
 
         var teamColor = baltek.style.colors.TEAM_COLORS[this.teamIndex] ;
         this.fillStyle = teamColor ;
@@ -46,5 +49,25 @@ baltek.draw.Footballer.__initClass = function(){
         this.strokeStyle = teamColor;
         this.strokeStyleSelected = baltek.style.colors.DISK_BORDER_SELECTED;
     };
+
+    baltek.draw.Disk.prototype.enableKick = function(condition){
+        this.canKick = condition;
+        this.updateText()
+    }
+
+    baltek.draw.Disk.prototype.enableRun = function(condition){
+        this.canRun = condition;
+        this.updateText()
+    }
+
+    baltek.draw.Disk.prototype.updateText = function(){
+        var text = "";
+        if ( this.canKick ) { text += ".";}
+        text += this.force.toString();
+        if ( this.canRun ) { text += ".";}
+        this.text = text;
+        this.draw();
+    }
+
 };
 ///////////////////////////////////////////////////////////////////////////////
