@@ -75,7 +75,7 @@
 						<tr>
 							<td>1.1</td>
 							<td>Esclarecimento da opção de sprint.
-								Dribble e efeito como os novos nomes para as compensações.
+								Drible e efeito como os novos nomes para as compensações.
 								Notação mais compacta de movimentos.
 								Escrevendo em HTML. Capturas de tela da implementação HTML / JavaScript.
 								Traduções em inglês, esperanto e português.
@@ -179,7 +179,7 @@
 							<li><strong>Chutar</strong>: mover a bola;
 								custo: <strong>1 crédito</strong>.</li>
 
-							<li><strong>Dribble</strong>: compensação de força para possuir a bola;
+							<li><strong>Drible</strong>: compensação de força para possuir a bola;
 								custo: <strong>1 crédito por unidade de força</strong>.</li>
 
 							<li><strong>Efeito</strong>: compensação de força para mover a bola;
@@ -286,7 +286,7 @@
 					</div>
 
 
-			<h2>Compensação para <q>dribble</q></h2>
+			<h2>Compensação para <q>drible</q></h2>
 				<ul>
 					<li>A ação <q>chutar</q> pode exigir essa compensação.</li>
 
@@ -326,7 +326,7 @@
 
 
 			<h1 id="notationOfMoves">Notação dos movimentos</h1>
-				<p>Si utile, les coups de la partie se notent comme dans l'exemple suivant.</p>
+				<p>Se útil, os movimentos do jogo são descritos como no exemplo a seguir.</p>
 
 <pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
@@ -336,7 +336,7 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @# /
 </pre>
 
-				<p>Optionnellement, des annotations sont ajoutées comme dans l'exemple suivant.</p>
+				<p>Opcionalmente, as anotações estão incluídas no exemplo a seguir.</p>
 
 <pre class="w3-code">
 #! BALTEK 1.1
@@ -348,74 +348,74 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 ...
 @# /
 #: 2014-12-24 11:30:00
-# Le bonus des rouges a été bien joué.
+# O bônus dos vermelhos foi bem jogado.
 </pre>
 
-					<p>La notation est structurée en lignes. Voici ses conventions :</p>
+					<p>A notação está estruturada em linhas. Aqui estão estas convenções:</p>
 					<ul>
-						<li>Le caractère espace <q> </q>, optionnellement répété, sépare les mots.</li>
+						<li>O sinal de espaço <q> </q>, opcionalmente repetido, separa as palavras.</li>
 
-						<li>Une ligne commençant par <q>#</q> est un commentaire ou pseudo-commentaire,
-							et est toujours optionnel.</li>
+						<li>Uma linha que começa com <q>#</q> é um comentário ou pseudo-comentário,
+							e é sempre opcional.</li>
 
 							<ul>
-								<li><q><code class="w3-codespan"># </code></q>, dièse suivi d'un espace,
-									annonce un commentaire libre.</li>
+								<li><q><code class="w3-codespan"># </code></q>, cerquilha seguido de um espaço,
+									anuncia um comentário libre.</li>
 
-								<li><q><code class="w3-codespan">#! BALTEK 1.1</code></q> annonce
-									la version <q>1.1</q> du format de notation BALTEK ;
-									utilisable une seule fois, en première ligne.</li>
+								<li><q><code class="w3-codespan">#! BALTEK 1.1</code></q> anuncia
+									a versão <q>1.1</q> do formato de notação BALTEK;
+									utilizável uma vez, na primeira linha.</li>
 
-								<li><q><code class="w3-codespan">#@</code></q> annonce
-									les identifiants choisis par les deux joueurs,
-									dans l'ordre <q>bleu</q>, puis <q>rouge</q> ;
-									utilisable une seule fois.</li>
+								<li><q><code class="w3-codespan">#@</code></q> anuncia
+									os identificadores escolhidos pelos dois jogadores,
+									em ordem <q>azul</q>, depois <q>vermelho</q> ;
+									utilizável uma vez.</li>
 
-								<li><q><code class="w3-codespan">#:</code></q> annonce,
-									selon un format <q>ISO</q>,
-									la date, puis optionnellement l'heure ;
-									utilisable plusieurs fois.</li>
+								<li><q><code class="w3-codespan">#:</code></q> anuncia,
+									num formato <q>ISO</q>,
+									a data, depois, opcionalmente, a hora;
+									utilizável várias vezes.</li>
 
 							</ul>
 
-						<li>Une ligne non-vide, qui n'est pas un commentaire,
-							décrit un tour <q>bleu</q>, suivi d'un tour <q>rouge</q>.
+						<li>Uma linha não-vazia, que não é um comentário,
+							descreve um turno <q>azul</q>, seguido dum turno <q>vermelho</q>.
 
-						<li><q><code class="w3-codespan">/</code></q> termine le tour <q>bleu</q>.
-						     La fin de ligne termine le tour <q>rouge</q>.</li>
+						<li><q><code class="w3-codespan">/</code></q> acaba o turno <q>azul</q>.
+						     O fim da linha acaba o turno <q>vermelho</q>.</li>
 
-						<li>Chaque tour est composé de 0, 1, 2 ou 3 actions.</li>
+						<li>Cada turno é composta por 0, 1, 2 ou 3 ações.</li>
 
 							<ul>
-								<li>L'action <q>courir</q> est notée par un mot
-									commençant par la case de départ et finissant par la case d’arrivée.
-									Exemple : <code class="w3-codespan">g3f3</code></li>
+								<li>A ação <q>correr</q> é indicada por uma palavra
+									que começa a partir do quadrado inicial e termina com o quadrado de chegada.
+									Exemplo: <code class="w3-codespan">g3f3</code></li>
 
-								<li>Pour noter le <q>sprint</q>, <q>*</q> est ajouté en fin de mot d'action.
-									Exemple : <code class="w3-codespan">g3e2*</code></li>
+								<li>Para indicar o <q>sprint</q>, <q>*</q> está junto no final da palavra de ação.
+									Exemplo: <code class="w3-codespan">g3e2*</code></li>
 
-								<li>L’action <q>chutar</q> est notée en un mot
-									commençant par <q>@</q> et finissant par la case d’arrivée.
-									Exemple : <code class="w3-codespan">@c3</code></li>
+								<li>A ação <q>chutar</q> é indicada pela uma palavra
+									que começa com <q>@</q> e acaba com a quadrado de chegada.
+									Exemplo: <code class="w3-codespan">@c3</code></li>
 
-								<li>L'action <q>tir au but</q> est abrégé par le mot suivant :
+								<li>A ação <q>chutar ao golo</q> é abreviada com a seguinte palavra:
 									<code class="w3-codespan">@#</code>
 
-								<li>Pour un <q>dribble</q> coûtant 1 crédit, <q>+</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3+</code></li>
+								<li>Para um <q>drible</q> custando 1 crédito, <q>+</q> é junto no final da palavra de ação.
+									Exemplo: <code class="w3-codespan">@c3+</code></li>
 
-								<li>Pour un <q>dribble</q> coûtant 2 crédits, <q>++</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3++</code></li>
+								<li>Para um <q>drible</q> custando 2 créditos, <q>++</q> é junto no final da palavra de ação.
+									Exemplo: <code class="w3-codespan">@c3++</code></li>
 
-								<li>Pour un <q>effect</q> coûtant 1 crédit, <q>!</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3!</code></li>
+								<li>Para um <q>efeito</q> custando 1 crédito, <q>!</q> é junto no final da palavra de ação.
+									Exemplo: <code class="w3-codespan">@c3!</code></li>
 
-								<li>Pour un <q>effect</q> coûtant 2 crédits, <q>!!</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3!!</code></li>
+								<li>Para um <q>efeito</q> custando 2 créditos, <q>!!</q> é junto no final da palavra de ação.
+									Exemplo: <code class="w3-codespan">@c3!!</code></li>
 
-								<li>Pour une combinaison <q>duel</q> et <q>effect</q>, coûtant chacun 1 crédit,
-									<q>+!</q> est ajouté au mot de l'action.
-									Exemple : <code class="w3-codespan">@c3+!</code></li>
+								<li>Para uma combinação <q>drible</q> et <q>efeito</q>, cada um custando 1 crédito,
+									<q>+!</q> é junto no final da palavra de ação.
+									Exemplo: <code class="w3-codespan">@c3+!</code></li>
 
 							</ul>
 
