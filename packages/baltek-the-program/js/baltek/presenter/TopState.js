@@ -51,6 +51,9 @@ baltek.presenter.TopState.__initClass = function(){
         if ( observable === this.presenter.language ) {
             this.presenter.i18nTranslator.setLanguage(this.presenter.language.getSelection());
 
+        } else if ( observable === this.presenter.debug ) {
+                baltek.debug.toggle();
+
         } else {
 
             if ( this.superState !== null ) {

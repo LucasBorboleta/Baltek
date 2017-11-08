@@ -17,12 +17,11 @@ This document collects the milestones for the **baltek-the-program** project and
 
 # Tasks
 
-1. Translate rules in Portuguese, but in the "baltek-the-rules" repository.
-2. Update the rules from the "baltek-the-rules" repository.
-3. Add a button or a function key in order to toggle the debug logging.
-4. Clean the first implementation of BALTEK mode "two close players".
-5. Write unit tests using QUnit.
-6. Automate a "release" using Python (collecting and minifying released files, ...).
-7. Update "Design.md".
-8. Describe in a CONTRIBUTING.txt file the rules for contributing (copyright, etc.)
-9. Describe the file tree in the README.md file.
+1. Update the rules from the "baltek-the-rules" repository.
+2. Add a button or a function key in order to toggle the debug logging.
+3. Clean the first implementation of BALTEK mode "two close players".
+4. Write unit tests using QUnit.
+5. Automate a "release" using Python (collecting and minifying released files, ...).
+6. Update "Design.md".
+7. Describe in a CONTRIBUTING.txt file the rules for contributing (copyright, etc.)
+8. Describe the file tree in the README.md file.

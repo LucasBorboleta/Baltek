@@ -21,9 +21,11 @@ baltek.widget.Widget.__initClass = function(){
 
         this.i18nKeyPrefix = id;
         this.i18nTranslator = i18nTranslator;
-        this.i18nLanguageAspect = this.i18nTranslator.getAspect("languageAspect");
-        this.i18nTranslator.registerObserver(this, this.i18nLanguageAspect);
 
+        if ( this.i18nTranslator !== null ) {
+            this.i18nLanguageAspect = this.i18nTranslator.getAspect("languageAspect");
+            this.i18nTranslator.registerObserver(this, this.i18nLanguageAspect);
+        }
     };
 
     baltek.widget.Widget.prototype.enable = function(condition){
@@ -31,6 +33,7 @@ baltek.widget.Widget.__initClass = function(){
     };
 
     baltek.widget.Widget.prototype.getI18nValueForKeySuffix = function(i18nKeySuffix){
+        baltek.utils.assert( this.i18nTranslator !== null );
         var translatedText = this.i18nTranslator.getValueForKey(this.i18nKeyPrefix, i18nKeySuffix);
         return translatedText;
     };
@@ -64,7 +67,7 @@ baltek.widget.Widget.__initClass = function(){
     };
 
     baltek.widget.Widget.prototype.updateFromObservable = function(observable, aspect){
-        if ( observable === this.i18nTranslator && aspect === this.i18nLanguageAspect ) {
+        if ( this.i18nTranslator !== null && observable === this.i18nTranslator && aspect === this.i18nLanguageAspect ) {
             this.updateFromI18nTranslator();
         } else {
             baltek.utils.assert( false, "observable/aspect not managed" );

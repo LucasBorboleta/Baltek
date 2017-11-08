@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 baltek.i18n.translations = {};
 
 baltek.i18n.translations.en = {
+    "baltek-button-debug:button"       : ";" ,
+
     "baltek-button-about:button"       : "About" ,
     "baltek-button-help:button"        : "Help" ,
     "baltek-button-rules:button"       : "Rules" ,
@@ -65,6 +67,8 @@ baltek.i18n.translations.en = {
 };
 
 baltek.i18n.translations.eo = {
+    "baltek-button-debug:button"       : ";" ,
+
     "baltek-button-about:button"       : "Pri" ,
     "baltek-button-help:button"        : "Helpo" ,
     "baltek-button-rules:button"       : "Reguloj" ,
@@ -108,6 +112,8 @@ baltek.i18n.translations.eo = {
 };
 
 baltek.i18n.translations.fr = {
+    "baltek-button-debug:button"       : ";" ,
+
     "baltek-button-about:button"       : "A propos" ,
     "baltek-button-help:button"        : "Aide" ,
     "baltek-button-rules:button"       : "Règles" ,
@@ -151,6 +157,8 @@ baltek.i18n.translations.fr = {
 };
 
 baltek.i18n.translations.pt = {
+    "baltek-button-debug:button"       : ";" ,
+
     "baltek-button-about:button"       : "Sobre" ,
     "baltek-button-help:button"        : "Ajuda" ,
     "baltek-button-rules:button"       : "Regras" ,

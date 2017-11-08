@@ -128,6 +128,9 @@ baltek.presenter.Presenter.__initClass = function(){
         this.about = new baltek.widget.Button( "baltek-button-about" , this.i18nTranslator);
         this.about.registerObserver(this);
 
+        this.debug = new baltek.widget.Button( "baltek-button-debug" , this.i18nTranslator);
+        this.debug.registerObserver(this);
+
         this.ballWatcher = new baltek.draw.BallWatcher();
         this.ballWatcher.registerObserver(this);
 

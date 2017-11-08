@@ -28,21 +28,29 @@ baltek.debug.__initModule = function(){
     baltek.debug.__initModuleCalled = true;
 
     // Init required modules
-    // None
+    baltek.widget.__initModule();
 
     // Init inner classes
     // None
 
     baltek.debug.messageCount = 0;
 
-    baltek.debug.isEnabled = ( document.getElementById( "baltek-debugZone" ) !== null ) ;
+    baltek.debug.isEnabled = true ;
+    baltek.debug.zone = new baltek.widget.Widget( "baltek-debugZone" , null);
     baltek.debug.messages = document.getElementById( "baltek-debug-messages" );
     baltek.debug.mousePosition = document.getElementById( "baltek-debug-mousePosition" );
+    baltek.debug.toggle();
 };
 
 baltek.debug.clearMessages = function(){
-    if ( baltek.debug.isEnabled ) {
-        baltek.debug.messages.innerHTML = "" ;
+    baltek.debug.messages.innerHTML = "" ;
+};
+
+baltek.debug.toggle = function(){
+    baltek.debug.isEnabled = ( ! baltek.debug.isEnabled );
+    baltek.debug.zone.show(baltek.debug.isEnabled)  ;
+    if ( ! baltek.debug.isEnabled ) {
+        baltek.debug.clearMessages();
     }
 };
 
