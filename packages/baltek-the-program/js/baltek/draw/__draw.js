@@ -51,17 +51,15 @@ baltek.draw.__initModule = function(){
 
     baltek.draw.drawer = baltek.draw.canvas.getContext( "2d" );
 
-    if ( baltek.debug.isEnabled ) {
-
-        baltek.draw.canvas.addEventListener( "mousemove" ,
-            function(event){
-                var mousePosition = baltek.draw.getMousePosition(event);
-                baltek.debug.mousePosition.innerHTML = "Mouse(x,y) = (" +
-                    Math.floor(mousePosition.x) + ", " + Math.floor(mousePosition.y)
-                    + ")" ;
-            },
-            false);
-    }
+    // Debug the mouse position when inside the canvas
+    baltek.draw.canvas.addEventListener( "mousemove" ,
+        function(event){
+            var mousePosition = baltek.draw.getMousePosition(event);
+            baltek.debug.mousePosition.innerHTML = "Mouse(x,y) = (" +
+                Math.floor(mousePosition.x) + ", " + Math.floor(mousePosition.y)
+                + ")" ;
+        },
+        false);
 };
 
 baltek.draw.getMousePosition = function(event){

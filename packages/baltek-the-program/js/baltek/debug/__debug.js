@@ -28,17 +28,17 @@ baltek.debug.__initModule = function(){
     baltek.debug.__initModuleCalled = true;
 
     // Init required modules
-    baltek.widget.__initModule();
+    // None
 
     // Init inner classes
     // None
 
-    baltek.debug.messageCount = 0;
-
-    baltek.debug.isEnabled = true ;
-    baltek.debug.zone = new baltek.widget.Widget( "baltek-debugZone" , null);
+    baltek.debug.zone = document.getElementById( "baltek-debugZone" );
     baltek.debug.messages = document.getElementById( "baltek-debug-messages" );
     baltek.debug.mousePosition = document.getElementById( "baltek-debug-mousePosition" );
+
+    baltek.debug.messageCount = 0;
+    baltek.debug.isEnabled = true ;
     baltek.debug.toggle();
 };
 
@@ -48,9 +48,15 @@ baltek.debug.clearMessages = function(){
 
 baltek.debug.toggle = function(){
     baltek.debug.isEnabled = ( ! baltek.debug.isEnabled );
-    baltek.debug.zone.show(baltek.debug.isEnabled)  ;
+
     if ( ! baltek.debug.isEnabled ) {
         baltek.debug.clearMessages();
+    }
+
+    if ( baltek.debug.isEnabled ) {
+        baltek.debug.zone.style.display = "inherit";
+    } else {
+        baltek.debug.zone.style.display = "none";
     }
 };
 
