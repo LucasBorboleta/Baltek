@@ -20,7 +20,7 @@ baltek.widget.Button.__initClass = function(){
         this.updateFromI18nTranslator();
 
         var thisSaved = this;
-        var eventHandler = function(event){ thisSaved.notifyObservers(); };
+        var eventHandler = function(event){ thisSaved.notifyObservers(thisSaved.userInputAspect); };
         this.element.onclick = eventHandler;
     };
 

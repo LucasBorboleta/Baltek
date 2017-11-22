@@ -60,6 +60,10 @@ baltek.draw.Selectable.__initClass = function(){
         this.draw();
     };
 
+    baltek.draw.Selectable.prototype.registerObserver = function(observer){
+        baltek.draw.Selectable.super.registerObserver.call(this, observer, this.selectableAspect);
+    };
+
     baltek.draw.Selectable.prototype.select = function(condition){
         this.selected = condition;
         this.draw();
@@ -74,7 +78,7 @@ baltek.draw.Selectable.__initClass = function(){
                 // Inverse the selection status
                 this.selected = (! this.selected);
                 this.draw();
-                this.notifyObservers();
+                this.notifyObservers(this.selectableAspect);
             }
         }
     };

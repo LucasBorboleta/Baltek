@@ -33,7 +33,9 @@ baltek.utils.Observable.__initClass = function(){
     baltek.utils.inherit(baltek.utils.Observable, Object);
 
     baltek.utils.Observable.prototype.__initObject = function(){
+        // An observable can be observed along one or many apsects.
         this.aspectNames = [];
+        // The observers are subscribing the observable for a given aspect.
         this.observersByAspects = [];
     };
 
@@ -52,8 +54,7 @@ baltek.utils.Observable.__initClass = function(){
     };
 
     baltek.utils.Observable.prototype.notifyObservers = function(aspect){
-        if ( aspect === undefined ) { aspect = 0;
-        }
+        baltek.utils.assert( aspect !== undefined );
         baltek.utils.assert( aspect < this.aspectNames.length );
         var observers = this.observersByAspects[aspect];
         var n = observers.length;
@@ -64,9 +65,7 @@ baltek.utils.Observable.__initClass = function(){
     };
 
     baltek.utils.Observable.prototype.registerObserver = function(observer, aspect){
-        if ( aspect === undefined ) {
-            aspect = 0;
-        }
+        baltek.utils.assert( aspect !== undefined );
         baltek.utils.assert( aspect < this.aspectNames.length );
         var observerIndex = this.observersByAspects[aspect].indexOf(observer);
         if ( ! ( observerIndex > -1 ) ) {
@@ -75,9 +74,7 @@ baltek.utils.Observable.__initClass = function(){
     };
 
     baltek.utils.Observable.prototype.unregisterObserver = function(observer, aspect){
-        if ( aspect === undefined ) {
-            aspect = 0;
-        }
+        baltek.utils.assert( aspect !== undefined );
         baltek.utils.assert( aspect < this.aspectNames.length );
         var observerIndex = this.observersByAspects[aspect].indexOf(observer);
         if ( observerIndex > -1 ) {

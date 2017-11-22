@@ -15,7 +15,7 @@ baltek.widget.Widget.__initClass = function(){
 
     baltek.widget.Widget.prototype.__initObject = function(id, i18nTranslator){
         baltek.widget.Widget.super.__initObject.call(this);
-        this.userInputAspect = this.newAspect("userInputAspect");
+        this.userInputAspect = this.newAspect( "userInputAspect" );
 
         baltek.utils.assert( i18nTranslator !== null );
 
@@ -23,7 +23,7 @@ baltek.widget.Widget.__initClass = function(){
 
         this.i18nKeyPrefix = id;
         this.i18nTranslator = i18nTranslator;
-        this.i18nLanguageAspect = this.i18nTranslator.getAspect("languageAspect");
+        this.i18nLanguageAspect = this.i18nTranslator.getAspect( "languageAspect" );
         this.i18nTranslator.registerObserver(this, this.i18nLanguageAspect);
     };
 
@@ -42,6 +42,10 @@ baltek.widget.Widget.__initClass = function(){
 
     baltek.widget.Widget.prototype.isShowed = function(){
         return ( this.element.style.display !== "none" );
+    };
+
+    baltek.widget.Widget.prototype.registerObserver = function(observer){
+        baltek.widget.Widget.super.registerObserver.call(this, observer, this.userInputAspect);
     };
 
     baltek.widget.Widget.prototype.setBackgroundColor  = function(color){

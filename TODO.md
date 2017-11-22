@@ -17,10 +17,9 @@ This document collects the milestones for the **baltek-the-program** project and
 
 # Tasks
 
-1. Update the rules from the "baltek-the-rules" repository.
-2. Clean the first implementation of BALTEK mode "two close players".
-3. Write unit tests using QUnit.
-4. Automate a "release" using Python (collecting and minifying released files, ...).
-5. Update "Design.md".
-6. Describe in a CONTRIBUTING.txt file the rules for contributing (copyright, etc.)
-7. Describe the file tree in the README.md file.
+1. Clean the first implementation of BALTEK mode "two close players".
+2. Write unit tests using QUnit.
+3. Automate a "release" using Python (collecting and minifying released files, ...).
+4. Update "Design.md".
+5. Describe in a CONTRIBUTING.txt file the rules for contributing (copyright, etc.)
+6. Describe the file tree in the README.md file.

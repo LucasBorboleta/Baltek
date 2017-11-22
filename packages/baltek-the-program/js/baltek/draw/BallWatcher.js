@@ -43,10 +43,14 @@ baltek.draw.BallWatcher.__initClass = function(){
         return this.ball;
     };
 
+    baltek.draw.BallWatcher.prototype.registerObserver = function(observer){
+        baltek.draw.BallWatcher.super.registerObserver.call(this, observer, this.ballWatcherAspect);
+    };
+
     baltek.draw.BallWatcher.prototype.updateFromObservable = function(observable){
         // The observable is assumed of type baltek.draw.Ball
         this.ball = observable;
-        this.notifyObservers();
+        this.notifyObservers(this.ballWatcherAspect);
     };
 };
 ///////////////////////////////////////////////////////////////////////////////

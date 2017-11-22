@@ -99,9 +99,9 @@ baltek.utils.inherit = function(childConstructor, parentConstructor){
 
 baltek.utils.repeatString = function(value, count){
     // Workaround because not support of String.repeat in Internet-Explorer-11
-    var text="";
-    var i=0;
-    for (i=0; i<count; i++) {
+    var text = "";
+    var i = 0;
+    for ( i=0; i<count; i++ ) {
         text += value;
     }
     return text;

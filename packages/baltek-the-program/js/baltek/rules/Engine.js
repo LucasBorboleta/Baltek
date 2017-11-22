@@ -34,7 +34,7 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.__initObject = function(){
         baltek.rules.Engine.super.__initObject.call(this);
-        this.engineAspect = this.newAspect("engineAspect");
+        this.gameStateAspect = this.newAspect( "gameStateAspect" );
 
         this.SCORE_MAX = 2;
         this.CREDIT_MAX = 3;
@@ -113,6 +113,10 @@ baltek.rules.Engine.__initClass = function(){
         if ( activeTeam !== this.activeTeam ) {
             this.switchActiveAndPassiveTeams();
         }
+    };
+
+    baltek.rules.Engine.prototype.registerObserver = function(observer){
+        baltek.rules.Engine.super.registerObserver.call(this, observer, this.gameStateAspect);
     };
 
     baltek.rules.Engine.prototype.setPassiveTeam = function(passiveTeam){
@@ -243,7 +247,7 @@ baltek.rules.Engine.__initClass = function(){
             }
         }
 
-        this.notifyObservers();
+        this.notifyObservers(this.gameStateAspect);
     };
 
     baltek.rules.Engine.prototype.roundUpdate = function(){

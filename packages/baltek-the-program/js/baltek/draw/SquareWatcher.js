@@ -43,10 +43,14 @@ baltek.draw.SquareWatcher.__initClass = function(){
         return this.square;
     };
 
+    baltek.draw.SquareWatcher.prototype.registerObserver = function(observer){
+        baltek.draw.SquareWatcher.super.registerObserver.call(this, observer, this.squareWatcherAspect);
+    };
+
     baltek.draw.SquareWatcher.prototype.updateFromObservable = function(observable){
         // The observable is assumed of type baltek.draw.Square
         this.square = observable;
-        this.notifyObservers();
+        this.notifyObservers(this.squareWatcherAspect);
     };
 };
 ///////////////////////////////////////////////////////////////////////////////
