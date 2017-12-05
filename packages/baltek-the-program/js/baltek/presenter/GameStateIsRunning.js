@@ -56,6 +56,9 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
+        var ball = null;
+        var footballer = null;
+        var square = null;
         var squareIndices = null;
 
         if ( observable === this.presenter.quitGame ) {
@@ -70,14 +73,17 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
             }
 
         } else if ( observable === this.presenter.ballWatcher ) {
+            ball = this.presenter.ballWatcher.getBall();
             this.presenter.rulesEngine.moveSelectBall(observable.ball.selected);
 
         } else if ( observable === this.presenter.footballerWatcher ) {
-            squareIndices = {ix:observable.footballer.square.ix, iy:observable.footballer.square.iy};
+            footballer = this.presenter.footballerWatcher.getFootballer();
+            squareIndices = {ix:footballer.square.ix, iy:footballer.square.iy};
             this.presenter.rulesEngine.moveSelectFootballer(squareIndices, observable.footballer.selected);
 
         } else if ( observable === this.presenter.squareWatcher ) {
-            squareIndices = {ix:observable.square.ix, iy:observable.square.iy};
+            square = this.presenter.squareWatcher.getSquare();
+            squareIndices = {ix:square.ix, iy:square.iy};
             this.presenter.rulesEngine.moveSelectSquare(squareIndices);
 
         } else if ( observable === this.presenter.sprint ) {

@@ -33,8 +33,8 @@ baltek.widget.CounterWithSymbols.__initClass = function(){
         baltek.utils.assert( count >= 0 );
         baltek.utils.assert( count <= this.maximum );
 
-        var text = baltek.utils.repeatString(this.oneSymbol, count) +
-                   baltek.utils.repeatString(this.zeroSymbol, this.maximum - count);
+        var text = baltek.utils.repeatString(this.zeroSymbol, this.maximum - count) +
+                   baltek.utils.repeatString(this.oneSymbol, count) ;
         this.element.innerHTML = text;
     };
 

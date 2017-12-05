@@ -33,4 +33,6 @@ baltek.i18n.__initModule = function(){
     // Init inner classes
     baltek.i18n.Translator.__initClass();
 };
+
+baltek.i18n.translations = {};
 ///////////////////////////////////////////////////////////////////////////////

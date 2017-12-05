@@ -38,7 +38,7 @@ baltek.style.__initModule = function(){
     baltek.style.fonts = { };
     baltek.style.widths = { };
 
-    var BALTEK_FONT = "Verdana,sans-serif";
+    var BALTEK_FONT = baltek.widget.getStylePropertyValue( "baltek-body", "font-family" );
     var BALTEK_YELLOW = "#FFFF00";
     var BALTEK_GREEN_0 = "#006600";
     var BALTEK_GREEN_1 = "#5C8A00";

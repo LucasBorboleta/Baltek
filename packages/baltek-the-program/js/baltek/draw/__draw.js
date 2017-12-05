@@ -71,12 +71,12 @@ baltek.draw.getMousePosition = function(event){
 };
 
 baltek.draw.setSquareLatticeDimensions = function(nx, ny){
-    var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
-
     baltek.draw.nx = nx;
     baltek.draw.ny = ny;
 
     // From the lattice dimension (nx, ny) computes the squareSide, etc.
+    var canvasRectangle = baltek.draw.canvas.getBoundingClientRect();
+
     baltek.draw.squareQuantum = Math.min(
         (canvasRectangle.right  - canvasRectangle.left)/baltek.draw.nx,
         (canvasRectangle.bottom - canvasRectangle.top )/baltek.draw.ny ) ;
