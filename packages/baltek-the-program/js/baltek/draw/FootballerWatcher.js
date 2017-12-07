@@ -34,7 +34,7 @@ baltek.draw.FootballerWatcher.__initClass = function(){
 
     baltek.draw.FootballerWatcher.prototype.__initObject = function(){
         baltek.draw.FootballerWatcher.super.__initObject.call(this);
-        this.footballerWatcherAspect = this.newAspect("footballerWatcherAspect");
+        this.footballerWatcherAspect = this.newAspect( "footballerWatcherAspect" );
 
         this.footballer = null;
     };
@@ -48,7 +48,7 @@ baltek.draw.FootballerWatcher.__initClass = function(){
     };
 
     baltek.draw.FootballerWatcher.prototype.updateFromObservable = function(observable){
-        // The observable is assumed of type baltek.draw.Footballer
+        baltek.utils.assert( observable instanceof baltek.draw.Footballer );
         this.footballer = observable;
         this.notifyObservers(this.footballerWatcherAspect);
     };

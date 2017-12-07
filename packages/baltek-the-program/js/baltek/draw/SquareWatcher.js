@@ -34,7 +34,7 @@ baltek.draw.SquareWatcher.__initClass = function(){
 
     baltek.draw.SquareWatcher.prototype.__initObject = function(){
         baltek.draw.SquareWatcher.super.__initObject.call(this);
-        this.squareWatcherAspect = this.newAspect("squareWatcherAspect");
+        this.squareWatcherAspect = this.newAspect( "squareWatcherAspect" );
 
         this.square = null;
     };
@@ -48,7 +48,7 @@ baltek.draw.SquareWatcher.__initClass = function(){
     };
 
     baltek.draw.SquareWatcher.prototype.updateFromObservable = function(observable){
-        // The observable is assumed of type baltek.draw.Square
+        baltek.utils.assert( observable instanceof baltek.draw.Square );
         this.square = observable;
         this.notifyObservers(this.squareWatcherAspect);
     };
