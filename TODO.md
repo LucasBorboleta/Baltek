@@ -18,7 +18,6 @@ This document collects the milestones for the **baltek-the-program** project and
 # Tasks
 
 1. Clean the first implementation of BALTEK mode "two close players".
-   - Find a solution to ensure expected observable in *Watchers.
 2. Write unit tests using QUnit.
 3. Automate a "release" using Python (collecting and minifying released files, ...).
 4. Update "Design.md".

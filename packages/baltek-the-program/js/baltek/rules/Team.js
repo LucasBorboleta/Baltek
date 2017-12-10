@@ -57,11 +57,19 @@ baltek.rules.Team.__initClass = function(){
         this.footballers.push(this.footballer1b);
     };
 
-    baltek.rules.Team.prototype.enableFootballers = function(condition){
+    baltek.rules.Team.prototype.enableCapabilities = function(condition){
         var i = 0;
         var n = this.footballers.length;
         for ( i=0; i<n; i++ ) {
-            this.footballers[i].selectable = condition;
+            this.footballers[i].enableCapabilities(condition);
+        }
+    };
+
+    baltek.rules.Team.prototype.enableSelection = function(condition){
+        var i = 0;
+        var n = this.footballers.length;
+        for ( i=0; i<n; i++ ) {
+            this.footballers[i].enableSelection(condition);
         }
     };
 
@@ -96,12 +104,11 @@ baltek.rules.Team.__initClass = function(){
         return state;
     };
 
-    baltek.rules.Team.prototype.initFootballerCapabilities = function(condition){
+    baltek.rules.Team.prototype.select = function(condition){
         var i = 0;
         var n = this.footballers.length;
         for ( i=0; i<n; i++ ) {
-            this.footballers[i].canKick = condition;
-            this.footballers[i].canRun = condition;
+            this.footballers[i].select(condition);
         }
     };
 
@@ -114,14 +121,6 @@ baltek.rules.Team.__initClass = function(){
         var n = this.footballers.length;
         for ( i=0; i<n; i++ ) {
             this.footballers[i].setState(state.footballers[i]);
-        }
-    };
-
-    baltek.rules.Team.prototype.selectFootballers = function(condition){
-        var i = 0;
-        var n = this.footballers.length;
-        for ( i=0; i<n; i++ ) {
-            this.footballers[i].selected = condition;
         }
     };
 };

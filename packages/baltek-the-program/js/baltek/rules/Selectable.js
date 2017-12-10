@@ -33,17 +33,41 @@ baltek.rules.Selectable.__initClass = function(){
     baltek.utils.inherit(baltek.rules.Selectable, Object);
 
     baltek.rules.Selectable.prototype.__initObject = function(){
-        this.selected = false;
-        this.selectable = false;
-        this.cost = 0;
+        this.__selected = false;
+        this.__selectable = false;
+        this.__cost = 0;
+    };
+
+    baltek.rules.Selectable.prototype.enableSelection = function(condition){
+        this.__selectable = condition;
     };
 
     baltek.rules.Selectable.prototype.exportState = function(){
         var state = {};
-        state.selected = this.selected;
-        state.selectable = this.selectable;
-        state.cost = this.cost;
+        state.selected = this.__selected;
+        state.selectable = this.__selectable;
+        state.cost = this.__cost;
         return state;
+    };
+
+    baltek.rules.Selectable.prototype.getCost = function(){
+        return this.__cost;
+    };
+
+    baltek.rules.Selectable.prototype.isSelectable = function(){
+        return this.__selectable;
+    };
+
+    baltek.rules.Selectable.prototype.isSelected = function(){
+        return this.__selected;
+    };
+
+    baltek.rules.Selectable.prototype.select = function(condition){
+        this.__selected = condition;
+    };
+
+    baltek.rules.Selectable.prototype.setCost = function(cost){
+        this.__cost = cost;
     };
 };
 ///////////////////////////////////////////////////////////////////////////////

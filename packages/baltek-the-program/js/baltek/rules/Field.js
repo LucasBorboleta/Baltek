@@ -97,7 +97,8 @@ baltek.rules.Field.__initClass = function(){
         this.engine.passiveTeam.goalSquare = this.squaresByIndices[pgix][pgiy] ;
     };
 
-    baltek.rules.Field.prototype.clearBallAndFootballerSquares = function(){
+    baltek.rules.Field.prototype.empty = function(){
+        // Clear all squares of ball and footballers
         var square = null;
         var ix = 0;
         var iy = 0;
@@ -128,7 +129,7 @@ baltek.rules.Field.__initClass = function(){
         }
     };
 
-    baltek.rules.Field.prototype.enableSquares = function(condition){
+    baltek.rules.Field.prototype.enableSelection = function(condition){
         var square = null;
         var ix = 0;
         var iy = 0;
@@ -136,7 +137,7 @@ baltek.rules.Field.__initClass = function(){
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
                 square = this.squaresByIndices[ix][iy];
                 if ( square !== null ) {
-                    square.selectable = condition;
+                    square.enableSelection(condition);
                 }
             }
         }
@@ -165,10 +166,10 @@ baltek.rules.Field.__initClass = function(){
         return state;
     };
 
-    baltek.rules.Field.prototype.initBallAndFootballerSquares = function(){
+    baltek.rules.Field.prototype.kickoff = function(){
 
-        // First: clear all squares, from field, ball and teams
-        this.clearBallAndFootballerSquares();
+        // First: empty all squares from ball and footballers
+        this.empty();
 
         // Second: set squares for the active and passive teams
 
@@ -197,7 +198,7 @@ baltek.rules.Field.__initClass = function(){
         this.squaresByIndices[passiveOriginX + (this.TSS - 2)*passiveDirectionX][this.lastY].setPassiveFootballer(this.engine.passiveTeam.footballer1b);
     };
 
-    baltek.rules.Field.prototype.selectSquares = function(condition){
+    baltek.rules.Field.prototype.select = function(condition){
         var square = null;
         var ix = 0;
         var iy = 0;
@@ -205,7 +206,7 @@ baltek.rules.Field.__initClass = function(){
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
                 square = this.squaresByIndices[ix][iy];
                 if ( square !== null ) {
-                    square.selected = condition;
+                    square.select(condition);
                 }
             }
         }
