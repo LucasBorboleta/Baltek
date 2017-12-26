@@ -49,7 +49,7 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.language.enable(true);
         this.presenter.what.enable(true);
 
-        if ( this.presenter.rulesEngine.match === undefined ) {
+        if ( ! this.presenter.rulesEngine.matchIsDefined() ) {
             this.presenter.rulesEngine.matchInit();
         }
         this.presenter.rulesEngine.matchUpdate();
@@ -65,10 +65,10 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
             this.setState(this.superState.gameStateIsReadyToQuit);
 
         } else if ( observable === this.presenter.rulesEngine ) {
-            var state = this.presenter.rulesEngine.exportState();
+            var state = this.presenter.rulesEngine.exportMoveState();
             this.presenter.updateFromEngineState(state);
 
-            if ( ! this.presenter.rulesEngine.match.isActive) {
+            if ( ! this.presenter.rulesEngine.matchIsActive() ) {
                 this.setState(this.superState.gameStateIsFinished);
             }
 

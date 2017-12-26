@@ -73,7 +73,7 @@ baltek.rules.Team.__initClass = function(){
         }
     };
 
-    baltek.rules.Team.prototype.exportState = function(){
+    baltek.rules.Team.prototype.exportMoveState = function(){
         var state = {};
         state.teamIndex = this.teamIndex ;
         state.score = this.score;
@@ -84,12 +84,12 @@ baltek.rules.Team.__initClass = function(){
         var i = 0;
         var n = this.footballers.length;
         for ( i=0; i<n; i++ ) {
-            state.footballers[i] = this.footballers[i].exportState();
+            state.footballers[i] = this.footballers[i].exportMoveState();
         }
         return state;
     };
 
-    baltek.rules.Team.prototype.getState = function(){
+    baltek.rules.Team.prototype.getTurnState = function(){
         var state = {};
         state.score = this.score;
         state.canSprint = this.canSprint;
@@ -99,7 +99,7 @@ baltek.rules.Team.__initClass = function(){
         var i = 0;
         var n = this.footballers.length;
         for ( i=0; i<n; i++ ) {
-            state.footballers[i] = this.footballers[i].getState();
+            state.footballers[i] = this.footballers[i].getTurnState();
         }
         return state;
     };
@@ -112,7 +112,7 @@ baltek.rules.Team.__initClass = function(){
         }
     };
 
-    baltek.rules.Team.prototype.setState = function(state){
+    baltek.rules.Team.prototype.setTurnState = function(state){
         this.score = state.score ;
         this.canSprint = state.canSprint;
         this.haveGoaled = state.haveGoaled;
@@ -120,7 +120,7 @@ baltek.rules.Team.__initClass = function(){
         var i = 0;
         var n = this.footballers.length;
         for ( i=0; i<n; i++ ) {
-            this.footballers[i].setState(state.footballers[i]);
+            this.footballers[i].setTurnState(state.footballers[i]);
         }
     };
 };

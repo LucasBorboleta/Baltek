@@ -40,13 +40,28 @@ baltek.rules.Square.__initClass = function(){
         this.canHostBall = false;
         this.canHostFootballer = false;
         this.ball = null ;
-        this.footballers = [] ;
-        this.footballers.push(null);
-        this.footballers.push(null);
+        this.footballers = [null, null] ;
     };
 
-    baltek.rules.Square.prototype.exportState = function(){
-        var state = baltek.rules.Square.super.exportState.call(this);
+    baltek.rules.Square.prototype.empty = function(){
+        if ( this.ball !== null ) {
+            this.ball.square = null;
+            this.ball = null;
+        }
+
+        if ( this.footballers[0] !== null ) {
+            this.footballers[0].square = null;
+            this.footballers[0] = null;
+        }
+
+        if ( this.footballers[1] !== null ) {
+            this.footballers[1].square = null;
+            this.footballers[1] = null;
+        }
+    };
+
+    baltek.rules.Square.prototype.exportMoveState = function(){
+        var state = baltek.rules.Square.super.exportMoveState.call(this);
         return state;
     };
 
@@ -58,12 +73,12 @@ baltek.rules.Square.__initClass = function(){
         return this.ball;
     };
 
-    baltek.rules.Square.prototype.getSquareIndices = function(){
-        return { ix:this.ix, iy:this.iy };
-    };
-
     baltek.rules.Square.prototype.getPassiveFootballer = function(){
         return this.footballers[this.engine.passiveTeam.teamIndex];
+    };
+
+    baltek.rules.Square.prototype.getSquareIndices = function(){
+        return { ix:this.ix, iy:this.iy };
     };
 
     baltek.rules.Square.prototype.hasActiveFootballer = function(){

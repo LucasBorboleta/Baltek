@@ -37,19 +37,19 @@ baltek.rules.Ball.__initClass = function(){
         this.square = null;
     };
 
-    baltek.rules.Ball.prototype.exportState = function(){
-        var state = baltek.rules.Ball.super.exportState.call(this);
+    baltek.rules.Ball.prototype.exportMoveState = function(){
+        var state = baltek.rules.Ball.super.exportMoveState.call(this);
         state.squareIndices = this.square.getSquareIndices();
         return state;
     };
 
-    baltek.rules.Ball.prototype.getState = function(){
+    baltek.rules.Ball.prototype.getTurnState = function(){
         var state = {};
         state.square = this.square;
         return state;
     };
 
-    baltek.rules.Ball.prototype.setState = function(state){
+    baltek.rules.Ball.prototype.setTurnState = function(state){
         state.square.setBall(this);
     };
 };

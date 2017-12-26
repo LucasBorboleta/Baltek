@@ -38,11 +38,9 @@ baltek.rules.Engine.__initClass = function(){
 
         this.SCORE_MAX = 2;
         this.CREDIT_MAX = 3;
+        this.BONUS_MAX = 1; // Sprint bonus
 
         this.teams = [];
-        this.teams.push(null);
-        this.teams.push(null);
-
         this.teams[0] = new baltek.rules.Team(0);
         this.teams[1] = new baltek.rules.Team(1);
 
@@ -52,28 +50,21 @@ baltek.rules.Engine.__initClass = function(){
         this.ball = new baltek.rules.Ball();
 
         this.field = new baltek.rules.Field(this);
-        this.field.kickoff();
     };
 
-    baltek.rules.Engine.prototype.exportState = function(){
+    baltek.rules.Engine.prototype.exportMoveState = function(){
         var state = {};
         state.activeTeamIndex = this.activeTeam.teamIndex;
-        state.ball = this.ball.exportState();
+        state.ball = this.ball.exportMoveState();
         state.teams = [];
-        state.teams[0] = this.teams[0].exportState();
-        state.teams[1] = this.teams[1].exportState();
-        state.field = this.field.exportState();
+        state.teams[0] = this.teams[0].exportMoveState();
+        state.teams[1] = this.teams[1].exportMoveState();
+        state.field = this.field.exportMoveState();
         return state;
     };
 
-    baltek.rules.Engine.prototype.getState = function(){
-        var state = {};
-        state.activeTeam = this.activeTeam;
-        state.ball = this.ball.getState();
-        state.teams = [];
-        state.teams[0] = this.teams[0].getState();
-        state.teams[1] = this.teams[1].getState();
-        return state;
+    baltek.rules.Engine.prototype.getBonusMax = function(){
+        return this.BONUS_MAX;
     };
 
     baltek.rules.Engine.prototype.getCreditMax = function(){
@@ -100,6 +91,16 @@ baltek.rules.Engine.__initClass = function(){
         return this.SCORE_MAX;
     };
 
+    baltek.rules.Engine.prototype.getTurnState = function(){
+        var state = {};
+        state.activeTeam = this.activeTeam;
+        state.ball = this.ball.getTurnState();
+        state.teams = [];
+        state.teams[0] = this.teams[0].getTurnState();
+        state.teams[1] = this.teams[1].getTurnState();
+        return state;
+    };
+
     baltek.rules.Engine.prototype.hasFieldSquare = function(ix, iy){
         return ( this.field.squaresByIndices[ix][iy] !== null );
     };
@@ -109,14 +110,14 @@ baltek.rules.Engine.__initClass = function(){
             return ( square !== null && ( square === this.activeTeam.goalSquare || square === this.passiveTeam.goalSquare ) );
         };
 
+    baltek.rules.Engine.prototype.registerObserver = function(observer){
+        baltek.rules.Engine.super.registerObserver.call(this, observer, this.gameStateAspect);
+    };
+
     baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){
         if ( activeTeam !== this.activeTeam ) {
             this.switchActiveAndPassiveTeams();
         }
-    };
-
-    baltek.rules.Engine.prototype.registerObserver = function(observer){
-        baltek.rules.Engine.super.registerObserver.call(this, observer, this.gameStateAspect);
     };
 
     baltek.rules.Engine.prototype.setPassiveTeam = function(passiveTeam){
@@ -125,12 +126,12 @@ baltek.rules.Engine.__initClass = function(){
         }
     };
 
-    baltek.rules.Engine.prototype.setState = function(state){
+    baltek.rules.Engine.prototype.setTurnState = function(state){
         this.field.empty();
         this.setActiveTeam(state.activeTeam);
-        this.ball.setState(state.ball);
-        this.teams[0].setState(state.teams[0]);
-        this.teams[1].setState(state.teams[1]);
+        this.ball.setTurnState(state.ball);
+        this.teams[0].setTurnState(state.teams[0]);
+        this.teams[1].setTurnState(state.teams[1]);
     };
 
     baltek.rules.Engine.prototype.switchActiveAndPassiveTeams = function(){
@@ -139,6 +140,8 @@ baltek.rules.Engine.__initClass = function(){
         this.activeTeam = oldPassiveTeam;
         this.passiveTeam = oldActiveTeam;
     };
+
+    ////////// Match methods  //////////
 
     baltek.rules.Engine.prototype.matchInit = function(){
         baltek.debug.writeMessage("matchInit: enter");
@@ -155,66 +158,12 @@ baltek.rules.Engine.__initClass = function(){
         this.roundInit();
     };
 
-    baltek.rules.Engine.prototype.roundInit = function(){
-        baltek.debug.writeMessage("roundInit: enter");
-        this.round = {};
-
-        this.round.isActive = true;
-
-        this.activeTeam.canSprint = true;
-        this.passiveTeam.canSprint = true;
-
-        this.activeTeam.haveGoaled = false;
-        this.passiveTeam.haveGoaled = false;
-
-        this.field.kickoff();
-        this.turnInit();
+    baltek.rules.Engine.prototype.matchIsActive = function(){
+        return this.match.isActive;
     };
 
-    baltek.rules.Engine.prototype.turnInit = function(){
-        baltek.debug.writeMessage("turnInit: enter");
-        this.turn = {};
-
-        this.turn.state = this.getState();
-
-        this.turn.isActive = true;
-
-        this.activeTeam.credit = this.CREDIT_MAX;
-        this.passiveTeam.credit = 0;
-
-        this.activeTeam.enableSelection(false);
-        this.passiveTeam.enableSelection(false);
-
-        this.activeTeam.enableCapabilities(true);
-        this.passiveTeam.enableCapabilities(false);
-
-        this.activeTeam.select(false);
-        this.passiveTeam.select(false);
-
-        this.field.enableSelection(false);
-        this.field.enableSelection(false);
-
-        this.ball.enableSelection(false);
-        this.ball.select(false);
-
-        this.moveInit();
-    };
-
-    baltek.rules.Engine.prototype.moveInit = function(){
-        baltek.debug.writeMessage("moveInit: enter");
-        this.move = {};
-
-        this.move.isActive = true;
-
-        this.move.LEN_KICK = 2;
-        this.move.LEN_RUN = 1;
-        this.move.LEN_SPRINT = 2;
-
-        this.move.sprint = false;
-        this.move.sourceSquare = null;
-        this.move.sourceCost = 0;
-        this.move.destinationSquare = null;
-        this.move.destinationCost = 0;
+    baltek.rules.Engine.prototype.matchIsDefined = function(){
+        return this.match !== undefined;
     };
 
     baltek.rules.Engine.prototype.matchUpdate = function(){
@@ -250,6 +199,24 @@ baltek.rules.Engine.__initClass = function(){
         this.notifyObservers(this.gameStateAspect);
     };
 
+    ////////// Round methods  //////////
+
+    baltek.rules.Engine.prototype.roundInit = function(){
+        baltek.debug.writeMessage("roundInit: enter");
+        this.round = {};
+
+        this.round.isActive = true;
+
+        this.activeTeam.canSprint = true;
+        this.passiveTeam.canSprint = true;
+
+        this.activeTeam.haveGoaled = false;
+        this.passiveTeam.haveGoaled = false;
+
+        this.field.kickoff();
+        this.turnInit();
+    };
+
     baltek.rules.Engine.prototype.roundUpdate = function(){
         baltek.debug.writeMessage("roundUpdate: enter");
         if ( this.round.isActive ) {
@@ -271,6 +238,54 @@ baltek.rules.Engine.__initClass = function(){
         }
     };
 
+    ////////// Turn methods  //////////
+
+    baltek.rules.Engine.prototype.turnCancel = function(){
+        // Triggered by the player of the activeTeam
+        baltek.debug.writeMessage("turnCancel:");
+        baltek.utils.assert( this.move.isActive );
+        this.setTurnState(this.turn.state);
+        this.turnInit();
+        this.matchUpdate();
+    };
+
+    baltek.rules.Engine.prototype.turnConfirm = function(){
+        // Triggered by the player of the activeTeam
+        baltek.debug.writeMessage("turnConfirm:");
+        baltek.utils.assert( this.move.isActive );
+        this.turn.isActive = false;
+        this.matchUpdate();
+    };
+
+    baltek.rules.Engine.prototype.turnInit = function(){
+        baltek.debug.writeMessage("turnInit: enter");
+        this.turn = {};
+
+        this.turn.state = this.getTurnState();
+
+        this.turn.isActive = true;
+
+        this.activeTeam.credit = this.CREDIT_MAX;
+        this.passiveTeam.credit = 0;
+
+        this.activeTeam.enableSelection(false);
+        this.passiveTeam.enableSelection(false);
+
+        this.activeTeam.enableCapabilities(true);
+        this.passiveTeam.enableCapabilities(false);
+
+        this.activeTeam.select(false);
+        this.passiveTeam.select(false);
+
+        this.field.enableSelection(false);
+        this.field.enableSelection(false);
+
+        this.ball.enableSelection(false);
+        this.ball.select(false);
+
+        this.moveInit();
+    };
+
     baltek.rules.Engine.prototype.turnUpdate = function(){
         baltek.debug.writeMessage("turnUpdate: enter");
         if ( this.turn.isActive ) {
@@ -286,70 +301,186 @@ baltek.rules.Engine.__initClass = function(){
         }
     };
 
-    baltek.rules.Engine.prototype.turnCancel = function(){
-        // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("turnCancel:");
-        baltek.utils.assert( this.move.isActive );
-        this.setState(this.turn.state);
-        this.turnInit();
-        this.matchUpdate();
-    };
+    ////////// Move methods  //////////
 
-    baltek.rules.Engine.prototype.turnConfirm = function(){
-        // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("turnConfirm:");
-        baltek.utils.assert( this.move.isActive );
-        this.turn.isActive = false;
-        this.matchUpdate();
-    };
+    baltek.rules.Engine.prototype.moveFindDestinations = function(){
+        baltek.debug.writeMessage("moveFindDestinations: enter");
 
-    baltek.rules.Engine.prototype.moveUpdate = function(){
-        baltek.debug.writeMessage("moveUpdate: enter");
-        if ( this.move.isActive ) {
+        if ( ! this.move.isActive ) return;
+        if ( this.move.sourceSquare === null ) return;
+        if ( this.move.destinationSquare !== null ) return;
 
-            if ( this.move.sourceSquare === null ) {
-                this.moveFindSources();
+        this.field.enableSelection(false);
+        this.activeTeam.enableSelection(false);
 
-            } else if ( this.move.destinationSquare === null ) {
-                this.moveFindDestinations();
+        // Let actual source selectable in order to allowing unselect it
+        if ( this.ball.isSelected() ) {
+            this.ball.enableSelection(true);
+        } else {
+            this.ball.enableSelection(false);
+            this.move.sourceSquare.getActiveFootballer().enableSelection(true);
+        }
 
-            } else {
-                this.move.isActive = false;
+        var activeFootballer = this.move.sourceSquare.footballers[this.activeTeam.teamIndex];
 
-                if ( this.ball.isSelected() ) {
-                    this.move.sourceSquare.getActiveFootballer().canKick = false;
-                    this.move.destinationSquare.setBall(this.ball);
+        var ux=0;
+        var uy=0;
+        var d=0;
+        var dx=0;
+        var dy=0;
+        var ix=0;
+        var iy=0;
+        var square=null;
 
-                    if (this.move.destinationSquare === this.passiveTeam.goalSquare ) {
-                        this.activeTeam.haveGoaled = true;
-                    }
+        if ( this.ball.isSelected() ) {
+            // The ball moves along a vector of size this.move.LEN_KICK or less
 
-                } else {
-                    this.move.sourceSquare.getActiveFootballer().canRun = false;
-                    this.move.destinationSquare.setActiveFootballer(this.move.sourceSquare.getActiveFootballer());
+            for ( ux=-1; ux<=1; ux++ ) {
+                for ( uy=-1; uy<=1; uy++ ) {
+                    for ( d=1; d <= this.move.LEN_KICK; d++) {
+                        dx = d*ux;
+                        dy = d*uy;
+                        ix = this.move.sourceSquare.ix + dx;
+                        iy = this.move.sourceSquare.iy + dy;
+                        if ( ix >= this.field.firstX && ix <= this.field.lastX && iy >= this.field.firstY && iy <= this.field.lastY ) {
+                            square = this.field.squaresByIndices[ix][iy];
+                            if ( square !== null && square != this.move.sourceSquare && square.canHostBall && square !== this.activeTeam.goalSquare ) {
+                                if ( d <= 1) {
+                                    square.setCost(1);
+                                    square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
+                                } else {
+                                    // Search along the trajectory
+                                    // the passiveFootballer, if any,
+                                    // with the strongest force
+                                    var strongestPassiveFootballer = null;
+                                    var t;
+                                    var tx;
+                                    var ty;
+                                    var jx;
+                                    var jy;
+                                    var tsquare;
+                                    for ( t=1; t < d; t++ ) {
+                                        tx = t*ux;
+                                        ty = t*uy;
+                                        jx = this.move.sourceSquare.ix + tx;
+                                        jy = this.move.sourceSquare.iy + ty;
+                                        tsquare = this.field.squaresByIndices[jx][jy];
+                                        if ( tsquare !== null && tsquare.hasPassiveFootballer() ) {
+                                            if ( strongestPassiveFootballer === null ) {
+                                                strongestPassiveFootballer = tsquare.getPassiveFootballer();
+                                            } else if ( tsquare.getPassiveFootballer().force > strongestPassiveFootballer ) {
+                                                strongestPassiveFootballer = tsquare.getPassiveFootballer();
+                                            }
+                                        }
+                                    }
 
-                    if ( this.move.sprint ) {
-                        this.activeTeam.canSprint = false;
+                                    if ( strongestPassiveFootballer === null ) {
+                                        square.setCost(1);
+                                        square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
+
+                                    } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
+                                        square.setCost(1);
+                                        square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
+
+                                    } else {
+                                        square.setCost(1 + strongestPassiveFootballer.force - activeFootballer.force);
+                                        square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+            }
+        } else {
+            var runLength = 0;
+            if ( this.move.sprint ) {
+                runLength = this.move.LEN_SPRINT;
+            }  else {
+                runLength = this.move.LEN_RUN;
+            }
 
-                this.activeTeam.credit -= ( this.move.sourceCost + this.move.destinationCost );
+            // The footballer moves freely inside a square of size runLength or less
+            for ( ix=this.move.sourceSquare.ix - runLength; ix <= this.move.sourceSquare.ix + runLength; ix++ ) {
+                if ( ix >= this.field.firstX && ix <= this.field.lastX) {
+                    for ( iy=this.move.sourceSquare.iy - runLength; iy <= this.move.sourceSquare.iy + runLength; iy++ ) {
+                        if ( iy >= this.field.firstY && iy <= this.field.lastY) {
+                            square = this.field.squaresByIndices[ix][iy];
+                            if ( square !== null && square != this.move.sourceSquare ) {
+                                if ( square.canHostFootballer && ! square.hasActiveFootballer() ) {
+                                    square.setCost(1);
+                                    square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     };
 
-    baltek.rules.Engine.prototype.moveSprint = function(condition){
-        // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("moveSprint:");
+    baltek.rules.Engine.prototype.moveFindSources = function(){
+        baltek.debug.writeMessage("moveFindSources: enter");
 
-        baltek.utils.assert( this.move.isActive );
-        if ( condition ) {
-            baltek.utils.assert( this.activeTeam.canSprint );
-            this.move.sprint = true;
-        } else {
-            this.move.sprint = false;
+        if ( this.move.isActive && this.move.sourceSquare === null ) {
+            this.field.enableSelection(false);
+            this.activeTeam.enableSelection(false);
+            this.activeTeam.select(false);
+            this.ball.select(false);
+            this.ball.enableSelection(false);
+
+            var activeFootballer = null;
+            var passiveFootballer = null;
+            var n = this.activeTeam.footballers.length;
+            var i;
+
+            this.ball.setCost(0);
+
+            for ( i=0; i<n; i++ ) {
+                activeFootballer = this.activeTeam.footballers[i];
+
+                if ( activeFootballer.canRun ) {
+                    // The activeFootballer has not run during this turn
+                    activeFootballer.setCost(0);
+                    activeFootballer.enableSelection( this.activeTeam.credit >= activeFootballer.getCost() );
+                }
+
+                if ( activeFootballer.canKick && activeFootballer.square.hasBall() ) {
+                    // The activeFootballer has not kick during this turn
+                    passiveFootballer = activeFootballer.square.getPassiveFootballer();
+
+                    if ( passiveFootballer === null ) {
+                        this.ball.setCost(0);
+                        this.ball.enableSelection( this.activeTeam.credit >= this.ball.getCost() );
+
+                    } else if ( activeFootballer.force >= passiveFootballer.force ) {
+                        this.ball.setCost(0);
+                        this.ball.enableSelection( this.activeTeam.credit >= this.ball.getCost() );
+
+                    } else {
+                        this.ball.setCost(passiveFootballer.force - activeFootballer.force);
+                        this.ball.enableSelection( this.activeTeam.credit >= this.ball.getCost() );
+                    }
+                }
+            }
         }
-        this.matchUpdate();
+    };
+
+    baltek.rules.Engine.prototype.moveInit = function(){
+        baltek.debug.writeMessage("moveInit: enter");
+        this.move = {};
+
+        this.move.isActive = true;
+
+        this.move.LEN_KICK = 2;
+        this.move.LEN_RUN = 1;
+        this.move.LEN_SPRINT = 2;
+
+        this.move.sprint = false;
+        this.move.sourceSquare = null;
+        this.move.sourceCost = 0;
+        this.move.destinationSquare = null;
+        this.move.destinationCost = 0;
     };
 
     baltek.rules.Engine.prototype.moveSelectBall = function(condition){
@@ -425,164 +556,51 @@ baltek.rules.Engine.__initClass = function(){
         this.matchUpdate();
     };
 
-    baltek.rules.Engine.prototype.moveFindSources = function(){
-        baltek.debug.writeMessage("moveFindSources: enter");
+    baltek.rules.Engine.prototype.moveSprint = function(condition){
+        // Triggered by the player of the activeTeam
+        baltek.debug.writeMessage("moveSprint:");
 
-        if ( this.move.isActive && this.move.sourceSquare === null ) {
-            this.field.enableSelection(false);
-            this.activeTeam.enableSelection(false);
-            this.activeTeam.select(false);
-            this.ball.select(false);
-            this.ball.enableSelection(false);
-
-            var activeFootballer = null;
-            var passiveFootballer = null;
-            var n = this.activeTeam.footballers.length;
-            var i;
-
-            this.ball.setCost(0);
-
-            for ( i=0; i<n; i++ ) {
-                activeFootballer = this.activeTeam.footballers[i];
-
-                if ( activeFootballer.canRun ) {
-                    // The activeFootballer has not run during this turn
-                    activeFootballer.setCost(0);
-                    activeFootballer.enableSelection( this.activeTeam.credit >= activeFootballer.getCost() );
-                }
-
-                if ( activeFootballer.canKick && activeFootballer.square.hasBall() ) {
-                    // The activeFootballer has not kick during this turn
-                    passiveFootballer = activeFootballer.square.getPassiveFootballer();
-
-                    if ( passiveFootballer === null ) {
-                        this.ball.setCost(0);
-                        this.ball.enableSelection( this.activeTeam.credit >= this.ball.getCost() );
-
-                    } else if ( activeFootballer.force >= passiveFootballer.force ) {
-                        this.ball.setCost(0);
-                        this.ball.enableSelection( this.activeTeam.credit >= this.ball.getCost() );
-
-                    } else {
-                        this.ball.setCost(passiveFootballer.force - activeFootballer.force);
-                        this.ball.enableSelection( this.activeTeam.credit >= this.ball.getCost() );
-                    }
-                }
-            }
+        baltek.utils.assert( this.move.isActive );
+        if ( condition ) {
+            baltek.utils.assert( this.activeTeam.canSprint );
+            this.move.sprint = true;
+        } else {
+            this.move.sprint = false;
         }
+        this.matchUpdate();
     };
 
-    baltek.rules.Engine.prototype.moveFindDestinations = function(){
-        baltek.debug.writeMessage("moveFindDestinations: enter");
+    baltek.rules.Engine.prototype.moveUpdate = function(){
+        baltek.debug.writeMessage("moveUpdate: enter");
+        if ( this.move.isActive ) {
 
-        if ( ! this.move.isActive ) return;
-        if ( this.move.sourceSquare === null ) return;
-        if ( this.move.destinationSquare !== null ) return;
+            if ( this.move.sourceSquare === null ) {
+                this.moveFindSources();
 
-        this.field.enableSelection(false);
-        this.activeTeam.enableSelection(false);
+            } else if ( this.move.destinationSquare === null ) {
+                this.moveFindDestinations();
 
-        // Let actual source selectable in order to allowing unselect it
-        if ( this.ball.isSelected() ) {
-            this.ball.enableSelection(true);
-        } else {
-            this.ball.enableSelection(false);
-            this.move.sourceSquare.getActiveFootballer().enableSelection(true);
-        }
+            } else {
+                this.move.isActive = false;
 
-        var activeFootballer = this.move.sourceSquare.footballers[this.activeTeam.teamIndex];
+                if ( this.ball.isSelected() ) {
+                    this.move.sourceSquare.getActiveFootballer().canKick = false;
+                    this.move.destinationSquare.setBall(this.ball);
 
-        var ux=0;
-        var uy=0;
-        var d=0;
-        var dx=0;
-        var dy=0;
-        var ix=0;
-        var iy=0;
-        var square=null;
+                    if (this.move.destinationSquare === this.passiveTeam.goalSquare ) {
+                        this.activeTeam.haveGoaled = true;
+                    }
 
-        if ( this.ball.isSelected() ) {
-            // The ball moves along a vector of size this.move.LEN_KICK or less
+                } else {
+                    this.move.sourceSquare.getActiveFootballer().canRun = false;
+                    this.move.destinationSquare.setActiveFootballer(this.move.sourceSquare.getActiveFootballer());
 
-            for ( ux=-1; ux<=1; ux++ ) {
-                for ( uy=-1; uy<=1; uy++ ) {
-                    for ( d=1; d <= this.move.LEN_KICK; d++) {
-                        dx = d*ux;
-                        dy = d*uy;
-                        ix = this.move.sourceSquare.ix + dx;
-                        iy = this.move.sourceSquare.iy + dy;
-                        if ( ix >= this.field.firstX && ix <= this.field.lastX && iy >= this.field.firstY && iy <= this.field.lastY ) {
-                            square = this.field.squaresByIndices[ix][iy];
-                            if ( square !== null && square != this.move.sourceSquare && square.canHostBall && square !== this.activeTeam.goalSquare ) {
-                                if ( d <= 1) {
-                                    square.setCost(1);
-                                    square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
-                                } else {
-                                    // Find the passiveFootballer with the strongest force
-                                    // on the trajectory
-                                    var strongestPassiveFootballer = null;
-                                    var t;
-                                    var tx;
-                                    var ty;
-                                    var jx;
-                                    var jy;
-                                    var tsquare;
-                                    for ( t=1; t < d; t++ ) {
-                                        tx = t*ux;
-                                        ty = t*uy;
-                                        jx = this.move.sourceSquare.ix + tx;
-                                        jy = this.move.sourceSquare.iy + ty;
-                                        tsquare = this.field.squaresByIndices[jx][jy];
-                                        if ( tsquare !== null && tsquare.hasPassiveFootballer() ) {
-                                            if ( strongestPassiveFootballer === null ) {
-                                                strongestPassiveFootballer = tsquare.getPassiveFootballer();
-                                            } else if ( tsquare.getPassiveFootballer().force > strongestPassiveFootballer ) {
-                                                strongestPassiveFootballer = tsquare.getPassiveFootballer();
-                                            }
-                                        }
-                                    }
-
-                                    if ( strongestPassiveFootballer === null ) {
-                                        square.setCost(1);
-                                        square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
-
-                                    } else if ( activeFootballer.force >= strongestPassiveFootballer.force ) {
-                                        square.setCost(1);
-                                        square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
-
-                                    } else {
-                                        square.setCost(1 + strongestPassiveFootballer.force - activeFootballer.force);
-                                        square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
-                                    }
-                                }
-                            }
-                        }
+                    if ( this.move.sprint ) {
+                        this.activeTeam.canSprint = false;
                     }
                 }
-            }
-        } else {
-            var runLength = 0;
-            if ( this.move.sprint ) {
-                runLength = this.move.LEN_SPRINT;
-            }  else {
-                runLength = this.move.LEN_RUN;
-            }
 
-            // The footballer moves freely inside a square of size runLength or less
-            for ( ix=this.move.sourceSquare.ix - runLength; ix <= this.move.sourceSquare.ix + runLength; ix++ ) {
-                if ( ix >= this.field.firstX && ix <= this.field.lastX) {
-                    for ( iy=this.move.sourceSquare.iy - runLength; iy <= this.move.sourceSquare.iy + runLength; iy++ ) {
-                        if ( iy >= this.field.firstY && iy <= this.field.lastY) {
-                            square = this.field.squaresByIndices[ix][iy];
-                            if ( square !== null && square != this.move.sourceSquare ) {
-                                if ( square.canHostFootballer && ! square.hasActiveFootballer() ) {
-                                    square.setCost(1);
-                                    square.enableSelection( this.activeTeam.credit >= this.move.sourceCost + square.getCost() );
-                                }
-                            }
-                        }
-                    }
-                }
+                this.activeTeam.credit -= ( this.move.sourceCost + this.move.destinationCost );
             }
         }
     };

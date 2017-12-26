@@ -38,7 +38,7 @@ baltek.presenter.Presenter.__initClass = function(){
 
         var SCORE_MAX = this.rulesEngine.getScoreMax();
 
-        var BONUS_MAX = 1;
+        var BONUS_MAX = this.rulesEngine.getBonusMax();
         var BONUS_ZERO_SYMBOL = "-";
         var BONUS_ONE_SYMBOL = "*";
 

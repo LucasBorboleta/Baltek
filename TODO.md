@@ -5,10 +5,10 @@ This document collects the milestones for the **baltek-the-program** project and
 # Milestones
 
 1. BALTEK mode "*two close players sharing the same browser*".
-2. BLATEK packaged from being download.
-3. The **baltek-the-program** repository is ready for accepting contributions.
-4. BALTEK mode "*two remote players using their own browser, synchronized thanks to JsTogether*"
-5. BALTEK mode "*human player against an AI*".
+2. BALTEK mode "*human player against an AI*".
+3. BLATEK packaged from being download.
+4. The **baltek-the-program** repository is ready for accepting contributions.
+5. BALTEK mode "*two remote players using their own browser, synchronized thanks to JsTogether*"
 6. BALTEK mode "*AI against another AI*".
 7. BALTEK tutorial as a merge of current "rules" and "help" texts.
 8. BALTEK redesigned for smartphone and any tactile screen, at least for the modes "two close players ..." and "human against AI".
@@ -17,7 +17,7 @@ This document collects the milestones for the **baltek-the-program** project and
 
 # Tasks
 
-1. Clean the first implementation of BALTEK mode "two close players".
+1. Try to implement an IA that plays randomly.
 2. Write unit tests using QUnit.
 3. Automate a "release" using Python (collecting and minifying released files, ...).
 4. Update "Design.md".

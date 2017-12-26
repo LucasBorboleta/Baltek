@@ -42,7 +42,7 @@ baltek.rules.Selectable.__initClass = function(){
         this.__selectable = condition;
     };
 
-    baltek.rules.Selectable.prototype.exportState = function(){
+    baltek.rules.Selectable.prototype.exportMoveState = function(){
         var state = {};
         state.selected = this.__selected;
         state.selectable = this.__selectable;

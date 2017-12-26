@@ -36,9 +36,7 @@ baltek.draw.Square.__initClass = function(){
         baltek.draw.Square.super.__initObject.call(this);
 
         this.ball = null ;
-        this.footballers = [] ;
-        this.footballers.push(null);
-        this.footballers.push(null);
+        this.footballers = [null, null] ;
 
         this.ix = ix;
         this.iy = iy;
