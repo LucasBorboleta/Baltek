@@ -67,16 +67,20 @@ baltek.rules.Field.__initClass = function(){
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
                 this.squaresByIndices[ix].push(null);
 
-                if ( ( ix === this.firstX || ix === this.lastX ) && ( iy === this.middleY ) ) {
-                    square = new baltek.rules.Square(this.engine, ix , iy);
-                    square.canHostBall = true;
-                    square.canHostFootballer = false;
-                    this.squaresByIndices[ix][iy] = square;
-                    if ( ix === this.firstX ) {
-                        this.goalSquares[0] = square;
-                    } else {
-                        this.goalSquares[1] = square;
+                if ( ix === this.firstX || ix === this.lastX ) {
+                    
+                    if ( iy === this.middleY ) {
+                        square = new baltek.rules.Square(this.engine, ix , iy);
+                        square.canHostBall = true;
+                        square.canHostFootballer = false;
+                        this.squaresByIndices[ix][iy] = square;
+                        if ( ix === this.firstX ) {
+                            this.goalSquares[0] = square;
+                        } else {
+                            this.goalSquares[1] = square;
+                        }
                     }
+
                 } else {
                     square = new baltek.rules.Square(this.engine, ix , iy);
                     square.canHostBall = true;

@@ -46,8 +46,8 @@ baltek.presenter.Presenter.__initClass = function(){
         var CREDIT_ZERO_SYMBOL = "-";
         var CREDIT_ONE_SYMBOL = "$";
 
-        this.team0Agent = { kind: "" };
-        this.team1Agent = { kind: "" };
+        this.team0Agent = { kind: "", ia: null };
+        this.team1Agent = { kind: "", ia: null };
 
         this.i18nTranslator = new baltek.i18n.Translator(baltek.i18n.translations, "fr" );
 

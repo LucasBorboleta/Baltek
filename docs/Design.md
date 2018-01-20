@@ -1,38 +1,34 @@
-# Introduction
+# Design of Baltek
 
-This document aims at collecting implementation principles and choices, as well as thoughts for not yet implemented features.  Therefore the audience of this document is the interested developers in contributing to *Baltek* , but not the end-users of *Baltek*.
+## Introduction
 
-# Implementation
+This document aims at collecting implementation principles and choices, as well as thoughts for not yet implemented features. Therefore the audience of this document is the interested developers in contributing to _Baltek_ , but not the end-users of _Baltek_.
 
-## CSS
+## Implementation
 
-*w3.css* is used mainly for formatting texts, but not for buttons and selectors.
+### CSS
 
-*normalize.css* is not directly used, but  *w3.css* uses  some extract of *normalize.css*.
+_w3.css_ is used mainly for formatting texts, but not for buttons and selectors.
 
-## JS
+_normalize.css_ is not directly used, but _w3.css_ uses some extract of _normalize.css_.
 
-*JavaScript.isSexy* (http://javascriptissexy.com/)  is a blog on modern JavaScript and modern web application development. A chunk of code is used for implemented OOP inheritance in the *Baltek* classes.*Richard*,  the author of the blog, also quotes *Douglas Crockford*.
+### JS
 
+_JavaScript.isSexy_ [](http://javascriptissexy.com/) is a blog on modern JavaScript and modern web application development. A chunk of code is used for implemented OOP inheritance in the _Baltek_ classes._Richard_, the author of the blog, also quotes _Douglas Crockford_.
 
+## General design
 
+_Baltek_ aims at decoupling its modules in order to implement, as easy as possible, the following features or changes:
 
-
-
-
-# General design
-
-*Baltek* aims at decoupling its modules  in order to implement, as easy as possible,  the following features or changes:
-
-- The user plays against another player seating in front of the same  desktop computer.
+- The user plays against another player seating in front of the same desktop computer.
 - The user plays against an Artificial Intelligence (AI).
 - The user plays against a remote player.
-- *Baltek*  adapts  the visual aspect to either desktop or smart phone.
+- _Baltek_ adapts the visual aspect to either desktop or smart phone.
 - The developer decides to use another User Interface (UI) framework.
 
 Let us get inspiration from the **Model View Presenter (MVP)**
 
-> ```
+> ```ascii
 >            +-----------+
 >            |   View    |
 >            +--+----+---+
@@ -63,7 +59,7 @@ Let us translate such diagram into a table of events:
 
 The previous objectives implies the following cluster of classes:
 
-## Cluster for the state of game (Model)
+### Cluster for the state of game (Model)
 
 These classes represent:
 
@@ -83,7 +79,7 @@ These classes know:
 - The possible action of the active team: move of each player, move of the ball, reinitialize the players positions.
 - How to note the played moves.
 
-## Cluster for the Presenter
+### Cluster for the Presenter
 
 These classes manage:
 
@@ -91,24 +87,24 @@ These classes manage:
 - The coordination between all other clusters.
 - The captures of events.
 
-## Cluster for the View
+### Cluster for the View
 
 These classes manage the drawing. Nothing else.
 
-## Cluster for the AI
+### Cluster for the AI
 
 These classes represent a virtual player.
 
 From a given state of the game, the AI provides moves. An advanced AI might also used the previous states of the game in order to provides the next moves.
 
-## Cluster for the remote interaction
+### Cluster for the remote interaction
 
 These classes are responsible for:
 
 - Initializing the remote connection.
 - Transforming local event into remote event, and vice versa.
 
-# The game phases
+## The game phases
 
 Hereafter are the phases that are relevant and useful for organizing the software
 
@@ -120,7 +116,7 @@ Hereafter are the phases that are relevant and useful for organizing the softwar
 - 1 turn is composed of n >= 0 moves
 - 1 move is the smallest action that a player can decide
 
-# Estimation of the number of possible moves
+## Estimation of the number of possible moves
 
 Let us determine a bound for the possible moves:
 
@@ -139,7 +135,7 @@ Let us determine a bound for the possible moves:
 
 - For a move, `6*(24 + 8 + 16) = 6*48 = 288` moves are possible, or maybe less, but never more.
 
-# Ideas for cutting responsibilities amongst the classes
+## Ideas for cutting responsibilities amongst the classes
 
 - One entity PlayerBlue
 - One entity PlayerRed
@@ -186,7 +182,7 @@ Let us determine a bound for the possible moves:
   - Hint-1: let us imagine an Artificial Intelligence that queries the RulesEngine, makes its own assessment, makes its exploration of the tree of moves, makes its decision.
   - Hint-2: the steps of the construction of the move should be also beneficial for interaction between the Presenter and the (Screen/ Mouse). Either the RulesEngine or the Move can notifies the Presenter of the steps of construction of the move.
 
-# Idea for easily click on smartphone
+## Idea for easily click on smartphone
 
 - Only click a box, no attempt to click on the ball or the player inside the box.
 - If the box only contains the footballer:
@@ -198,19 +194,22 @@ Let us determine a bound for the possible moves:
 - If the box only contains the footballer and the ball:
 
   - the first click selects the ball for a "kick" if it is possible
+
   - the second click selects the footballer for a "run"
+
   - the third click selects the footballer for a "sprint" if it is possible
-  - the fourth click unselect the footballer.
 
-  # Idea for interfacing "sprint"
+  - the fourth click unselect the footballer
 
-  - button with three states:
+## Idea for interfacing "sprint"
 
-    - "sprint: off" ; this is the state at initialization.
-    - "sprint: on" ; this is the state when it is going to be used.
-    - "sprint: over" ; this is the state when it has been used.
+- button with three states:
 
-# Idea for run/sprint/kick options
+  - "sprint: off" ; this is the state at initialization.
+  - "sprint: on" ; this is the state when it is going to be used.
+  - "sprint: over" ; this is the state when it has been used.
+
+## Idea for run/sprint/kick options
 
 Articulate the options as a sort of states and transitions machinery:
 
@@ -224,14 +223,14 @@ Articulate the options as a sort of states and transitions machinery:
 
 Use priorities in the states of options:
 
-1. run (if canRun)
+- run (if canRun)
 
-  1. sprint:off
-  2. sprint:on (if canSprint)
+  - sprint:off
+  - sprint:on (if canSprint)
 
-2. kick (if canKick)
+- kick (if canKick)
 
-  # Regarding the move, other idea for organizing the interaction between the engine and the player
+## Regarding the move, other idea for organizing the interaction between the engine and the player
 
 | Step | Engine                                   | Player                                   |
 | ---- | ---------------------------------------- | ---------------------------------------- |
@@ -247,7 +246,7 @@ Use priorities in the states of options:
 
 When finding selectable options or finding selectable destinations, the costs are evaluated.
 
-# Ideas for synchronizing the Engine state and the Presenter state
+## Ideas for synchronizing the Engine state and the Presenter state
 
 - Engine export a state to Presenter without using pointers, but just integers.
 - Engine exported state includes:
@@ -290,3 +289,87 @@ When finding selectable options or finding selectable destinations, the costs ar
   - unselectBall() as reaction to "click"
   - unselectFootballer( {ix:? ; iy:?} ) as reaction to "click"
   - selectBox( {ix:? , iy:?} ) as reaction to "click"
+
+## Model
+
+Attributes
+
+- Field as a rectangular grid of Square
+- 2 Teams of 6 Footballers
+- Ball
+- activeTeam
+- match, round, turn, move ?
+
+Creating
+
+- Field
+- Square
+- Footballer
+- Team
+- Ball
+
+Positioning
+- Field::clear
+- Square::clean
+- Square::setFootballer
+- Square::setBall
+
+Enabling
+- Footballer::enableSelection(condition)
+- Footballer::enableKick (condition)
+- Footballer::enableRun (condition)
+- Ball::enableSelection(condition)
+- Square::enableSelection(condition)
+- Move::enableSprint(condition)
+- Turn::enableConfirm(condition)
+- Turn::enableCancel(condition)
+
+Selecting
+
+- Footballer::select(condition)
+- Ball::selection(condition)
+- Square::select(condition)
+- Move::selectSprint(condition)
+- Turn::confirm()
+- Turn::cancel()
+
+Cloning
+
+* Model::cloneStructure
+* Model::cloneState
+
+Querying
+
+## Using the Model
+
+- The Presenter creates an Engine
+  * The Engine creates the Engine Model
+  * The Engine builds the structure of the Engine Model
+- The Presenter creates an UI Model
+- The Presenter requests the UI Model to clone the structure of the Engine Model
+- The Presenter registers itself as Observer of Engine Model
+- The Agent can be:
+  - Local UI Agent
+  - Remote UI Agent
+  - Local IA Agent
+  - Remote IA Agent
+- The UI Model can display:
+  - The actual Engine Model
+  - The move being evaluated by some Agent (UI or IA, local or remote)
+  - A switch might enable or disable the display of the opponent thinking, in case the opponent is remote or/and IA.
+- The Presenter creates an Agent0 associated to Team0
+- The Presenter registers itself as Observer of Agent0
+- The Presenter creates an Agent1 associated to Team1
+- The Presenter registers itself as Observer of Agent1
+- The Presenter requests the Engine update
+  - The Engine updates the state of the Engine Model
+  - The Presenter requests the UI Model to clone the state of the Engine Model
+- The User selects some UI item
+  - The UI Model notifies the Presenter
+  - The Presenter filters UI Model selection and transforms it as a selection on the Engine Model
+  - The Presenter requests the Engine update
+- The Agent0 selects something
+  - The Agent0 notifies each of its observers, which is the Presenter
+  - The Presenter filters notification  and transforms it as a selection on the Engine Model
+  - The Presenter requests the Engine update
+
