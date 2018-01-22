@@ -67,7 +67,7 @@ baltek.presenter.WhatTopState.__initClass = function(){
     };
 
     baltek.presenter.WhatTopState.prototype.getDefaultSubstate = function(){
-        return this.whatStateShowAbout;
+        return this.whatStateShowHelp;
     };
 
     baltek.presenter.WhatTopState.prototype.updateFromObservable = function(observable){
