@@ -29,6 +29,8 @@ During Fall 2017, the effort was on translating of the rules text and selection 
 
 In October 2017, the description of the **rules** was moved in a separate project, named  **[baltek-the-rules](https://github.com/LucasBorboleta/baltek-the-rules)** in order to finalize their translations and to promote them.
 
+In March 2018, two browsers can be synchronized thanks to TogetherJS in order to realize the mode "two remote BALTEK players".
+
 # Licenses
 
 BALTEK (_the program_) is licensed under the [GNU General Public License](http://www.gnu.org/licenses/). 

@@ -82,13 +82,12 @@
 				<button class="baltek-button-class" type="button" id="baltek-button-rules" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-help" ></button>
 	        	<button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
+
+				<button class="baltek-button-class" type="button" id="baltek-button-togetherjs"
+						onclick="TogetherJS(this); return false;">+</button>
+
 				<button class="baltek-button-class" type="button" id="baltek-button-debug" ></button>
 
-				<!--
-					<script src="https://togetherjs.com/togetherjs-min.js"></script>
-					<button class="baltek-button-class" type="button"
-							onclick="TogetherJS(this); return false;">Start TogetherJS</button>
-				-->
 			</div>
 
 		</div>
@@ -117,6 +116,26 @@
 			<p class="baltek-debug-messages-class" id="baltek-debug-messages" ></p>
 		</div>
 
+		<!-- TogetherJS settings -->
+		<script>
+			var TogetherJSConfig_cloneClicks = true;
+			var TogetherJSConfig_dontShowClicks = true;
+			var TogetherJSConfig_useMinimizedCode = false;
+		</script>
+
+		<script src="../../packages/togetherjs/js/togetherjs.js"></script>
+
+		<script>
+			TogetherJS.hub.on( "canvas-abstract-click",
+				function (msg) {
+					if ( ! msg.sameUrl ) {
+						return;
+					}
+					baltek.draw.Selectable.__instances[msg.id].onAbstractClick();
+				}
+			);
+		</script>
+
 		<!-- The "*.js" baltek files must be loaded in lexicographical order -->
 		<script src="./js/baltek/__baltek.js"></script>
 
@@ -131,9 +150,6 @@
 		<script src="./js/baltek/draw/Selectable.js"></script>
 		<script src="./js/baltek/draw/Square.js"></script>
 		<script src="./js/baltek/draw/SquareWatcher.js"></script>
-
-		<script src="./js/baltek/ia/__ia.js"></script>
-		<script src="./js/baltek/ia/IA.js"></script>
 
 		<script src="./js/baltek/i18n/__i18n.js"></script>
 		<script src="./js/baltek/i18n/translations-en.js"></script>

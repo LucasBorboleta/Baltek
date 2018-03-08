@@ -24,6 +24,7 @@ baltek.draw.Selectable = function(){
 };
 
 baltek.draw.Selectable.__initClassCalled = false;
+baltek.draw.Selectable.__instances = [];
 
 baltek.draw.Selectable.__initClass = function(){
 
@@ -40,7 +41,10 @@ baltek.draw.Selectable.__initClass = function(){
         this.selected = false;
 
         var thisSaved = this;
-        this.onClickWrapper = function(event){ thisSaved.onclick(event); };
+        this.onClickWrapper = function(event){ thisSaved.onClick(event); };
+
+        baltek.draw.Selectable.__instances.push(this);
+        this.id = ( baltek.draw.Selectable.__instances.length - 1);
     };
 
     baltek.draw.Selectable.prototype.contains = function(point){
@@ -69,18 +73,26 @@ baltek.draw.Selectable.__initClass = function(){
         this.draw();
     };
 
-    baltek.draw.Selectable.prototype.onclick = function(event){
+    baltek.draw.Selectable.prototype.onClick = function(event){
         if (this.selectable) {
             var mousePosition = baltek.draw.getMousePosition(event);
             var clicked = this.contains(mousePosition);
 
             if ( clicked ) {
-                // Inverse the selection status
-                this.selected = (! this.selected);
-                this.draw();
-                this.notifyObservers(this.selectableAspect);
+                if ( TogetherJS.running ) {
+                    TogetherJS.send( { type: "canvas-abstract-click", id: this.id } );
+                }
+                this.onAbstractClick();
             }
         }
+    };
+
+    baltek.draw.Selectable.prototype.onAbstractClick = function(){
+        // Inverse the selection status
+        this.selected = (! this.selected);
+
+        this.draw();
+        this.notifyObservers(this.selectableAspect);
     };
 };
 ///////////////////////////////////////////////////////////////////////////////
