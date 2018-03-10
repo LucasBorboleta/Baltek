@@ -35,7 +35,7 @@ baltek.i18n.translations.pt = {
     "baltek-button-restartGame:button" : "Reiniciar jogo" ,
     "baltek-button-resumeGame:button"  : "Retomar jogo" ,
     "baltek-button-startGame:button"   : "Novo jogo" ,
-    "baltek-button-quitGame:button"    : "Sair do game" ,
+    "baltek-button-quitGame:button"    : "Sair do jogo" ,
 
     "baltek-select-coordinates:no"     : "Coordenadas: não" ,
     "baltek-select-coordinates:yes"    : "Coordenadas: sim" ,
