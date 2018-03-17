@@ -40,6 +40,7 @@ baltek.presenter.TopState.__initClass = function(){
     baltek.presenter.TopState.prototype.initSubstates = function(){
         this.gameTopState = new baltek.presenter.GameTopState(this.presenter, this);
         this.whatTopState = new baltek.presenter.WhatTopState(this.presenter, this);
+        this.settingsState = new baltek.presenter.SettingsState(this.presenter, this);
     };
 
     baltek.presenter.TopState.prototype.getDefaultSubstate = function(){
@@ -47,20 +48,10 @@ baltek.presenter.TopState.__initClass = function(){
     };
 
     baltek.presenter.TopState.prototype.updateFromObservable = function(observable){
-
-        if ( observable === this.presenter.language ) {
-            this.presenter.i18nTranslator.setLanguage(this.presenter.language.getSelection());
-
-        } else if ( observable === this.presenter.debug ) {
-                baltek.debug.toggle();
-
+        if ( this.superState !== null ) {
+            this.superState.updateFromObservable(observable);
         } else {
-
-            if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
-            } else {
-                baltek.utils.assert( false, "observable not managed" );
-            }
+            baltek.utils.assert( false, "observable not managed" );
         }
     };
 };

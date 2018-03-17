@@ -39,15 +39,14 @@ baltek.debug.__initModule = function(){
 
     baltek.debug.messageCount = 0;
     baltek.debug.isEnabled = true ;
-    baltek.debug.toggle();
 };
 
 baltek.debug.clearMessages = function(){
     baltek.debug.messages.innerHTML = "" ;
 };
 
-baltek.debug.toggle = function(){
-    baltek.debug.isEnabled = ( ! baltek.debug.isEnabled );
+baltek.debug.enable = function(condition){
+    baltek.debug.isEnabled = condition;
 
     if ( ! baltek.debug.isEnabled ) {
         baltek.debug.clearMessages();

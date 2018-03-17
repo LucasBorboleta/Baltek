@@ -42,6 +42,7 @@ baltek.presenter.__initModule = function(){
     baltek.presenter.GameStateIsRunning.__initClass();
     baltek.presenter.GameTopState.__initClass();
     baltek.presenter.Presenter.__initClass();
+    baltek.presenter.SettingsState.__initClass();
     baltek.presenter.State.__initClass();
     baltek.presenter.SuperState.__initClass();
     baltek.presenter.TopState.__initClass();

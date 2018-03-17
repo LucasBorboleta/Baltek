@@ -39,18 +39,14 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
     baltek.presenter.GameStateIsReadyToStart.prototype.enter = function(){
         this.presenter.hideAllButtons();
         this.presenter.startGame.show(true);
-        this.presenter.team0Kind.show(true);
-        this.presenter.team1Kind.show(true);
-        this.presenter.coordinates.show(true);
-        this.presenter.language.show(true);
+        this.presenter.settings.show(true);
+        this.presenter.invitation.show(true);
         this.presenter.what.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.startGame.enable(true);
-        this.presenter.team0Kind.enable(true);
-        this.presenter.team1Kind.enable(true);
-        this.presenter.coordinates.enable(true);
-        this.presenter.language.enable(true);
+        this.presenter.settings.enable(true);
+        this.presenter.invitation.enable(true);
         this.presenter.what.enable(true);
     };
 

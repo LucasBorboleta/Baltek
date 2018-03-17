@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 ///////////////////////////////////////////////////////////////////////////////
 baltek.i18n.translations.eo = {
-    "baltek-button-debug:button"       : ":/" ,
 
     "baltek-button-about:button"       : "Pri" ,
     "baltek-button-help:button"        : "Helpo" ,
@@ -29,8 +28,10 @@ baltek.i18n.translations.eo = {
     "baltek-button-undo:button"        : "Malfari" ,
     "baltek-button-confirm:button"     : "Bone" ,
 
+    "baltek-button-invitation:button"  : "Invito" ,
     "baltek-button-goToGame:button"    : "< Ludo" ,
     "baltek-button-goToHelp:button"    : "?" ,
+    "baltek-button-settings:button"    : "Agordoj" ,
 
     "baltek-button-restartGame:button" : "Rekomenci ludon" ,
     "baltek-button-resumeGame:button"  : "Daŭri ludon" ,
@@ -43,6 +44,9 @@ baltek.i18n.translations.eo = {
 
     "baltek-select-coordinates:no"     : "Koordinatoj: ne" ,
     "baltek-select-coordinates:yes"    : "Koordinatoj: jes" ,
+
+    "baltek-select-debug:no"           : "*Debug *messages: ne" ,
+    "baltek-select-debug:yes"          : "*Debug *messages: jes" ,
 
     "baltek-select-language:name"      : "Esperanto" ,
     "baltek-select-language:en"        : "English" ,

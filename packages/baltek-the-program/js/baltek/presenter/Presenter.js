@@ -113,6 +113,12 @@ baltek.presenter.Presenter.__initClass = function(){
         this.coordinates.registerObserver(this);
         this.coordinates.setSelection("no");
 
+        this.invitation = new baltek.widget.Button( "baltek-button-invitation" , this.i18nTranslator);
+        this.invitation.registerObserver(this);
+
+        this.settings = new baltek.widget.Button( "baltek-button-settings" , this.i18nTranslator);
+        this.settings.registerObserver(this);
+
         this.what = new baltek.widget.Button( "baltek-button-goToHelp" , this.i18nTranslator);
         this.what.registerObserver(this);
 
@@ -128,8 +134,13 @@ baltek.presenter.Presenter.__initClass = function(){
         this.about = new baltek.widget.Button( "baltek-button-about" , this.i18nTranslator);
         this.about.registerObserver(this);
 
-        this.debug = new baltek.widget.Button( "baltek-button-debug" , this.i18nTranslator);
+        this.debug = new baltek.widget.Selector( "baltek-select-debug", this.i18nTranslator,
+            [ "no", "yes" ] );
         this.debug.registerObserver(this);
+        this.debug.setSelection("no");
+        baltek.debug.enable(false);
+
+        this.settingsZone = document.getElementById( "baltek-settingsZone" );
 
         this.ballWatcher = new baltek.draw.BallWatcher();
         this.ballWatcher.registerObserver(this);
@@ -181,8 +192,11 @@ baltek.presenter.Presenter.__initClass = function(){
         this.undo.enable(false);
         this.credit.enable(false);
 
+        this.settings.enable(false);
         this.language.enable(false);
         this.coordinates.enable(false);
+        this.debug.enable(false);
+        this.invitation.enable(false);
 
         this.what.enable(false);
         this.rules.enable(false);
@@ -226,6 +240,9 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.language.show(false);
         this.coordinates.show(false);
+        this.debug.show(false);
+        this.settings.show(false);
+        this.invitation.show(false);
 
         this.what.show(false);
         this.rules.show(false);

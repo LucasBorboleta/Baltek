@@ -20,8 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 ///////////////////////////////////////////////////////////////////////////////
 baltek.i18n.translations.en = {
-    "baltek-button-debug:button"       : ":/" ,
-
     "baltek-button-about:button"       : "About" ,
     "baltek-button-help:button"        : "Help" ,
     "baltek-button-rules:button"       : "Rules" ,
@@ -29,8 +27,10 @@ baltek.i18n.translations.en = {
     "baltek-button-undo:button"        : "Undo" ,
     "baltek-button-confirm:button"     : "OK" ,
 
+    "baltek-button-invitation:button"  : "Invitation" ,
     "baltek-button-goToGame:button"    : "< Game" ,
     "baltek-button-goToHelp:button"    : "?" ,
+    "baltek-button-settings:button"    : "Settings" ,
 
     "baltek-button-restartGame:button" : "Restart game" ,
     "baltek-button-resumeGame:button"  : "Resume game" ,
@@ -43,6 +43,9 @@ baltek.i18n.translations.en = {
 
     "baltek-select-coordinates:no"     : "Coordinates: no" ,
     "baltek-select-coordinates:yes"    : "Coordinates: yes" ,
+
+    "baltek-select-debug:no"           : "Debug messages: no" ,
+    "baltek-select-debug:yes"          : "Debug messages: yes" ,
 
     "baltek-select-language:name"      : "English" ,
     "baltek-select-language:eo"        : "Esperanto" ,

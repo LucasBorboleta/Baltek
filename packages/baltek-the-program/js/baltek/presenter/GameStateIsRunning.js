@@ -39,14 +39,14 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
     baltek.presenter.GameStateIsRunning.prototype.enter = function(){
         this.presenter.hideAllButtons();
         this.presenter.quitGame.show(true);
-        this.presenter.coordinates.show(true);
-        this.presenter.language.show(true);
+        this.presenter.settings.show(true);
+        this.presenter.invitation.show(true);
         this.presenter.what.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.quitGame.enable(true);
-        this.presenter.coordinates.enable(true);
-        this.presenter.language.enable(true);
+        this.presenter.settings.enable(true);
+        this.presenter.invitation.enable(true);
         this.presenter.what.enable(true);
 
         if ( ! this.presenter.rulesEngine.matchIsDefined() ) {

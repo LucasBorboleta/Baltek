@@ -58,8 +58,11 @@ baltek.presenter.GameTopState.__initClass = function(){
 
     baltek.presenter.GameTopState.prototype.updateFromObservable = function(observable){
 
-        if ( observable === this.presenter.coordinates ) {
-            this.presenter.showXYLabels( this.presenter.coordinates.getSelection() === "yes" );
+        if ( observable === this.presenter.settings ) {
+            this.setState(this.superState.settingsState);
+
+        } else if ( observable === this.presenter.invitation ) {
+            TogetherJS();
 
         } else if ( observable === this.presenter.what ) {
             this.setState(this.superState.whatTopState);

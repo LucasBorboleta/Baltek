@@ -47,9 +47,6 @@
 				<button class="baltek-button-class" type="button" id="baltek-button-resumeGame" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-quitGame" ></button>
 
-				<select class="baltek-select-class baltek-team-0-background-class" id="baltek-select-team0Kind" ></select>
-				<select class="baltek-select-class baltek-team-1-background-class" id="baltek-select-team1Kind"  ></select>
-
 				<button class="baltek-button-class"  type="button" id="baltek-button-goToGame" ></button>
 			</div>
 
@@ -66,28 +63,18 @@
 				<select class="baltek-select-class" id="baltek-select-sprint" ></select>
 				<button class="baltek-button-class" type="button" id="baltek-button-confirm" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-undo" ></button>
-
 				<span class="baltek-counter-class" id="baltek-counter-credit" ></span>
 			</div>
 
-			<!-- 4) Preferences -->
+			<!-- 4) Settings and Help -->
 			<div class="baltek-buttonGroup-class" >
-				<select  class="baltek-select-class" id="baltek-select-coordinates" ></select>
-				<select  class="baltek-select-class" id="baltek-select-language" ></select>
-			</div>
+				<button class="baltek-button-class" type="button" id="baltek-button-invitation" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-settings" ></button>
 
-			<!-- 5) Help -->
-			<div class="baltek-buttonGroup-class" >
 				<button class="baltek-button-class" type="button" id="baltek-button-goToHelp" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-rules" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-help" ></button>
 	        	<button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
-
-				<button class="baltek-button-class" type="button" id="baltek-button-togetherjs"
-						onclick="TogetherJS(this); return false;">+</button>
-
-				<button class="baltek-button-class" type="button" id="baltek-button-debug" ></button>
-
 			</div>
 
 		</div>
@@ -97,6 +84,14 @@
 			<iframe class="baltek-help-frame-class" id="baltek-iframe-rules" ></iframe>
 			<iframe class="baltek-help-frame-class" id="baltek-iframe-help" ></iframe>
 			<iframe class="baltek-help-frame-class" id="baltek-iframe-about"></iframe>
+
+			<div id="baltek-settingsZone" >
+				<p><select class="baltek-select-class baltek-team-0-background-class" id="baltek-select-team0Kind" ></select></p>
+				<p><select class="baltek-select-class baltek-team-1-background-class" id="baltek-select-team1Kind"  ></select></p>
+				<p><select  class="baltek-select-class" id="baltek-select-coordinates" ></select></p>
+				<p><select  class="baltek-select-class" id="baltek-select-language" ></select></p>
+				<p><select class="baltek-select-class" id="baltek-select-debug" ></select></p>
+			</div>
 		</div>
 
 		<div class="baltek-debugZone-class" id="baltek-debugZone" >
@@ -165,6 +160,7 @@
 		<script src="./js/baltek/presenter/GameStateIsRunning.js"></script>
 		<script src="./js/baltek/presenter/GameTopState.js"></script>
 		<script src="./js/baltek/presenter/Presenter.js"></script>
+		<script src="./js/baltek/presenter/SettingsState.js"></script>
 		<script src="./js/baltek/presenter/State.js"></script>
 		<script src="./js/baltek/presenter/SuperState.js"></script>
 		<script src="./js/baltek/presenter/TopState.js"></script>

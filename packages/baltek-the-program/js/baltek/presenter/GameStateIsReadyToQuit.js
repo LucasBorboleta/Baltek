@@ -44,15 +44,15 @@ baltek.presenter.GameStateIsReadyToQuit.__initClass = function(){
         this.presenter.team0Score.show(true);
         this.presenter.team1Score.show(true);
         this.presenter.team1Bonus.show(true);
-        this.presenter.coordinates.show(true);
-        this.presenter.language.show(true);
+        this.presenter.settings.show(true);
+        this.presenter.invitation.show(true);
         this.presenter.what.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.resumeGame.enable(true);
         this.presenter.quitGame.enable(true);
-        this.presenter.coordinates.enable(true);
-        this.presenter.language.enable(true);
+        this.presenter.settings.enable(true);
+        this.presenter.invitation.enable(true);
         this.presenter.what.enable(true);
     };
 
