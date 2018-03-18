@@ -63,8 +63,8 @@ baltek.presenter.Presenter.__initClass = function(){
         this.quitGame = new baltek.widget.Button( "baltek-button-quitGame" , this.i18nTranslator);
         this.quitGame.registerObserver(this);
 
-        this.game = new baltek.widget.Button( "baltek-button-goToGame" , this.i18nTranslator);
-        this.game.registerObserver(this);
+        this.goToGame = new baltek.widget.Button( "baltek-button-goToGame" , this.i18nTranslator);
+        this.goToGame.registerObserver(this);
 
         this.team0Kind = new baltek.widget.Selector( "baltek-select-team0Kind", this.i18nTranslator,
             [ "human", "ai1", "ai2", "ai3" ] );
@@ -116,19 +116,19 @@ baltek.presenter.Presenter.__initClass = function(){
         this.invitation = new baltek.widget.Button( "baltek-button-invitation" , this.i18nTranslator);
         this.invitation.registerObserver(this);
 
-        this.settings = new baltek.widget.Button( "baltek-button-settings" , this.i18nTranslator);
-        this.settings.registerObserver(this);
+        this.goToSettings = new baltek.widget.Button( "baltek-button-goToSettings" , this.i18nTranslator);
+        this.goToSettings.registerObserver(this);
 
-        this.what = new baltek.widget.Button( "baltek-button-goToHelp" , this.i18nTranslator);
-        this.what.registerObserver(this);
+        this.goToHelp = new baltek.widget.Button( "baltek-button-goToHelp" , this.i18nTranslator);
+        this.goToHelp.registerObserver(this);
 
         this.rulesIFrame = new baltek.widget.IFrame( "baltek-iframe-rules" , this.i18nTranslator);
         this.rules = new baltek.widget.Button( "baltek-button-rules" , this.i18nTranslator);
         this.rules.registerObserver(this);
 
-        this.helpIFrame = new baltek.widget.IFrame( "baltek-iframe-help" , this.i18nTranslator);
-        this.help = new baltek.widget.Button( "baltek-button-help" , this.i18nTranslator);
-        this.help.registerObserver(this);
+        this.guideIFrame = new baltek.widget.IFrame( "baltek-iframe-guide" , this.i18nTranslator);
+        this.guide = new baltek.widget.Button( "baltek-button-guide" , this.i18nTranslator);
+        this.guide.registerObserver(this);
 
         this.aboutIFrame = new baltek.widget.IFrame( "baltek-iframe-about" , this.i18nTranslator);
         this.about = new baltek.widget.Button( "baltek-button-about" , this.i18nTranslator);
@@ -140,7 +140,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.debug.setSelection("no");
         baltek.debug.enable(false);
 
-        this.settingsZone = document.getElementById( "baltek-settingsZone" );
+        this.goToSettingsZone = document.getElementById( "baltek-settingsZone" );
 
         this.ballWatcher = new baltek.draw.BallWatcher();
         this.ballWatcher.registerObserver(this);
@@ -185,22 +185,22 @@ baltek.presenter.Presenter.__initClass = function(){
         this.team1Kind.enable(false);
         this.team1Bonus.enable(false);
 
-        this.game.enable(false);
+        this.goToGame.enable(false);
 
         this.sprint.enable(false);
         this.confirm.enable(false);
         this.undo.enable(false);
         this.credit.enable(false);
 
-        this.settings.enable(false);
+        this.goToSettings.enable(false);
         this.language.enable(false);
         this.coordinates.enable(false);
         this.debug.enable(false);
         this.invitation.enable(false);
 
-        this.what.enable(false);
+        this.goToHelp.enable(false);
         this.rules.enable(false);
-        this.help.enable(false);
+        this.guide.enable(false);
         this.about.enable(false);
     };
 
@@ -231,7 +231,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.team1Score.show(false);
         this.team1Bonus.show(false);
 
-        this.game.show(false);
+        this.goToGame.show(false);
 
         this.sprint.show(false);
         this.confirm.show(false);
@@ -241,12 +241,12 @@ baltek.presenter.Presenter.__initClass = function(){
         this.language.show(false);
         this.coordinates.show(false);
         this.debug.show(false);
-        this.settings.show(false);
+        this.goToSettings.show(false);
         this.invitation.show(false);
 
-        this.what.show(false);
+        this.goToHelp.show(false);
         this.rules.show(false);
-        this.help.show(false);
+        this.guide.show(false);
         this.about.show(false);
     };
 

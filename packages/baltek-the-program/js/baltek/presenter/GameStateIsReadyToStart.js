@@ -39,15 +39,15 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
     baltek.presenter.GameStateIsReadyToStart.prototype.enter = function(){
         this.presenter.hideAllButtons();
         this.presenter.startGame.show(true);
-        this.presenter.settings.show(true);
+        this.presenter.goToSettings.show(true);
         this.presenter.invitation.show(true);
-        this.presenter.what.show(true);
+        this.presenter.goToHelp.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.startGame.enable(true);
-        this.presenter.settings.enable(true);
+        this.presenter.goToSettings.enable(true);
         this.presenter.invitation.enable(true);
-        this.presenter.what.enable(true);
+        this.presenter.goToHelp.enable(true);
     };
 
     baltek.presenter.GameStateIsReadyToStart.prototype.updateFromObservable = function(observable){
@@ -67,7 +67,7 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
         } else if ( observable === this.presenter.startGame ) {
             this.presenter.team0Agent.kind = this.presenter.team0Kind.getSelection();
             this.presenter.team1Agent.kind = this.presenter.team1Kind.getSelection();
-            this.setState(this.superState.gameStateIsRunning);
+            this.setState(this.superState.goToGameStateIsRunning);
 
         } else {
 

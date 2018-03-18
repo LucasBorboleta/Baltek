@@ -39,15 +39,15 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
     baltek.presenter.GameStateIsRunning.prototype.enter = function(){
         this.presenter.hideAllButtons();
         this.presenter.quitGame.show(true);
-        this.presenter.settings.show(true);
+        this.presenter.goToSettings.show(true);
         this.presenter.invitation.show(true);
-        this.presenter.what.show(true);
+        this.presenter.goToHelp.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.quitGame.enable(true);
-        this.presenter.settings.enable(true);
+        this.presenter.goToSettings.enable(true);
         this.presenter.invitation.enable(true);
-        this.presenter.what.enable(true);
+        this.presenter.goToHelp.enable(true);
 
         if ( ! this.presenter.rulesEngine.matchIsDefined() ) {
             this.presenter.rulesEngine.matchInit();
@@ -62,14 +62,14 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         var squareIndices = null;
 
         if ( observable === this.presenter.quitGame ) {
-            this.setState(this.superState.gameStateIsReadyToQuit);
+            this.setState(this.superState.goToGameStateIsReadyToQuit);
 
         } else if ( observable === this.presenter.rulesEngine ) {
             var state = this.presenter.rulesEngine.exportMoveState();
             this.presenter.updateFromEngineState(state);
 
             if ( ! this.presenter.rulesEngine.matchIsActive() ) {
-                this.setState(this.superState.gameStateIsFinished);
+                this.setState(this.superState.goToGameStateIsFinished);
             }
 
         } else if ( observable === this.presenter.ballWatcher ) {

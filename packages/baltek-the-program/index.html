@@ -22,14 +22,12 @@
 	-->
 
 	<head>
-	    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../../packages/w3.css/css/w3.css">
+		<link rel="stylesheet" href="./css/baltek.css">
 		<title>Baltek</title>
 	</head>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="../../packages/w3.css/css/w3.css">
-	<link rel="stylesheet" href="./css/baltek.css">
 
 	<body id="baltek-body" onload="baltek.__initModule();">
 
@@ -46,11 +44,10 @@
 				<button class="baltek-button-class" type="button" id="baltek-button-restartGame" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-resumeGame" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-quitGame" ></button>
-
 				<button class="baltek-button-class"  type="button" id="baltek-button-goToGame" ></button>
 			</div>
 
-			<!-- 2) Scores and bonuses -->
+			<!-- 2) Scores and bonuses display -->
 			<div class="baltek-buttonGroup-class" >
 				<span class="baltek-counter-class baltek-team-0-background-class" id="baltek-counter-team0Bonus" ></span>
 				<span class="baltek-counter-class baltek-team-0-background-class" id="baltek-counter-team0Score" ></span>
@@ -69,12 +66,11 @@
 			<!-- 4) Settings and Help -->
 			<div class="baltek-buttonGroup-class" >
 				<button class="baltek-button-class" type="button" id="baltek-button-invitation" ></button>
-				<button class="baltek-button-class" type="button" id="baltek-button-settings" ></button>
-
+				<button class="baltek-button-class" type="button" id="baltek-button-goToSettings" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-goToHelp" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-rules" ></button>
-				<button class="baltek-button-class" type="button" id="baltek-button-help" ></button>
-	        	<button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
+				<button class="baltek-button-class" type="button" id="baltek-button-guide" ></button>
+	      <button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
 			</div>
 
 		</div>
@@ -82,7 +78,7 @@
 		<div class="baltek-drawZone-class" id="baltek-drawZone">
 			<canvas class="baltek-canvas-class" id="baltek-canvas-field"></canvas>
 			<iframe class="baltek-help-frame-class" id="baltek-iframe-rules" ></iframe>
-			<iframe class="baltek-help-frame-class" id="baltek-iframe-help" ></iframe>
+			<iframe class="baltek-help-frame-class" id="baltek-iframe-guide" ></iframe>
 			<iframe class="baltek-help-frame-class" id="baltek-iframe-about"></iframe>
 
 			<div id="baltek-settingsZone" >
@@ -104,32 +100,20 @@
 			</div>
 
 			<button class="baltek-button-class" type="button" id="baltek-debug-clearMessages"
-				    onclick="baltek.debug.clearMessages()" >Clear messages</button>
+	    				onclick="baltek.debug.clearMessages()" >Clear messages</button>
 
 			<span class="baltek-debug-mousePosition-class" id="baltek-debug-mousePosition" >Mouse(x,y) = (?, ?)</span>
 
 			<p class="baltek-debug-messages-class" id="baltek-debug-messages" ></p>
 		</div>
 
-		<!-- TogetherJS settings -->
+		<!-- The "*.js" TogetherJS file must be loaded with the following pre-settings -->
 		<script>
 			var TogetherJSConfig_cloneClicks = true;
 			var TogetherJSConfig_dontShowClicks = true;
 			var TogetherJSConfig_useMinimizedCode = false;
 		</script>
-
 		<script src="../../packages/togetherjs/js/togetherjs.js"></script>
-
-		<script>
-			TogetherJS.hub.on( "canvas-abstract-click",
-				function (msg) {
-					if ( ! msg.sameUrl ) {
-						return;
-					}
-					baltek.draw.Selectable.__instances[msg.id].onAbstractClick();
-				}
-			);
-		</script>
 
 		<!-- The "*.js" baltek files must be loaded in lexicographical order -->
 		<script src="./js/baltek/__baltek.js"></script>
@@ -165,7 +149,7 @@
 		<script src="./js/baltek/presenter/SuperState.js"></script>
 		<script src="./js/baltek/presenter/TopState.js"></script>
 		<script src="./js/baltek/presenter/WhatStateShowAbout.js"></script>
-		<script src="./js/baltek/presenter/WhatStateShowHelp.js"></script>
+		<script src="./js/baltek/presenter/WhatStateShowGuide.js"></script>
 		<script src="./js/baltek/presenter/WhatStateShowRules.js"></script>
 		<script src="./js/baltek/presenter/WhatTopState.js"></script>
 

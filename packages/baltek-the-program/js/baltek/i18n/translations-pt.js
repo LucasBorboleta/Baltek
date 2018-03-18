@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 baltek.i18n.translations.pt = {
 
     "baltek-button-about:button"       : "Sobre" ,
-    "baltek-button-help:button"        : "Ajuda" ,
+    "baltek-button-guide:button"       : "Guia" ,
     "baltek-button-rules:button"       : "Regras" ,
 
     "baltek-button-undo:button"        : "Anular" ,
@@ -30,8 +30,8 @@ baltek.i18n.translations.pt = {
 
     "baltek-button-invitation:button"  : "Convite" ,
     "baltek-button-goToGame:button"    : "< Jogo" ,
-    "baltek-button-goToHelp:button"    : "?" ,
-    "baltek-button-settings:button"    : "Configurações" ,
+    "baltek-button-goToHelp:button"    : "Ajuda" ,
+    "baltek-button-goToSettings:button"    : "Configurações" ,
 
     "baltek-button-restartGame:button" : "Reiniciar jogo" ,
     "baltek-button-resumeGame:button"  : "Retomar jogo" ,
@@ -48,7 +48,7 @@ baltek.i18n.translations.pt = {
     "baltek-select-sprint:yes"         : "Sprint: sim" ,
 
     "baltek-iframe-about:file"         : "./html/pt/baltek-about-pt.html" ,
-    "baltek-iframe-help:file"          : "./html/pt/baltek-help-pt.html" ,
+    "baltek-iframe-guide:file"          : "./html/pt/baltek-guide-pt.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-pt.html" ,
 
     "baltek-select-language:name"      : "Português" ,

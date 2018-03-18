@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 baltek.i18n.translations.eo = {
 
     "baltek-button-about:button"       : "Pri" ,
-    "baltek-button-help:button"        : "Helpo" ,
+    "baltek-button-guide:button"       : "Gvidilo" ,
     "baltek-button-rules:button"       : "Reguloj" ,
 
     "baltek-button-undo:button"        : "Malfari" ,
@@ -30,8 +30,8 @@ baltek.i18n.translations.eo = {
 
     "baltek-button-invitation:button"  : "Invito" ,
     "baltek-button-goToGame:button"    : "< Ludo" ,
-    "baltek-button-goToHelp:button"    : "?" ,
-    "baltek-button-settings:button"    : "Agordoj" ,
+    "baltek-button-goToHelp:button"    : "Helpo" ,
+    "baltek-button-goToSettings:button"    : "Agordoj" ,
 
     "baltek-button-restartGame:button" : "Rekomenci ludon" ,
     "baltek-button-resumeGame:button"  : "Daŭri ludon" ,
@@ -39,7 +39,7 @@ baltek.i18n.translations.eo = {
     "baltek-button-quitGame:button"    : "Ĉesi ludon" ,
 
     "baltek-iframe-about:file"         : "./html/eo/baltek-about-eo.html" ,
-    "baltek-iframe-help:file"          : "./html/eo/baltek-help-eo.html" ,
+    "baltek-iframe-guide:file"          : "./html/eo/baltek-guide-eo.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-eo.html" ,
 
     "baltek-select-coordinates:no"     : "Koordinatoj: ne" ,

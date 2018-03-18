@@ -41,25 +41,25 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
         this.presenter.restartGame.show(true);
         this.presenter.team0Score.show(true);
         this.presenter.team1Score.show(true);
-        this.presenter.settings.show(true);
+        this.presenter.goToSettings.show(true);
         this.presenter.invitation.show(true);
-        this.presenter.what.show(true);
+        this.presenter.goToHelp.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.restartGame.enable(true);
-        this.presenter.settings.enable(true);
+        this.presenter.goToSettings.enable(true);
         this.presenter.invitation.enable(true);
-        this.presenter.what.enable(true);
+        this.presenter.goToHelp.enable(true);
     };
 
     baltek.presenter.GameStateIsFinished.prototype.updateFromObservable = function(observable){
 
         if ( observable === this.presenter.restartGame ) {
             this.presenter.rulesEngine.matchInit();
-            this.setState(this.superState.gameStateIsReadyToStart);
+            this.setState(this.superState.goToGameStateIsReadyToStart);
 
         } else if ( observable === this.presenter.quitGame ) {
-            this.setState(this.superState.gameStateIsFinished);
+            this.setState(this.superState.goToGameStateIsFinished);
 
         } else {
 

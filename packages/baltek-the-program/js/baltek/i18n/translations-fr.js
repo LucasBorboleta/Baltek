@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 baltek.i18n.translations.fr = {
 
     "baltek-button-about:button"       : "A propos" ,
-    "baltek-button-help:button"        : "Aide" ,
+    "baltek-button-guide:button"       : "Guide" ,
     "baltek-button-rules:button"       : "Règles" ,
 
     "baltek-button-undo:button"        : "Annuler" ,
@@ -36,11 +36,11 @@ baltek.i18n.translations.fr = {
 
     "baltek-button-invitation:button"  : "Invitation" ,
     "baltek-button-goToGame:button"    : "< Jeu" ,
-    "baltek-button-goToHelp:button"    : "?" ,
-    "baltek-button-settings:button"    : "Paramètres" ,
+    "baltek-button-goToHelp:button"    : "Aide" ,
+    "baltek-button-goToSettings:button"    : "Paramètres" ,
 
     "baltek-iframe-about:file"         : "./html/fr/baltek-about-fr.html" ,
-    "baltek-iframe-help:file"          : "./html/fr/baltek-help-fr.html" ,
+    "baltek-iframe-guide:file"          : "./html/fr/baltek-guide-fr.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-fr.html" ,
 
     "baltek-select-language:name"      : "Français" ,

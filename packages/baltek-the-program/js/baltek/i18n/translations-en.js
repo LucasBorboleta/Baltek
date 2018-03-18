@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ///////////////////////////////////////////////////////////////////////////////
 baltek.i18n.translations.en = {
     "baltek-button-about:button"       : "About" ,
-    "baltek-button-help:button"        : "Help" ,
+    "baltek-button-guide:button"       : "Guide" ,
     "baltek-button-rules:button"       : "Rules" ,
 
     "baltek-button-undo:button"        : "Undo" ,
@@ -29,8 +29,8 @@ baltek.i18n.translations.en = {
 
     "baltek-button-invitation:button"  : "Invitation" ,
     "baltek-button-goToGame:button"    : "< Game" ,
-    "baltek-button-goToHelp:button"    : "?" ,
-    "baltek-button-settings:button"    : "Settings" ,
+    "baltek-button-goToHelp:button"    : "Help" ,
+    "baltek-button-goToSettings:button"    : "Settings" ,
 
     "baltek-button-restartGame:button" : "Restart game" ,
     "baltek-button-resumeGame:button"  : "Resume game" ,
@@ -38,7 +38,7 @@ baltek.i18n.translations.en = {
     "baltek-button-quitGame:button"    : "Quit game" ,
 
     "baltek-iframe-about:file"         : "./html/en/baltek-about-en.html" ,
-    "baltek-iframe-help:file"          : "./html/en/baltek-help-en.html" ,
+    "baltek-iframe-guide:file"          : "./html/en/baltek-guide-en.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-en.html" ,
 
     "baltek-select-coordinates:no"     : "Coordinates: no" ,

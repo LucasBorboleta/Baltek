@@ -38,13 +38,13 @@ baltek.presenter.TopState.__initClass = function(){
     };
 
     baltek.presenter.TopState.prototype.initSubstates = function(){
-        this.gameTopState = new baltek.presenter.GameTopState(this.presenter, this);
-        this.whatTopState = new baltek.presenter.WhatTopState(this.presenter, this);
-        this.settingsState = new baltek.presenter.SettingsState(this.presenter, this);
+        this.goToGameTopState = new baltek.presenter.GameTopState(this.presenter, this);
+        this.goToHelpTopState = new baltek.presenter.WhatTopState(this.presenter, this);
+        this.goToSettingsState = new baltek.presenter.SettingsState(this.presenter, this);
     };
 
     baltek.presenter.TopState.prototype.getDefaultSubstate = function(){
-        return this.gameTopState;
+        return this.goToGameTopState;
     };
 
     baltek.presenter.TopState.prototype.updateFromObservable = function(observable){

@@ -46,26 +46,26 @@ baltek.presenter.GameTopState.__initClass = function(){
     };
 
     baltek.presenter.GameTopState.prototype.initSubstates = function(){
-        this.gameStateIsFinished = new baltek.presenter.GameStateIsFinished(this.presenter, this);
-        this.gameStateIsReadyToStart = new baltek.presenter.GameStateIsReadyToStart(this.presenter, this);
-        this.gameStateIsRunning = new baltek.presenter.GameStateIsRunning(this.presenter, this);
-        this.gameStateIsReadyToQuit = new baltek.presenter.GameStateIsReadyToQuit(this.presenter, this);
+        this.goToGameStateIsFinished = new baltek.presenter.GameStateIsFinished(this.presenter, this);
+        this.goToGameStateIsReadyToStart = new baltek.presenter.GameStateIsReadyToStart(this.presenter, this);
+        this.goToGameStateIsRunning = new baltek.presenter.GameStateIsRunning(this.presenter, this);
+        this.goToGameStateIsReadyToQuit = new baltek.presenter.GameStateIsReadyToQuit(this.presenter, this);
     };
 
     baltek.presenter.GameTopState.prototype.getDefaultSubstate = function(){
-        return this.gameStateIsReadyToStart;
+        return this.goToGameStateIsReadyToStart;
     };
 
     baltek.presenter.GameTopState.prototype.updateFromObservable = function(observable){
 
-        if ( observable === this.presenter.settings ) {
-            this.setState(this.superState.settingsState);
+        if ( observable === this.presenter.goToSettings ) {
+            this.setState(this.superState.goToSettingsState);
 
         } else if ( observable === this.presenter.invitation ) {
             TogetherJS();
 
-        } else if ( observable === this.presenter.what ) {
-            this.setState(this.superState.whatTopState);
+        } else if ( observable === this.presenter.goToHelp ) {
+            this.setState(this.superState.goToHelpTopState);
 
         } else {
 

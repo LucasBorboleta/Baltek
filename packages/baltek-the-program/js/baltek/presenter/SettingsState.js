@@ -37,10 +37,11 @@ baltek.presenter.SettingsState.__initClass = function(){
     };
 
     baltek.presenter.SettingsState.prototype.enter = function(){
-        this.presenter.settingsZone.style.display = "inherit";
+        this.presenter.goToSettingsZone.style.display = "inherit";
 
         this.presenter.hideAllButtons();
-        this.presenter.game.show(true);
+        this.presenter.goToGame.show(true);
+        this.presenter.goToSettings.show(true);
         this.presenter.team0Kind.show(true);
         this.presenter.team1Kind.show(true);
         this.presenter.language.show(true);
@@ -48,16 +49,17 @@ baltek.presenter.SettingsState.__initClass = function(){
         this.presenter.debug.show(true);
 
         this.presenter.disableAllButtons();
-        this.presenter.game.enable(true);
-        //this.presenter.team0Kind.enable(true); // No IA implemented yet
-        //this.presenter.team1Kind.enable(true); // No IA implemented yet
+        this.presenter.goToGame.enable(true);
+        this.presenter.goToSettings.enable(false);
+        this.presenter.team0Kind.enable(false); // No IA implemented yet
+        this.presenter.team1Kind.enable(false); // No IA implemented yet
         this.presenter.language.enable(true);
         this.presenter.coordinates.enable(true);
         this.presenter.debug.enable(true);
     };
 
     baltek.presenter.SettingsState.prototype.exit = function(){
-        this.presenter.settingsZone.style.display = "none";
+        this.presenter.goToSettingsZone.style.display = "none";
     }
 
     baltek.presenter.SettingsState.prototype.updateFromObservable = function(observable){
@@ -68,8 +70,8 @@ baltek.presenter.SettingsState.__initClass = function(){
         } else if ( observable === this.presenter.team1Kind ) {
             this.presenter.team1Agent.kind = this.presenter.team1Kind.getSelection();
 
-        } else if ( observable === this.presenter.game ) {
-            this.setState(this.superState.gameTopState);
+        } else if ( observable === this.presenter.goToGame ) {
+            this.setState(this.superState.goToGameTopState);
 
         } else if ( observable === this.presenter.language ) {
             this.presenter.i18nTranslator.setLanguage(this.presenter.language.getSelection());

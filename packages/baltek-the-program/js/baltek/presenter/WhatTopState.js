@@ -39,41 +39,41 @@ baltek.presenter.WhatTopState.__initClass = function(){
 
     baltek.presenter.WhatTopState.prototype.atEnter = function(){
         this.presenter.rulesIFrame.show(false);
-        this.presenter.helpIFrame.show(false);
+        this.presenter.guideIFrame.show(false);
         this.presenter.aboutIFrame.show(false);
 
         this.presenter.hideAllButtons();
         this.presenter.language.show(true);
-        this.presenter.game.show(true);
+        this.presenter.goToGame.show(true);
         this.presenter.rules.show(true);
-        this.presenter.help.show(true);
+        this.presenter.guide.show(true);
         this.presenter.about.show(true);
 
         this.presenter.disableAllButtons();
         this.presenter.language.enable(true);
-        this.presenter.game.enable(true);
+        this.presenter.goToGame.enable(true);
     };
 
     baltek.presenter.WhatTopState.prototype.atExit = function(){
         this.presenter.rulesIFrame.show(false);
-        this.presenter.helpIFrame.show(false);
+        this.presenter.guideIFrame.show(false);
         this.presenter.aboutIFrame.show(false);
     };
 
     baltek.presenter.WhatTopState.prototype.initSubstates = function(){
-        this.whatStateShowRules = new baltek.presenter.WhatStateShowRules(this.presenter, this);
-        this.whatStateShowHelp = new baltek.presenter.WhatStateShowHelp(this.presenter, this);
-        this.whatStateShowAbout = new baltek.presenter.WhatStateShowAbout(this.presenter, this);
+        this.goToHelpStateShowRules = new baltek.presenter.WhatStateShowRules(this.presenter, this);
+        this.goToHelpStateShowHelp = new baltek.presenter.WhatStateShowGuide(this.presenter, this);
+        this.goToHelpStateShowAbout = new baltek.presenter.WhatStateShowAbout(this.presenter, this);
     };
 
     baltek.presenter.WhatTopState.prototype.getDefaultSubstate = function(){
-        return this.whatStateShowHelp;
+        return this.goToHelpStateShowHelp;
     };
 
     baltek.presenter.WhatTopState.prototype.updateFromObservable = function(observable){
 
-        if ( observable === this.presenter.game ) {
-            this.setState(this.superState.gameTopState);
+        if ( observable === this.presenter.goToGame ) {
+            this.setState(this.superState.goToGameTopState);
 
         } else {
 
