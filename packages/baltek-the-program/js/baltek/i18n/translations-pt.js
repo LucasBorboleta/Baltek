@@ -25,6 +25,8 @@ baltek.i18n.translations.pt = {
     "baltek-button-guide:button"       : "Guia" ,
     "baltek-button-rules:button"       : "Regras" ,
 
+    "baltek-debug-clearMessages:button": "Clear messages" ,
+
     "baltek-button-undo:button"        : "Anular" ,
     "baltek-button-confirm:button"     : "OK" ,
 

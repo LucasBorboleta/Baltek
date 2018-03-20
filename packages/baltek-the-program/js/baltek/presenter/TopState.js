@@ -48,10 +48,16 @@ baltek.presenter.TopState.__initClass = function(){
     };
 
     baltek.presenter.TopState.prototype.updateFromObservable = function(observable){
-        if ( this.superState !== null ) {
-            this.superState.updateFromObservable(observable);
+
+        if ( observable === this.presenter.clearMessages ) {
+            baltek.debug.clearMessages();
         } else {
-            baltek.utils.assert( false, "observable not managed" );
+
+          if ( this.superState !== null ) {
+              this.superState.updateFromObservable(observable);
+          } else {
+              baltek.utils.assert( false, "observable not managed" );
+          }
         }
     };
 };

@@ -34,8 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     text-align:center
 }
 
-.baltek-buttonGroup-class
-{
+.baltek-buttonGroup-class{
     display:inherit;
     padding-right:24px;
 }
@@ -86,12 +85,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     width:100%;
 }
 
+.baltek-settingsZone-class{
+}
+
 .baltek-debugZone-class{
-    background-color:lavender;
-    color:black;
-    border-style:solid;
-    border-width:1px;
-    border-color:gray;
+  background-color:lavender;
+  color:black;
+  border-style:solid;
+  border-width:1px;
+  border-color:gray;
+  padding-left:8px;
+  padding-right:8px;
 }
 
 .baltek-debug-logo-class{

@@ -24,13 +24,15 @@ baltek.i18n.translations.en = {
     "baltek-button-guide:button"       : "Guide" ,
     "baltek-button-rules:button"       : "Rules" ,
 
+    "baltek-debug-clearMessages:button": "Clear messages" ,
+
     "baltek-button-undo:button"        : "Undo" ,
     "baltek-button-confirm:button"     : "OK" ,
 
     "baltek-button-invitation:button"  : "Invitation" ,
     "baltek-button-goToGame:button"    : "< Game" ,
     "baltek-button-goToHelp:button"    : "Help" ,
-    "baltek-button-goToSettings:button"    : "Settings" ,
+    "baltek-button-goToSettings:button": "Settings" ,
 
     "baltek-button-restartGame:button" : "Restart game" ,
     "baltek-button-resumeGame:button"  : "Resume game" ,

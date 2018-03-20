@@ -25,6 +25,8 @@ baltek.i18n.translations.eo = {
     "baltek-button-guide:button"       : "Gvidilo" ,
     "baltek-button-rules:button"       : "Reguloj" ,
 
+    "baltek-debug-clearMessages:button": "Clear messages" ,
+
     "baltek-button-undo:button"        : "Malfari" ,
     "baltek-button-confirm:button"     : "Bone" ,
 

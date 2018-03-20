@@ -140,6 +140,9 @@ baltek.presenter.Presenter.__initClass = function(){
         this.debug.setSelection("no");
         baltek.debug.enable(false);
 
+        this.clearMessages = new baltek.widget.Button( "baltek-debug-clearMessages" , this.i18nTranslator);
+        this.clearMessages.registerObserver(this);
+
         this.goToSettingsZone = document.getElementById( "baltek-settingsZone" );
 
         this.ballWatcher = new baltek.draw.BallWatcher();

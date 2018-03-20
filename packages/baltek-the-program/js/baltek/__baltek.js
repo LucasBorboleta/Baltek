@@ -34,16 +34,6 @@ baltek.__initModule = function(){
     // Init inner classes
     // None
 
-    // TogetherJS settings -->
-    TogetherJS.hub.on( "canvas-abstract-click",
-      function (msg) {
-        if ( ! msg.sameUrl ) {
-          return;
-        }
-        baltek.draw.Selectable.__instances[msg.id].onAbstractClick();
-      }
-    );
-
     baltek.thePresenter = new baltek.presenter.Presenter();
     baltek.debug.writeMessage( "baltek.__initModule(): done" );
 };
