@@ -62,7 +62,10 @@ baltek.presenter.GameTopState.__initClass = function(){
             this.setState(this.superState.goToSettingsState);
 
         } else if ( observable === this.presenter.invitation ) {
-            TogetherJS();
+            baltek.debug.writeMessage( "TogetherJS is defined = " + (TogetherJS !== undefined) );
+            if ( TogetherJS !== undefined ) {
+              TogetherJS();
+            }
 
         } else if ( observable === this.presenter.goToHelp ) {
             this.setState(this.superState.goToHelpTopState);

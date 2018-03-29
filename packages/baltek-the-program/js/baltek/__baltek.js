@@ -34,7 +34,25 @@ baltek.__initModule = function(){
     // Init inner classes
     // None
 
+    // Create and start an instance of Presenter that handles the application
     baltek.thePresenter = new baltek.presenter.Presenter();
+
+    // TogetherJS settings
+    if ( TogetherJS !== undefined ) {
+        TogetherJS.hub.on( "canvas-abstract-click",
+            function (msg) {
+                if ( ! msg.sameUrl ) {
+                    return;
+                }
+                baltek.draw.Selectable.__instances[msg.id].onAbstractClick();
+            }
+        );
+    }
+
+    // Hide the pleaseWait message
+    document.getElementById( "baltek-text-pleaseWait" ).style.display = "none";
+
     baltek.debug.writeMessage( "baltek.__initModule(): done" );
+    baltek.debug.writeMessage( "baltek.__initModule(): TogetherJS is defined = " + (TogetherJS !== undefined) );
 };
 ///////////////////////////////////////////////////////////////////////////////

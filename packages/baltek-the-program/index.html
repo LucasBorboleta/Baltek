@@ -22,14 +22,16 @@
 	-->
 
 	<head>
-    <meta charset="UTF-8">
+    	<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="../../packages/w3.css/css/w3.css">
 		<link rel="stylesheet" href="./css/baltek.css">
-		<title>Baltek</title>
+		<title>BALTEK</title>
 	</head>
 
 	<body id="baltek-body" onload="baltek.__initModule();">
+
+		<p id="baltek-text-pleaseWait">Please wait, BALTEK files are being loaded ...</p>
 
 		<div id="baltek-buttonZone" class="baltek-buttonZone-class" >
 
@@ -70,7 +72,7 @@
 				<button class="baltek-button-class" type="button" id="baltek-button-goToHelp" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-rules" ></button>
 				<button class="baltek-button-class" type="button" id="baltek-button-guide" ></button>
-	      <button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
+	      		<button class="baltek-button-class" type="button" id="baltek-button-about" ></button>
 			</div>
 
 		</div>
@@ -104,14 +106,6 @@
 			<span class="baltek-debug-mousePosition-class" id="baltek-debug-mousePosition" >Mouse(x,y) = (?, ?)</span>
 			<p class="baltek-debug-messages-class" id="baltek-debug-messages" ></p>
 		</div>
-
-		<!-- The "*.js" TogetherJS file must be loaded with the following pre-settings -->
-		<script>
-			var TogetherJSConfig_cloneClicks = true;
-			var TogetherJSConfig_dontShowClicks = true;
-			var TogetherJSConfig_useMinimizedCode = false;
-		</script>
-		<script src="../../packages/togetherjs/js/togetherjs.js"></script>
 
 		<!-- The "*.js" baltek files must be loaded in lexicographical order -->
 		<script src="./js/baltek/__baltek.js"></script>
@@ -172,5 +166,17 @@
 		<script src="./js/baltek/widget/IFrame.js"></script>
 		<script src="./js/baltek/widget/Selector.js"></script>
 		<script src="./js/baltek/widget/Widget.js"></script>
+
+		<!-- The "*.js" TogetherJS file must be loaded with the following pre-settings -->
+		<script>
+			var TogetherJS;
+			var TogetherJSConfig_autoStart = true;
+			var TogetherJSConfig_cloneClicks = true;
+			var TogetherJSConfig_disableWebRTC = true;
+			var TogetherJSConfig_dontShowClicks = true;
+			var TogetherJSConfig_suppressInvite = true;
+			var TogetherJSConfig_useMinimizedCode = true;
+		</script>
+		<script src="../../packages/togetherjs/js/togetherjs-min.js"></script>
 	</body>
 </html>

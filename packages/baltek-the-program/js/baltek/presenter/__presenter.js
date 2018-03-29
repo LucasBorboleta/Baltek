@@ -51,14 +51,5 @@ baltek.presenter.__initModule = function(){
     baltek.presenter.WhatStateShowRules.__initClass();
     baltek.presenter.WhatTopState.__initClass();
 
-    // TogetherJS settings -->
-    TogetherJS.hub.on( "canvas-abstract-click",
-      function (msg) {
-        if ( ! msg.sameUrl ) {
-          return;
-        }
-        baltek.draw.Selectable.__instances[msg.id].onAbstractClick();
-      }
-    );
 };
 ///////////////////////////////////////////////////////////////////////////////
