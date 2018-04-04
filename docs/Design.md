@@ -309,12 +309,14 @@ Creating
 - Ball
 
 Positioning
+
 - Field::clear
 - Square::clean
 - Square::setFootballer
 - Square::setBall
 
 Enabling
+
 - Footballer::enableSelection(condition)
 - Footballer::enableKick (condition)
 - Footballer::enableRun (condition)
@@ -335,16 +337,16 @@ Selecting
 
 Cloning
 
-* Model::cloneStructure
-* Model::cloneState
+- Model::cloneStructure
+- Model::cloneState
 
 Querying
 
 ## Using the Model
 
 - The Presenter creates an Engine
-  * The Engine creates the Engine Model
-  * The Engine builds the structure of the Engine Model
+  - The Engine creates the Engine Model
+  - The Engine builds the structure of the Engine Model
 - The Presenter creates an UI Model
 - The Presenter requests the UI Model to clone the structure of the Engine Model
 - The Presenter registers itself as Observer of Engine Model

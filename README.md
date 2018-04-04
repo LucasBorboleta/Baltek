@@ -1,6 +1,9 @@
-# Introduction
 
-This project, named **baltek-the-program**,  implements the BALTEK board game, using **HTML** and **JavaScript**. 
+# README
+
+## Introduction
+
+This project, named **baltek-the-program**,  implements the BALTEK board game, using **HTML** and **JavaScript**.
 
 BALTEK is a turn-based board game, inspired from **football**. Here are its principles:
 
@@ -15,7 +18,7 @@ The name of the game is built using sounds of the words ball (BAL) and technical
 
 The **atmosphere** of the matches is reminiscent of the game of **chess**.
 
-# History
+## History
 
 During year 2015, the rules of the game have been tested within the limited circle of my family and office colleagues. The rules have been found balanced and fun.
 
@@ -31,8 +34,8 @@ In October 2017, the description of the **rules** was moved in a separate projec
 
 In March 2018, two browsers can be synchronized thanks to TogetherJS in order to realize the mode "two remote BALTEK players".
 
-# Licenses
+## Licenses
 
-BALTEK (_the program_) is licensed under the [GNU General Public License](http://www.gnu.org/licenses/). 
+BALTEK (_the program_) is licensed under the [GNU General Public License](http://www.gnu.org/licenses/).
 
 BALTEK (_the rules_) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).

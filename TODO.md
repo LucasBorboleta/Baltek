@@ -1,19 +1,21 @@
-# Introduction
+# TODO
+
+## Introduction
 
 This document collects the milestones for the **baltek-the-program** project and the tasks for the current milestone.
 
-# Milestones
+## Milestones
 
 1. BALTEK mode "*two close players sharing the same browser*".
 2. BALTEK mode "*two remote players using their own browser, synchronized thanks to JsTogether*"
 3. BALTEK  ready for accepting contributions.
 4. Introduce a minimal test plan to be executed manually.
 5. Introduce automated unit tests using QUnit.
-4. BALTEK mode "*human player against an AI*".
-3. BALTEK mode "*AI against another AI*".
-7. BALTEK GUI redesigned for smartphone/tactile surface, only for the modes "against IA" and "two close players".
+6. BALTEK mode "*human player against an AI*".
+7. BALTEK mode "*AI against another AI*".
+8. BALTEK GUI redesigned for smartphone/tactile surface, only for the modes "against IA" and "two close players".
 
-# Tasks
+## Tasks
 
 1. Introduce "Parameters" button for grouping buttons (selector human/ia; language; coordinates; debug)
 
