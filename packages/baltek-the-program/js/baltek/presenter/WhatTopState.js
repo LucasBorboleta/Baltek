@@ -43,14 +43,12 @@ baltek.presenter.WhatTopState.__initClass = function(){
         this.presenter.aboutIFrame.show(false);
 
         this.presenter.hideAllButtons();
-        this.presenter.language.show(true);
         this.presenter.goToGame.show(true);
         this.presenter.rules.show(true);
         this.presenter.guide.show(true);
         this.presenter.about.show(true);
 
         this.presenter.disableAllButtons();
-        this.presenter.language.enable(true);
         this.presenter.goToGame.enable(true);
     };
 

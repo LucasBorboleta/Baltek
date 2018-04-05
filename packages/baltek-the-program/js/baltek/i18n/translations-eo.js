@@ -47,8 +47,8 @@ baltek.i18n.translations.eo = {
     "baltek-select-coordinates:no"     : "Koordinatoj: ne" ,
     "baltek-select-coordinates:yes"    : "Koordinatoj: jes" ,
 
-    "baltek-select-debug:no"           : "*Debug *messages: ne" ,
-    "baltek-select-debug:yes"          : "*Debug *messages: jes" ,
+    "baltek-select-debug:no"           : "Eraro-serĉitaj mesaĝoj: ne" ,
+    "baltek-select-debug:yes"          : "Eraro-serĉitaj mesaĝoj: jes" ,
 
     "baltek-select-language:name"      : "Esperanto" ,
     "baltek-select-language:en"        : "English" ,

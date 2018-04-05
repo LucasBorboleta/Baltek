@@ -43,8 +43,8 @@ baltek.i18n.translations.pt = {
     "baltek-select-coordinates:no"     : "Coordenadas: não" ,
     "baltek-select-coordinates:yes"    : "Coordenadas: sim" ,
 
-    "baltek-select-debug:no"           : "*Debug mensagens: não" ,
-    "baltek-select-debug:yes"          : "*Debug mensagens: sim" ,
+    "baltek-select-debug:no"           : "Mensagens de depuração: não" ,
+    "baltek-select-debug:yes"          : "Mensagens de depuração: sim" ,
 
     "baltek-select-sprint:no"          : "Sprint: não" ,
     "baltek-select-sprint:yes"         : "Sprint: sim" ,

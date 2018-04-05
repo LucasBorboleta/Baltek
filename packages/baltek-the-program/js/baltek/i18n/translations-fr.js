@@ -33,8 +33,8 @@ baltek.i18n.translations.fr = {
     "baltek-select-coordinates:no"     : "Coordonnées : non" ,
     "baltek-select-coordinates:yes"    : "Coordonnées : oui" ,
 
-    "baltek-select-debug:no"           : "Debug messages: non" ,
-    "baltek-select-debug:yes"          : "Debug messages: oui" ,
+    "baltek-select-debug:no"           : "Messages de débogage: non" ,
+    "baltek-select-debug:yes"          : "Messages de débogage: oui" ,
 
     "baltek-button-invitation:button"  : "Invitation" ,
     "baltek-button-goToGame:button"    : "< Jeu" ,
