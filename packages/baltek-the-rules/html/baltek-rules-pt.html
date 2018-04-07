@@ -1,408 +1,237 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../../packages/w3.css/css/w3.css">
-	<link rel="stylesheet" href="../css/baltek-rules.css">
-	<title>Regras do BALTEK</title>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1"
+        name="viewport">
+  <link href="../../../packages/w3.css/css/w3.css"
+        rel="stylesheet">
+  <link href="../css/baltek-rules.css"
+        rel="stylesheet">
+  <title>Regras do BALTEK</title>
 </head>
-
 <body>
-	<p class="baltek-rules-logo-class">Regras do BALTEK &#x26BD;&#127939;</p>
-
-	<span class="baltek-rules-hyperlink-group-class">
-		<a class="baltek-rules-hyperlink-class" href="#introduction">Introdução</a>
-		<a class="baltek-rules-hyperlink-class" href="#copyright">Copyright</a>
-		<a class="baltek-rules-hyperlink-class" href="#revisions">Revisões</a>
-		<a class="baltek-rules-hyperlink-class" href="#material">Material</a>
-		<a class="baltek-rules-hyperlink-class" href="#purpose">Objetivo</a>
-		<a class="baltek-rules-hyperlink-class" href="#howtoStart">Como começar</a>
-		<a class="baltek-rules-hyperlink-class" href="#howToPlay">Como jogar</a>
-		<a class="baltek-rules-hyperlink-class" href="#notationOfMoves">Notação dos movimentos</a>
-		<a class="baltek-rules-hyperlink-class" href="#indexesOfVersions">Índices das versões</a>
-		<a class="baltek-rules-hyperlink-class" href="#thanks">Obrigado</a>
-	</span>
-
-	<h1 id="introduction">Introdução</h1>
-
-	<p>BALTEK é um jogo de tabuleiro baseado em turnos, inspirado no futebol. Aqui estão os princípios:</p>
-
-	<ul>
-		<li>Jogo facilmente feito à mão,</li>
-
-		<li>definido por algumas regras,</li>
-
-		<li>sem dispositivo de randomização.</li>
-
-		<li>O jogo permite várias ações por turno.</li>
-
-		<li>A bola se move mais rápido do que os futebolistas.</li>
-
-		<li>A coordenação dos futebolistas é essencial.</li>
-	</ul>
-
-	<p>O nome do jogo é construído usando sons das palavras
-		<q>bola</q> (BAL) e
-		<q>técnico</q> (TEK).</p>
-
-
-	<h1 id="copyright">Copyright</h1>
-	<p>
-		<a href="http://creativecommons.org/licenses/by-sa/4.0/">
-			<img alt="Licença Creative Commons" src="../../../packages/creative-commons/pictures/CC-BY-SA.png" />
-		</a>
-		<br />O trabalho
-		<span>BALTEK (as regras)</span> de
-		<a href="https://github.com/LucasBorboleta/baltek-the-rules">Lucas Borboleta</a> está licenciado com uma Licença
-		<a href="http://creativecommons.org/licenses/by-sa/4.0/">
-			Creative Commons - Atribuição-CompartilhaIgual 4.0 Internacional</a>.
-	</p>
-
-
-	<h1 id="revisions">Revisões</h1>
-
-	<p>Este documento é a versão 1.1 das regras de BALTEK.</p>
-	<p>A tabela abaixo resume as motivações para cada versão.</p>
-
-	<table class="w3-table-all">
-		<thead>
-			<tr>
-				<th>Versão</th>
-				<th>Descrição</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr>
-				<td>1.0</td>
-				<td>Redação das regras em francês.</td>
-			</tr>
-
-			<tr>
-				<td>1.1</td>
-				<td>Esclarecimento da opção de sprint. Drible e efeito como os novos nomes para as compensações. Notação mais compacta de
-					movimentos. Escrevendo em HTML. Capturas de tela da implementação HTML / JavaScript. Traduções em inglês, esperanto
-					e português.
-				</td>
-			</tr>
-
-		</tbody>
-	</table>
-
-	<h1 id="material">Material</h1>
-
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="starting-positions-with-coordinates" src="../pictures/starting-positions-with-coordinates.png"
-		/>
-	</div>
-
-	<p>Aqui está o material, mostrado na imagem acima:</p>
-	<ul>
-		<li>1 bola branca, com a etiqueta
-			<q>@</q>.</li>
-		<li>Uma equipe de 6 futebolistas azuis.</li>
-		<li>Uma equipe de 6 futebolistas vermelhos</li>
-		<li>Cada equipe é composta por:
-			<ul>
-				<li>1 avançado da força 3.</li>
-				<li>2 extremos da força 2.</li>
-				<li>3 centrais da força 1.</li>
-			</ul>
-		</li>
-
-		<li>O campo é construído usando 52 quadrados verdes.</li>
-		<li>O quadrado
-			<q>a3</q>, com a etiqueta
-			<q>#</q>, é o golo defendido pela equipe azul.</li>
-		<li>O quadrado
-			<q>l3</q>, com a etiqueta
-			<q>#</q>, é o golo defendido pela equipe vermelha.</li>
-	</ul>
-
-	<p>As coordenadas e as etiquetas,
-		<q>@</q> e
-		<q>#</q>, são usados para a notação dos movimentos.</p>
-
-	<h1 id="purpose">Objetivo</h1>
-	<ul>
-		<li>BALTEK é jogado por dois jogadores.</li>
-
-		<li>Cada jogador lidera uma equipe de 6 futebolistas.</li>
-
-		<li>Por sua vez, cada jogador move a bola e os seus jogadores de futebol, tentando enviar a bola para o golo do adversário.</li>
-
-		<li>O vencedor é o jogador que primeiro marcou 2 golos.</li>
-	</ul>
-
-
-	<h1 id="howtoStart">Como começar</h1>
-	<ul>
-		<li>Os jogadores decidem o líder de cada equipe.</li>
-
-		<li>A equipe azul sempre começa o jogo.</li>
-
-		<li>No início do jogo, assim como após cada golo marcado, os jogadores se deslocam para as posições iniciais.</li>
-
-		<li>As posições iniciais são fixas.</li>
-
-		<li>As posições iniciais das duas equipes são simétricas, exceto as dos avançados .</li>
-
-		<li>A equipe que acabou de marcar um golo deixa a outra equipe começar.</li>
-	</ul>
-
-	<p>A seguinte imagem mostra as posições iniciais da equipe azul.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="starting-positions-for-blue-team" src="../pictures/starting-positions-for-blue-team.png"
-		/>
-	</div>
-
-	<p>A seguinte imagem mostra as posições iniciais da equipe vermelha.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="starting-positions-for-red-team" src="../pictures/starting-positions-for-red-team.png"
-		/>
-	</div>
-
-
-	<h1 id="howToPlay">Como jogar</h1>
-
-	<h2>Ações, opções, compensações, créditos e bônus</h2>
-	<ul>
-		<li>Por sua vez, cada jogador escolhe ações e opções, que, dependendo do contexto, exigem compensações.</li>
-
-		<li>Esses escolhidos custam créditos ou bônus.</li>
-
-		<li>Cada jogador recebe:
-			<ul>
-				<li>3 créditos, no início de cada turno;</li>
-				<li>1 bônus, em cada início do jogo.</li>
-			</ul>
-		</li>
-
-		<li>Por sua vez, cada jogador pode gastar 0, 1, 2 ou 3 créditos e 0 ou 1 bônus.</li>
-
-		<li>As ações, opções e compensações são as seguintes:
-			<ul>
-				<li>
-					<strong>Correr</strong> : mover um futebolista; custo:
-					<strong>1 crédito</strong>.</li>
-
-				<li>
-					<strong>Sprint</strong>: opção para aumentar o movimento dum futebolista; custo:
-					<strong>1 bônus</strong>.</li>
-
-				<li>
-					<strong>Chutar</strong>: mover a bola; custo:
-					<strong>1 crédito</strong>.</li>
-
-				<li>
-					<strong>Drible</strong>: compensação de força para possuir a bola; custo:
-					<strong>1 crédito por unidade de força</strong>.</li>
-
-				<li>
-					<strong>Efeito</strong>: compensação de força para mover a bola; custo:
-					<strong>1 crédito por unidade de força</strong>.</li>
-
-			</ul>
-		</li>
-	</ul>
-
-	<h2>Ação
-		<q>Correr</q>
-	</h2>
-	<ul>
-		<li>A ação
-			<q>correr</q> custa 1 crédito e permite mover um futebolista por 1 quadrado.</li>
-
-		<li>Cada quadrado da zona 3 x 3, centrado no futebolista movido, é um destino possível, a menos que:
-
-			<ul>
-				<li>está fora do campo;</li>
-				<li>é um quadrado de golo;</li>
-				<li>ele já possui um futebolista da mesma equipe.</li>
-			</ul>
-		</li>
-		<li>Cada futebolista só pode correr uma vez por turno.</li>
-
-		<li>A ação
-			<q>correr</q> não move a bola.</li>
-
-	</ul>
-
-	<p>Exemplo: Possíveis destinos para o futebolista azul 3 têm bordas amarelas.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="run-allowed-destinations" src="../pictures/run-allowed-destinations.png" />
-	</div>
-
-
-	<h2>Opção
-		<q>sprint</q>
-	</h2>
-	<ul>
-		<li>A opção
-			<q>sprint</q> custa 1 bônus e amplia o movimento do futebolista até 2 quadrados.</li>
-
-		<li>A opção
-			<q>sprint</q> deve ser sempre combinada com a ação
-			<q>correr</q>.</li>
-
-		<li>Cada quadrado da zona 5 x 5, centrado no futebolista movido, é um destino possível, a menos que:
-			<ul>
-				<li>está fora do campo;</li>
-				<li>é um quadrado de golo;</li>
-				<li>ele já possui um futebolista da mesma equipe.</li>
-			</ul>
-		</li>
-
-		<li>O jogador só pode gastar o seu bônus uma vez entre dois inícios.</li>
-	</ul>
-
-	<p>Exemplo: Possíveis destinos para o futebolista azul 3 têm bordas amarelas.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="sprint-allowed-destinations" src="../pictures/sprint-allowed-destinations.png"
-		/>
-	</div>
-
-
-	<h2>Ação
-		<q>chutar</q>
-	</h2>
-	<ul>
-		<li>As ações
-			<q>transmitir a bola para um futebolista</q>,
-			<q>enviar a bola num quadrado vazio</q>
-			e
-			<q>chutar a bola para o golo</q>
-			obedecem às mesmas regras.</li>
-
-		<li>A ação
-			<q>chutar</q> custa 1 crédito. Se as condições gerais e as condições da força forem satisfeitas, a ação pode mover a bola
-			até 2 quadrados horizontalmente, verticalmente ou diagonalmente. No entanto, a trajetória da bola nunca é curvada.</li>
-
-		<li>Aqui estão as condições gerais para ser satisfeitas:
-
-			<ul>
-				<li>O jogador têm um
-					<q>batedor</q> (um futebolista pronta a chutar) no quadrado inicial da bola.</li>
-				<li>Neste turno, o
-					<q>batedor</q> ainda não
-					<q>chutou</q>.</li>
-				<li>O quadrado de chegada da bola está no campo.</li>
-				<li>O quadrado de chegada da bola não é o golo defendido pelo jogador.</li>
-				<li>O quadrado de chegada da bola pode ser vazio ou não.</li>
-			</ul>
-		</li>
-
-		<li>Aqui estão as condições da força para ser satisfeitas:
-			<ul>
-				<li>Se o
-					<q>batedor</q> compartilhe o seu quadrado com um oponente, o
-					<q>batedor</q> deve:
-					<ul>
-						<li>igualar ou superar a força do seu oponente,</li>
-						<li>ou compensar a sua inferioridade por
-							<q>drible</q>
-						</li>
-					</ul>
-				</li>
-
-				<li>Se o
-					<q>batedor</q> move a bola sobre um oponente, o
-					<q>batedor</q> deve:
-					<ul>
-						<li>igualar ou superar a força do seu oponente,</li>
-						<li>ou compensar a sua inferioridade para um
-							<q>efeito</q>.</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
-
-	<p>Exemplo: os possíveis destinos para a bola pelo
-		<q>batedor</q> azul 3 tem bordas amarelas; nenhum desses destinos exige
-		<q>drible</q> ou
-		<q>efeito</q>.</p>
-
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="shoot-allowed-destinations" src="../pictures/shoot-allowed-destinations.png" />
-	</div>
-
-
-	<h2>Compensação para
-		<q>drible</q>
-	</h2>
-	<ul>
-		<li>A ação
-			<q>chutar</q> pode exigir essa compensação.</li>
-
-		<li>O
-			<q>drible</q> compensa a inferioridade do
-			<q>batedor</q>
-			contra o oponente que compartilha o seu quadrado.</li>
-
-		<li>O
-			<q>drible</q> custa 1 crédito por unidade de força compensada.</li>
-	</ul>
-	<p>Exemplos: para possuir a bola, o
-		<q>batedor</q> azul 2 deve realizar um
-		<q>drible</q> custando 1 crédito; e o
-		<q>batedor</q> azul 1 deve realizar um
-		<q>drible</q> custando 2 créditos.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="requiring-dribble-of-one-credit" src="../pictures/requiring-dribble-of-one-credit.png"
-		/>
-		<img class="baltek-rules-image-class" alt="requiring-dribble-of-two-credits" src="../pictures/requiring-dribble-of-two-credits.png"
-		/>
-	</div>
-
-
-	<h2>Compensação para
-		<q>efeito</q>
-	</h2>
-	<ul>
-		<li>A ação
-			<q>chutar</q> pode exigir essa compensação.</li>
-
-		<li>O
-			<q>efeito</q> compensa a inferioridade do
-			<q>batedor</q> em relação ao adversário sobre o qual passa a bola.</li>
-
-		<li>O
-			<q>efeito</q> custa 1 crédito por unidade de força compensada.</li>
-
-		<li>Quando o
-			<q>batedor</q> senda a bola sobre um futebolista da sua equipe, então o jogador não precisa pagar o
-			<q>efeito</q>.</li>
-	</ul>
-
-	<p>Exemplos: para transmitir a bola para o futebolista azul 2, o
-		<q>batedor</q> azul 1 deve fazer um
-		<q>efeito</q> de 1 crédito no contexto à esquerda, e um
-		<q>efeito</q> de 2 créditos no contexto à direita.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="requiring-effect-of-one-credit" src="../pictures/requiring-effect-of-one-credit.png"
-		/>
-		<img class="baltek-rules-image-class" alt="requiring-effect-of-two-credits" src="../pictures/requiring-effect-of-two-credits.png"
-		/>
-	</div>
-
-
-	<h1 id="notationOfMoves">Notação dos movimentos</h1>
-	<p>Se útil, os movimentos do jogo são descritos como no exemplo a seguir.</p>
-
-	<pre class="w3-code">
+  <p class="baltek-rules-logo-class">Regras do BALTEK &#x26BD;&#127939;</p><span class="baltek-rules-hyperlink-group-class"><a class="baltek-rules-hyperlink-class"
+     href="#introduction">Introdução</a> <a class="baltek-rules-hyperlink-class"
+     href="#copyright">Copyright</a> <a class="baltek-rules-hyperlink-class"
+     href="#revisions">Revisões</a> <a class="baltek-rules-hyperlink-class"
+     href="#material">Material</a> <a class="baltek-rules-hyperlink-class"
+     href="#purpose">Objetivo</a> <a class="baltek-rules-hyperlink-class"
+     href="#howtoStart">Como começar</a> <a class="baltek-rules-hyperlink-class"
+     href="#howToPlay">Como jogar</a> <a class="baltek-rules-hyperlink-class"
+     href="#notationOfMoves">Notação dos movimentos</a> <a class="baltek-rules-hyperlink-class"
+     href="#indexesOfVersions">Índices das versões</a> <a class="baltek-rules-hyperlink-class"
+     href="#thanks">Obrigado</a></span>
+  <h1 id="introduction">Introdução</h1>
+  <p>BALTEK é um jogo de tabuleiro baseado em turnos, inspirado no futebol. Aqui estão os princípios:</p>
+  <ul>
+    <li>Jogo facilmente feito à mão,</li>
+    <li>definido por algumas regras,</li>
+    <li>sem dispositivo de randomização.</li>
+    <li>O jogo permite várias ações por turno.</li>
+    <li>A bola se move mais rápido do que os futebolistas.</li>
+    <li>A coordenação dos futebolistas é essencial.</li>
+  </ul>
+  <p>O nome do jogo é construído usando sons das palavras <q>bola</q> (BAL) e <q>técnico</q> (TEK).</p>
+  <h1 id="copyright">Copyright</h1>
+  <p><a href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons"
+       src="../../../packages/creative-commons/pictures/CC-BY-SA.png"></a><br>
+  O trabalho <span>BALTEK (as regras)</span> de <a href="https://github.com/LucasBorboleta/baltek-the-rules">Lucas Borboleta</a> e dos <a href="https://github.com/LucasBorboleta/baltek-the-rules/CONTRIBUTORS.txt">Baltekians</a> está licenciado com
+  uma Licença <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons - Atribuição-CompartilhaIgual 4.0 Internacional</a>.</p>
+  <h1 id="revisions">Revisões</h1>
+  <p>Este documento é a versão 1.1 das regras de BALTEK.</p>
+  <p>A tabela abaixo resume as motivações para cada versão.</p>
+  <table class="w3-table-all">
+    <thead>
+      <tr>
+        <th>Versão</th>
+        <th>Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1.0</td>
+        <td>Redação das regras em francês.</td>
+      </tr>
+      <tr>
+        <td>1.1</td>
+        <td>Esclarecimento da opção de sprint. Drible e efeito como os novos nomes para as compensações. Notação mais compacta de movimentos. Escrevendo em HTML. Capturas de tela da implementação HTML / JavaScript. Traduções em inglês, esperanto e
+        português.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h1 id="material">Material</h1>
+  <div class="baltek-rules-hasImage-class"><img alt="starting-positions-with-coordinates"
+       class="baltek-rules-image-class"
+       src="../pictures/starting-positions-with-coordinates.png"></div>
+  <p>Aqui está o material, mostrado na imagem acima:</p>
+  <ul>
+    <li>1 bola branca, com a etiqueta <q>@</q>.</li>
+    <li>Uma equipe de 6 futebolistas azuis.</li>
+    <li>Uma equipe de 6 futebolistas vermelhos</li>
+    <li>Cada equipe é composta por:
+      <ul>
+        <li>1 avançado da força 3.</li>
+        <li>2 extremos da força 2.</li>
+        <li>3 centrais da força 1.</li>
+      </ul>
+    </li>
+    <li>O campo é construído usando 52 quadrados verdes.</li>
+    <li>O quadrado <q>a3</q>, com a etiqueta <q>#</q>, é o golo defendido pela equipe azul.</li>
+    <li>O quadrado <q>l3</q>, com a etiqueta <q>#</q>, é o golo defendido pela equipe vermelha.</li>
+  </ul>
+  <p>As coordenadas e as etiquetas, <q>@</q> e <q>#</q>, são usados para a notação dos movimentos.</p>
+  <h1 id="purpose">Objetivo</h1>
+  <ul>
+    <li>BALTEK é jogado por dois jogadores.</li>
+    <li>Cada jogador lidera uma equipe de 6 futebolistas.</li>
+    <li>Por sua vez, cada jogador move a bola e os seus jogadores de futebol, tentando enviar a bola para o golo do adversário.</li>
+    <li>O vencedor é o jogador que primeiro marcou 2 golos.</li>
+  </ul>
+  <h1 id="howtoStart">Como começar</h1>
+  <ul>
+    <li>Os jogadores decidem o líder de cada equipe.</li>
+    <li>A equipe azul sempre começa o jogo.</li>
+    <li>No início do jogo, assim como após cada golo marcado, os jogadores se deslocam para as posições iniciais.</li>
+    <li>As posições iniciais são fixas.</li>
+    <li>As posições iniciais das duas equipes são simétricas, exceto as dos avançados .</li>
+    <li>A equipe que acabou de marcar um golo deixa a outra equipe começar.</li>
+  </ul>
+  <p>A seguinte imagem mostra as posições iniciais da equipe azul.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="starting-positions-for-blue-team"
+       class="baltek-rules-image-class"
+       src="../pictures/starting-positions-for-blue-team.png"></div>
+  <p>A seguinte imagem mostra as posições iniciais da equipe vermelha.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="starting-positions-for-red-team"
+       class="baltek-rules-image-class"
+       src="../pictures/starting-positions-for-red-team.png"></div>
+  <h1 id="howToPlay">Como jogar</h1>
+  <h2>Ações, opções, compensações, créditos e bônus</h2>
+  <ul>
+    <li>Por sua vez, cada jogador escolhe ações e opções, que, dependendo do contexto, exigem compensações.</li>
+    <li>Esses escolhidos custam créditos ou bônus.</li>
+    <li>Cada jogador recebe:
+      <ul>
+        <li>3 créditos, no início de cada turno;</li>
+        <li>1 bônus, em cada início do jogo.</li>
+      </ul>
+    </li>
+    <li>Por sua vez, cada jogador pode gastar 0, 1, 2 ou 3 créditos e 0 ou 1 bônus.</li>
+    <li>As ações, opções e compensações são as seguintes:
+      <ul>
+        <li><strong>Correr</strong>&nbsp;: mover um futebolista; custo: <strong>1 crédito</strong>.</li>
+        <li><strong>Sprint</strong>: opção para aumentar o movimento dum futebolista; custo: <strong>1 bônus</strong>.</li>
+        <li><strong>Chutar</strong>: mover a bola; custo: <strong>1 crédito</strong>.</li>
+        <li><strong>Drible</strong>: compensação de força para possuir a bola; custo: <strong>1 crédito por unidade de força</strong>.</li>
+        <li><strong>Efeito</strong>: compensação de força para mover a bola; custo: <strong>1 crédito por unidade de força</strong>.</li>
+      </ul>
+    </li>
+  </ul>
+  <h2>Ação <q>Correr</q></h2>
+  <ul>
+    <li>A ação <q>correr</q> custa 1 crédito e permite mover um futebolista por 1 quadrado.</li>
+    <li>Cada quadrado da zona 3 x 3, centrado no futebolista movido, é um destino possível, a menos que:
+      <ul>
+        <li>está fora do campo;</li>
+        <li>é um quadrado de golo;</li>
+        <li>ele já possui um futebolista da mesma equipe.</li>
+      </ul>
+    </li>
+    <li>Cada futebolista só pode correr uma vez por turno.</li>
+    <li>A ação <q>correr</q> não move a bola.</li>
+  </ul>
+  <p>Exemplo: Possíveis destinos para o futebolista azul 3 têm bordas amarelas.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="run-allowed-destinations"
+       class="baltek-rules-image-class"
+       src="../pictures/run-allowed-destinations.png"></div>
+  <h2>Opção <q>sprint</q></h2>
+  <ul>
+    <li>A opção <q>sprint</q> custa 1 bônus e amplia o movimento do futebolista até 2 quadrados.</li>
+    <li>A opção <q>sprint</q> deve ser sempre combinada com a ação <q>correr</q>.</li>
+    <li>Cada quadrado da zona 5 x 5, centrado no futebolista movido, é um destino possível, a menos que:
+      <ul>
+        <li>está fora do campo;</li>
+        <li>é um quadrado de golo;</li>
+        <li>ele já possui um futebolista da mesma equipe.</li>
+      </ul>
+    </li>
+    <li>O jogador só pode gastar o seu bônus uma vez entre dois inícios.</li>
+  </ul>
+  <p>Exemplo: Possíveis destinos para o futebolista azul 3 têm bordas amarelas.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="sprint-allowed-destinations"
+       class="baltek-rules-image-class"
+       src="../pictures/sprint-allowed-destinations.png"></div>
+  <h2>Ação <q>chutar</q></h2>
+  <ul>
+    <li>As ações <q>transmitir a bola para um futebolista</q>, <q>enviar a bola num quadrado vazio</q> e <q>chutar a bola para o golo</q> obedecem às mesmas regras.</li>
+    <li>A ação <q>chutar</q> custa 1 crédito. Se as condições gerais e as condições da força forem satisfeitas, a ação pode mover a bola até 2 quadrados horizontalmente, verticalmente ou diagonalmente. No entanto, a trajetória da bola nunca é
+    curvada.</li>
+    <li>Aqui estão as condições gerais para ser satisfeitas:
+      <ul>
+        <li>O jogador têm um <q>batedor</q> (um futebolista pronta a chutar) no quadrado inicial da bola.</li>
+        <li>Neste turno, o <q>batedor</q> ainda não <q>chutou</q>.</li>
+        <li>O quadrado de chegada da bola está no campo.</li>
+        <li>O quadrado de chegada da bola não é o golo defendido pelo jogador.</li>
+        <li>O quadrado de chegada da bola pode ser vazio ou não.</li>
+      </ul>
+    </li>
+    <li>Aqui estão as condições da força para ser satisfeitas:
+      <ul>
+        <li>Se o <q>batedor</q> compartilhe o seu quadrado com um oponente, o <q>batedor</q> deve:
+          <ul>
+            <li>igualar ou superar a força do seu oponente,</li>
+            <li>ou compensar a sua inferioridade por <q>drible</q></li>
+          </ul>
+        </li>
+        <li>Se o <q>batedor</q> move a bola sobre um oponente, o <q>batedor</q> deve:
+          <ul>
+            <li>igualar ou superar a força do seu oponente,</li>
+            <li>ou compensar a sua inferioridade para um <q>efeito</q>.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>Exemplo: os possíveis destinos para a bola pelo <q>batedor</q> azul 3 tem bordas amarelas; nenhum desses destinos exige <q>drible</q> ou <q>efeito</q>.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="shoot-allowed-destinations"
+       class="baltek-rules-image-class"
+       src="../pictures/shoot-allowed-destinations.png"></div>
+  <h2>Compensação para <q>drible</q></h2>
+  <ul>
+    <li>A ação <q>chutar</q> pode exigir essa compensação.</li>
+    <li>O <q>drible</q> compensa a inferioridade do <q>batedor</q> contra o oponente que compartilha o seu quadrado.</li>
+    <li>O <q>drible</q> custa 1 crédito por unidade de força compensada.</li>
+  </ul>
+  <p>Exemplos: para possuir a bola, o <q>batedor</q> azul 2 deve realizar um <q>drible</q> custando 1 crédito; e o <q>batedor</q> azul 1 deve realizar um <q>drible</q> custando 2 créditos.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="requiring-dribble-of-one-credit"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-dribble-of-one-credit.png"> <img alt="requiring-dribble-of-two-credits"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-dribble-of-two-credits.png"></div>
+  <h2>Compensação para <q>efeito</q></h2>
+  <ul>
+    <li>A ação <q>chutar</q> pode exigir essa compensação.</li>
+    <li>O <q>efeito</q> compensa a inferioridade do <q>batedor</q> em relação ao adversário sobre o qual passa a bola.</li>
+    <li>O <q>efeito</q> custa 1 crédito por unidade de força compensada.</li>
+    <li>Quando o <q>batedor</q> senda a bola sobre um futebolista da sua equipe, então o jogador não precisa pagar o <q>efeito</q>.</li>
+  </ul>
+  <p>Exemplos: para transmitir a bola para o futebolista azul 2, o <q>batedor</q> azul 1 deve fazer um <q>efeito</q> de 1 crédito no contexto à esquerda, e um <q>efeito</q> de 2 créditos no contexto à direita.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="requiring-effect-of-one-credit"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-effect-of-one-credit.png"> <img alt="requiring-effect-of-two-credits"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-effect-of-two-credits.png"></div>
+  <h1 id="notationOfMoves">Notação dos movimentos</h1>
+  <p>Se útil, os movimentos do jogo são descritos como no exemplo a seguir.</p>
+  <pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
 e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @e4  @g4+       / g3g4 i5i4 @i4
 ...
 @# /
 </pre>
-
-	<p>Opcionalmente, as anotações estão incluídas no exemplo a seguir.</p>
-
-	<pre class="w3-code">
+  <p>Opcionalmente, as anotações estão incluídas no exemplo a seguir.</p>
+  <pre class="w3-code">
 #! BALTEK 1.1
 #@ bernard@bois.fr robert@riviere.fr
 #: 2014-12-24 11:09:30
@@ -414,142 +243,42 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 #: 2014-12-24 11:30:00
 # O bônus dos vermelhos foi bem jogado.
 </pre>
-
-	<p>A notação está estruturada em linhas. Aqui estão estas convenções:</p>
-	<ul>
-		<li>O sinal de espaço
-			<q> </q>, opcionalmente repetido, separa as palavras.</li>
-
-		<li>Uma linha que começa com
-			<q>#</q> é um comentário ou pseudo-comentário, e é sempre opcional.
-
-			<ul>
-				<li>
-					<q>
-						<code class="w3-codespan"># </code>
-					</q>, cerquilha seguido de um espaço, anuncia um comentário libre.</li>
-
-				<li>
-					<q>
-						<code class="w3-codespan">#! BALTEK 1.1</code>
-					</q> anuncia a versão
-					<q>1.1</q> do formato de notação BALTEK; utilizável uma vez, na primeira linha.</li>
-
-				<li>
-					<q>
-						<code class="w3-codespan">#@</code>
-					</q> anuncia os identificadores escolhidos pelos dois jogadores, em ordem
-					<q>azul</q>, depois
-					<q>vermelho</q> ; utilizável uma vez.</li>
-
-				<li>
-					<q>
-						<code class="w3-codespan">#:</code>
-					</q> anuncia, num formato
-					<q>ISO</q>, a data, depois, opcionalmente, a hora; utilizável várias vezes.</li>
-
-			</ul>
-		</li>
-
-		<li>Uma linha não-vazia, que não é um comentário, descreve um turno
-			<q>azul</q>, seguido dum turno
-			<q>vermelho</q>.
-		</li>
-
-		<li>
-			<q>
-				<code class="w3-codespan">/</code>
-			</q> acaba o turno
-			<q>azul</q>. O fim da linha acaba o turno
-			<q>vermelho</q>.
-		</li>
-
-		<li>Cada turno é composta por 0, 1, 2 ou 3 ações.
-
-			<ul>
-				<li>A ação
-					<q>correr</q> é indicada por uma palavra que começa a partir do quadrado inicial e termina com o quadrado de chegada. Exemplo:
-					<code class="w3-codespan">g3f3</code>
-				</li>
-
-				<li>Para indicar o
-					<q>sprint</q>,
-					<q>*</q> está junto no final da palavra de ação. Exemplo:
-					<code class="w3-codespan">g3e2*</code>
-				</li>
-
-				<li>A ação
-					<q>chutar</q> é indicada pela uma palavra que começa com
-					<q>@</q> e acaba com a quadrado de chegada. Exemplo:
-					<code class="w3-codespan">@c3</code>
-				</li>
-
-				<li>A ação
-					<q>chutar ao golo</q> é abreviada com a seguinte palavra:
-					<code class="w3-codespan">@#</code>
-				</li>
-
-				<li>Para um
-					<q>drible</q> custando 1 crédito,
-					<q>+</q> é junto no final da palavra de ação. Exemplo:
-					<code class="w3-codespan">@c3+</code>
-				</li>
-
-				<li>Para um
-					<q>drible</q> custando 2 créditos,
-					<q>++</q> é junto no final da palavra de ação. Exemplo:
-					<code class="w3-codespan">@c3++</code>
-				</li>
-
-				<li>Para um
-					<q>efeito</q> custando 1 crédito,
-					<q>!</q> é junto no final da palavra de ação. Exemplo:
-					<code class="w3-codespan">@c3!</code>
-				</li>
-
-				<li>Para um
-					<q>efeito</q> custando 2 créditos,
-					<q>!!</q> é junto no final da palavra de ação. Exemplo:
-					<code class="w3-codespan">@c3!!</code>
-				</li>
-
-				<li>Para uma combinação
-					<q>drible</q> e
-					<q>efeito</q>, cada um custando 1 crédito,
-					<q>+!</q> é junto no final da palavra de ação. Exemplo:
-					<code class="w3-codespan">@c3+!</code>
-				</li>
-			</ul>
-		</li>
-	</ul>
-
-
-	<h1 id="indexesOfVersions">Índices das versões</h1>
-	<ul>
-		<li>As versões das regras são identificadas por dois índices inteiros
-			<q>i.j</q>.</li>
-
-		<li>A primeira versão é
-			<q>1.0</q>.</li>
-
-		<li>Quando a lógica da regras muda, o primeiro índice
-			<q>i</q> é incrementado de 1, e o segundo índice
-			<q>j</q> é reposto para 0.</li>
-
-		<li>O segundo índice
-			<q>j</q> é incrementado de 1 quando os textos ou ilustrações ou a notação dos movimentos ou a estrutura do documento evoluem
-			ou uma tradução é junta, mas sem alterar a lógica das regras.</li>
-	</ul>
-
-	<h1 id="thanks">Obrigado</h1>
-	<p>Agradeço aos meus filhos
-		<q>A</q> e
-		<q>C</q> por sua paciência e comentários durante os testes do BALTEK. Minha esposa
-		<q>P</q>, que sempre pensa por um longo tempo durante os jogos de xadrez, inspirou a criação do bônus de sprint para dinamizar
-		o jogo de BALTEK; gradeço-lha.
-	</p>
-
-
+  <p>A notação está estruturada em linhas. Aqui estão estas convenções:</p>
+  <ul>
+    <li>O sinal de espaço , opcionalmente repetido, separa as palavras.</li>
+    <li>Uma linha que começa com <q>#</q> é um comentário ou pseudo-comentário, e é sempre opcional.
+      <ul>
+        <li><q><code class="w3-codespan">#</code></q> , cerquilha seguido de um espaço, anuncia um comentário libre.</li>
+        <li><q><code class="w3-codespan">#! BALTEK 1.1</code></q> anuncia a versão <q>1.1</q> do formato de notação BALTEK; utilizável uma vez, na primeira linha.</li>
+        <li><q><code class="w3-codespan">#@</code></q> anuncia os identificadores escolhidos pelos dois jogadores, em ordem <q>azul</q>, depois <q>vermelho</q> ; utilizável uma vez.</li>
+        <li><q><code class="w3-codespan">#:</code></q> anuncia, num formato <q>ISO</q>, a data, depois, opcionalmente, a hora; utilizável várias vezes.</li>
+      </ul>
+    </li>
+    <li>Uma linha não-vazia, que não é um comentário, descreve um turno <q>azul</q>, seguido dum turno <q>vermelho</q>.</li>
+    <li><q><code class="w3-codespan">/</code></q> acaba o turno <q>azul</q>. O fim da linha acaba o turno <q>vermelho</q>.</li>
+    <li>Cada turno é composta por 0, 1, 2 ou 3 ações.
+      <ul>
+        <li>A ação <q>correr</q> é indicada por uma palavra que começa a partir do quadrado inicial e termina com o quadrado de chegada. Exemplo: <code class="w3-codespan">g3f3</code></li>
+        <li>Para indicar o <q>sprint</q>, <q>*</q> está junto no final da palavra de ação. Exemplo: <code class="w3-codespan">g3e2*</code></li>
+        <li>A ação <q>chutar</q> é indicada pela uma palavra que começa com <q>@</q> e acaba com a quadrado de chegada. Exemplo: <code class="w3-codespan">@c3</code></li>
+        <li>A ação <q>chutar ao golo</q> é abreviada com a seguinte palavra: <code class="w3-codespan">@#</code></li>
+        <li>Para um <q>drible</q> custando 1 crédito, <q>+</q> é junto no final da palavra de ação. Exemplo: <code class="w3-codespan">@c3+</code></li>
+        <li>Para um <q>drible</q> custando 2 créditos, <q>++</q> é junto no final da palavra de ação. Exemplo: <code class="w3-codespan">@c3++</code></li>
+        <li>Para um <q>efeito</q> custando 1 crédito, <q>!</q> é junto no final da palavra de ação. Exemplo: <code class="w3-codespan">@c3!</code></li>
+        <li>Para um <q>efeito</q> custando 2 créditos, <q>!!</q> é junto no final da palavra de ação. Exemplo: <code class="w3-codespan">@c3!!</code></li>
+        <li>Para uma combinação <q>drible</q> e <q>efeito</q>, cada um custando 1 crédito, <q>+!</q> é junto no final da palavra de ação. Exemplo: <code class="w3-codespan">@c3+!</code></li>
+      </ul>
+    </li>
+  </ul>
+  <h1 id="indexesOfVersions">Índices das versões</h1>
+  <ul>
+    <li>As versões das regras são identificadas por dois índices inteiros <q>i.j</q>.</li>
+    <li>A primeira versão é <q>1.0</q>.</li>
+    <li>Quando a lógica da regras muda, o primeiro índice <q>i</q> é incrementado de 1, e o segundo índice <q>j</q> é reposto para 0.</li>
+    <li>O segundo índice <q>j</q> é incrementado de 1 quando os textos ou ilustrações ou a notação dos movimentos ou a estrutura do documento evoluem ou uma tradução é junta, mas sem alterar a lógica das regras.</li>
+  </ul>
+  <h1 id="thanks">Obrigado</h1>
+  <p>Agradeço aos meus filhos <q>A</q> e <q>C</q> por sua paciência e comentários durante os testes do BALTEK. Minha esposa <q>P</q>, que sempre pensa por um longo tempo durante os jogos de xadrez, inspirou a criação do bônus de sprint para
+  dinamizar o jogo de BALTEK; gradeço-lha.</p>
 </body>
-
 </html>

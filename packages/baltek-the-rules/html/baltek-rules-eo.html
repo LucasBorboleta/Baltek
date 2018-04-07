@@ -1,409 +1,237 @@
 <!DOCTYPE html>
 <html lang="eo">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../../packages/w3.css/css/w3.css">
-	<link rel="stylesheet" href="../css/baltek-rules.css">
-	<title>Reguloj de BALTEK</title>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1"
+        name="viewport">
+  <link href="../../../packages/w3.css/css/w3.css"
+        rel="stylesheet">
+  <link href="../css/baltek-rules.css"
+        rel="stylesheet">
+  <title>Reguloj de BALTEK</title>
 </head>
-
 <body>
-	<p class="baltek-rules-logo-class">Reguloj de BALTEK &#x26BD;&#127939;</p>
-
-	<span class="baltek-rules-hyperlink-group-class">
-		<a class="baltek-rules-hyperlink-class" href="#introduction">Enkonduko</a>
-		<a class="baltek-rules-hyperlink-class" href="#copyright">Kopirajto</a>
-		<a class="baltek-rules-hyperlink-class" href="#revisions">Revizioj</a>
-		<a class="baltek-rules-hyperlink-class" href="#material">Materialo</a>
-		<a class="baltek-rules-hyperlink-class" href="#purpose">Celo</a>
-		<a class="baltek-rules-hyperlink-class" href="#howtoStart">Preparo</a>
-		<a class="baltek-rules-hyperlink-class" href="#howToPlay">Ludvico</a>
-		<a class="baltek-rules-hyperlink-class" href="#notationOfMoves">Notacio de movoj</a>
-		<a class="baltek-rules-hyperlink-class" href="#indexesOfVersions">Indeksoj de versioj</a>
-		<a class="baltek-rules-hyperlink-class" href="#thanks">Dankoj</a>
-	</span>
-
-	<h1 id="introduction">Enkonduko</h1>
-
-	<p>BALTEK estas tabulludo pri futbalo, alternante ludvicoj. Jen ĝiaj principoj:</p>
-
-	<ul>
-		<li>Ludo facile mane farita,</li>
-
-		<li>difinita per malmultaj reguloj,</li>
-
-		<li>sen hazarda mekanismo.</li>
-
-		<li>La ludo permesas plurajn agojn dum ĉiu ludvico.</li>
-
-		<li>La pilko moviĝas pli rapide, ol la futbalistoj.</li>
-
-		<li>La kunordigo de futbalistoj estas esenca.</li>
-	</ul>
-
-	<p>La nomo de la ludo estas konstruita per sonoj de la vortoj
-		<q>ballon(1)</q> (BAL) kaj
-		<q>tekniko</q> (TEK).</p>
-
-	<p>(1) La franca traduko de pilko estas
-		<q>ballon</q>.</p>
-
-
-	<h1 id="copyright">Kopirajto</h1>
-	<p>
-		<a href="http://creativecommons.org/licenses/by-sa/4.0/">
-			<img alt="Permesilo Krea Komunaĵo" src="../../../packages/creative-commons/pictures/CC-BY-SA.png" />
-		</a>
-		<br/>
-		<span>BALTEK (la reguloj)</span> fare de
-		<a href="https://github.com/LucasBorboleta/baltek-the-rules">Lucas Borboleta</a>
-		estas disponebla laŭ la permesilo
-		<a href="http://creativecommons.org/licenses/by-sa/4.0/">
-			Krea Komunaĵo Atribuite-Samkondiĉe 4.0 Tutmonda
-		</a>.
-	</p>
-
-
-	<h1 id="revisions">Revizioj</h1>
-
-	<p>Ĉi tiu dokumento estas la versio 1.1 de la BALTEK reguloj.</p>
-	<p>La tablo sube resumas la motivojn por ĉiu versio.</p>
-
-	<table class="w3-table-all">
-		<thead>
-			<tr>
-				<th>Versio</th>
-				<th>Priskribo</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr>
-				<td>1.0</td>
-				<td>Skribi regulojn en la franca.</td>
-			</tr>
-
-			<tr>
-				<td>1.1</td>
-				<td>Klarigo de la sprinto eblo. Driblo kaj efiko kiel la novaj nomoj por la kompensoj. Pli kompakta notacio de movoj. Skribante
-					per HTML. Ekrankopioj de la HTML / JavaScript komputila programo. Tradukoj en la angla, esperanta kaj portugala.
-				</td>
-			</tr>
-
-		</tbody>
-	</table>
-
-	<h1 id="material">Materialo</h1>
-
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="starting-positions-with-coordinates" src="../pictures/starting-positions-with-coordinates.png"
-		/>
-	</div>
-
-	<p>Jen la materialo, ilustrita en la supra bildo:</p>
-	<ul>
-		<li>1 blanka pilko markita de "@".</li>
-		<li>1 teamo da 6 bluaj futbalistoj.</li>
-		<li>1 teamo da 6 ruĝaj futbalistoj.</li>
-		<li>Ĉiu teamo konsistas el:
-			<ul>
-				<li>1 centra atakanto de forto 3.</li>
-				<li>2 flanka atakantoj de force 2.</li>
-				<li>3 defendantoj de forto 1.</li>
-			</ul>
-		</li>
-		<li>La ludkampo konstruiĝas per 52 verdaj ĉeloj.</li>
-		<li>La ĉelo ĉe
-			<q>a3</q>, markita de
-			<q>#</q>, estas la golejo, kiun defendas la blua teamo.</li>
-
-		<li>La ĉelo ĉe
-			<q>l3</q>, markita de
-			<q>#</q>, estas la golejo, kiun defendas la ruĝa teamo.</li>
-
-	</ul>
-
-	<p>La koordinatoj kaj la markoj,
-		<q>@</q> kaj
-		<q>#</q>, estas uzitaj por la notacio de movoj.</p>
-
-	<h1 id="purpose">Celo</h1>
-	<ul>
-		<li>BALTEK estas ludo por du ludantoj.</li>
-
-		<li>Ĉiu ludanto estras teamon da 6 futbalistoj.</li>
-
-		<li>Ĉiu ludanto movas siavice la pilkon kaj siajn futbalistojn, provante sendi la pilkon en la kontraŭa golejo.</li>
-
-		<li>La gajninto estas la ludanto, kiu unue gajnis 2 goloj.</li>
-	</ul>
-
-	<h1 id="howtoStart">Preparo</h1>
-	<ul>
-		<li>La ludantoj decidas la estron de ĉiu teamo.</li>
-
-		<li>La blua teamo ĉiam startas la ludbatalon.</li>
-
-		<li>Komence de la ludbatalo (starto), kaj post ĉiu golo (restarto), la futbalistoj moviĝas ĉe siajn startajn ĉelojn.</li>
-
-		<li>La startaj ĉeloj estas fiksaj.</li>
-
-		<li>La startaj ĉeloj de la du teamoj estas simetriaj, krom tiuj de la centraj atakantoj.</li>
-
-		<li>La teamo, kiu ĵus atingis golon, permesas al la kontraŭa teamo restarti.</li>
-	</ul>
-
-	<p>La jena bildo montras la startajn ĉelojn de la blua teamo.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="starting-positions-for-blue-team" src="../pictures/starting-positions-for-blue-team.png"
-		/>
-	</div>
-
-	<p>La jena bildo montras la startajn ĉelojn de la ruĝa teamo.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="starting-positions-for-red-team" src="../pictures/starting-positions-for-red-team.png"
-		/>
-	</div>
-
-
-	<h1 id="howToPlay">Ludvico</h1>
-
-	<h2>Agoj, ebloj, kompensoj, kreditoj kaj bonusoj</h2>
-	<ul>
-		<li>Siavice, ĉiu ludanto elektas agojn kaj eblojn, kiuj, laŭ la cirkonstanco, bezonas kompensojn.</li>
-
-		<li>Ĉi tiuj elektoj kostas kreditojn aŭ bonusojn.</li>
-
-		<li>Ĉiu ludanto ricevas:
-			<ul>
-				<li>3 kreditoj je la komenco de ĉiu ludvico;</li>
-				<li>1 bonuso je la starto aŭ ĉiu restarto.</li>
-			</ul>
-		</li>
-
-
-		<li>Siavice, ĉiu ludanto povas elspezi 0, 1, 2 aŭ 3 kreditojn, kaj 0 aŭ 1 bonuson.</li>
-
-		<li>La agoj, ebloj kaj kompensoj estas la jenaj:
-			<ul>
-				<li>
-					<strong>Kuri</strong>: movi futbaliston; kosto:
-					<strong>1 kredito</strong>.</li>
-
-				<li>
-					<strong>Sprinto</strong>: eblo kiu pliigas la movadon de futbalisto; kosto:
-					<strong>1 bonuso</strong>.</li>
-
-				<li>
-					<strong>Ŝoti</strong>: movi la pilkon; kosto:
-					<strong>1 kredito</strong>.</li>
-
-				<li>
-					<strong>Driblo</strong>: kompenso por posedi la pilkon; kosto:
-					<strong>1 kredito po unuo de forto</strong>.</li>
-
-				<li>
-					<strong>Efiko</strong>: kompenso por movi la pilkon; kosto:
-					<strong>1 kredito po unuo de forto</strong>.</li>
-			</ul>
-		</li>
-	</ul>
-
-	<h2>Ago
-		<q>kuri</q>
-	</h2>
-	<ul>
-		<li>La ago
-			<q>kuri</q> kostas 1 kredito kaj permesas movi futbaliston distance de 1 ĉelo.</li>
-
-		<li>Ĉiu ĉelo el la 3 x 3 kvadrato, centrita sur la movanta futbalisto, estas permisita celloko, krom se:
-
-			<ul>
-				<li>ĝi estas ekster la ludkampo;</li>
-				<li>ĝi estas golejo;</li>
-				<li>ĝi jam enhavas futbaliston de la sama teamo.</li>
-			</ul>
-		</li>
-		<li>Ĉiu futbalisto eblas
-			<q>kuri</q> nur unufoje dum ĉiu ludvico.</li>
-
-		<li>La ago
-			<q>kuri</q> ne movas la pilkon.</li>
-
-	</ul>
-
-	<p>Ekzemplo: la eblaj cellokoj por la blua-3 futbalisto havas flavaj limoj.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="run-allowed-destinations" src="../pictures/run-allowed-destinations.png" />
-	</div>
-
-
-	<h2>Eblo
-		<q>sprinto</q>
-	</h2>
-	<ul>
-		<li>La eblo
-			<q>sprinto</q> kostas 1 bonuson kaj pliigas ĝis 2 ĉeloj la movon de futbalisto.</li>
-
-		<li>La eblo
-			<q>sprinto</q> ĉiam estas unuigita kun la ago
-			<q>kuri</q>.</li>
-
-		<li>Ĉiu ĉelo el la 5 x 5 kvadrato, centrita sur la movanta futbalisto, estas permisita celloko, krom se:
-
-			<ul>
-				<li>ĝi estas ekster la ludkampo;</li>
-				<li>ĝi estas golejo;</li>
-				<li>ĝi jam enhavas futbaliston de la sama teamo.</li>
-			</ul>
-		</li>
-
-		<li>La ludanto povas elspezi sian bonuson nur unufoje inter du startoj/restartoj.</li>
-	</ul>
-
-	<p>Ekzemplo: la eblaj cellokoj por la blua-3 futbalisto havas flavaj limoj.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="sprint-allowed-destinations" src="../pictures/sprint-allowed-destinations.png"
-		/>
-	</div>
-
-	<h2>Ago
-		<q>ŝoti</q>
-	</h2>
-	<ul>
-		<li>La agoj
-			<q>transdoni la pilkon al futbalisto</q>,
-			<q>sendi la pilkon al malplena ĉelo</q>
-			kaj
-			<q>ŝoti al golejo</q>
-			obeas la samajn regulojn.</li>
-
-		<li>La ago
-			<q>ŝoti</q> kostas 1 kredito. Se la ĝeneralaj kondiĉoj kaj kondiĉoj pri fortoj kontentigas, la ago permesas movi la pilkon
-			ĝis 2 ĉeloj horizontale, vertikale aŭ diagonale. Tamen, la movo de la pilko neniam kurbiĝas.</li>
-
-		<li>Jen la ĝeneralaj kondiĉoj, kiujn la ago postulas:
-
-			<ul>
-				<li>La ludanto havas
-					<q>ŝotanto</q> (futblisto, kiu estas preta ŝoti) en la startanta ĉelo de la pilko.</li>
-				<li>Dum ĉi tiu ludvico, la
-					<q>ŝotanto</q> neniam
-					<q>ŝotis</q>.</li>
-				<li>La celloko de la pilko estas en la ludkampo.</li>
-				<li>La celloko de la pilko ne estas la golejo, kiun defendas la ludanto.</li>
-				<li>La celloko de la pilko estas malplena aŭ ne.</li>
-			</ul>
-		</li>
-
-		<li>Jen la kondiĉoj pri fortoj, kiujn la ago postulas:
-			<ul>
-				<li>Se la
-					<q>ŝotanto</q> estas en sama ĉelo ke kontraŭulo, la
-					<q>ŝotanto</q> devas:
-					<ul>
-						<li>ĉu egali aŭ superi la forton de sia kontraŭulo,</li>
-						<li>ĉu kompensi sian malsuperecon per
-							<q>driblo</q>.</li>
-					</ul>
-				</li>
-
-				<li>Se la
-					<q>ŝotanto</q> movas la pilkon super kontraŭulo, la
-					<q>ŝotanto</q> devas:
-					<ul>
-						<li>ĉu egali aŭ superi la forton de sia kontraŭulo,</li>
-						<li>ĉu kompensi sian malsuperecon per
-							<q>efiko</q>.</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
-
-	<p>Ekzemplo: la eblaj cellokoj por la pilko, al kiujn ŝotus la blua-3 futbalisto, havas flavaj limoj; tiuj cellokoj bezonas
-		nek
-		<q>driblo</q> nek
-		<q>efiko</q>.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="shoot-allowed-destinations" src="../pictures/shoot-allowed-destinations.png" />
-	</div>
-
-	<h2>Kompenso per
-		<q>driblo</q>
-	</h2>
-	<ul>
-		<li>La ago
-			<q>ŝoti</q> eble postulas ĉi tiun kompenson.</li>
-
-		<li>La
-			<q>driblo</q> kompensas la malsuperecon de la ŝotanto rilate al la kontraŭulo en sama ĉelo.</li>
-
-		<li>La
-			<q>driblo</q> kostas 1 krediton po unuo de kompensita forto.</li>
-
-	</ul>
-	<p>Ekzemploj: por posedi la pilkon, la blua-2
-		<q>ŝotanto</q> devas fari
-		<q>driblon</q> kostanta 1 krediton; kaj la blua-1
-		<q>ŝotanto</q> devas fari
-		<q>driblon</q> kostanta 2 kreditojn.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="requiring-dribble-of-one-credit" src="../pictures/requiring-dribble-of-one-credit.png"
-		/>
-		<img class="baltek-rules-image-class" alt="requiring-dribble-of-two-credits" src="../pictures/requiring-dribble-of-two-credits.png"
-		/>
-	</div>
-
-
-
-	<h2>Kompenso per
-		<q>efiko</q>
-	</h2>
-	<ul>
-		<li>La ago
-			<q>ŝoti</q> eble postulas ĉi tiun kompenson.</li>
-
-		<li>La
-			<q>efiko</q> kompensas la malsuperecon de la
-			<q>ŝotanto</q> rilate al la kontraŭulo, super kiu movas la pilko.</li>
-
-		<li>La
-			<q>efiko</q> kostas 1 krediton po unuo de kompensita forto.</li>
-
-		<li>Kiam oni transdonas la pilkon super futbalisto de sia teamo, tiam oni ne bezonas la kompenson
-			<q>efiko</q>.</li>
-
-	</ul>
-
-	<p>Ekzemploj: por transdoni la pilkon al la blua-2 futbalisto, la blua-1
-		<q>ŝotanto</q>
-		devas fari
-		<q>efikon</q> kostanta 1 krediton, en la maldekstra situacio; kaj
-		<q>efikon</q> kostanta 2 kreditojn, en la dekstra situacio.</p>
-	<div class="baltek-rules-hasImage-class">
-		<img class="baltek-rules-image-class" alt="requiring-effect-of-one-credit" src="../pictures/requiring-effect-of-one-credit.png"
-		/>
-		<img class="baltek-rules-image-class" alt="requiring-effect-of-two-credits" src="../pictures/requiring-effect-of-two-credits.png"
-		/>
-	</div>
-
-	<h1 id="notationOfMoves">Notacio de movoj</h1>
-	<p>Laŭbezone, la movoj de la ludbatalo estas priskribitaj kiel en la jena ekzemplo.</p>
-
-	<pre class="w3-code">
+  <p class="baltek-rules-logo-class">Reguloj de BALTEK &#x26BD;&#127939;</p><span class="baltek-rules-hyperlink-group-class"><a class="baltek-rules-hyperlink-class"
+     href="#introduction">Enkonduko</a> <a class="baltek-rules-hyperlink-class"
+     href="#copyright">Kopirajto</a> <a class="baltek-rules-hyperlink-class"
+     href="#revisions">Revizioj</a> <a class="baltek-rules-hyperlink-class"
+     href="#material">Materialo</a> <a class="baltek-rules-hyperlink-class"
+     href="#purpose">Celo</a> <a class="baltek-rules-hyperlink-class"
+     href="#howtoStart">Preparo</a> <a class="baltek-rules-hyperlink-class"
+     href="#howToPlay">Ludvico</a> <a class="baltek-rules-hyperlink-class"
+     href="#notationOfMoves">Notacio de movoj</a> <a class="baltek-rules-hyperlink-class"
+     href="#indexesOfVersions">Indeksoj de versioj</a> <a class="baltek-rules-hyperlink-class"
+     href="#thanks">Dankoj</a></span>
+  <h1 id="introduction">Enkonduko</h1>
+  <p>BALTEK estas tabulludo pri futbalo, alternante ludvicoj. Jen ĝiaj principoj:</p>
+  <ul>
+    <li>Ludo facile mane farita,</li>
+    <li>difinita per malmultaj reguloj,</li>
+    <li>sen hazarda mekanismo.</li>
+    <li>La ludo permesas plurajn agojn dum ĉiu ludvico.</li>
+    <li>La pilko moviĝas pli rapide, ol la futbalistoj.</li>
+    <li>La kunordigo de futbalistoj estas esenca.</li>
+  </ul>
+  <p>La nomo de la ludo estas konstruita per sonoj de la vortoj <q>ballon(1)</q> (BAL) kaj <q>tekniko</q> (TEK).</p>
+  <p>(1) La franca traduko de pilko estas <q>ballon</q>.</p>
+  <h1 id="copyright">Kopirajto</h1>
+  <p><a href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Permesilo Krea Komunaĵo"
+       src="../../../packages/creative-commons/pictures/CC-BY-SA.png"></a><br>
+  <span>BALTEK (la reguloj)</span> fare de <a href="https://github.com/LucasBorboleta/baltek-the-rules">Lucas Borboleta</a> kaj la <a href="https://github.com/LucasBorboleta/baltek-the-rules/CONTRIBUTORS.txt">Baltekians</a> estas disponebla laŭ la
+  permesilo <a href="http://creativecommons.org/licenses/by-sa/4.0/">Krea Komunaĵo Atribuite-Samkondiĉe 4.0 Tutmonda</a> .</p>
+  <h1 id="revisions">Revizioj</h1>
+  <p>Ĉi tiu dokumento estas la versio 1.1 de la BALTEK reguloj.</p>
+  <p>La tablo sube resumas la motivojn por ĉiu versio.</p>
+  <table class="w3-table-all">
+    <thead>
+      <tr>
+        <th>Versio</th>
+        <th>Priskribo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1.0</td>
+        <td>Skribi regulojn en la franca.</td>
+      </tr>
+      <tr>
+        <td>1.1</td>
+        <td>Klarigo de la sprinto eblo. Driblo kaj efiko kiel la novaj nomoj por la kompensoj. Pli kompakta notacio de movoj. Skribante per HTML. Ekrankopioj de la HTML / JavaScript komputila programo. Tradukoj en la angla, esperanta kaj
+        portugala.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h1 id="material">Materialo</h1>
+  <div class="baltek-rules-hasImage-class"><img alt="starting-positions-with-coordinates"
+       class="baltek-rules-image-class"
+       src="../pictures/starting-positions-with-coordinates.png"></div>
+  <p>Jen la materialo, ilustrita en la supra bildo:</p>
+  <ul>
+    <li>1 blanka pilko markita de "@".</li>
+    <li>1 teamo da 6 bluaj futbalistoj.</li>
+    <li>1 teamo da 6 ruĝaj futbalistoj.</li>
+    <li>Ĉiu teamo konsistas el:
+      <ul>
+        <li>1 centra atakanto de forto 3.</li>
+        <li>2 flanka atakantoj de force 2.</li>
+        <li>3 defendantoj de forto 1.</li>
+      </ul>
+    </li>
+    <li>La ludkampo konstruiĝas per 52 verdaj ĉeloj.</li>
+    <li>La ĉelo ĉe <q>a3</q>, markita de <q>#</q>, estas la golejo, kiun defendas la blua teamo.</li>
+    <li>La ĉelo ĉe <q>l3</q>, markita de <q>#</q>, estas la golejo, kiun defendas la ruĝa teamo.</li>
+  </ul>
+  <p>La koordinatoj kaj la markoj, <q>@</q> kaj <q>#</q>, estas uzitaj por la notacio de movoj.</p>
+  <h1 id="purpose">Celo</h1>
+  <ul>
+    <li>BALTEK estas ludo por du ludantoj.</li>
+    <li>Ĉiu ludanto estras teamon da 6 futbalistoj.</li>
+    <li>Ĉiu ludanto movas siavice la pilkon kaj siajn futbalistojn, provante sendi la pilkon en la kontraŭa golejo.</li>
+    <li>La gajninto estas la ludanto, kiu unue gajnis 2 goloj.</li>
+  </ul>
+  <h1 id="howtoStart">Preparo</h1>
+  <ul>
+    <li>La ludantoj decidas la estron de ĉiu teamo.</li>
+    <li>La blua teamo ĉiam startas la ludbatalon.</li>
+    <li>Komence de la ludbatalo (starto), kaj post ĉiu golo (restarto), la futbalistoj moviĝas ĉe siajn startajn ĉelojn.</li>
+    <li>La startaj ĉeloj estas fiksaj.</li>
+    <li>La startaj ĉeloj de la du teamoj estas simetriaj, krom tiuj de la centraj atakantoj.</li>
+    <li>La teamo, kiu ĵus atingis golon, permesas al la kontraŭa teamo restarti.</li>
+  </ul>
+  <p>La jena bildo montras la startajn ĉelojn de la blua teamo.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="starting-positions-for-blue-team"
+       class="baltek-rules-image-class"
+       src="../pictures/starting-positions-for-blue-team.png"></div>
+  <p>La jena bildo montras la startajn ĉelojn de la ruĝa teamo.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="starting-positions-for-red-team"
+       class="baltek-rules-image-class"
+       src="../pictures/starting-positions-for-red-team.png"></div>
+  <h1 id="howToPlay">Ludvico</h1>
+  <h2>Agoj, ebloj, kompensoj, kreditoj kaj bonusoj</h2>
+  <ul>
+    <li>Siavice, ĉiu ludanto elektas agojn kaj eblojn, kiuj, laŭ la cirkonstanco, bezonas kompensojn.</li>
+    <li>Ĉi tiuj elektoj kostas kreditojn aŭ bonusojn.</li>
+    <li>Ĉiu ludanto ricevas:
+      <ul>
+        <li>3 kreditoj je la komenco de ĉiu ludvico;</li>
+        <li>1 bonuso je la starto aŭ ĉiu restarto.</li>
+      </ul>
+    </li>
+    <li>Siavice, ĉiu ludanto povas elspezi 0, 1, 2 aŭ 3 kreditojn, kaj 0 aŭ 1 bonuson.</li>
+    <li>La agoj, ebloj kaj kompensoj estas la jenaj:
+      <ul>
+        <li><strong>Kuri</strong>: movi futbaliston; kosto: <strong>1 kredito</strong>.</li>
+        <li><strong>Sprinto</strong>: eblo kiu pliigas la movadon de futbalisto; kosto: <strong>1 bonuso</strong>.</li>
+        <li><strong>Ŝoti</strong>: movi la pilkon; kosto: <strong>1 kredito</strong>.</li>
+        <li><strong>Driblo</strong>: kompenso por posedi la pilkon; kosto: <strong>1 kredito po unuo de forto</strong>.</li>
+        <li><strong>Efiko</strong>: kompenso por movi la pilkon; kosto: <strong>1 kredito po unuo de forto</strong>.</li>
+      </ul>
+    </li>
+  </ul>
+  <h2>Ago <q>kuri</q></h2>
+  <ul>
+    <li>La ago <q>kuri</q> kostas 1 kredito kaj permesas movi futbaliston distance de 1 ĉelo.</li>
+    <li>Ĉiu ĉelo el la 3 x 3 kvadrato, centrita sur la movanta futbalisto, estas permisita celloko, krom se:
+      <ul>
+        <li>ĝi estas ekster la ludkampo;</li>
+        <li>ĝi estas golejo;</li>
+        <li>ĝi jam enhavas futbaliston de la sama teamo.</li>
+      </ul>
+    </li>
+    <li>Ĉiu futbalisto eblas <q>kuri</q> nur unufoje dum ĉiu ludvico.</li>
+    <li>La ago <q>kuri</q> ne movas la pilkon.</li>
+  </ul>
+  <p>Ekzemplo: la eblaj cellokoj por la blua-3 futbalisto havas flavaj limoj.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="run-allowed-destinations"
+       class="baltek-rules-image-class"
+       src="../pictures/run-allowed-destinations.png"></div>
+  <h2>Eblo <q>sprinto</q></h2>
+  <ul>
+    <li>La eblo <q>sprinto</q> kostas 1 bonuson kaj pliigas ĝis 2 ĉeloj la movon de futbalisto.</li>
+    <li>La eblo <q>sprinto</q> ĉiam estas unuigita kun la ago <q>kuri</q>.</li>
+    <li>Ĉiu ĉelo el la 5 x 5 kvadrato, centrita sur la movanta futbalisto, estas permisita celloko, krom se:
+      <ul>
+        <li>ĝi estas ekster la ludkampo;</li>
+        <li>ĝi estas golejo;</li>
+        <li>ĝi jam enhavas futbaliston de la sama teamo.</li>
+      </ul>
+    </li>
+    <li>La ludanto povas elspezi sian bonuson nur unufoje inter du startoj/restartoj.</li>
+  </ul>
+  <p>Ekzemplo: la eblaj cellokoj por la blua-3 futbalisto havas flavaj limoj.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="sprint-allowed-destinations"
+       class="baltek-rules-image-class"
+       src="../pictures/sprint-allowed-destinations.png"></div>
+  <h2>Ago <q>ŝoti</q></h2>
+  <ul>
+    <li>La agoj <q>transdoni la pilkon al futbalisto</q>, <q>sendi la pilkon al malplena ĉelo</q> kaj <q>ŝoti al golejo</q> obeas la samajn regulojn.</li>
+    <li>La ago <q>ŝoti</q> kostas 1 kredito. Se la ĝeneralaj kondiĉoj kaj kondiĉoj pri fortoj kontentigas, la ago permesas movi la pilkon ĝis 2 ĉeloj horizontale, vertikale aŭ diagonale. Tamen, la movo de la pilko neniam kurbiĝas.</li>
+    <li>Jen la ĝeneralaj kondiĉoj, kiujn la ago postulas:
+      <ul>
+        <li>La ludanto havas <q>ŝotanto</q> (futblisto, kiu estas preta ŝoti) en la startanta ĉelo de la pilko.</li>
+        <li>Dum ĉi tiu ludvico, la <q>ŝotanto</q> neniam <q>ŝotis</q>.</li>
+        <li>La celloko de la pilko estas en la ludkampo.</li>
+        <li>La celloko de la pilko ne estas la golejo, kiun defendas la ludanto.</li>
+        <li>La celloko de la pilko estas malplena aŭ ne.</li>
+      </ul>
+    </li>
+    <li>Jen la kondiĉoj pri fortoj, kiujn la ago postulas:
+      <ul>
+        <li>Se la <q>ŝotanto</q> estas en sama ĉelo ke kontraŭulo, la <q>ŝotanto</q> devas:
+          <ul>
+            <li>ĉu egali aŭ superi la forton de sia kontraŭulo,</li>
+            <li>ĉu kompensi sian malsuperecon per <q>driblo</q>.</li>
+          </ul>
+        </li>
+        <li>Se la <q>ŝotanto</q> movas la pilkon super kontraŭulo, la <q>ŝotanto</q> devas:
+          <ul>
+            <li>ĉu egali aŭ superi la forton de sia kontraŭulo,</li>
+            <li>ĉu kompensi sian malsuperecon per <q>efiko</q>.</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>Ekzemplo: la eblaj cellokoj por la pilko, al kiujn ŝotus la blua-3 futbalisto, havas flavaj limoj; tiuj cellokoj bezonas nek <q>driblo</q> nek <q>efiko</q>.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="shoot-allowed-destinations"
+       class="baltek-rules-image-class"
+       src="../pictures/shoot-allowed-destinations.png"></div>
+  <h2>Kompenso per <q>driblo</q></h2>
+  <ul>
+    <li>La ago <q>ŝoti</q> eble postulas ĉi tiun kompenson.</li>
+    <li>La <q>driblo</q> kompensas la malsuperecon de la ŝotanto rilate al la kontraŭulo en sama ĉelo.</li>
+    <li>La <q>driblo</q> kostas 1 krediton po unuo de kompensita forto.</li>
+  </ul>
+  <p>Ekzemploj: por posedi la pilkon, la blua-2 <q>ŝotanto</q> devas fari <q>driblon</q> kostanta 1 krediton; kaj la blua-1 <q>ŝotanto</q> devas fari <q>driblon</q> kostanta 2 kreditojn.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="requiring-dribble-of-one-credit"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-dribble-of-one-credit.png"> <img alt="requiring-dribble-of-two-credits"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-dribble-of-two-credits.png"></div>
+  <h2>Kompenso per <q>efiko</q></h2>
+  <ul>
+    <li>La ago <q>ŝoti</q> eble postulas ĉi tiun kompenson.</li>
+    <li>La <q>efiko</q> kompensas la malsuperecon de la <q>ŝotanto</q> rilate al la kontraŭulo, super kiu movas la pilko.</li>
+    <li>La <q>efiko</q> kostas 1 krediton po unuo de kompensita forto.</li>
+    <li>Kiam oni transdonas la pilkon super futbalisto de sia teamo, tiam oni ne bezonas la kompenson <q>efiko</q>.</li>
+  </ul>
+  <p>Ekzemploj: por transdoni la pilkon al la blua-2 futbalisto, la blua-1 <q>ŝotanto</q> devas fari <q>efikon</q> kostanta 1 krediton, en la maldekstra situacio; kaj <q>efikon</q> kostanta 2 kreditojn, en la dekstra situacio.</p>
+  <div class="baltek-rules-hasImage-class"><img alt="requiring-effect-of-one-credit"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-effect-of-one-credit.png"> <img alt="requiring-effect-of-two-credits"
+       class="baltek-rules-image-class"
+       src="../pictures/requiring-effect-of-two-credits.png"></div>
+  <h1 id="notationOfMoves">Notacio de movoj</h1>
+  <p>Laŭbezone, la movoj de la ludbatalo estas priskribitaj kiel en la jena ekzemplo.</p>
+  <pre class="w3-code">
 @d3  f3g3 d1e1  / h3g3 g5f5 i3h3
 e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 @e4  @g4+       / g3g4 i5i4 @i4
 ...
 @# /
 </pre>
-
-	<p>Laŭvole, komentarioj estas aldonitaj kiel en la jena ekzemplo.</p>
-
-	<pre class="w3-code">
+  <p>Laŭvole, komentarioj estas aldonitaj kiel en la jena ekzemplo.</p>
+  <pre class="w3-code">
 #! BALTEK 1.1
 #@ bernard@bois.fr robert@riviere.fr
 #: 2014-12-24 11:09:30
@@ -415,141 +243,42 @@ e1e2 d5e4 f5g4  / f5e4 g1f1 i1h2
 #: 2014-12-24 11:30:00
 # La bonuson bone ludis la ruĝaj.
 </pre>
-
-	<p>La notacio estas strukturita laŭ linioj. Jen ĝiaj konvencioj:</p>
-	<ul>
-		<li>La spaceto, signo
-			<q> </q>, laŭvole ripetita, disigas la vortojn.</li>
-
-		<li>Linio komencita de
-			<q>#</q> estas komento aŭ pseŭda komento, kaj ĉiam estas nedeviga.
-
-			<ul>
-				<li>
-					<q>
-						<code class="w3-codespan"># </code>
-					</q>, dieso sekvita de spaceto, anoncas liberan komenton.</li>
-
-				<li>
-					<q>
-						<code class="w3-codespan">#! BALTEK 1.1</code>
-					</q> anoncas la version
-					<q>1.1</q> de la formato de notacio de BALTEK; uzebla nur unufoje, kiel unua lineo.</li>
-
-				<li>
-					<q>
-						<code class="w3-codespan">#@</code>
-					</q> anoncas la salutnomoj elektitajn de la du ludantoj, laŭvice
-					<q>bluan</q> kaj
-					<q>ruĝan</q>; uzebla nur unufoje.</li>
-
-				<li>
-					<q>
-						<code class="w3-codespan">#:</code>
-					</q> anoncas, pere de
-					<q>ISO</q> formato, la daton, kaj laŭvole la tempon; uzebla plurfoje.</li>
-
-			</ul>
-		</li>
-
-		<li>Linio, kiu estas nek senhava, nek komento, priskribas la
-			<q>bluan</q> ludvicon, kaj sekve, la
-			<q>ruĝan</q> ludvicon.</li>
-
-		<li>
-			<q>
-				<code class="w3-codespan">/</code>
-			</q> finas la
-			<q>bluan</q> ludvicon. La fino de la linio finas la
-			<q>ruĝan</q> ludvicon.</li>
-
-		<li>Ĉiu ludvico konsistas el 0, 1, 2 aŭ 3 agoj.
-
-			<ul>
-				<li>La ago
-					<q>kuri</q> estas notita per vorto komencante de la startinta ĉelo kaj finante de la alveninta ĉelo. Ekzemplo:
-					<code class="w3-codespan">g3f3</code>
-				</li>
-
-				<li>Por la
-					<q>sprinto</q>,
-					<q>*</q> plilongigas la vorton. Ekzemplo:
-					<code class="w3-codespan">g3e2*</code>
-				</li>
-
-				<li>La ago
-					<q>ŝoti</q> estas priskribita per vorto komencante de la signo
-					<q>@</q> kaj finante de la alveninta ĉelo. Ekzemplo:
-					<code class="w3-codespan">@c3</code>
-				</li>
-
-				<li>La ago
-					<q>ŝoti al golejo</q> estas mallongigita per la jena vorto:
-					<code class="w3-codespan">@#</code>
-				</li>
-
-				<li>Por
-					<q>driblo</q>, kostanta 1 krediton,
-					<q>+</q> plilongigas la vorton. Ekzemplo:
-					<code class="w3-codespan">@c3+</code>
-				</li>
-
-				<li>Por
-					<q>driblo</q>, kostanta 2 kreditojn,
-					<q>++</q> plilongigas la vorton. Ekzemplo:
-					<code class="w3-codespan">@c3++</code>
-				</li>
-
-				<li>Por
-					<q>efiko</q>, kostanta 1 krediton,
-					<q>!</q> plilongigas la vorton. Ekzemplo:
-					<code class="w3-codespan">@c3!</code>
-				</li>
-
-				<li>Por
-					<q>efiko</q>, kostanta 2 kreditojn,
-					<q>!!</q> plilongigas la vorton. Ekzemplo:
-					<code class="w3-codespan">@c3!!</code>
-				</li>
-
-				<li>Por la kombinaĵo de
-					<q>driblo</q> kaj
-					<q>efiko</q>, kostanta po 1 krediton,
-					<q>+!</q> plilongigas la vorton. Ekzemplo:
-					<code class="w3-codespan">@c3+!</code>
-				</li>
-
-			</ul>
-		</li>
-
-	</ul>
-
-
-	<h1 id="indexesOfVersions">Indeksoj de versioj</h1>
-	<ul>
-		<li>La versioj de la reguloj estas identigitaj per du entjeraj indeksoj
-			<q>i.j</q>.</li>
-
-		<li>La unua versio estas
-			<q>1.0</q>.</li>
-
-		<li>Kiam la logiko de reguloj ŝanĝiĝas, la unua indekso
-			<q>i</q> estas pliigita de 1, kaj la dua indekso
-			<q>j</q> estas rekomencita de 0.</li>
-
-		<li>La dua indekso
-			<q>j</q> estas pliigita de 1 kiam la tekstoj aŭ la ilustraĵoj aŭ la notacio de movoj aŭ la strukturo de la dokumento evoluas,
-			aŭ traduko estas aldonita, sed sen ŝanĝi la logikon de la reguloj.</li>
-	</ul>
-
-
-	<h1 id="thanks">Dankoj</h1>
-	<p>Mi dankas miajn filojn
-		<q>A</q> kaj
-		<q>C</q> pro ilia pacienco kaj komentoj dum la testoj de BALTEK. Mia edzino
-		<q>P</q>, kiu ĉiam pensas longatempe dum ludbataloj de ŝako, inspiris la kreon de la
-		<q>sprinto-bonuso</q>, kiu vigligis la ludon de BALTEK; mi dankas ŝin.
-	</p>
+  <p>La notacio estas strukturita laŭ linioj. Jen ĝiaj konvencioj:</p>
+  <ul>
+    <li>La spaceto, signo , laŭvole ripetita, disigas la vortojn.</li>
+    <li>Linio komencita de <q>#</q> estas komento aŭ pseŭda komento, kaj ĉiam estas nedeviga.
+      <ul>
+        <li><q><code class="w3-codespan">#</code></q> , dieso sekvita de spaceto, anoncas liberan komenton.</li>
+        <li><q><code class="w3-codespan">#! BALTEK 1.1</code></q> anoncas la version <q>1.1</q> de la formato de notacio de BALTEK; uzebla nur unufoje, kiel unua lineo.</li>
+        <li><q><code class="w3-codespan">#@</code></q> anoncas la salutnomoj elektitajn de la du ludantoj, laŭvice <q>bluan</q> kaj <q>ruĝan</q>; uzebla nur unufoje.</li>
+        <li><q><code class="w3-codespan">#:</code></q> anoncas, pere de <q>ISO</q> formato, la daton, kaj laŭvole la tempon; uzebla plurfoje.</li>
+      </ul>
+    </li>
+    <li>Linio, kiu estas nek senhava, nek komento, priskribas la <q>bluan</q> ludvicon, kaj sekve, la <q>ruĝan</q> ludvicon.</li>
+    <li><q><code class="w3-codespan">/</code></q> finas la <q>bluan</q> ludvicon. La fino de la linio finas la <q>ruĝan</q> ludvicon.</li>
+    <li>Ĉiu ludvico konsistas el 0, 1, 2 aŭ 3 agoj.
+      <ul>
+        <li>La ago <q>kuri</q> estas notita per vorto komencante de la startinta ĉelo kaj finante de la alveninta ĉelo. Ekzemplo: <code class="w3-codespan">g3f3</code></li>
+        <li>Por la <q>sprinto</q>, <q>*</q> plilongigas la vorton. Ekzemplo: <code class="w3-codespan">g3e2*</code></li>
+        <li>La ago <q>ŝoti</q> estas priskribita per vorto komencante de la signo <q>@</q> kaj finante de la alveninta ĉelo. Ekzemplo: <code class="w3-codespan">@c3</code></li>
+        <li>La ago <q>ŝoti al golejo</q> estas mallongigita per la jena vorto: <code class="w3-codespan">@#</code></li>
+        <li>Por <q>driblo</q>, kostanta 1 krediton, <q>+</q> plilongigas la vorton. Ekzemplo: <code class="w3-codespan">@c3+</code></li>
+        <li>Por <q>driblo</q>, kostanta 2 kreditojn, <q>++</q> plilongigas la vorton. Ekzemplo: <code class="w3-codespan">@c3++</code></li>
+        <li>Por <q>efiko</q>, kostanta 1 krediton, <q>!</q> plilongigas la vorton. Ekzemplo: <code class="w3-codespan">@c3!</code></li>
+        <li>Por <q>efiko</q>, kostanta 2 kreditojn, <q>!!</q> plilongigas la vorton. Ekzemplo: <code class="w3-codespan">@c3!!</code></li>
+        <li>Por la kombinaĵo de <q>driblo</q> kaj <q>efiko</q>, kostanta po 1 krediton, <q>+!</q> plilongigas la vorton. Ekzemplo: <code class="w3-codespan">@c3+!</code></li>
+      </ul>
+    </li>
+  </ul>
+  <h1 id="indexesOfVersions">Indeksoj de versioj</h1>
+  <ul>
+    <li>La versioj de la reguloj estas identigitaj per du entjeraj indeksoj <q>i.j</q>.</li>
+    <li>La unua versio estas <q>1.0</q>.</li>
+    <li>Kiam la logiko de reguloj ŝanĝiĝas, la unua indekso <q>i</q> estas pliigita de 1, kaj la dua indekso <q>j</q> estas rekomencita de 0.</li>
+    <li>La dua indekso <q>j</q> estas pliigita de 1 kiam la tekstoj aŭ la ilustraĵoj aŭ la notacio de movoj aŭ la strukturo de la dokumento evoluas, aŭ traduko estas aldonita, sed sen ŝanĝi la logikon de la reguloj.</li>
+  </ul>
+  <h1 id="thanks">Dankoj</h1>
+  <p>Mi dankas miajn filojn <q>A</q> kaj <q>C</q> pro ilia pacienco kaj komentoj dum la testoj de BALTEK. Mia edzino <q>P</q>, kiu ĉiam pensas longatempe dum ludbataloj de ŝako, inspiris la kreon de la <q>sprinto-bonuso</q>, kiu vigligis la ludon de
+  BALTEK; mi dankas ŝin.</p>
 </body>
-
 </html>
