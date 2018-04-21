@@ -1,4 +1,3 @@
-/* BALTEK-THE-RULES-LICENSE-MD-BEGIN
 # LICENSE
 
 [![Creative Commons License](../packages/creative-commons/pictures/CC-BY-SA.png)](http://creativecommons.org/licenses/by-sa/4.0)
@@ -10,28 +9,3 @@ Copyright (C) 2017-2018 Lucas Borboleta ([lucas.borboleta@free.fr](mailto:lucas.
 This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/4.0](http://creativecommons.org/licenses/by-sa/4.0).
 
 Attribute work to URL [https://github.com/LucasBorboleta/baltek-the-rules](https://github.com/LucasBorboleta/baltek-the-rules).
-BALTEK-THE-RULES-LICENSE-MD-END */
-
-.baltek-rules-hyperlink-group-class{
-    word-spacing:16px;
-}
-
-.baltek-rules-hyperlink-class{
-    word-spacing:2px;
-}
-
-.baltek-rules-hasImage-class{
-    text-align:center;
-}
-
-.baltek-rules-image-class{
-    max-width:100%;
-    height:auto
-}
-
-.baltek-rules-logo-class{
-    background-color:khaki;
-    border-radius:8px;
-    font-size:32px;
-    text-align:center
-}
