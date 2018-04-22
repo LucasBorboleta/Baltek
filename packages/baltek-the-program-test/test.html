@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BALTEK-THE-PROGRAM-LICENSE-MD-BEGIN
+BALTEK-THE-PROGRAM-LICENSE-MD-END -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../../packages/qunit/css/qunit-2.4.0.css">
+    <title>QUnit BALTEK-Test</title>
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <div id="Labo_debugZone" style="background-color:white; color:black; margin:2px; padding:2px;">
+        <p><button id="Labo_clearDebugButton" type="button" onclick="Labo.clearDebugText()">Clear debug</button></p>
+        <p>Inverse list of debug messages:</p>
+        <ul id="Labo_debugLines"></ul>
+    </div>
+
+    <script src="../../packages/qunit/js/qunit-2.4.0.js"></script>
+    <script src="../../packages/jquery/js/jquery-3.0.0.min.js"></script>
+
+    <script src="./js/Labo.js"></script>
+    <script src="./js/LaboTest.js"></script>
+</body>
+
+</html>

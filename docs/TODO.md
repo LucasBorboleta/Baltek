@@ -17,22 +17,16 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Tasks
 
-1. Introduce "Parameters" button for grouping buttons (selector human/ia; language; coordinates; debug)
+1. In help, add description for "inviting a friend" and "setting parameters"
 
-2. Use label "Invite friend" instead of "+"
+2. Add a CODE_OF_CONDUCT.md file
 
-3. Add credit for TogetherJS
+3. Add a CONTRIBUTING.md file
 
-4. In help, add description for "inviting a friend" and "setting parameters"
+4. Describe the file tree in the CONTRIBUTING.md file.
 
-5. Add a CODE_OF_CONDUCT.md file
+5. Update the DESIGN.md file
 
-6. Add a CONTRIBUTING.md file
-
-7. Describe the file tree in the CONTRIBUTING.md file.
-
-8. Update the DESIGN.md file
-
-9. In README.md mentions briefly the main milestones.
+6. In README.md mentions briefly the main milestones.
 
    ​
