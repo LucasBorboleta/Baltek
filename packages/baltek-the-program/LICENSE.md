@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<!-- BALTEK-THE-PROGRAM-LICENSE-MD-BEGIN
 # LICENSE
 
 BALTEK (the program) implements BALTEK (the rules), a turn-based board game, inspired from football.
@@ -17,20 +13,3 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program. If not, see [http://www.gnu.org/licenses](http://www.gnu.org/licenses).
-BALTEK-THE-PROGRAM-LICENSE-MD-END -->
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BALTEK</title>
-    <script>
-        window.location.href = "./packages/baltek-the-program/index.html";
-    </script>
-</head>
-
-<body>
-    If you are not redirected automatically, follow this
-    <a href="./packages/baltek-the-program/index.html">link</a>.
-</body>
-
-</html>
