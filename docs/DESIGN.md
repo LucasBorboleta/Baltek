@@ -1,4 +1,4 @@
-# Design of Baltek
+# DESIGN
 
 ## Introduction
 
@@ -46,16 +46,16 @@ Let us get inspiration from the **Model View Presenter (MVP)**
 
 Let us translate such diagram into a table of events:
 
-| Step | View             | Presenter                   | Model                   |
-| ---- | ---------------- | --------------------------- | ----------------------- |
-| 1    | sends user event |                             |                         |
-| 2    |                  | receives user event         |                         |
-| 3    |                  | requests model change       |                         |
-| 4    |                  |                             | updates model           |
-| 5    |                  |                             | send state-change event |
-| 6    |                  | receives state-change event |                         |
-| 7    |                  | request view change         |                         |
-| 8    | updates view     |                             |                         |
+Step | View             | Presenter                   | Model
+---- | ---------------- | --------------------------- | -----------------------
+1    | sends user event |                             |
+2    |                  | receives user event         |
+3    |                  | requests model change       |
+4    |                  |                             | updates model
+5    |                  |                             | send state-change event
+6    |                  | receives state-change event |
+7    |                  | request view change         |
+8    | updates view     |
 
 The previous objectives implies the following cluster of classes:
 
@@ -232,17 +232,17 @@ Use priorities in the states of options:
 
 ## Regarding the move, other idea for organizing the interaction between the engine and the player
 
-| Step | Engine                                   | Player                                   |
-| ---- | ---------------------------------------- | ---------------------------------------- |
-| 1    | Find the selectable sources that run and/or kick. |                                          |
-| 2    |                                          | Select one of the selectable source.     |
-| 3    | Find the selectable options (run/sprint/kick). |                                          |
-| 4    | Select the first selectable option.      |                                          |
-| 5    | Find the selectable destinations.        |                                          |
-| 6    |                                          | Change the option among the selectable options. |
-| 7    | Find the selectable destinations.        |                                          |
-| 8    |                                          | Select one of the selectable destination. |
-| 9    | Play the move.                           |                                          |
+Step | Engine                                            | Player
+---- | ------------------------------------------------- | -----------------------------------------------
+1    | Find the selectable sources that run and/or kick. |
+2    |                                                   | Select one of the selectable source.
+3    | Find the selectable options (run/sprint/kick).    |
+4    | Select the first selectable option.               |
+5    | Find the selectable destinations.                 |
+6    |                                                   | Change the option among the selectable options.
+7    | Find the selectable destinations.                 |
+8    |                                                   | Select one of the selectable destination.
+9    | Play the move.
 
 When finding selectable options or finding selectable destinations, the costs are evaluated.
 
@@ -345,33 +345,43 @@ Querying
 ## Using the Model
 
 - The Presenter creates an Engine
+
   - The Engine creates the Engine Model
   - The Engine builds the structure of the Engine Model
+
 - The Presenter creates an UI Model
 - The Presenter requests the UI Model to clone the structure of the Engine Model
 - The Presenter registers itself as Observer of Engine Model
 - The Agent can be:
+
   - Local UI Agent
   - Remote UI Agent
   - Local IA Agent
   - Remote IA Agent
+
 - The UI Model can display:
+
   - The actual Engine Model
   - The move being evaluated by some Agent (UI or IA, local or remote)
   - A switch might enable or disable the display of the opponent thinking, in case the opponent is remote or/and IA.
+
 - The Presenter creates an Agent0 associated to Team0
 - The Presenter registers itself as Observer of Agent0
 - The Presenter creates an Agent1 associated to Team1
 - The Presenter registers itself as Observer of Agent1
 - The Presenter requests the Engine update
+
   - The Engine updates the state of the Engine Model
   - The Presenter requests the UI Model to clone the state of the Engine Model
+
 - The User selects some UI item
+
   - The UI Model notifies the Presenter
   - The Presenter filters UI Model selection and transforms it as a selection on the Engine Model
   - The Presenter requests the Engine update
-- The Agent0 selects something
-  - The Agent0 notifies each of its observers, which is the Presenter
-  - The Presenter filters notification  and transforms it as a selection on the Engine Model
-  - The Presenter requests the Engine update
 
+- The Agent0 selects something
+
+  - The Agent0 notifies each of its observers, which is the Presenter
+  - The Presenter filters notification and transforms it as a selection on the Engine Model
+  - The Presenter requests the Engine update

@@ -1,4 +1,4 @@
-# Design for smartphone
+# DESIGN FOR SMARTPHONE
 
 ## Introduction
 
@@ -32,6 +32,7 @@ Hereafter is a possible design for the screen.
   - select the bonus ; the selected status is rendered by the yellow colour, also used for the selected Field box.
 
 - The "OK" box acts as a button used for confirm the active turn.
+
 - The "$$$" and the "OK" boxes are displayed on the side of the active player, and using the colour of the active player.
 - The two remaining boxes, in grey colour, "///" and "..." are respectively used for a general menu (IA levels or remote player request; help; rules; about; language settings; display coordinates) and for a few quick actions (e.g. new game).
 - Another option is that:
