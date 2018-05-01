@@ -37,8 +37,8 @@ baltek.i18n.translations.en = {
     "baltek-button-startGame:button"   : "New game" ,
     "baltek-button-quitGame:button"    : "Quit game" ,
 
-    "baltek-iframe-about:file"         : "./html/en/baltek-about-en.html" ,
-    "baltek-iframe-guide:file"          : "./html/en/baltek-guide-en.html" ,
+    "baltek-iframe-about:file"         : "../../packages/baltek-the-program/html/en/baltek-about-en.html" ,
+    "baltek-iframe-guide:file"         : "../../packages/baltek-the-program/html/en/baltek-guide-en.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-en.html" ,
 
     "baltek-select-coordinates:no"     : "Coordinates: no" ,

@@ -6,6 +6,7 @@ Automate the following tasks:
 2) In comments, insert or update the license & copyright Markdown text in the files of the project.
 3) In about HTML files, insert or update a conversion to HTML of the license & copyright Markdown text.
 4) In about HTML files, insert or update a conversion to HTML of the credits Markdown text.
+5) In HTML files, insert or update the version of baltek-the-program and of baltek-the-rules.
 """
 
 _COPYRIGHT_AND_LICENSE = """
@@ -28,6 +29,7 @@ You should have received a copy of the GNU General Public License along with thi
 BALTEK-THE-PROGRAM-LICENSE-MD-END
 """
 
+import datetime
 import os
 import re
 import shutil
@@ -42,7 +44,7 @@ sys.stdout = open(log_path, "w")
 sys.stderr = sys.stdout
 
 print
-print "Hello"
+print "Hello " + datetime.datetime.now().isoformat()
 
 baltek_the_program_package_path = os.path.join(project_home, "packages", "baltek-the-program")
 baltek_the_program_package_html_path = os.path.join(baltek_the_program_package_path, "html")
@@ -127,7 +129,7 @@ def convert_lines_from_md_to_html(md_lines):
     package_path_replacement = r'"../../../../packages/\g<package_name>"'
 
     local_path_rule = re.compile(r'"[.]/(?P<file_name>[^"]+)"')
-    local_path_replacement = r'"../../\g<file_name>"'
+    local_path_replacement = r'"../../../../packages/baltek-the-program/\g<file_name>"'
 
     paragraph_begin_found = False
     paragraph_end_found = False
@@ -362,7 +364,8 @@ for file_path in [license_md_path, contributors_path, baltek_the_program_version
     print "copying file done"
 
 print
-print "Bye"
+print "Bye " + datetime.datetime.now().isoformat()
+
 
 if len(failed_file_paths) == 0:
     sys.exit(0)

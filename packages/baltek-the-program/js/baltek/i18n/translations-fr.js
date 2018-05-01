@@ -39,8 +39,8 @@ baltek.i18n.translations.fr = {
     "baltek-button-goToHelp:button"    : "Aide" ,
     "baltek-button-goToSettings:button"    : "Paramètres" ,
 
-    "baltek-iframe-about:file"         : "./html/fr/baltek-about-fr.html" ,
-    "baltek-iframe-guide:file"          : "./html/fr/baltek-guide-fr.html" ,
+    "baltek-iframe-about:file"         : "../../packages/baltek-the-program/html/fr/baltek-about-fr.html" ,
+    "baltek-iframe-guide:file"         : "../../packages/baltek-the-program/html/fr/baltek-guide-fr.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-fr.html" ,
 
     "baltek-select-language:name"      : "Français" ,

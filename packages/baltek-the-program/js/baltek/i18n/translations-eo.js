@@ -38,8 +38,8 @@ baltek.i18n.translations.eo = {
     "baltek-button-startGame:button"   : "Novan ludon" ,
     "baltek-button-quitGame:button"    : "Ĉesi ludon" ,
 
-    "baltek-iframe-about:file"         : "./html/eo/baltek-about-eo.html" ,
-    "baltek-iframe-guide:file"          : "./html/eo/baltek-guide-eo.html" ,
+    "baltek-iframe-about:file"         : "../../packages/baltek-the-program/html/eo/baltek-about-eo.html" ,
+    "baltek-iframe-guide:file"         : "../../packages/baltek-the-program/html/eo/baltek-guide-eo.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-eo.html" ,
 
     "baltek-select-coordinates:no"     : "Koordinatoj: ne" ,

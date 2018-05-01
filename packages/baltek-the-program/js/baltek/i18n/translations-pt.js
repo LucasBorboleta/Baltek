@@ -47,8 +47,8 @@ baltek.i18n.translations.pt = {
     "baltek-select-sprint:no"          : "Sprint: não" ,
     "baltek-select-sprint:yes"         : "Sprint: sim" ,
 
-    "baltek-iframe-about:file"         : "./html/pt/baltek-about-pt.html" ,
-    "baltek-iframe-guide:file"          : "./html/pt/baltek-guide-pt.html" ,
+    "baltek-iframe-about:file"         : "../../packages/baltek-the-program/html/pt/baltek-about-pt.html" ,
+    "baltek-iframe-guide:file"         : "../../packages/baltek-the-program/html/pt/baltek-guide-pt.html" ,
     "baltek-iframe-rules:file"         : "../../packages/baltek-the-rules/html/baltek-rules-pt.html" ,
 
     "baltek-select-language:name"      : "Português" ,
