@@ -18,9 +18,21 @@ JavaScript.isSexy is a blog on modern JavaScript and modern web application deve
 
 Post of march. 19 2013: [OOP In JavaScript: What You NEED to Know](http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/) (Object Oriented JavaScript: Only Two Techniques Matter).
 
+## [jQuery](https://jquery.com/)
+
+Copyright JS Foundation and other contributors, <https://js.foundation>.
+
+MIT License.
+
 ## [normalize.css](http://github.com/necolas/normalize.css/)
 
 Copyright Nicolas Gallagher and Jonathan Neal.
+
+MIT License.
+
+## [QUnit](https://qunitjs.com/)
+
+Copyright JS Foundation and other contributors, <https://js.foundation>.
 
 MIT License.
 

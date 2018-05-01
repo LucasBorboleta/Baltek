@@ -2,19 +2,21 @@
 
 ## Introduction
 
-This document aims at collecting implementation principles and choices, as well as thoughts for not yet implemented features. Therefore the audience of this document is the interested developers in contributing to _Baltek_ , but not the end-users of _Baltek_.
+This document aims at collecting implementation principles and choices, as well as thoughts for not yet implemented features. 
 
-## Implementation
+## Implementation bricks
 
-### CSS
+The implementation relies on HTML5, CSS and JavaScript.
 
-_w3.css_ is used mainly for formatting texts, but not for buttons and selectors.
+From HTML5, the canvas feature is used for drawing the field, the ball and the footballers.
 
-_normalize.css_ is not directly used, but _w3.css_ uses some extract of _normalize.css_.
+JavaScript is used in its ECMAScript 5 flavor in order to be accepted by most of the browsers. 
 
-### JS
+Some conventions and helping functions have been introduced in order to provide OOP in JavaScript. Inspiration has been taken from [JavaScript.isSexy](http://javascriptissexy.com/).
 
-_JavaScript.isSexy_ [](http://javascriptissexy.com/) is a blog on modern JavaScript and modern web application development. A chunk of code is used for implemented OOP inheritance in the _Baltek_ classes._Richard_, the author of the blog, also quotes _Douglas Crockford_.
+No JavaScript framework has been used, excepted for supporting unit test automation.
+
+A CSS framework has been used.
 
 ## General design
 

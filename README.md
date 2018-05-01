@@ -18,6 +18,24 @@ The name of the game is built using sounds of the words ball (BAL) and technical
 
 The **atmosphere** of the matches is reminiscent of the game of **chess**.
 
+## Usage
+
+In order to play the game: open the file [index.html](./index.html) in your web browser.
+
+## License
+
+If you intent to derive or to sell either a text, a product or a software from this work, then read the [LICENSE](./docs/LICENSE.md) document.
+
+Used works are listed in the [CREDITS](./docs/CREDITS.md) document.
+
+## Contributing
+
+Changes regarding either the internationalization or the coding are welcome; see the  [CONTRIBUTING](./docs/CONTRIBUTING.md) document.
+
+See also the [ROADMAP](./docs/ROADMAP.md) document.
+
+The past and present contributors are listed in the [CONTRIBUTORS](./docs/CONTRIBUTORS.md) document.
+
 ## History
 
 During year 2015, the rules of the game have been tested within the limited circle of my family and office colleagues. The rules have been found balanced and fun.
@@ -34,8 +52,8 @@ In October 2017, the description of the **rules** was moved in a separate projec
 
 In March 2018, two browsers can be synchronized thanks to TogetherJS in order to realize the mode "two remote BALTEK players".
 
-## Licenses
+See also the [CHANGELOG](./docs/CHANGELOG.md).
 
-BALTEK (_the program_) is licensed under the [GNU General Public License](http://www.gnu.org/licenses/).
+## Documentation
 
-BALTEK (_the rules_) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+All other documentation files can be found in the [docs](./docs) folder.
