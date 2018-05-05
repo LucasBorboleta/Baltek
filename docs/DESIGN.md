@@ -4,19 +4,20 @@
 
 This document aims at collecting implementation principles and choices, as well as thoughts for not yet implemented features. 
 
-## Implementation bricks
+## Selected technologies
 
-The implementation relies on HTML5, CSS and JavaScript.
+The implementation relies on:
 
-From HTML5, the canvas feature is used for drawing the field, the ball and the footballers.
-
-JavaScript is used in its ECMAScript 5 flavor in order to be accepted by most of the browsers. 
-
-Some conventions and helping functions have been introduced in order to provide OOP in JavaScript. Inspiration has been taken from [JavaScript.isSexy](http://javascriptissexy.com/).
-
-No JavaScript framework has been used, excepted for supporting unit test automation.
-
-A CSS framework has been used.
+* HTML5:  its canvas feature is used for drawing the field, the ball and the footballers.
+* CSS: it concentrates most of the style characteristics (colors, sizes, ...) of BALTEK. It takes benefit of two CSS frameworks: [normalize.css](http://github.com/necolas/normalize.css/) and [w3.css](http://www.w3schools.com/w3css/).
+* JavaScript:
+  * JavaScript is used in its ECMAScript 5 flavor in order to be directly accepted by most of the web browsers.
+  * Piece of code from [JavaScript.isSexy ](http://javascriptissexy.com/)blog has been reused in order to provide Objet Oriented Programming with classes in JavaScript. 
+  * [TogetherJS](https://togetherjs.com/) framework supports the synchronization of two browsers across the network. In operation this framework relies, by default, on the server at <https://hub.togetherjs.com>.
+  * [jQuery](https://jquery.com/) and [QUnit](https://qunitjs.com/) frameworks support unit test automation.
+* Python:
+  * It is used only during development for automating the update of files in order to avoid manual copy/paste operations.
+  * It is used only during some test for starting a simple HTTP server in order to simulate the hosting the BALTEK files by a web site (e.g. a blog).
 
 ## General design
 
