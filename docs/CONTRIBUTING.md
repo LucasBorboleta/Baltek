@@ -30,7 +30,7 @@ You can exchange by:
 ## How do you get started
 
 - Read the introductory [README](../README.md) document.
-- Download the latest release of [baltek-the-program](https://github.com/LucasBorboleta/baltek-the-program) and play the game.
+- Play the game either from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr) or download its latest release from  [there](https://github.com/LucasBorboleta/baltek-the-program/releases).
 - Create a [GitHub](https://github.com) account. This is the prerequisite for issuing a ticket.
 - If you intent to propose code, then:
 
@@ -45,22 +45,27 @@ Here is the organization of the files:
 
 - The [README](../README.md) file is stored at the root of the project. All other documentation files ([LICENSE](./LICENSE.md), [CONTRIBUTING](./CONTRIBUTING.md)...) are stored in the [docs](./.) folder, itself located at the root of the project. These files are named with capitalized letters leading to words joined with `-` but not with `_`. Their extensions are either `.txt` or `.md`.
 - The [DESIGN](./DESIGN.md) document describes the chosen architecture and conventions about classes, functions and variables.
-- The main files are grouped and stored as packages in the [packages](../packages) folder. The present project is the [baltek-the-program](../packages/baltek-the-program) package. The other packages correspond to imported projects.
+- The main files are grouped and stored as packages in the [packages](../packages) folder. The present project corresponds to the [baltek-the-program](../packages/baltek-the-program) and  [baltek-the-program-test](../packages/baltek-the-program-test) packages. The other packages correspond to imported projects.
 - Beneath each package root, the following subfolders group the files according to their types: `html`, `css`, `js`, `pictures`. Going deeper, sub-subfolders might be created if they bring added value.
-- Links between files beneath the [packages](../packages) folder are always expressed using relative paths.
+- Links between files beneath the [packages](../packages) folder are always expressed using relative paths starting like `../../../packages/`.
 - At the root of the project, the [index.html](../index.html) file launches the [baltek-the-program](../packages/baltek-the-program) package, thanks to a minimal amount of code.
 - The [tools](../tools) folder provides Python scripts for automation:
 
-  - [update-files.py](../tools/update-files.py) walks the project file and insert or update the copyright and license text. Some files and folders are excluded from this process. The updated files must provide special tagged lines (see the script). Also this script duplicates the [LICENSE](../docs/LICENSE.md), [CONTRIBUTORS](../docs/CONTRIBUTORS.md) and [VERSION](../docs/VERSION.txt) files at the root of the [baltek-the-program](../packages/baltek-the-program) package.
+  - [update-files.py](../tools/update-files.py) :
+    - It duplicates the [LICENSE](../docs/LICENSE.md), [CONTRIBUTORS](../docs/CONTRIBUTORS.md) and [VERSION](../docs/VERSION.txt) files at the root of the [baltek-the-program](../packages/baltek-the-program) package.
+    - For each selected file of the project (see the script), it updates the following items that are identified thanks to special tags (see the script):
+      - the license lines from the Markdown file.
+      - the credits text lines lines from the Markdown file.
+      - the version strings of **baltek-the-rules** and **baltek-the-program** from their text files.
   - [test.html](../tools/test.html) launches unit tests in your web browser thanks to [QUnit](https://qunitjs.com/) and [jQuery](https://jquery.com/). All unit tests are stored in the [baltek-the-program-test](../packages/baltek-the-program-test) package.
 
 ## How do you test
 
 New and modified HTML files have to be tested manually as follows:
 
-- The [W3C HTML validator](https://validator.w3.org) checks the files without any error.
-- All hyperlinks are checked with success.
-- The files are readable using at least two browsers amongst Chrome, Firefox, Internet Explorer, Opera.
+- The [W3C HTML validator](https://validator.w3.org) must validate each file without any error.
+- All hyperlinks must be checked with success.
+- The game must be playable without error by at least two browsers amongst Chrome, Firefox, Internet Explorer, Opera.
 
 JavaScript classes and functions can be automatically tested using [test.html](../tools/test.html) file in your web browser.
 

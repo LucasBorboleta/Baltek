@@ -15,6 +15,6 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Tasks
 
-- [ ] Clean the DESIGN.md file.
-- [ ] Automated unit tests using QUnit.
+- [ ] Re-write seriously the DESIGN.md file.
+- [ ] Start automating unit tests of true classes of BALTEK using QUnit 
 - [ ] In help, add description for "inviting a friend" and "setting parameters".

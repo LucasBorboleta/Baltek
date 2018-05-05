@@ -20,7 +20,14 @@ The **atmosphere** of the matches is reminiscent of the game of **chess**.
 
 ## Usage
 
-In order to play the game: open the file [index.html](./index.html) in your web browser.
+In order to play the game: 
+
+* First method: find the latest release from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr) and click on the proposed `index.html` link.
+
+
+
+* Second method: download the latest release from [there](https://github.com/LucasBorboleta/baltek-the-program/releases) and open the `index.html` file using your web browser.
+
 
 ## License
 
@@ -40,7 +47,7 @@ The past and present contributors are listed in the [CONTRIBUTORS](./docs/CONTRI
 
 During year 2015, the rules of the game have been tested within the limited circle of my family and office colleagues. The rules have been found balanced and fun.
 
-Such tests were performed using handcrafted material (paper sheet and wooden pieces). See also the [pictures](http://lucas.borboleta.blog.free.fr/public/Baltek/2016-01--Baltek-Prototype-2/Diaporama.htm) from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr)
+Such tests were performed using handcrafted material (paper sheet and wooden pieces). See also the [pictures](http://lucas.borboleta.blog.free.fr/public/Baltek/2016-01--Baltek-Prototype-2/Diaporama.htm) from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr).
 
 By end of year 2015, a software prototype has been started, but with a slow rhythm. I used this project for learning about JavaScript and improving my skills in software design and automated testing. 
 
