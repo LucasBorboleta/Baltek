@@ -164,6 +164,12 @@ The yellow borders must be displayed accordingly to the rules.
 
 Each section of the rules text must be tested at least once.
 
+## Two synchronized web browsers
+
+Test this BALTEK mode after launching the simple HTTP server thanks to [test-game-using-http.py](../tools/test-game-using-http.py) in a terminal.
+
+
+
 
 
 

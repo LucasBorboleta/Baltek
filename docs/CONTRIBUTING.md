@@ -57,7 +57,9 @@ Here is the organization of the files:
       - the license lines from the Markdown file.
       - the credits text lines lines from the Markdown file.
       - the version strings of **baltek-the-rules** and **baltek-the-program** from their text files.
+    - It generates a log file in `tmp` directory.
   - [test.html](../tools/test.html) launches unit tests in your web browser thanks to [QUnit](https://qunitjs.com/) and [jQuery](https://jquery.com/). All unit tests are stored in the [baltek-the-program-test](../packages/baltek-the-program-test) package.
+  - [test-game-using-http.py](../tools/test-game-using-http.py) starts a simple HTTP server in order to simulate the behavior of BALTEK being served for a web site like a blog. It generates a log file in `tmp` directory.
 
 ## How do you test
 

@@ -17,7 +17,7 @@ The implementation relies on:
   * [jQuery](https://jquery.com/) and [QUnit](https://qunitjs.com/) frameworks support unit test automation.
 * Python:
   * It is used only during development for automating the update of files in order to avoid manual copy/paste operations.
-  * It is used only during some test for starting a simple HTTP server in order to simulate the hosting the BALTEK files by a web site (e.g. a blog).
+  * It is used only during some test for starting a simple HTTP server in order to simulate the hosting the BALTEK files by a web site like a blog.
 
 ## General design
 

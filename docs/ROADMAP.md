@@ -16,6 +16,5 @@ This document collects the milestones for the **baltek-the-program** project and
 ## Tasks
 
 - [ ] Re-write seriously the DESIGN.md file.
-- [ ] Automate the launch of the simple HTTP server using Python.
 - [ ] Start automating unit tests of true classes of BALTEK using QUnit 
 - [ ] In help, add description for "inviting a friend" and "setting parameters".
