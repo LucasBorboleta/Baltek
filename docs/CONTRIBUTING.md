@@ -19,7 +19,6 @@ All other languages are welcome for internationalization the interface.
 - You can work the next milestone of the [ROADMAP](./ROADMAP.md).
 - If your interest in the evolution of the rules, then move to the sister project [baltek-the-rules](https://github.com/LucasBorboleta/baltek-the-rules).
 
-
 ## How do you exchange
 
 You can exchange by:
@@ -30,7 +29,7 @@ You can exchange by:
 ## How do you get started
 
 - Read the introductory [README](../README.md) document.
-- Play the game either from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr) or download its latest release from  [there](https://github.com/LucasBorboleta/baltek-the-program/releases).
+- Play the game either from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr) or download its latest release from [there](https://github.com/LucasBorboleta/baltek-the-program/releases).
 - Create a [GitHub](https://github.com) account. This is the prerequisite for issuing a ticket.
 - If you intent to propose code, then:
 
@@ -45,21 +44,26 @@ Here is the organization of the files:
 
 - The [README](../README.md) file is stored at the root of the project. All other documentation files ([LICENSE](./LICENSE.md), [CONTRIBUTING](./CONTRIBUTING.md)...) are stored in the [docs](./.) folder, itself located at the root of the project. These files are named with capitalized letters leading to words joined with `-` but not with `_`. Their extensions are either `.txt` or `.md`.
 - The [DESIGN](./DESIGN.md) document describes the chosen architecture and conventions about classes, functions and variables.
-- The main files are grouped and stored as packages in the [packages](../packages) folder. The present project corresponds to the [baltek-the-program](../packages/baltek-the-program) and  [baltek-the-program-test](../packages/baltek-the-program-test) packages. The other packages correspond to imported projects.
+- The main files are grouped and stored as packages in the [packages](../packages) folder. The present project corresponds to the [baltek-the-program](../packages/baltek-the-program) and [baltek-the-program-test](../packages/baltek-the-program-test) packages. The other packages correspond to imported projects.
 - Beneath each package root, the following subfolders group the files according to their types: `html`, `css`, `js`, `pictures`. Going deeper, sub-subfolders might be created if they bring added value.
 - Links between files beneath the [packages](../packages) folder are always expressed using relative paths starting like `../../../packages/`.
 - At the root of the project, the [index.html](../index.html) file launches the [baltek-the-program](../packages/baltek-the-program) package, thanks to a minimal amount of code.
 - The [tools](../tools) folder provides Python scripts for automation:
 
   - [update-files.py](../tools/update-files.py) :
+
     - It duplicates the [LICENSE](../docs/LICENSE.md), [CONTRIBUTORS](../docs/CONTRIBUTORS.md) and [VERSION](../docs/VERSION.txt) files at the root of the [baltek-the-program](../packages/baltek-the-program) package.
     - For each selected file of the project (see the script), it updates the following items that are identified thanks to special tags (see the script):
+
       - the license lines from the Markdown file.
       - the credits text lines lines from the Markdown file.
       - the version strings of **baltek-the-rules** and **baltek-the-program** from their text files.
+
     - It generates a log file in `tmp` directory.
-  - [test.html](../tools/test.html) launches unit tests in your web browser thanks to [QUnit](https://qunitjs.com/) and [jQuery](https://jquery.com/). All unit tests are stored in the [baltek-the-program-test](../packages/baltek-the-program-test) package.
-  - [test-game-using-http.py](../tools/test-game-using-http.py) starts a simple HTTP server in order to simulate the behavior of BALTEK being served for a web site like a blog. It generates a log file in `tmp` directory.
+
+  - [unit-tests.html](../tools/unit-tests.html) launches unit tests in your web browser thanks to [QUnit](https://qunitjs.com/) and [jQuery](https://jquery.com/). All unit tests are stored in the [baltek-the-program-test](../packages/baltek-the-program-test) package.
+
+  - [http-test.py](../tools/http-test.py) starts a simple HTTP server in order to simulate the behavior of BALTEK being served for a web site like a blog. It generates a log file in `tmp` directory.
 
 ## How do you test
 
@@ -69,7 +73,7 @@ New and modified HTML files have to be tested manually as follows:
 - All hyperlinks must be checked with success.
 - The game must be playable without error by at least two browsers amongst Chrome, Firefox, Internet Explorer, Opera.
 
-JavaScript classes and functions can be automatically tested using [test.html](../tools/test.html) file in your web browser.
+JavaScript classes and functions can be automatically tested using [unit-tests.html](../tools/unit-tests.html) file in your web browser.
 
 The test plan described in the [TEST-PLAN](./TEST-PLAN.md) document has to be applied manually.
 

@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<!-- BALTEK-THE-PROGRAM-LICENSE-MD-BEGIN
+"use strict";
+/* BALTEK-THE-PROGRAM-LICENSE-MD-BEGIN
 # LICENSE
 
 [![GNU General Public License](../packages/gnu-gpl/pictures/gplv3-88x31.png)](http://www.gnu.org/licenses)
@@ -17,20 +15,28 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
-BALTEK-THE-PROGRAM-LICENSE-MD-END -->
+BALTEK-THE-PROGRAM-LICENSE-MD-END */
+///////////////////////////////////////////////////////////////////////////////
+$.noConflict()
+///////////////////////////////////////////////////////////////////////////////
+var baltek_test = { };
+baltek_test.__initModuleCalled = false;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BALTEK</title>
-    <script>
-        window.location.href = "../packages/baltek-the-program-test/test.html";
-    </script>
-</head>
+baltek_test.__initModule = function(){
 
-<body>
-    If you are not redirected automatically, follow this
-    <a href="../packages/baltek-the-program-test/test.html">link</a>.
-</body>
+    if ( baltek_test.__initModuleCalled ) return;
+    baltek_test.__initModuleCalled = true;
 
-</html>
+    QUnit.module( "baltek_test" , function(){
+        baltek_test.js_learning_test.__initModule();
+        baltek_test.utils_test.__initModule();
+    });
+
+    baltek.debug.writeMessage( "baltek_test.__initModule(): done" );
+};
+///////////////////////////////////////////////////////////////////////////////
+jQuery(document).ready(function(){
+    baltek.__initModule();
+    baltek_test.__initModule();
+});
+///////////////////////////////////////////////////////////////////////////////

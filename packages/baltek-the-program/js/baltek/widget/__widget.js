@@ -36,8 +36,6 @@ baltek.widget.__initModule = function(){
     baltek.widget.IFrame.__initClass();
     baltek.widget.Selector.__initClass();
     baltek.widget.Widget.__initClass();
-
-
 };
 ///////////////////////////////////////////////////////////////////////////////
 baltek.widget.getStylePropertyValue = function(elementId, propertyName){

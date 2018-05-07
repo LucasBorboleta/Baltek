@@ -30,6 +30,8 @@ baltek.style.__initModule = function(){
 
     // Init inner classes
     // None
+    
+    if ( ! baltek.isInteractive ) return;
 
     // Define colors, fonts and witdhs used by Javascript
     baltek.style.colors = { };

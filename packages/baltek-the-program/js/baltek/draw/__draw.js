@@ -40,8 +40,9 @@ baltek.draw.__initModule = function(){
     baltek.draw.Square.__initClass();
     baltek.draw.SquareWatcher.__initClass();
 
-    baltek.draw.canvas = document.getElementById( "baltek-canvas-field" );
+    if ( ! baltek.isInteractive ) return;
 
+    baltek.draw.canvas = document.getElementById( "baltek-canvas-field" );
     // Force the dimensions of the canvas
     var drawZone = document.getElementById( "baltek-drawZone" );
     baltek.draw.canvas.width = drawZone.offsetWidth;

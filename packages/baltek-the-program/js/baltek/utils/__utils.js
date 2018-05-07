@@ -43,11 +43,17 @@ baltek.utils.assert = function(condition, message){
             text += " !";
         }
 
-        var error = new Error();
-        text += "\n\n STACK TRACE: " + error.stack;
+        if ( baltek.isInteractive ) {
+            var error = new Error();
+            text += "\n\n STACK TRACE: " + error.stack;
+        }
 
         baltek.debug.writeMessage(text);
-        alert(text);
+
+        if ( baltek.isInteractive ) {
+            alert(text);
+        }
+
         throw text;
     }
 };

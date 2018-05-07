@@ -25,6 +25,9 @@ baltek.__initModule = function(){
     if ( baltek.__initModuleCalled ) return;
     baltek.__initModuleCalled = true;
 
+    // Detect the interactive context, in order to ease BALTEK loading in unit tests
+    baltek.isInteractive = ( document.getElementById( "baltek-body" ) !== null );
+
     // Init required packages
     baltek.debug.__initModule();
     baltek.presenter.__initModule();
@@ -32,6 +35,18 @@ baltek.__initModule = function(){
     // Init inner classes
     // None
 
+    // Hide the pleaseWait message
+    if ( baltek.isInteractive ) {
+        document.getElementById( "baltek-text-pleaseWait" ).style.display = "none";
+    }
+
+    baltek.debug.writeMessage( "baltek.__initModule(): done" );
+    if ( baltek.isInteractive ) {
+        baltek.debug.writeMessage( "baltek.__initModule(): TogetherJS is defined = " + (TogetherJS !== undefined) );
+    }
+};
+
+baltek.startGame = function(){
     // Create and start an instance of Presenter that handles the application
     baltek.thePresenter = new baltek.presenter.Presenter();
 
@@ -46,11 +61,5 @@ baltek.__initModule = function(){
             }
         );
     }
-
-    // Hide the pleaseWait message
-    document.getElementById( "baltek-text-pleaseWait" ).style.display = "none";
-
-    baltek.debug.writeMessage( "baltek.__initModule(): done" );
-    baltek.debug.writeMessage( "baltek.__initModule(): TogetherJS is defined = " + (TogetherJS !== undefined) );
 };
 ///////////////////////////////////////////////////////////////////////////////
