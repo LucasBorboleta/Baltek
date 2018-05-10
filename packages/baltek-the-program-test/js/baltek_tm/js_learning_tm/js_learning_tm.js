@@ -17,26 +17,36 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-$.noConflict()
-///////////////////////////////////////////////////////////////////////////////
-var baltek_test = { };
-baltek_test.__initModuleCalled = false;
+baltek_tm.js_learning_tm = { };
 
-baltek_test.__initModule = function(){
+baltek_tm.js_learning_tm.__initTestModule = function(){
 
-    if ( baltek_test.__initModuleCalled ) return;
-    baltek_test.__initModuleCalled = true;
+    QUnit.module( "js_learning_tm" , function(){
+        //---------------------------------------------------------------------
+        QUnit.test( "properties_and_bracket_notation_tc" , function( assert ) {
+            var a = { p1: "p1-value-0" };
+            assert.equal( a.p1, "p1-value-0", "getting using dot" );
+            assert.equal( a[ "p1" ], "p1-value-0", "getting using brackets" );
 
-    QUnit.module( "baltek_test" , function(){
-        baltek_test.js_learning_test.__initModule();
-        baltek_test.utils_test.__initModule();
+            a.p1 = "p1-value-1";
+            assert.equal( a.p1, "p1-value-1", "setting using dot" );
+            a[ "p1" ] = "p1-value-2";
+            assert.equal( a.p1, "p1-value-2", "setting using brackets" );
+
+            a[ "p2" ] = "p2-value-0";
+            assert.equal( a.p2, "p2-value-0", "creating using brackets" );
+
+            var aProperties = [];
+            var p;
+            for (p in a) {
+                if ( a.hasOwnProperty(p) ) {
+                    aProperties.push(p);
+                }
+            }
+            aProperties.sort();
+            assert.deepEqual( aProperties, [ "p1" , "p2" ], "properties of 'a'" );
+        });
+        //---------------------------------------------------------------------
     });
-
-    baltek.debug.writeMessage( "baltek_test.__initModule(): done" );
 };
-///////////////////////////////////////////////////////////////////////////////
-jQuery(document).ready(function(){
-    baltek.__initModule();
-    baltek_test.__initModule();
-});
 ///////////////////////////////////////////////////////////////////////////////

@@ -17,19 +17,31 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-baltek_test.utils_test = { };
-baltek_test.utils_test.__initModuleCalled = false;
+baltek_tm.utils_tm = { };
 
-baltek_test.utils_test.__initModule = function(){
+baltek_tm.utils_tm.__initTestModule = function(){
 
-    if ( baltek_test.utils_test.__initModuleCalled ) return;
-    baltek_test.utils_test.__initModuleCalled = true;
-
-    QUnit.module( "utils_test" , function(){
+    QUnit.module( "utils_tm" , function(){
         //-------------------------------------------------------------------------
-        baltek_test.utils_test.inherit_test.__initModule();
+        baltek_tm.utils_tm.inherit_ts.__initTestSuite();
+        baltek_tm.utils_tm.Observable_ts.__initTestSuite();
         //-------------------------------------------------------------------------
-        QUnit.test( "testHasValue" , function( assert ) {
+        QUnit.test( "assert_tc" , function( assert ) {
+            assert.throws( function() { baltek.utils.assert( 1 + 1 == 3, "wrong arithmetic"); }, /ASSERTION FAILED: wrong arithmetic !/ );
+        });
+        //-------------------------------------------------------------------------
+        QUnit.test( "getOwnProperties_tc" , function( assert ) {
+            var a = {};
+            a.p3 = "p3-value" ;
+            a.p2 = "p2-value";
+            a.p1 = "p1-value";
+            assert.deepEqual( baltek.utils.getOwnProperties(a), [ "p1", "p2", "p3" ], "3 properties" );
+
+            var b = {};
+            assert.deepEqual( baltek.utils.getOwnProperties(b), [], "0 property" );
+        });
+        //-------------------------------------------------------------------------
+        QUnit.test( "hasValue_tc" , function( assert ) {
             var languages = [ "en", "eo", "fr", "pt" ];
             assert.ok( baltek.utils.hasValue( languages, "en" ), "en in languages");
             assert.notOk( baltek.utils.hasValue( languages, "nuu"), "nuu not in languages");
@@ -38,16 +50,12 @@ baltek_test.utils_test.__initModule = function(){
             assert.notOk( baltek.utils.hasValue(languages, foo), "foo not in languages");
         });
         //-------------------------------------------------------------------------
-        QUnit.test( "testRepeatString" , function( assert ) {
+        QUnit.test( "repeatString_tc" , function( assert ) {
             assert.equal( baltek.utils.repeatString( "XyZ", 0), "", "count=0" );
             assert.equal( baltek.utils.repeatString( "XyZ", 1), "XyZ", "count=1" );
             assert.equal( baltek.utils.repeatString( "XyZ", 2), "XyZXyZ", "count=2" );
             assert.equal( baltek.utils.repeatString( "XyZ", 3), "XyZXyZXyZ", "count=3" );
             assert.equal( baltek.utils.repeatString( "", 3), "", "void string" );
-        });
-        //-------------------------------------------------------------------------
-        QUnit.test( "testAssert" , function( assert ) {
-            assert.throws( function() { baltek.utils.assert( 1 + 1 == 3, "wrong arithmetic"); }, /ASSERTION FAILED: wrong arithmetic !/ );
         });
         //-------------------------------------------------------------------------
     });

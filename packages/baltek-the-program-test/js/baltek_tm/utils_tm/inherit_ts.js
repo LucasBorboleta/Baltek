@@ -17,15 +17,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-baltek_test.utils_test.inherit_test = { };
-baltek_test.utils_test.inherit_test.__initModuleCalled = false;
+baltek_tm.utils_tm.inherit_ts = { };
 
-baltek_test.utils_test.inherit_test.__initModule = function(){
+baltek_tm.utils_tm.inherit_ts.__initTestSuite = function(){
 
-    if ( baltek_test.utils_test.inherit_test.__initModuleCalled ) return;
-    baltek_test.utils_test.inherit_test.__initModuleCalled = true;
-
-    QUnit.module( "inherit_test" , function(){
+    QUnit.module( "inherit_ts" , function(){
         //---------------------------------------------------------------------
         // 1) Define 3 classes with inheritance.
         //---------------------------------------------------------------------
@@ -123,7 +119,7 @@ baltek_test.utils_test.inherit_test.__initModule = function(){
         //---------------------------------------------------------------------
         // 3) Test each created class.
         //---------------------------------------------------------------------
-        QUnit.test( "testAnimal" , function(assert){
+        QUnit.test( "Animal_tc" , function(assert){
             assert.expect( 6 );
 
             var a1 = new Labo.Animal( "a1" );
@@ -139,7 +135,7 @@ baltek_test.utils_test.inherit_test.__initModule = function(){
             assert.ok( "fooAnimal" in a1, "d1 has property fooAnimal" );
         });
         //---------------------------------------------------------------------
-        QUnit.test( "testDog" , function( assert ) {
+        QUnit.test( "Dog_tc" , function( assert ) {
             var d1 = new Labo.Dog( "d1" , "red" );
             var d2 = new Labo.Dog( "d2" , "blue" );
             assert.equal(d1.cry(), "Labo.Dog: 'd1', whose color is 'red', cries whoua!" , "cry() by d1" );
@@ -150,7 +146,7 @@ baltek_test.utils_test.inherit_test.__initModule = function(){
             assert.ok( "fooDog" in d1, "d1 has property fooDog" );
         });
         //---------------------------------------------------------------------
-        QUnit.test( "testBigDog" , function( assert ) {
+        QUnit.test( "BigDog_tc" , function( assert ) {
             var bd1 = new Labo.BigDog( "bd1" , "green" , "1.10" );
             var bd2 = new Labo.BigDog( "bd2" , "orange" , "2.20" );
             assert.equal( bd1.cry(),
