@@ -27,7 +27,7 @@ baltek_tm.utils_tm.__initTestModule = function(){
         baltek_tm.utils_tm.Observable_ts.__initTestSuite();
         //-------------------------------------------------------------------------
         QUnit.test( "assert_tc" , function( assert ) {
-            assert.throws( function() { baltek.utils.assert( 1 + 1 == 3, "wrong arithmetic"); }, /ASSERTION FAILED: wrong arithmetic !/ );
+            assert.throws( function(){ baltek.utils.assert( 1 + 1 == 3, "wrong arithmetic"); }, /^ASSERTION FAILED: wrong arithmetic !/ );
         });
         //-------------------------------------------------------------------------
         QUnit.test( "getOwnProperties_tc" , function( assert ) {
