@@ -2,7 +2,13 @@
 
 ## Introduction
 
-This document aims at collecting implementation principles and choices, as well as thoughts for not yet implemented features. 
+This document aims at collecting implementation principles. 
+
+The next section brings an overview of the used technologies. 
+
+The other sections of the document focuses on how JavaScript (JS) has been used. 
+
+The other technologies (HTML5 and CSS) are not here described because they are concerning a very few files that the developer can learn about by his/her own.
 
 ## Technologies
 
@@ -35,17 +41,43 @@ The following design patterns have been used by purpose:
 * **Observable/Observers**: all notifications are implemented using this pattern.
 * **State**: the reactions of the Presenter to notification are organized by states and sub-states using this pattern and the hierarchical nested states of UML. 
 
-## Namespaces
+## Namespace for JS sources
 
-TODO: explain the conventions related to modules, functions and classes.
+The sources are defining symbols for either objects or functions or classes. These definitions are stored in files and folders. Hereafter are the governing principles:
 
-## Class and inheritance
+* All symbols are hierarchically defined according to a tree structure whose unique root is `baltek`.
+* The first level of the hierarchy corresponds to the concept of `module`; example: `baltek.utils`.
+* A `module` is implemented as a folder, a main file and an initializer function; examples:
+  * folder `baltek`, main file `baltek/__baltek.js` and initializer function `baltek.__initModule()`.
+  * folder `baltek/utils`, main file `baltek/utils/__utils.js` and initializer function `baltek.utils.__initModule()`.
+  * Note the usage of the prefix `__` with two underscores.
+* A `module` can define global objects and functions in its main file; examples:
+  *  `baltek.isInteractive` is a global Boolean defined in the file `baltek/__baltek.js` by the initializer function `baltek.__initModule()`.
+  * `baltek.utils.baltek.utils.assert(condition, message)` is a function defined in the file  `baltek/utils/__utils.js`
+* A `module` can define classes. Each class is defined by its own file stored beneath the module folder; example: the class `baltek.utils.Observable` is stored in the file `baltek/utils/Observable.js`.
+* Each class is defined by two functions: an object constructor and a class definer ; example for the class  `baltek.utils.Observable`:
+  * The function `baltek.utils.Observable()` constructs an object of that class.
+  * The function  `baltek.utils.Observable.__initClass` defines the inheritance and all the methods of that class.
+* Each module triggers the initialization of its required modules by calling their initializer functions `__initModule()`. Boolean guard `<module>.__initModuleCalled` ensures that each initializer function is called only once. Another module is required because one of its own function or class is requiring it.
+* Each module triggers the definitions of its inner classes by calling their definer functions `__initClass`(). Boolean guard `<class>.__initClassCalled`ensures that each definer function is called only once.
+* A section below brings more details about implementation of classes.
+
+## Namespace for JS unit tests
+
+Unit tests are defining `test-modules`, `test-suites`, `test-cases`, `test-environments` and are making assertions. They are handled by the QUnit framework.   Hereafter are the governing principles:
+
+* All unit test symbols are hierarchically defined according to a tree structure whose unique root is `baltek_tm`, which corresponds to a `test-module`.
+* A `test-module` is implemented as a folder, a main file, an initializer function and a QUnit module; examples:
+  - folder `baltek_tm`, main file `baltek_tm/baltek_tm.js, `initializer function `baltek_tm.__initTestModule()` that defines the QUnit module of name `baltek_tm`.
+  - folder `baltek_tm/utils_tm`, main file `baltek_tm/utils_tm/utils_tm.js`, initializer function `baltek_tm.utils_tm.__initTestModule()` that defines the QUnit module of name `utils_tm`.
+  - Note the usage of the suffix `_tm`.
+* 
+
+## Class and inheritance for JS
 
 TODO: explain conventions for defining classes.
 
-## Namespaces for unit tests
 
-TODO: explain conventions related to test-Modules, test-Suite, test-Case and test-Environment.
 
 ## The game phases
 
@@ -64,7 +96,7 @@ Hereafter are the phases that are relevant and useful for organizing the softwar
   - Selection or not the sprint bonus, if available.
   - Selection of a destination box.
 
-Confirm/undo:
+## Confirm/undo and select/unselect
 
 - Each turn has to be confirmed.
 - Each turn can be undone. 
@@ -72,7 +104,7 @@ Confirm/undo:
 - The selection of the source box can be unselected, if the destination box is not already selected.
 - The sprint bonus can be unselected, if the destination box is not already selected.
 
-## IA design
+## Thoughts for IA design
 
 Let us determine a bound for the possible moves:
 
