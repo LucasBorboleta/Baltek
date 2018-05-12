@@ -16,5 +16,5 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Tasks
 
-- [ ] Re-write seriously the DESIGN.md file.
+- [ ] Review the DESIGN.md file.
 - [ ] In help, add description for "inviting a friend" and "setting parameters".

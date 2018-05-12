@@ -2,7 +2,7 @@
 
 ⚽🏃
 
-## v1.0 (2018-05-10)
+## v1.0 (2018-05-12)
 
 - Documentation and Python automation are considered sufficient to promote the project as "ready for contributions".
 

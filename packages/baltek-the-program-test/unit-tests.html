@@ -49,12 +49,12 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
     <script src="../../packages/qunit/js/qunit-2.6.0.js"></script>
     <script src="../../packages/jquery/js/jquery-3.3.1.min.js"></script>
 
-    <!-- The "*.js" baltek files must be loaded in lexicographical order -->
-  	<script src="../../packages/baltek-the-program/js/baltek/__baltek.js"></script>
+    <!-- The "*.js" BALTEK files are loaded per module, starting with its "-init.js" file -->
+  	<script src="../../packages/baltek-the-program/js/baltek/baltek-init.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/debug/__debug.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/debug/debug-init.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/draw/__draw.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/draw/draw-init.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/draw/Ball.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/draw/BallWatcher.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/draw/Disk.js"></script>
@@ -64,14 +64,14 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
   	<script src="../../packages/baltek-the-program/js/baltek/draw/Square.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/draw/SquareWatcher.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/i18n/__i18n.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/i18n/i18n-init.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-en.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-eo.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-fr.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-pt.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/i18n/Translator.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/presenter/__presenter.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/presenter/presenter-init.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/presenter/GameStateIsFinished.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/presenter/GameStateIsReadyToStart.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/presenter/GameStateIsReadyToQuit.js"></script>
@@ -87,7 +87,7 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
   	<script src="../../packages/baltek-the-program/js/baltek/presenter/WhatStateShowRules.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/presenter/WhatTopState.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/rules/__rules.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/rules/rules-init.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/rules/Ball.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/rules/Engine.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/rules/Field.js"></script>
@@ -96,12 +96,12 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
   	<script src="../../packages/baltek-the-program/js/baltek/rules/Square.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/rules/Team.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/style/__style.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/style/style-init.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/utils/__utils.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/utils/utils-init.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/utils/Observable.js"></script>
 
-  	<script src="../../packages/baltek-the-program/js/baltek/widget/__widget.js"></script>
+  	<script src="../../packages/baltek-the-program/js/baltek/widget/widget-init.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/widget/Button.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/widget/CounterWithDecimals.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/widget/CounterWithSymbols.js"></script>
@@ -109,12 +109,12 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
   	<script src="../../packages/baltek-the-program/js/baltek/widget/Selector.js"></script>
   	<script src="../../packages/baltek-the-program/js/baltek/widget/Widget.js"></script>
 
-    <!-- The "*.js" baltek unit test files must be loaded in lexicographical order -->
-    <script src="../../packages/baltek-the-program-test/js/baltek_tm/baltek_tm.js"></script>
+    <!-- The "*.js" BALTEK unit test files are loaded per module, starting with its "-init.js" file -->
+    <script src="../../packages/baltek-the-program-test/js/baltek_tm/baltek_tm-init.js"></script>
 
-    <script src="../../packages/baltek-the-program-test/js/baltek_tm/js_learning_tm/js_learning_tm.js"></script>
+    <script src="../../packages/baltek-the-program-test/js/baltek_tm/js_learning_tm/js_learning_tm-init.js"></script>
 
-    <script src="../../packages/baltek-the-program-test/js/baltek_tm/utils_tm/utils_tm.js"></script>
+    <script src="../../packages/baltek-the-program-test/js/baltek_tm/utils_tm/utils_tm-init.js"></script>
     <script src="../../packages/baltek-the-program-test/js/baltek_tm/utils_tm/inherit_ts.js"></script>
     <script src="../../packages/baltek-the-program-test/js/baltek_tm/utils_tm/Observable_ts.js"></script>
 </body>
