@@ -90,8 +90,8 @@ baltek_tm.utils_tm.Observable_ts.__initTestSuite = function(){
             myObservable.newAspect( "ASPECT-B" )
             myObservable.newAspect( "ASPECT-C" )
             assert.equal( myObservable.getAspect( "ASPECT-A" ), 0, "ASPECT-A") ;
-            assert.equal( myObservable.getAspect( "ASPECT-B" ), 1, "ASPECT-A") ;
-            assert.equal( myObservable.getAspect( "ASPECT-C" ), 2, "ASPECT-A") ;
+            assert.equal( myObservable.getAspect( "ASPECT-B" ), 1, "ASPECT-B") ;
+            assert.equal( myObservable.getAspect( "ASPECT-C" ), 2, "ASPECT-C") ;
             assert.throws( function(){ myObservable.getAspect( "aspect-z" ); }, /^ASSERTION FAILED/, "undefined aspect" ) ;
         });
         //---------------------------------------------------------------------

@@ -140,7 +140,7 @@ baltek_tm.utils_tm.inherit_ts.__initTestSuite = function(){
             var d2 = new Labo.Dog( "d2" , "blue" );
             assert.equal(d1.cry(), "Labo.Dog: 'd1', whose color is 'red', cries whoua!" , "cry() by d1" );
             assert.equal(d2.cry(), "Labo.Dog: 'd2', whose color is 'blue', cries whoua!" , "cry() by d2"  );
-            assert.equal( typeof d1, "object", "typeof a1" );
+            assert.equal( typeof d1, "object", "typeof d1" );
             assert.ok( d1 instanceof Labo.Dog, "d1 intanceof Labo.Dog" );
             assert.ok( d1 instanceof Labo.Animal, "d1 intanceof Labo.Animal" );
             assert.ok( "fooDog" in d1, "d1 has property fooDog" );
@@ -153,7 +153,7 @@ baltek_tm.utils_tm.inherit_ts.__initTestSuite = function(){
                 "Labo.Dog: 'bd1', whose color and size are 'green' and '1.10', cries whoua whoua!" , "cry() by bd1" );
             assert.equal( bd2.cry(),
                 "Labo.Dog: 'bd2', whose color and size are 'orange' and '2.20', cries whoua whoua!" , "cry() by bd2" );
-            assert.equal( typeof bd1, "object", "typeof a1" );
+            assert.equal( typeof bd1, "object", "typeof bd1" );
             assert.ok( bd1 instanceof Labo.BigDog, "bd1 intanceof Labo.BigDog" );
             assert.ok( bd1 instanceof Labo.Dog, "bd1 intanceof Labo.Dog" );
             assert.ok( bd1 instanceof Labo.Animal, "bd1 intanceof Labo.Animal" );
