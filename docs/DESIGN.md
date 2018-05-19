@@ -6,53 +6,55 @@ This document aims at collecting implementation principles.
 
 The next section brings an overview of the used technologies. 
 
-The other sections of the document focuses on how JavaScript (JS) has been used. 
+The other sections of the document are focusing on how JavaScript (JS) has been used. 
 
-The other technologies (HTML5 and CSS) are not here described because they are concerning a very few files that the developer can learn about by his/her own.
+The other technologies (HTML5 and CSS) are not here described because they are concerning a very few files that the developer can understand himself/herself.
 
 ## Technologies
 
 The implementation relies on:
 
 * HTML5:  its canvas feature is used for drawing the field, the ball and the footballers.
-* CSS: it concentrates most of the style characteristics (colors, sizes, ...) of BALTEK. It takes benefit of two CSS frameworks: [normalize.css](http://github.com/necolas/normalize.css/) and [w3.css](http://www.w3schools.com/w3css/).
+* CSS: the style sheet concentrates most of the style characteristics (colors, sizes, ...) of BALTEK. It takes benefit of two CSS frameworks: [normalize.css](http://github.com/necolas/normalize.css/) and [w3.css](http://www.w3schools.com/w3css/).
 * JavaScript:
   * JavaScript is used in its ECMAScript 5 flavor in order to be directly accepted by most of the web browsers.
-  * Piece of code from [JavaScript.isSexy ](http://javascriptissexy.com/)blog has been reused in order to provide Objet Oriented Programming with classes in JavaScript. 
+  * Piece of code from blog  [JavaScript.isSexy ](http://javascriptissexy.com/)has been reused in order to provide Object Oriented Programming with classes. 
   * [TogetherJS](https://togetherjs.com/) framework supports the synchronization of two browsers across the network. In operation this framework relies, by default, on the server at <https://hub.togetherjs.com>.
   * [jQuery](https://jquery.com/) and [QUnit](https://qunitjs.com/) frameworks support unit test automation.
 * Python:
-  * It is used only during development for automating the update of files in order to avoid manual copy/paste operations.
-  * It is used only during some test for starting a simple HTTP server in order to simulate the hosting the BALTEK files by a web site like a blog.
+  * It is used during development for automating the update of files in order to avoid manual copy/paste operations.
+  * It is used during some test for starting a simple HTTP server in order to simulate the hosting the BALTEK files by a web site like a blog.
 
 ## Namespace for JS sources
 
-The sources are defining symbols for either objects or functions or classes. These definitions are stored in files and folders. Hereafter are the governing principles:
+The sources are defining symbols for either variables or functions or classes. These definitions are stored in files and folders. Hereafter are the governing principles:
 
 * All symbols are hierarchically defined according to a tree structure whose unique root is `baltek`.
 * The first level of the hierarchy corresponds to the concept of `module`; example: `baltek.utils`.
 * A `module` is implemented as a folder, an initializer file and an initializer function; examples:
   * folder `baltek`, initializer file `baltek/baltek-init.js` and initializer function `baltek.__initModule()`.
   * folder `baltek/utils`, initializer file `baltek/utils/utils-init.js` and initializer function `baltek.utils.__initModule()`.
-* A `module` can define global objects and functions in its initializer file; examples:
-  *  `baltek.isInteractive` is a global Boolean defined in the file `baltek/baltek-init.js` by the initializer function `baltek.__initModule()`.
+* A `module` can define global variables and functions in its initializer file; examples:
+  *  `baltek.isInteractive` is a global Boolean constant defined in the file `baltek/baltek-init.js` by the initializer function `baltek.__initModule()`.
   * `baltek.utils.baltek.utils.assert(condition, message)` is a function defined in the file  `baltek/utils/utils-init.js`
 * A `module` can define classes. Each class is defined by its own file stored beneath the module folder; example: the class `baltek.utils.Observable` is stored in the file `baltek/utils/Observable.js`.
 * Each class is defined by two functions: an object constructor and a class definer ; example for the class  `baltek.utils.Observable`:
-  * The function `baltek.utils.Observable()` constructs an object of that class.
+  * The function `baltek.utils.Observable()` provides the constructor of an object of that class.
   * The function  `baltek.utils.Observable.__initClass` defines the inheritance and all the methods of that class.
-* Each module triggers the initialization of its required modules by calling their initializer functions `__initModule()`. Boolean guard `<module>.__initModuleCalled` ensures that each initializer function is called only once. Another module is required because one of its own function or class is requiring it.
+* Each class defines an object initializer function `__initObject()`, which is called by the public constructor; example: `baltek.utils.Observable.prototype.__initObject()` is called by `baltek.utils.Observable()`.
+* All other methods of a class are defined as functions of the `prototype`; example: `baltek.utils.Observable.prototype.newAspect(aspectName)` and `baltek.utils.Observable.prototype.getAspect(aspectName)` are defining methods `newAspect(aspectName)` and `getAspect(aspectName)` applicable to any object of class `baltek.utils.Observable`.
+* Each module triggers the initialization of its required modules by calling their initializer functions `__initModule()`. Boolean guard `<module>.__initModuleCalled` ensures that each initializer function is called only once. Module `m2` is required by module `m1` because one function or class of `m1` is requiring either variable, function or class that `m2` defines.
 * Each module triggers the definitions of its inner classes by calling their definer functions `__initClass`(). Boolean guard `<class>.__initClassCalled`ensures that each definer function is called only once.
 * A section below brings more details about implementation of classes.
 * Note the usage of the suffix `-init` and of prefix `__` made of two underscores.
 
 ## Namespace for JS unit tests
 
-Unit tests are defining `test-modules`, `test-suites`, `test-cases`, `test-environments` and are making assertions. They are handled by the QUnit framework.   Hereafter are the governing principles:
+Unit tests are defining `test-modules`, `test-suites`, `test-cases`, `test-environments` and are making assertions. They are handled by the QUnit framework, together with a little support for JQuery framework.   Hereafter are the governing principles:
 
 * All unit test symbols are hierarchically defined according to a tree structure whose unique root is `baltek_tm`, which corresponds to a `test-module`.
 * A `test-module` is implemented as a folder, an initializer file, an initializer function and a QUnit module; examples:
-  - folder `baltek_tm`, initializer file `baltek_tm/baltek_tm-init.js, `initializer function `baltek_tm.__initTestModule()` that defines the QUnit module of name `baltek_tm`.
+  - folder `baltek_tm`, initializer file `baltek_tm/baltek_tm-init.js, `initializer function `baltek_tm.__initTestModule()` that defines the QUnit module by `QUnit.module( "baltek_tm" , ...)`.
   - folder `baltek_tm/utils_tm`, initializer file `baltek_tm/utils_tm/utils_tm-init.js`, initializer function `baltek_tm.utils_tm.__initTestModule()` that defines the QUnit module by `QUnit.module( "utils_tm" , ...)`.
 * A `test-suite` is implemented as a file and an initializer function and a QUnit module; examples:
   * file `baltek_tm/utils_tm/inherit_ts.js` file and `baltek_tm/utils_tm/inherit_ts.__initTestSuite()` initializer function that defines the QUnit module by `QUnit.module( "inherit_ts" , ...)`.
@@ -69,7 +71,7 @@ Unit tests are defining `test-modules`, `test-suites`, `test-cases`, `test-envir
 
 An example of defining a class using inheritance is given by `baltek.widget.Selector` in the file `baltek/widget/Selector.js`. The schema is the following:
 
-* Declare the object constructor:
+* Declare the public object constructor:
 
 ```javascript
   baltek.widget.Selector = function(id, i18nTranslator, values){
@@ -77,7 +79,7 @@ An example of defining a class using inheritance is given by `baltek.widget.Sele
   };
 ```
 
-* Declare the class uninitialized:
+* Declare the class as uninitialized:
 
 ```javascript
 baltek.widget.Selector.__initClassCalled = false;
@@ -89,20 +91,20 @@ baltek.widget.Selector.__initClassCalled = false;
     baltek.widget.Selector.__initClass = function(){ ...
 ```
 
-* Declare the class initialized 
+* Declare the class as initialized 
 
 ```javascript
     if ( baltek.widget.Selector.__initClassCalled ) return;
     baltek.widget.Selector.__initClassCalled = true;
 ```
 
-  * Declare the inheritance (`Selector` inherits from `Widget`):
+  * Declare the inheritance of `Selector` from `Widget`:
 
 ```javascript
     baltek.utils.inherit(baltek.widget.Selector, baltek.widget.Widget);
 ```
 
-  * Declare the method for initializing an object; invoke the initialization of the super-class (`Widget`):
+  * Declare the object initializer; invoke the initializer of the super-class (`Widget`):
 
 ```javascript
     baltek.widget.Selector.prototype.__initObject = function(id, i18nTranslator, values){
@@ -132,14 +134,14 @@ Hereafter are the phases that are relevant and useful for organizing the softwar
 
 - Each match is composed of $n \ge 1$ rounds. 
 - Each match is necessarily won by one of the players after $n \le 3$ rounds.
-- Each  round begins after each kickoff.
-- Each  round ends after a goal by one player.
+- Each  round begins with a kickoff.
+- Each  round ends after a goal scored by one player.
 - Each  round is composed of $n \ge 1$  turns.
 - Each  turn is devoted to a given player.
 - Each  turn is composed of $n \ge 0$  moves.
 - Each move implies the following elementary decisions by the active player:
   - Selection of a source box.
-  - Selection of either the ball or a footballer.
+  - Selection of either the ball or a footballer in the selected source box.
   - Selection or not the sprint bonus, if available.
   - Selection of a destination box.
 
@@ -148,7 +150,7 @@ Hereafter are the phases that are relevant and useful for organizing the softwar
 - Each turn has to be confirmed.
 - Each turn can be undone. 
 - A single move cannot be undone.
-- The selection of the source box can be unselected, if the destination box is not already selected.
+- The selected source box can be unselected, if the destination box is not already selected.
 - The sprint bonus can be unselected, if the destination box is not already selected.
 
 ## Design patterns
@@ -169,15 +171,15 @@ The following design patterns have been used by purpose:
 
 ## Responsibilities of modules
 
-The Model-View-Presenter (MVP) is implemented by classes, functions and global objects that are grouped my modules. Here are the responsibilities of each module:
+The Model-View-Presenter (MVP) is implemented by classes, functions and global objects that are grouped by modules. Here are the responsibilities of the modules:
 
-* The Presenter aspect of MVP is supported by the module `baltek.presenter` .
+* The Presenter aspect of MVP is supported by the module `baltek.presenter` whose main class is `baltek.presenter.Presenter`
 * The Model aspect of MVP is supported by the module `baltek.rules`. The main class `baltek.rules.Engine` implements the BALTEK rules.
 * The View aspect of MVP is supported by the following modules:
   * `baltek.widget` wraps classical HTML interactive elements like button, selector, iframe, etc.
-  * `baltek.draw` provides primitive for drawing boxes, ball and footballers in the HTML canvas element.
+  * `baltek.draw` provides primitives for drawing boxes, ball and footballers in the HTML canvas element.
   * `baltek.i18n` supports the dynamic change of language (English, French, ...).
-  * `baltek.style` provides factorization of colors, fonts, ...
+  * `baltek.style` provides factorization of colors, fonts, ... for other classes.
 
 The remaining modules are:
 
