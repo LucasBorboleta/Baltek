@@ -8,7 +8,7 @@ This document collects the milestones for the **baltek-the-program** project and
 
 - [x] BALTEK mode "*two close players sharing the same browser*".
 - [x] BALTEK mode "*two remote players using their own browser, synchronized thanks to JsTogether*"
-- [ ] BALTEK  ready for accepting contributions.
+- [x] BALTEK  ready for accepting contributions.
 - [ ] BALTEK with sufficient unit tests.
 - [ ] BALTEK mode "*human player against an AI*".
 - [ ] BALTEK mode "*AI against another AI*".
@@ -16,4 +16,4 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Tasks
 
-- [ ] In help, add description for "inviting a friend" and "setting parameters".
+- [ ] Redesign as necessary for implementing the simplest IA (random chooser).
