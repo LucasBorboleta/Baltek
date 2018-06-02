@@ -77,7 +77,7 @@ baltek.draw.Selectable.__initClass = function(){
             var clicked = this.contains(mousePosition);
 
             if ( clicked ) {
-                baltek.debug.writeMessage( "TogetherJS is defined = " + (TogetherJS !== undefined) );
+                //baltek.debug.writeMessage( "TogetherJS is defined = " + (TogetherJS !== undefined) );
                 if ( TogetherJS !== undefined && TogetherJS.running ) {
                     TogetherJS.send( { type: "canvas-abstract-click", id: this.id } );
                 }

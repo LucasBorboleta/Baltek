@@ -32,7 +32,7 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.__initObject = function(){
         baltek.rules.Engine.super.__initObject.call(this);
-        this.goToGameStateAspect = this.newAspect( "gameStateAspect" );
+        this.gameStateAspect = this.newAspect( "gameStateAspect" );
 
         this.SCORE_MAX = 2;
         this.CREDIT_MAX = 3;
@@ -53,6 +53,7 @@ baltek.rules.Engine.__initClass = function(){
     baltek.rules.Engine.prototype.exportMoveState = function(){
         var state = {};
         state.activeTeamIndex = this.activeTeam.teamIndex;
+        state.sprint = this.move.sprint;
         state.ball = this.ball.exportMoveState();
         state.teams = [];
         state.teams[0] = this.teams[0].exportMoveState();
@@ -109,7 +110,7 @@ baltek.rules.Engine.__initClass = function(){
         };
 
     baltek.rules.Engine.prototype.registerObserver = function(observer){
-        baltek.rules.Engine.super.registerObserver.call(this, observer, this.goToGameStateAspect);
+        baltek.rules.Engine.super.registerObserver.call(this, observer, this.gameStateAspect);
     };
 
     baltek.rules.Engine.prototype.setActiveTeam = function(activeTeam){
@@ -142,7 +143,7 @@ baltek.rules.Engine.__initClass = function(){
     ////////// Match methods  //////////
 
     baltek.rules.Engine.prototype.matchInit = function(){
-        baltek.debug.writeMessage("matchInit: enter");
+        //baltek.debug.writeMessage("matchInit: enter");
         this.match = {};
 
         this.match.isActive = true;
@@ -165,7 +166,7 @@ baltek.rules.Engine.__initClass = function(){
     };
 
     baltek.rules.Engine.prototype.matchUpdate = function(){
-        baltek.debug.writeMessage("matchUpdate: enter");
+        //baltek.debug.writeMessage("matchUpdate: enter");
         if ( this.match.isActive ) {
             this.roundUpdate();
 
@@ -184,7 +185,7 @@ baltek.rules.Engine.__initClass = function(){
                     this.roundInit();
                     this.roundUpdate();
                 } else {
-                    baltek.debug.writeMessage("matchUpdate: this.match.isActive=" + this.match.isActive);
+                    //baltek.debug.writeMessage("matchUpdate: this.match.isActive=" + this.match.isActive);
                     this.field.enableSelection(false);
                     this.activeTeam.enableSelection(false);
                     this.activeTeam.select(false);
@@ -194,13 +195,13 @@ baltek.rules.Engine.__initClass = function(){
             }
         }
 
-        this.notifyObservers(this.goToGameStateAspect);
+        this.notifyObservers(this.gameStateAspect);
     };
 
     ////////// Round methods  //////////
 
     baltek.rules.Engine.prototype.roundInit = function(){
-        baltek.debug.writeMessage("roundInit: enter");
+        //baltek.debug.writeMessage("roundInit: enter");
         this.round = {};
 
         this.round.isActive = true;
@@ -216,7 +217,7 @@ baltek.rules.Engine.__initClass = function(){
     };
 
     baltek.rules.Engine.prototype.roundUpdate = function(){
-        baltek.debug.writeMessage("roundUpdate: enter");
+        //baltek.debug.writeMessage("roundUpdate: enter");
         if ( this.round.isActive ) {
 
             this.turnUpdate();
@@ -240,7 +241,7 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.turnCancel = function(){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("turnCancel:");
+        //baltek.debug.writeMessage("turnCancel:");
         baltek.utils.assert( this.move.isActive );
         this.setTurnState(this.turn.state);
         this.turnInit();
@@ -249,14 +250,14 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.turnConfirm = function(){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("turnConfirm:");
+        //baltek.debug.writeMessage("turnConfirm:");
         baltek.utils.assert( this.move.isActive );
         this.turn.isActive = false;
         this.matchUpdate();
     };
 
     baltek.rules.Engine.prototype.turnInit = function(){
-        baltek.debug.writeMessage("turnInit: enter");
+        //baltek.debug.writeMessage("turnInit: enter");
         this.turn = {};
 
         this.turn.state = this.getTurnState();
@@ -285,7 +286,7 @@ baltek.rules.Engine.__initClass = function(){
     };
 
     baltek.rules.Engine.prototype.turnUpdate = function(){
-        baltek.debug.writeMessage("turnUpdate: enter");
+        //baltek.debug.writeMessage("turnUpdate: enter");
         if ( this.turn.isActive ) {
 
             this.moveUpdate();
@@ -302,7 +303,7 @@ baltek.rules.Engine.__initClass = function(){
     ////////// Move methods  //////////
 
     baltek.rules.Engine.prototype.moveFindDestinations = function(){
-        baltek.debug.writeMessage("moveFindDestinations: enter");
+        //baltek.debug.writeMessage("moveFindDestinations: enter");
 
         if ( ! this.move.isActive ) return;
         if ( this.move.sourceSquare === null ) return;
@@ -418,7 +419,7 @@ baltek.rules.Engine.__initClass = function(){
     };
 
     baltek.rules.Engine.prototype.moveFindSources = function(){
-        baltek.debug.writeMessage("moveFindSources: enter");
+        //baltek.debug.writeMessage("moveFindSources: enter");
 
         if ( this.move.isActive && this.move.sourceSquare === null ) {
             this.field.enableSelection(false);
@@ -465,7 +466,7 @@ baltek.rules.Engine.__initClass = function(){
     };
 
     baltek.rules.Engine.prototype.moveInit = function(){
-        baltek.debug.writeMessage("moveInit: enter");
+        //baltek.debug.writeMessage("moveInit: enter");
         this.move = {};
 
         this.move.isActive = true;
@@ -483,7 +484,7 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.moveSelectBall = function(condition){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("moveSelectBall: condition=" + condition);
+        //baltek.debug.writeMessage("moveSelectBall: condition=" + condition);
 
         baltek.utils.assert( this.move.isActive );
 
@@ -507,7 +508,7 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.moveSelectFootballer = function(squareIndices, condition){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("moveSelectFootballer: condition=" + condition);
+        //baltek.debug.writeMessage("moveSelectFootballer: condition=" + condition);
 
         baltek.utils.assert( this.move.isActive );
 
@@ -537,7 +538,7 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.moveSelectSquare = function(squareIndices){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("moveSelectSquare:");
+        //baltek.debug.writeMessage("moveSelectSquare:");
 
         baltek.utils.assert( this.move.isActive );
         baltek.utils.assert( this.move.sourceSquare !== null );
@@ -556,7 +557,7 @@ baltek.rules.Engine.__initClass = function(){
 
     baltek.rules.Engine.prototype.moveSprint = function(condition){
         // Triggered by the player of the activeTeam
-        baltek.debug.writeMessage("moveSprint:");
+        //baltek.debug.writeMessage("moveSprint:");
 
         baltek.utils.assert( this.move.isActive );
         if ( condition ) {
@@ -569,7 +570,7 @@ baltek.rules.Engine.__initClass = function(){
     };
 
     baltek.rules.Engine.prototype.moveUpdate = function(){
-        baltek.debug.writeMessage("moveUpdate: enter");
+        //baltek.debug.writeMessage("moveUpdate: enter");
         if ( this.move.isActive ) {
 
             if ( this.move.sourceSquare === null ) {

@@ -132,7 +132,7 @@ baltek.rules.Field.__initClass = function(){
             state.squaresByIndices.push([]);
 
             for ( iy=this.firstY; iy<=this.lastY; iy++ ) {
-                this.squaresByIndices[ix].push(null);
+                state.squaresByIndices[ix].push(null);
 
                 square = this.squaresByIndices[ix][iy];
                 if ( square !== null ) {

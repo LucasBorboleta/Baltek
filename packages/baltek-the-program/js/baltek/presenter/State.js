@@ -58,9 +58,9 @@ baltek.presenter.State.__initClass = function(){
     baltek.presenter.State.prototype.exit = function(){
     };
 
-    baltek.presenter.State.prototype.updateFromObservable = function(observable){
+    baltek.presenter.State.prototype.updateFromObservable = function(observable, aspect){
         if ( this.superState !== null ) {
-            this.superState.updateFromObservable(observable);
+            this.superState.updateFromObservable(observable, aspect);
         } else {
             baltek.utils.assert( false, "observable not managed" );
         }

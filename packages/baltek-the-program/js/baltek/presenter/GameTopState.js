@@ -54,13 +54,13 @@ baltek.presenter.GameTopState.__initClass = function(){
         return this.goToGameStateIsReadyToStart;
     };
 
-    baltek.presenter.GameTopState.prototype.updateFromObservable = function(observable){
+    baltek.presenter.GameTopState.prototype.updateFromObservable = function(observable, aspect){
 
         if ( observable === this.presenter.goToSettings ) {
             this.setState(this.superState.goToSettingsState);
 
         } else if ( observable === this.presenter.invitation ) {
-            baltek.debug.writeMessage( "TogetherJS is defined = " + (TogetherJS !== undefined) );
+            //baltek.debug.writeMessage( "TogetherJS is defined = " + (TogetherJS !== undefined) );
             if ( TogetherJS !== undefined ) {
               TogetherJS();
             }
@@ -71,7 +71,7 @@ baltek.presenter.GameTopState.__initClass = function(){
         } else {
 
             if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
+                this.superState.updateFromObservable(observable, aspect);
             } else {
                 baltek.utils.assert( false, "observable not managed" );
             }

@@ -2,10 +2,13 @@
 
 ⚽🏃
 
+## v1.1 (2018-06-02)
+
+- New style for the interface.
+- Structure for AI.
+
 ## v1.0 (2018-05-27)
 
 - Modes "two close players" and "two remote players" are implemented.
 
 - The project is ready for contributions.
-
-  

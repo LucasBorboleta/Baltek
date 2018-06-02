@@ -17,51 +17,28 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-var baltek = { };
-baltek.__initModuleCalled = false;
+baltek.ai = { };
+baltek.ai.__initModuleCalled = false;
 
-baltek.__initModule = function(){
+baltek.ai.__initModule = function(){
 
-    if ( baltek.__initModuleCalled ) return;
-    baltek.__initModuleCalled = true;
+    if ( baltek.ai.__initModuleCalled ) return;
+    baltek.ai.__initModuleCalled = true;
 
-    // Detect the interactive context, in order to ease BALTEK loading in unit tests
-    baltek.isInteractive = ( document.getElementById( "baltek-body" ) !== null );
-
-    // Init required packages
+    // Init required modules
     baltek.debug.__initModule();
-    baltek.presenter.__initModule();
+    baltek.utils.__initModule();
 
     // Init inner classes
-    // None
+    baltek.ai.AI.__initClass();
+    baltek.ai.AI1.__initClass();
+    baltek.ai.AI2.__initClass();
+    baltek.ai.AI3.__initClass();
 
-    // Hide the pleaseWait message
-    if ( baltek.isInteractive ) {
-        document.getElementById( "baltek-text-pleaseWait" ).style.display = "none";
-    }
-
-    baltek.debug.writeMessage( "baltek.__initModule(): done" );
-    if ( baltek.isInteractive ) {
-        baltek.debug.writeMessage( "baltek.__initModule(): TogetherJS is defined = " + (TogetherJS !== undefined) );
-    }
-};
-
-baltek.startGame = function(){
-    // Create and start an instance of Presenter that handles the application
-    baltek.thePresenter = new baltek.presenter.Presenter();
-
-    // TogetherJS settings
-    if ( TogetherJS !== undefined ) {
-        TogetherJS.hub.on( "canvas-abstract-click",
-            function (msg) {
-                if ( ! msg.sameUrl ) {
-                    return;
-                }
-                baltek.draw.Selectable.__instances[msg.id].onAbstractClick();
-            }
-        );
-    }
-
-    baltek.utils.Dispatcher.getInstance().start();
+    // Register AI construtors
+    baltek.ai.makers = {};
+    baltek.ai.makers[ "ai1" ] = baltek.ai.AI1;
+    baltek.ai.makers[ "ai2" ] = baltek.ai.AI2;
+    baltek.ai.makers[ "ai3" ] = baltek.ai.AI3;
 };
 ///////////////////////////////////////////////////////////////////////////////

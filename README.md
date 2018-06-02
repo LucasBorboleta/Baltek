@@ -1,9 +1,8 @@
-
 # README
 
 ## Introduction
 
-This project, named **baltek-the-program**,  implements the BALTEK board game, using **HTML** and **JavaScript**.
+This project, named **baltek-the-program**, implements the BALTEK board game, using **HTML** and **JavaScript**.
 
 BALTEK is a turn-based board game, inspired from **football**. Here are its principles:
 
@@ -20,14 +19,11 @@ The **atmosphere** of the matches is reminiscent of the game of **chess**.
 
 ## Usage
 
-In order to play the game: 
+In order to play the game:
 
-* First method: find the latest release from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr) and click on the proposed `index.html` link.
+- First method: find the latest release from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr) and click on the proposed `index.html` link.
 
-
-
-* Second method: download the latest release from [there](https://github.com/LucasBorboleta/baltek-the-program/releases) and open the `index.html` file using your web browser.
-
+- Second method: download the latest release from [there](https://github.com/LucasBorboleta/baltek-the-program/releases) and open the `index.html` file using your web browser.
 
 ## License
 
@@ -37,7 +33,7 @@ Used works are listed in the [CREDITS](./docs/CREDITS.md) document.
 
 ## Contributing
 
-Changes regarding either the internationalization or the coding are welcome; see the  [CONTRIBUTING](./docs/CONTRIBUTING.md) document.
+Changes regarding either the internationalization or the coding are welcome; see the [CONTRIBUTING](./docs/CONTRIBUTING.md) document.
 
 See also the [ROADMAP](./docs/ROADMAP.md) document.
 
@@ -49,15 +45,17 @@ During year 2015, the rules of the game have been tested within the limited circ
 
 Such tests were performed using handcrafted material (paper sheet and wooden pieces). See also the [pictures](http://lucas.borboleta.blog.free.fr/public/Baltek/2016-01--Baltek-Prototype-2/Diaporama.htm) from the blog [Lucas Borboleta](http://lucas.borboleta.blog.free.fr).
 
-By end of year 2015, a software prototype has been started, but with a slow rhythm. I used this project for learning about JavaScript and improving my skills in software design and automated testing. 
+By end of year 2015, a software prototype has been started, but with a slow rhythm. I used this project for learning about JavaScript and improving my skills in software design and automated testing.
 
 Since Summer 2017, the full rules have been implemented and two humans sitting in front of the same computer can play a BALTEK match.
 
 During Fall 2017, the effort was on translating of the rules text and selection of licenses.
 
-In October 2017, the description of the **rules** was moved in a separate project, named  **[baltek-the-rules](https://github.com/LucasBorboleta/baltek-the-rules)** in order to finalize their translations and to promote them.
+In October 2017, the description of the **rules** was moved in a separate project, named **[baltek-the-rules](https://github.com/LucasBorboleta/baltek-the-rules)** in order to finalize their translations and to promote them.
 
 In March 2018, two browsers can be synchronized thanks to [TogetherJS](https://togetherjs.com/) in order to realize the mode "two remote BALTEK players".
+
+In May 2018, the design for AI implementation started
 
 See also the [CHANGELOG](./docs/CHANGELOG.md).
 

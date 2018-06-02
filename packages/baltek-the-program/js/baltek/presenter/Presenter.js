@@ -44,8 +44,9 @@ baltek.presenter.Presenter.__initClass = function(){
         var CREDIT_ZERO_SYMBOL = "-";
         var CREDIT_ONE_SYMBOL = "$";
 
-        this.team0Agent = { kind: "", ia: null };
-        this.team1Agent = { kind: "", ia: null };
+        this.teamAgents = [];
+        this.teamAgents[0] = { kindIsBlocked: false, kind: "", ai: null };
+        this.teamAgents[1] = { kindIsBlocked: false, kind: "", ai: null };
 
         this.i18nTranslator = new baltek.i18n.Translator(baltek.i18n.translations, "fr" );
 
@@ -68,11 +69,13 @@ baltek.presenter.Presenter.__initClass = function(){
             [ "human", "ai1", "ai2", "ai3" ] );
         this.team0Kind.registerObserver(this);
         this.team0Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
+        this.teamAgents[0].kind = this.team0Kind.getSelection();
 
         this.team1Kind = new baltek.widget.Selector( "baltek-select-team1Kind", this.i18nTranslator,
             [ "human", "ai1", "ai2", "ai3" ] );
         this.team1Kind.registerObserver(this);
         this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
+        this.teamAgents[1].kind = this.team1Kind.getSelection();
 
         this.team0Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team0Bonus" , this.i18nTranslator,
             BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
@@ -346,8 +349,8 @@ baltek.presenter.Presenter.__initClass = function(){
         }
     };
 
-    baltek.presenter.Presenter.prototype.updateFromObservable = function(observable){
-        this.state.updateFromObservable(observable);
+    baltek.presenter.Presenter.prototype.updateFromObservable = function(observable, aspect){
+        this.state.updateFromObservable(observable, aspect);
     };
 
     baltek.presenter.Presenter.prototype.updateFromEngineBallState = function(state){
@@ -415,7 +418,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.sprint.show(true);
         this.sprint.enable(state.teams[activeTeamIndex].canSprint);
 
-        if ( this.rulesEngine.move.sprint ) {
+        if ( state.sprint ) {
             this.sprint.setSelection( "yes" );
         } else {
             this.sprint.setSelection( "no" );

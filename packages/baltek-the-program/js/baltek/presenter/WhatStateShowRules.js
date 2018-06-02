@@ -50,7 +50,7 @@ baltek.presenter.WhatStateShowRules.__initClass = function(){
         this.presenter.about.enable(false);
     };
 
-    baltek.presenter.WhatStateShowRules.prototype.updateFromObservable = function(observable){
+    baltek.presenter.WhatStateShowRules.prototype.updateFromObservable = function(observable, aspect){
 
         if ( observable === this.presenter.rules ) {
             this.setState(this.superState.goToHelpStateShowRules);
@@ -64,7 +64,7 @@ baltek.presenter.WhatStateShowRules.__initClass = function(){
         } else {
 
             if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
+                this.superState.updateFromObservable(observable, aspect);
             } else {
                 baltek.utils.assert( false, "observable not managed" );
             }

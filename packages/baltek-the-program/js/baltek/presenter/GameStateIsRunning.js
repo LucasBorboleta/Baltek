@@ -47,13 +47,51 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.invitation.enable(true);
         this.presenter.goToHelp.enable(true);
 
+        baltek.utils.sleep(20);
+
+        var iTeamAgent;
+        var teamAgentKind = "" ;
+        for ( iTeamAgent=0; iTeamAgent < this.presenter.teamAgents.length; iTeamAgent++) {
+
+            if ( ! this.presenter.teamAgents[iTeamAgent].kindIsBlocked ) {
+
+                this.presenter.teamAgents[iTeamAgent].kindIsBlocked = true;
+
+                teamAgentKind = this.presenter.teamAgents[iTeamAgent].kind;
+
+                if ( teamAgentKind !== "human" ) {
+                    baltek.utils.assert( baltek.ai.makers[teamAgentKind] !== undefined );
+                    this.presenter.teamAgents[iTeamAgent].ai = new baltek.ai.makers[teamAgentKind]();
+
+                } else {
+                    this.presenter.teamAgents[iTeamAgent].ai = null;
+                }
+
+                var ai = this.presenter.teamAgents[iTeamAgent].ai;
+
+                if ( ai !== null ) {
+                    var confirmAspect = ai.getAspect( "confirmAspect" );
+                    var squareAspect = ai.getAspect( "squareAspect" );
+                    var ballAspect = ai.getAspect( "ballAspect" );
+                    var sprintAspect = ai.getAspect( "sprintAspect" );
+                    var footballerAspect = ai.getAspect( "footballerAspect" );
+                    this.presenter.teamAgents[iTeamAgent].ai.registerObserver(this.presenter, confirmAspect);
+                    this.presenter.teamAgents[iTeamAgent].ai.registerObserver(this.presenter, squareAspect);
+                    this.presenter.teamAgents[iTeamAgent].ai.registerObserver(this.presenter, ballAspect);
+                    this.presenter.teamAgents[iTeamAgent].ai.registerObserver(this.presenter, sprintAspect);
+                    this.presenter.teamAgents[iTeamAgent].ai.registerObserver(this.presenter, footballerAspect);
+                }
+            }
+        }
+
         if ( ! this.presenter.rulesEngine.matchIsDefined() ) {
             this.presenter.rulesEngine.matchInit();
         }
+
         this.presenter.rulesEngine.matchUpdate();
     };
 
-    baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable){
+    baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable, aspect){
         var ball = null;
         var footballer = null;
         var square = null;
@@ -68,6 +106,10 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
 
             if ( ! this.presenter.rulesEngine.matchIsActive() ) {
                 this.setState(this.superState.goToGameStateIsFinished);
+            }
+
+            if ( this.presenter.teamAgents[state.activeTeamIndex].ai !== null ) {
+                this.presenter.teamAgents[state.activeTeamIndex].ai.updateFromEngineState(state);
             }
 
         } else if ( observable === this.presenter.ballWatcher ) {
@@ -93,10 +135,38 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         } else if ( observable === this.presenter.confirm ) {
             this.presenter.rulesEngine.turnConfirm();
 
+        } else if ( observable === this.presenter.teamAgents[0].ai || observable === this.presenter.teamAgents[1].ai) {
+            var ai = observable;
+
+            var confirmAspect = ai.getAspect( "confirmAspect" );
+            var squareAspect = ai.getAspect( "squareAspect" );
+            var ballAspect = ai.getAspect( "ballAspect" );
+            var sprintAspect = ai.getAspect( "sprintAspect" );
+            var footballerAspect = ai.getAspect( "footballerAspect" );
+
+            if ( aspect === confirmAspect ) {
+                this.presenter.rulesEngine.turnConfirm();
+
+            } else if ( aspect === squareAspect ) {
+                this.presenter.rulesEngine.moveSelectSquare(ai.getSquareIndices());
+
+            } else if ( aspect === ballAspect ) {
+                this.presenter.rulesEngine.moveSelectBall(true);
+
+            } else if ( aspect === sprintAspect ) {
+                this.presenter.rulesEngine.moveSprint(true);
+
+            } else if ( aspect === footballerAspect ) {
+                this.presenter.rulesEngine.moveSelectFootballer(ai.getFootballerSquareIndices(), true);
+
+            } else {
+                baltek.utils.assert( false, "aspect not managed" );
+            }
+
         } else {
 
             if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
+                this.superState.updateFromObservable(observable, aspect);
             } else {
                 baltek.utils.assert( false, "observable not managed" );
             }

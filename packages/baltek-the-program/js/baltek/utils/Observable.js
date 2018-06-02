@@ -57,9 +57,18 @@ baltek.utils.Observable.__initClass = function(){
         var observers = this.observersByAspects[aspect];
         var n = observers.length;
         var i = 0;
+        var thisSaved = this;
+        var notifier;
+        baltek.utils.Dispatcher.getInstance().lock();
         for ( i=0; i < n ; i++ ) {
-            observers[i].updateFromObservable(this, aspect);
+            //observers[i].updateFromObservable(thisSaved, aspect);
+            notifier = function(){
+                var observerSaved=observers[i];
+                return function(){ observerSaved.updateFromObservable(thisSaved, aspect); };
+            }();
+            baltek.utils.Dispatcher.getInstance().registerNotifier(notifier);
         }
+        baltek.utils.Dispatcher.getInstance().unlock();
     };
 
     baltek.utils.Observable.prototype.registerObserver = function(observer, aspect){

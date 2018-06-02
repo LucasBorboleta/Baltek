@@ -12,6 +12,10 @@ This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 Inte
 Attribute work to URL <https://github.com/LucasBorboleta/baltek-the-rules>.
 BALTEK-THE-RULES-LICENSE-MD-END */
 
+.baltek-rules-body-class{
+    margin:16px;
+}
+
 .baltek-rules-hyperlink-group-class{
     word-spacing:16px;
 }
@@ -31,7 +35,8 @@ BALTEK-THE-RULES-LICENSE-MD-END */
 
 .baltek-rules-logo-class{
     background-color:khaki;
-    border-radius:8px;
+    border-style:none;
+    border-width:0px;
     font-size:32px;
     text-align:center
 }

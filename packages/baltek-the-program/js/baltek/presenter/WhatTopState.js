@@ -66,7 +66,7 @@ baltek.presenter.WhatTopState.__initClass = function(){
         return this.goToHelpStateShowHelp;
     };
 
-    baltek.presenter.WhatTopState.prototype.updateFromObservable = function(observable){
+    baltek.presenter.WhatTopState.prototype.updateFromObservable = function(observable, aspect){
 
         if ( observable === this.presenter.goToGame ) {
             this.setState(this.superState.goToGameTopState);
@@ -74,7 +74,7 @@ baltek.presenter.WhatTopState.__initClass = function(){
         } else {
 
             if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
+                this.superState.updateFromObservable(observable, aspect);
             } else {
                 baltek.utils.assert( false, "observable not managed" );
             }

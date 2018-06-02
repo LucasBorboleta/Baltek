@@ -46,31 +46,21 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
         this.presenter.goToSettings.enable(true);
         this.presenter.invitation.enable(true);
         this.presenter.goToHelp.enable(true);
+
+        this.presenter.teamAgents[0].kindIsBlocked = false;
+        this.presenter.teamAgents[1].kindIsBlocked = false;
+        this.presenter.teamAgents[0].ai = null;
+        this.presenter.teamAgents[1].ai = null;
     };
 
-    baltek.presenter.GameStateIsReadyToStart.prototype.updateFromObservable = function(observable){
-        var isImplemented = true;
-        if ( observable === this.presenter.team0Kind ) {
-            this.presenter.team0Agent.kind = this.presenter.team0Kind.getSelection();
-            isImplemented = ( this.presenter.team0Agent.kind == "human");
-            baltek.debug.writeMessage( "GameStateIsReadyToStart: team0Kind=" + this.presenter.team0Agent.kind +
-                                            " ; implemented=" + isImplemented);
-
-        } else if ( observable === this.presenter.team1Kind ) {
-            this.presenter.team1Agent.kind = this.presenter.team1Kind.getSelection();
-            isImplemented = ( this.presenter.team0Agent.kind == "human");
-            baltek.debug.writeMessage( "GameStateIsReadyToStart: team1Kind=" + this.presenter.team1Agent.kind +
-                                            " ; implemented=" + isImplemented);
-
-        } else if ( observable === this.presenter.startGame ) {
-            this.presenter.team0Agent.kind = this.presenter.team0Kind.getSelection();
-            this.presenter.team1Agent.kind = this.presenter.team1Kind.getSelection();
+    baltek.presenter.GameStateIsReadyToStart.prototype.updateFromObservable = function(observable, aspect){
+        if ( observable === this.presenter.startGame ) {
             this.setState(this.superState.goToGameStateIsRunning);
 
         } else {
 
             if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
+                this.superState.updateFromObservable(observable, aspect);
             } else {
                 baltek.utils.assert( false, "observable not managed" );
             }

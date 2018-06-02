@@ -50,7 +50,7 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
         this.presenter.goToHelp.enable(true);
     };
 
-    baltek.presenter.GameStateIsFinished.prototype.updateFromObservable = function(observable){
+    baltek.presenter.GameStateIsFinished.prototype.updateFromObservable = function(observable, aspect){
 
         if ( observable === this.presenter.restartGame ) {
             this.presenter.rulesEngine.matchInit();
@@ -62,7 +62,7 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
         } else {
 
             if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
+                this.superState.updateFromObservable(observable, aspect);
             } else {
                 baltek.utils.assert( false, "observable not managed" );
             }

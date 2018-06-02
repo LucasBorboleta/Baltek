@@ -29,6 +29,7 @@ baltek.utils.__initModule = function(){
     baltek.debug.__initModule();
 
     // Init inner classes
+    baltek.utils.Dispatcher.__initClass();
     baltek.utils.Observable.__initClass();
 };
 
@@ -110,4 +111,9 @@ baltek.utils.repeatString = function(value, count){
     }
     return text;
 };
+
+baltek.utils.sleep = function(millisecs) {
+    var initiation = new Date().getTime();
+    while ((new Date().getTime() - initiation) < millisecs);
+}
 ///////////////////////////////////////////////////////////////////////////////

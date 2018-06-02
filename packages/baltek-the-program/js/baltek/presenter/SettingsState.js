@@ -49,8 +49,8 @@ baltek.presenter.SettingsState.__initClass = function(){
         this.presenter.disableAllButtons();
         this.presenter.goToGame.enable(true);
         this.presenter.goToSettings.enable(false);
-        this.presenter.team0Kind.enable(false); // No IA implemented yet
-        this.presenter.team1Kind.enable(false); // No IA implemented yet
+        this.presenter.team0Kind.enable( ! this.presenter.teamAgents[0].kindIsBlocked);
+        this.presenter.team1Kind.enable( ! this.presenter.teamAgents[1].kindIsBlocked);
         this.presenter.language.enable(true);
         this.presenter.coordinates.enable(true);
         this.presenter.debug.enable(true);
@@ -60,13 +60,15 @@ baltek.presenter.SettingsState.__initClass = function(){
         this.presenter.goToSettingsZone.style.display = "none";
     }
 
-    baltek.presenter.SettingsState.prototype.updateFromObservable = function(observable){
+    baltek.presenter.SettingsState.prototype.updateFromObservable = function(observable, aspect){
 
         if ( observable === this.presenter.team0Kind ) {
-            this.presenter.team0Agent.kind = this.presenter.team0Kind.getSelection();
+            baltek.utils.assert( ! this.presenter.teamAgents[0].kindIsBlocked )
+            this.presenter.teamAgents[0].kind = this.presenter.team0Kind.getSelection();
 
         } else if ( observable === this.presenter.team1Kind ) {
-            this.presenter.team1Agent.kind = this.presenter.team1Kind.getSelection();
+            baltek.utils.assert( ! this.presenter.teamAgents[1].kindIsBlocked )
+            this.presenter.teamAgents[1].kind = this.presenter.team1Kind.getSelection();
 
         } else if ( observable === this.presenter.goToGame ) {
             this.setState(this.superState.goToGameTopState);
@@ -83,7 +85,7 @@ baltek.presenter.SettingsState.__initClass = function(){
         } else {
 
             if ( this.superState !== null ) {
-                this.superState.updateFromObservable(observable);
+                this.superState.updateFromObservable(observable, aspect);
             } else {
                 baltek.utils.assert( false, "observable not managed" );
             }

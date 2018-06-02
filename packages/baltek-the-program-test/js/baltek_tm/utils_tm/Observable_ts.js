@@ -110,19 +110,21 @@ baltek_tm.utils_tm.Observable_ts.__initTestSuite = function(){
             var env = __init_testEnvironment();
 
             env.observable.notifyObservers(env.ASPECT_A);
+            baltek.utils.Dispatcher.getInstance().callNotifiers();
             assert.deepEqual( env.observerA1.events, [ {observable:env.observable, aspect:env.ASPECT_A} ], "myObserverA1 events after notify ASPECT_A") ;
             assert.deepEqual( env.observerA2.events, [ {observable:env.observable, aspect:env.ASPECT_A} ], "myObserverA2 events after notify ASPECT_A") ;
             assert.deepEqual( env.observerB1.events, [ ], "myObserverB1 events after notify ASPECT_A") ;
             assert.deepEqual( env.observerB2.events, [ ], "myObserverB2 events after notify ASPECT_A") ;
 
             env.observable.notifyObservers(env.ASPECT_B);
+            baltek.utils.Dispatcher.getInstance().callNotifiers();
             assert.deepEqual( env.observerA1.events, [ {observable:env.observable, aspect:env.ASPECT_A} ], "myObserverA1 events after notify ASPECT_B") ;
             assert.deepEqual( env.observerA2.events, [ {observable:env.observable, aspect:env.ASPECT_A} ], "myObserverA2 events after notify ASPECT_B") ;
             assert.deepEqual( env.observerB1.events, [ {observable:env.observable, aspect:env.ASPECT_B} ], "myObserverB1 events after notify ASPECT_B") ;
             assert.deepEqual( env.observerB2.events, [ {observable:env.observable, aspect:env.ASPECT_B} ], "myObserverB2 events after notify ASPECT_B") ;
 
-            assert.throws( function(){ env.observable.notifyObservers(env.ASPECT_X); }, /^ASSERTION FAILED/, "undefined aspect" ) ;
-            assert.throws( function(){ env.observable.notifyObservers(env.ASPECT_Y); }, /^ASSERTION FAILED/, "wrong aspect" ) ;
+            assert.throws( function(){ env.observable.notifyObservers(env.ASPECT_X); baltek.utils.Dispatcher.getInstance().callNotifiers();}, /^ASSERTION FAILED/, "undefined aspect" ) ;
+            assert.throws( function(){ env.observable.notifyObservers(env.ASPECT_Y); baltek.utils.Dispatcher.getInstance().callNotifiers();}, /^ASSERTION FAILED/, "wrong aspect" ) ;
         });
         //---------------------------------------------------------------------
         QUnit.test( "registerObserver_tc" , function(assert){

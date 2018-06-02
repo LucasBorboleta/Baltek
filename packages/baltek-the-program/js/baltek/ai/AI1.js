@@ -17,38 +17,26 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter = { };
-baltek.presenter.__initModuleCalled = false;
+baltek.ai.AI1 = function(){
+    this.__initObject();
+};
 
-baltek.presenter.__initModule = function(){
+baltek.ai.AI1.__initClassCalled = false;
 
-    if ( baltek.presenter.__initModuleCalled ) return;
-    baltek.presenter.__initModuleCalled = true;
+baltek.ai.AI1.__initClass = function(){
 
-    // Init required modules
-    baltek.ai.__initModule();
-    baltek.debug.__initModule();
-    baltek.draw.__initModule();
-    baltek.i18n.__initModule();
-    baltek.rules.__initModule();
-    baltek.utils.__initModule();
-    baltek.widget.__initModule();
+    if ( baltek.ai.AI1.__initClassCalled ) return;
+    baltek.ai.AI1.__initClassCalled = true;
 
-    // Init inner classes
-    baltek.presenter.GameStateIsFinished.__initClass();
-    baltek.presenter.GameStateIsReadyToStart.__initClass();
-    baltek.presenter.GameStateIsReadyToQuit.__initClass();
-    baltek.presenter.GameStateIsRunning.__initClass();
-    baltek.presenter.GameTopState.__initClass();
-    baltek.presenter.Presenter.__initClass();
-    baltek.presenter.SettingsState.__initClass();
-    baltek.presenter.State.__initClass();
-    baltek.presenter.SuperState.__initClass();
-    baltek.presenter.TopState.__initClass();
-    baltek.presenter.WhatStateShowAbout.__initClass();
-    baltek.presenter.WhatStateShowGuide.__initClass();
-    baltek.presenter.WhatStateShowRules.__initClass();
-    baltek.presenter.WhatTopState.__initClass();
+    baltek.utils.inherit(baltek.ai.AI1, baltek.ai.AI);
 
+    baltek.ai.AI1.prototype.__initObject = function(){
+        baltek.ai.AI1.super.__initObject.call(this);
+    };
+
+    baltek.ai.AI1.prototype.updateFromEngineState = function(state){
+        baltek.debug.writeMessage( "From AI1:" );
+        this.randomDecision(state);
+    };
 };
 ///////////////////////////////////////////////////////////////////////////////

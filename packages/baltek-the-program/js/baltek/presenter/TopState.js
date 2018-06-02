@@ -45,14 +45,14 @@ baltek.presenter.TopState.__initClass = function(){
         return this.goToGameTopState;
     };
 
-    baltek.presenter.TopState.prototype.updateFromObservable = function(observable){
+    baltek.presenter.TopState.prototype.updateFromObservable = function(observable, aspect){
 
         if ( observable === this.presenter.clearMessages ) {
             baltek.debug.clearMessages();
         } else {
 
           if ( this.superState !== null ) {
-              this.superState.updateFromObservable(observable);
+              this.superState.updateFromObservable(observable, aspect);
           } else {
               baltek.utils.assert( false, "observable not managed" );
           }
