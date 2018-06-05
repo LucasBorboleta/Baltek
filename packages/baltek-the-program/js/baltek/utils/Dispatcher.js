@@ -33,26 +33,24 @@ baltek.utils.Dispatcher.__initClass = function(){
     baltek.utils.inherit(baltek.utils.Dispatcher, Object);
 
     baltek.utils.Dispatcher.prototype.__initObject = function(){
-        this.notifiers = [];
         this.updater = null;
         this.locked = false;
+        this.notifiers = [];
+        this.selectedNotifiers = [];
     };
 
     baltek.utils.Dispatcher.prototype.callNotifiers = function(){
-        if ( this.notifiers.length !== 0 ) {
-            baltek.debug.writeMessage( "Dispatcher: this.notifiers.length = " + this.notifiers.length );
-        }
-
         if ( this.locked ) return;
 
-        var savedNotifiers = this.notifiers.concat([]);
+        this.selectedNotifiers = this.notifiers.concat([]);
         this.notifiers = [];
 
         var notifier = null;
-        while ( savedNotifiers.length !== 0 ) {
-            notifier = savedNotifiers.shift();
+        while ( this.selectedNotifiers.length !== 0 ) {
+            notifier = this.selectedNotifiers.shift();
             notifier();
         }
+        baltek.utils.assert( this.selectedNotifiers.length === 0 );
     };
 
     baltek.utils.Dispatcher.getInstance = function(){
@@ -67,13 +65,15 @@ baltek.utils.Dispatcher.__initClass = function(){
         this.locked = true;
     };
 
-    baltek.utils.Dispatcher.prototype.unlock = function(){
+    baltek.utils.Dispatcher.prototype.registerNotifier = function(notifier){
         baltek.utils.assert( this.locked );
-        this.locked = false;
+        this.notifiers.push(notifier);
     };
 
-    baltek.utils.Dispatcher.prototype.registerNotifier = function(notifier){
-        this.notifiers.push(notifier);
+    baltek.utils.Dispatcher.prototype.resetNotifiers = function(){
+        baltek.utils.assert( ! this.locked );
+        this.notifiers = [];
+        this.selectedNotifiers = [];
     };
 
     baltek.utils.Dispatcher.prototype.start = function(){
@@ -85,6 +85,11 @@ baltek.utils.Dispatcher.__initClass = function(){
 
     baltek.utils.Dispatcher.prototype.stop = function(){
         window.clearInterval(this.updater);
+    };
+
+    baltek.utils.Dispatcher.prototype.unlock = function(){
+        baltek.utils.assert( this.locked );
+        this.locked = false;
     };
 };
 ///////////////////////////////////////////////////////////////////////////////

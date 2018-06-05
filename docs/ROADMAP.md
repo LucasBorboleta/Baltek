@@ -16,5 +16,5 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Tasks
 
-- [ ] Redesign as necessary for implementing the simplest AI (random chooser).
+- [x] Redesign as necessary for implementing the simplest AI (random chooser).
 - [ ] Design an AI that explores the move tree.

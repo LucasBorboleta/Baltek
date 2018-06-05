@@ -2,10 +2,10 @@
 
 ⚽🏃
 
-## v1.1 (2018-06-02)
+## v1.1 (2018-06-05)
 
 - New style for the interface.
-- Structure for AI.
+- New code structure for AI.
 
 ## v1.0 (2018-05-27)
 

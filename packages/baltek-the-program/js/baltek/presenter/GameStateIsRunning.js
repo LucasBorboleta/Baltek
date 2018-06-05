@@ -35,6 +35,7 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsRunning.prototype.enter = function(){
+
         this.presenter.hideAllButtons();
         this.presenter.quitGame.show(true);
         this.presenter.goToSettings.show(true);
@@ -46,8 +47,6 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         this.presenter.goToSettings.enable(true);
         this.presenter.invitation.enable(true);
         this.presenter.goToHelp.enable(true);
-
-        baltek.utils.sleep(20);
 
         var iTeamAgent;
         var teamAgentKind = "" ;
@@ -98,6 +97,8 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
         var squareIndices = null;
 
         if ( observable === this.presenter.quitGame ) {
+            baltek.utils.Dispatcher.getInstance().resetNotifiers();
+            baltek.debug.writeMessage("GameStateIsRunning: after resetNotifiers");
             this.setState(this.superState.goToGameStateIsReadyToQuit);
 
         } else if ( observable === this.presenter.rulesEngine ) {
