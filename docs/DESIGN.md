@@ -166,7 +166,8 @@ The following design patterns have been used by purpose:
     2. The Presenter modifies the View (using its API) correspondingly to the Model state.
     3. The View notifies the Presenter about user interaction (button press or mouse click).
     4. The Presenter modifies the Model (using its API)
-- **Observable/Observers**: all notifications are implemented using this pattern.
+- **Observable/Observers**: all notifications are implemented using this pattern. 
+- **Event Queue**: After having experimenting a stack overflow failure when playing an AI against another AI, a Dispatcher has been implemented in order to differ the direct calling between Observable and Observer.
 - **State**: the reactions of the Presenter to notification are organized by states and sub-states using this pattern and the hierarchical nested states of UML. 
 
 ## Responsibilities of modules
@@ -183,7 +184,7 @@ The Model-View-Presenter (MVP) is implemented by classes, functions and global o
 
 The remaining modules are:
 
-* `baltek.utils` that provides functions and classes helpful for the other modules.
+* `baltek.utils` that provides functions and classes helpful for the other modules; among them the classes `Observable` and `Dispatcher`.
 * `baltek.debug` that provides logging of messages for debugging.
 
 ## Thoughts for IA design
