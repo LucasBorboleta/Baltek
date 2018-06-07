@@ -98,7 +98,6 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
 
         if ( observable === this.presenter.quitGame ) {
             baltek.utils.Dispatcher.getInstance().resetNotifiers();
-            baltek.debug.writeMessage("GameStateIsRunning: after resetNotifiers");
             this.setState(this.superState.goToGameStateIsReadyToQuit);
 
         } else if ( observable === this.presenter.rulesEngine ) {
@@ -106,10 +105,10 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
             this.presenter.updateFromEngineState(state);
 
             if ( ! this.presenter.rulesEngine.matchIsActive() ) {
+                baltek.utils.Dispatcher.getInstance().resetNotifiers();
                 this.setState(this.superState.goToGameStateIsFinished);
-            }
-
-            if ( this.presenter.teamAgents[state.activeTeamIndex].ai !== null ) {
+                
+            } else if ( this.presenter.teamAgents[state.activeTeamIndex].ai !== null ) {
                 this.presenter.teamAgents[state.activeTeamIndex].ai.updateFromEngineState(state);
             }
 

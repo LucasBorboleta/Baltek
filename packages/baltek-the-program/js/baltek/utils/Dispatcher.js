@@ -35,22 +35,22 @@ baltek.utils.Dispatcher.__initClass = function(){
     baltek.utils.Dispatcher.prototype.__initObject = function(){
         this.updater = null;
         this.locked = false;
-        this.notifiers = [];
-        this.selectedNotifiers = [];
+        this.waitingNotifiers = [];
+        this.loopedNotifiers = [];
     };
 
     baltek.utils.Dispatcher.prototype.callNotifiers = function(){
         if ( this.locked ) return;
 
-        this.selectedNotifiers = this.notifiers.concat([]);
-        this.notifiers = [];
+        this.loopedNotifiers = this.waitingNotifiers;
+        this.waitingNotifiers = [];
 
         var notifier = null;
-        while ( this.selectedNotifiers.length !== 0 ) {
-            notifier = this.selectedNotifiers.shift();
+        while ( this.loopedNotifiers.length !== 0 ) {
+            notifier = this.loopedNotifiers.shift();
             notifier();
         }
-        baltek.utils.assert( this.selectedNotifiers.length === 0 );
+        baltek.utils.assert( this.loopedNotifiers.length === 0 );
     };
 
     baltek.utils.Dispatcher.getInstance = function(){
@@ -67,13 +67,13 @@ baltek.utils.Dispatcher.__initClass = function(){
 
     baltek.utils.Dispatcher.prototype.registerNotifier = function(notifier){
         baltek.utils.assert( this.locked );
-        this.notifiers.push(notifier);
+        this.waitingNotifiers.push(notifier);
     };
 
     baltek.utils.Dispatcher.prototype.resetNotifiers = function(){
         baltek.utils.assert( ! this.locked );
-        this.notifiers = [];
-        this.selectedNotifiers = [];
+        this.waitingNotifiers = [];
+        this.loopedNotifiers = [];
     };
 
     baltek.utils.Dispatcher.prototype.start = function(){
