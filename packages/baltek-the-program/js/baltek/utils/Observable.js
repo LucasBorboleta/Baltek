@@ -63,9 +63,12 @@ baltek.utils.Observable.__initClass = function(){
         for ( i=0; i < n ; i++ ) {
             // Naive implementation without Dispatcher causes stack overflow when an AI plays against another AI!
             //observers[i].updateFromObservable(thisSaved, aspect);
+            
             notifier = function(){
                 var observerSaved=observers[i];
-                return function(){ observerSaved.updateFromObservable(thisSaved, aspect); };
+                return function(){
+                    baltek.debug.writeMessage( "notifier: apsect=" + thisSaved.aspectNames[aspect] );
+                    observerSaved.updateFromObservable(thisSaved, aspect); };
             }();
             baltek.utils.Dispatcher.getInstance().registerNotifier(notifier);
         }

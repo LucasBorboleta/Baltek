@@ -57,6 +57,7 @@ baltek.startGame = function(){
                 if ( ! msg.sameUrl ) {
                     return;
                 }
+                baltek.debug.writeMessage( "TogetherJS.hub: receiving canvas-abstract-click id=" + msg.id );
                 baltek.draw.Selectable.__instances[msg.id].onAbstractClick();
             }
         );

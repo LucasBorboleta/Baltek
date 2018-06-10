@@ -79,6 +79,7 @@ baltek.draw.Selectable.__initClass = function(){
             if ( clicked ) {
                 //baltek.debug.writeMessage( "TogetherJS is defined = " + (TogetherJS !== undefined) );
                 if ( TogetherJS !== undefined && TogetherJS.running ) {
+                    baltek.debug.writeMessage( "Selectable: send canvas-abstract-click id=" + this.id );
                     TogetherJS.send( { type: "canvas-abstract-click", id: this.id } );
                 }
                 this.onAbstractClick();

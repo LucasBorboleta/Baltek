@@ -78,7 +78,7 @@ baltek.utils.Dispatcher.__initClass = function(){
 
     baltek.utils.Dispatcher.prototype.start = function(){
         // Each "milliseconds" call the registered notifiers
-        var milliseconds = 1;
+        var milliseconds = 20;
         var thisSaved = this;
         var thisSavedCallNotifiers = function(){ thisSaved.callNotifiers(); };
         this.updater = window.setInterval(thisSavedCallNotifiers, milliseconds);
