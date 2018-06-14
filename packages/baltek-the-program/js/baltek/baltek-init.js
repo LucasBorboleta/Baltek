@@ -28,6 +28,9 @@ baltek.__initModule = function(){
     // Detect the interactive context, in order to ease BALTEK loading in unit tests
     baltek.isInteractive = ( document.getElementById( "baltek-body" ) !== null );
 
+    // Use a Dispatcher ?
+    baltek.useDispatcher = false;
+
     // Init required packages
     baltek.debug.__initModule();
     baltek.presenter.__initModule();
@@ -41,6 +44,7 @@ baltek.__initModule = function(){
     }
 
     baltek.debug.writeMessage( "baltek.__initModule(): done" );
+
     if ( baltek.isInteractive ) {
         baltek.debug.writeMessage( "baltek.__initModule(): TogetherJS is defined = " + (TogetherJS !== undefined) );
     }
@@ -53,7 +57,7 @@ baltek.startGame = function(){
     // TogetherJS settings
     if ( TogetherJS !== undefined ) {
         TogetherJS.hub.on( "canvas-abstract-click",
-            function (msg) {
+            function(msg){
                 if ( ! msg.sameUrl ) {
                     return;
                 }
@@ -63,6 +67,8 @@ baltek.startGame = function(){
         );
     }
 
-    baltek.utils.Dispatcher.getInstance().start();
+    if ( baltek.useDispatcher ) {
+        baltek.utils.Dispatcher.getInstance().start();
+    }
 };
 ///////////////////////////////////////////////////////////////////////////////

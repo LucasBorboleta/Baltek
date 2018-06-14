@@ -47,8 +47,8 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
         this.presenter.invitation.enable(true);
         this.presenter.goToHelp.enable(true);
 
-        this.presenter.teamAgents[0].kindIsBlocked = false;
-        this.presenter.teamAgents[1].kindIsBlocked = false;
+        this.presenter.teamAgents[0].kindIsBlocked = true; //false;
+        this.presenter.teamAgents[1].kindIsBlocked = true; //false;
         this.presenter.teamAgents[0].ai = null;
         this.presenter.teamAgents[1].ai = null;
     };

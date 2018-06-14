@@ -77,6 +77,8 @@ baltek.utils.Dispatcher.__initClass = function(){
     };
 
     baltek.utils.Dispatcher.prototype.start = function(){
+        this.stop();
+        
         // Each "milliseconds" call the registered notifiers
         var milliseconds = 20;
         var thisSaved = this;
@@ -85,7 +87,10 @@ baltek.utils.Dispatcher.__initClass = function(){
     };
 
     baltek.utils.Dispatcher.prototype.stop = function(){
-        window.clearInterval(this.updater);
+        if ( this.updater !== null ) {
+            window.clearInterval(this.updater);
+            this.updater = null;
+        }
     };
 
     baltek.utils.Dispatcher.prototype.unlock = function(){

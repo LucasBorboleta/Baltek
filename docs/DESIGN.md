@@ -187,6 +187,30 @@ The remaining modules are:
 * `baltek.utils` that provides functions and classes helpful for the other modules; among them the classes `Observable` and `Dispatcher`.
 * `baltek.debug` that provides logging of messages for debugging.
 
+## Understanding stack overflow when two AI are playing
+
+When two AI are playing one against another, and with direct call implementation of the `Observable`pattern a stack overflow occurs. In addition, the canvas is not updated. Let us explain such behavior.
+
+Regarding the freeze of the canvas:
+
+*  The stack overflow looks like an infinite loop. So when the user clicks "new game" the application enters in computation, and cannot update the canvas (nor the other items of the GUI). 
+* Lesson learn: when a computation is long, some slice of time is periodically required for updating the drawing.
+
+Regarding the stack overflow itself:
+
+* The sequence of calls is as follows:
+  1. User clicks the "new game" button.
+  2. The Button instance notifies (i.e. calls) its unique observer: the Presenter instance.
+  3. The Presenter instance calls its current state: the GameStateIsReadyToStart instance.
+  4. The GameStateIsReadyToStart instance calls the GameStateIsRunning instance.
+  5. The GameStateIsRunning instance calls the Engine instance.
+  6. The Engine instance notifies (i.e. calls) its unique observer: the Presenter instance.
+  7. The Presenter instance calls its current state: the GameStateIsRunning instance.
+  8. The GameStateIsRunning instance calls the Presenter instance for drawing, then calls the active AI instance; let say the "AI-0".
+  9. The AI instance "AI-0" makes some decision and notifies (i.e. calls) its unique observer: the Presenter instance.
+  10. The sequence is repeated at step 7, but at steps 8 and 9, the active AI instance changes for "AI-1".
+* Lesson learn: TODO
+
 ## Thoughts for IA design
 
 Let us determine a bound for the possible moves:

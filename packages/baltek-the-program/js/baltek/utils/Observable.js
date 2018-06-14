@@ -54,25 +54,34 @@ baltek.utils.Observable.__initClass = function(){
     baltek.utils.Observable.prototype.notifyObservers = function(aspect){
         baltek.utils.assert( aspect !== undefined );
         baltek.utils.assert( aspect < this.aspectNames.length );
+
         var observers = this.observersByAspects[aspect];
         var n = observers.length;
         var i = 0;
         var thisSaved = this;
         var notifier;
-        baltek.utils.Dispatcher.getInstance().lock();
-        for ( i=0; i < n ; i++ ) {
-            // Naive implementation without Dispatcher causes stack overflow when an AI plays against another AI!
-            //observers[i].updateFromObservable(thisSaved, aspect);
+
+        if ( baltek.useDispatcher ) {
             
-            notifier = function(){
-                var observerSaved=observers[i];
-                return function(){
-                    baltek.debug.writeMessage( "notifier: apsect=" + thisSaved.aspectNames[aspect] );
-                    observerSaved.updateFromObservable(thisSaved, aspect); };
-            }();
-            baltek.utils.Dispatcher.getInstance().registerNotifier(notifier);
+            baltek.utils.Dispatcher.getInstance().lock();
+            for ( i=0; i < n ; i++ ) {
+
+                notifier = function(){
+                    var observerSaved=observers[i];
+                    return function(){
+                        baltek.debug.writeMessage( "notifier: apsect=" + thisSaved.aspectNames[aspect] );
+                        observerSaved.updateFromObservable(thisSaved, aspect); };
+                }();
+
+                baltek.utils.Dispatcher.getInstance().registerNotifier(notifier);
+            }
+            baltek.utils.Dispatcher.getInstance().unlock();
+
+        } else {
+            for ( i=0; i < n ; i++ ) {
+                observers[i].updateFromObservable(thisSaved, aspect);
+            }
         }
-        baltek.utils.Dispatcher.getInstance().unlock();
     };
 
     baltek.utils.Observable.prototype.registerObserver = function(observer, aspect){
