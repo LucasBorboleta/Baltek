@@ -178,6 +178,20 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END */
 .baltek-settingsZone-class{
 }
 
+.baltek-tutorialZone-class{
+    display:inline-block;
+    margin:16px;
+}
+
+.baltek-picture-slider-class{
+    max-width:100%;
+    height:auto;
+    border:none;
+}
+
+.baltek-text-slider-class{
+}
+
 .baltek-debugZone-class{
     display:inline-block;
 

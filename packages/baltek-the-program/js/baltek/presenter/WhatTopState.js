@@ -43,6 +43,7 @@ baltek.presenter.WhatTopState.__initClass = function(){
         this.presenter.hideAllButtons();
         this.presenter.goToGame.show(true);
         this.presenter.rules.show(true);
+        this.presenter.tutorial.show(true);
         this.presenter.guide.show(true);
         this.presenter.about.show(true);
 
@@ -58,6 +59,7 @@ baltek.presenter.WhatTopState.__initClass = function(){
 
     baltek.presenter.WhatTopState.prototype.initSubstates = function(){
         this.goToHelpStateShowRules = new baltek.presenter.WhatStateShowRules(this.presenter, this);
+        this.goToHelpStateShowTutorial = new baltek.presenter.WhatStateShowTutorial(this.presenter, this);
         this.goToHelpStateShowHelp = new baltek.presenter.WhatStateShowGuide(this.presenter, this);
         this.goToHelpStateShowAbout = new baltek.presenter.WhatStateShowAbout(this.presenter, this);
     };

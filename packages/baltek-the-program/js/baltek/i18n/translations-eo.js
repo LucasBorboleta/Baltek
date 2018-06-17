@@ -22,6 +22,10 @@ baltek.i18n.translations.eo = {
     "baltek-button-about:button"       : "Pri" ,
     "baltek-button-guide:button"       : "Gvidilo" ,
     "baltek-button-rules:button"       : "Reguloj" ,
+    "baltek-button-tutorial:button"    : "Lernilo" ,
+
+    "baltek-button-previous:button"    : "❮" ,
+    "baltek-button-next:button"        : "❯" ,
 
     "baltek-debug-clearMessages:button": "Clear messages" ,
 

@@ -17,39 +17,52 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter = { };
-baltek.presenter.__initModuleCalled = false;
+baltek.i18n.tutorial = {};
+baltek.i18n.tutorial.pictures = [];
+baltek.i18n.tutorial.texts = [];
 
-baltek.presenter.__initModule = function(){
+/// Slide 0
+baltek.i18n.tutorial.pictures[0] = {
+    en: "./pictures/tutorial/x0-en.png",
+    eo: "./pictures/tutorial/x0-eo.png",
+    fr: "./pictures/tutorial/x0-fr.png",
+    pt: "./pictures/tutorial/x0-pt.png"
+};
 
-    if ( baltek.presenter.__initModuleCalled ) return;
-    baltek.presenter.__initModuleCalled = true;
+baltek.i18n.tutorial.texts[0] = {
+    en: "x0-en",
+    eo: "x0-eo",
+    fr: "BALTEK est un jeu en tour par tour qui est inspiré du football.",
+    pt: "x0-pt"
+};
 
-    // Init required modules
-    baltek.ai.__initModule();
-    baltek.debug.__initModule();
-    baltek.draw.__initModule();
-    baltek.i18n.__initModule();
-    baltek.rules.__initModule();
-    baltek.utils.__initModule();
-    baltek.widget.__initModule();
+/// Slide 1
+baltek.i18n.tutorial.pictures[1] = {
+    en: "./pictures/tutorial/x1-en.png",
+    eo: "./pictures/tutorial/x1-eo.png",
+    fr: "./pictures/tutorial/x1-fr.png",
+    pt: "./pictures/tutorial/x1-pt.png"
+};
 
-    // Init inner classes
-    baltek.presenter.GameStateIsFinished.__initClass();
-    baltek.presenter.GameStateIsReadyToStart.__initClass();
-    baltek.presenter.GameStateIsReadyToQuit.__initClass();
-    baltek.presenter.GameStateIsRunning.__initClass();
-    baltek.presenter.GameTopState.__initClass();
-    baltek.presenter.Presenter.__initClass();
-    baltek.presenter.SettingsState.__initClass();
-    baltek.presenter.State.__initClass();
-    baltek.presenter.SuperState.__initClass();
-    baltek.presenter.TopState.__initClass();
-    baltek.presenter.WhatStateShowAbout.__initClass();
-    baltek.presenter.WhatStateShowGuide.__initClass();
-    baltek.presenter.WhatStateShowRules.__initClass();
-    baltek.presenter.WhatStateShowTutorial.__initClass();
-    baltek.presenter.WhatTopState.__initClass();
+baltek.i18n.tutorial.texts[1] = {
+    en: "x1-en",
+    eo: "x1-eo",
+    fr: "x1-fr",
+    pt: "x1-pt"
+};
 
+/// Slide 2
+baltek.i18n.tutorial.pictures[2] = {
+    en: "./pictures/tutorial/x2-en.png",
+    eo: "./pictures/tutorial/x2-eo.png",
+    fr: "./pictures/tutorial/x2-fr.png",
+    pt: "./pictures/tutorial/x2-pt.png"
+};
+
+baltek.i18n.tutorial.texts[2] = {
+    en: "x2-en",
+    eo: "x2-eo",
+    fr: "x2-fr",
+    pt: "x2-pt"
 };
 ///////////////////////////////////////////////////////////////////////////////

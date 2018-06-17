@@ -38,6 +38,7 @@ baltek.presenter.WhatStateShowAbout.__initClass = function(){
         this.presenter.aboutIFrame.show(true);
 
         this.presenter.rules.enable(true);
+        this.presenter.tutorial.enable(true);
         this.presenter.guide.enable(true);
         this.presenter.about.enable(false);
     };
@@ -46,6 +47,7 @@ baltek.presenter.WhatStateShowAbout.__initClass = function(){
         this.presenter.aboutIFrame.show(false);
 
         this.presenter.rules.enable(false);
+        this.presenter.tutorial.enable(false);
         this.presenter.guide.enable(false);
         this.presenter.about.enable(false);
     };
@@ -55,11 +57,11 @@ baltek.presenter.WhatStateShowAbout.__initClass = function(){
         if ( observable === this.presenter.rules ) {
             this.setState(this.superState.goToHelpStateShowRules);
 
+        } else if ( observable === this.presenter.tutorial ) {
+            this.setState(this.superState.goToHelpStateShowTutorial);
+
         } else if ( observable === this.presenter.guide ) {
             this.setState(this.superState.goToHelpStateShowHelp);
-
-        } else if ( observable === this.presenter.about ) {
-            this.setState(this.superState.goToHelpStateShowAbout);
 
         } else {
 

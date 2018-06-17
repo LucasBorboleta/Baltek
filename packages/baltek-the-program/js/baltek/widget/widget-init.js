@@ -34,7 +34,9 @@ baltek.widget.__initModule = function(){
     baltek.widget.CounterWithDecimals.__initClass();
     baltek.widget.CounterWithSymbols.__initClass();
     baltek.widget.IFrame.__initClass();
+    baltek.widget.PictureSlider.__initClass();
     baltek.widget.Selector.__initClass();
+    baltek.widget.TextSlider.__initClass();
     baltek.widget.Widget.__initClass();
 };
 ///////////////////////////////////////////////////////////////////////////////

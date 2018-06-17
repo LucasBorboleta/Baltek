@@ -21,6 +21,10 @@ baltek.i18n.translations.en = {
     "baltek-button-about:button"       : "About" ,
     "baltek-button-guide:button"       : "Guide" ,
     "baltek-button-rules:button"       : "Rules" ,
+    "baltek-button-tutorial:button"    : "Tutorial" ,
+
+    "baltek-button-previous:button"    : "❮" ,
+    "baltek-button-next:button"        : "❯" ,
 
     "baltek-debug-clearMessages:button": "Clear messages" ,
 

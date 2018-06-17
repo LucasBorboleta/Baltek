@@ -17,51 +17,70 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-baltek.presenter.WhatStateShowRules = function(presenter, superState){
+baltek.presenter.WhatStateShowTutorial = function(presenter, superState){
     this.__initObject(presenter, superState);
 };
 
-baltek.presenter.WhatStateShowRules.__initClassCalled = false;
+baltek.presenter.WhatStateShowTutorial.__initClassCalled = false;
 
-baltek.presenter.WhatStateShowRules.__initClass = function(){
+baltek.presenter.WhatStateShowTutorial.__initClass = function(){
 
-    if ( baltek.presenter.WhatStateShowRules.__initClassCalled ) return;
-    baltek.presenter.WhatStateShowRules.__initClassCalled = true;
+    if ( baltek.presenter.WhatStateShowTutorial.__initClassCalled ) return;
+    baltek.presenter.WhatStateShowTutorial.__initClassCalled = true;
 
-    baltek.utils.inherit(baltek.presenter.WhatStateShowRules, baltek.presenter.State);
+    baltek.utils.inherit(baltek.presenter.WhatStateShowTutorial, baltek.presenter.State);
 
-    baltek.presenter.WhatStateShowRules.prototype.__initObject = function(presenter, superState){
-        baltek.presenter.WhatStateShowRules.super.__initObject.call(this, presenter, superState);
+    baltek.presenter.WhatStateShowTutorial.prototype.__initObject = function(presenter, superState){
+        baltek.presenter.WhatStateShowTutorial.super.__initObject.call(this, presenter, superState);
     };
 
-    baltek.presenter.WhatStateShowRules.prototype.enter = function(){
-        this.presenter.rulesIFrame.show(true);
+    baltek.presenter.WhatStateShowTutorial.prototype.enter = function(){
+        this.presenter.tutorialZone.style.display = "inherit";
 
-        this.presenter.rules.enable(false);
-        this.presenter.tutorial.enable(true);
+        this.presenter.rules.enable(true);
+        this.presenter.tutorial.enable(false);
         this.presenter.guide.enable(true);
         this.presenter.about.enable(true);
+
+        this.presenter.previous.enable(true);
+        this.presenter.next.enable(true);
+
+        this.presenter.previous.show(true);
+        this.presenter.next.show(true);
+
+        this.updateMoveButtons();
     };
 
-    baltek.presenter.WhatStateShowRules.prototype.exit = function(){
-        this.presenter.rulesIFrame.show(false);
+    baltek.presenter.WhatStateShowTutorial.prototype.exit = function(){
+        this.presenter.tutorialZone.style.display = "none";
 
         this.presenter.rules.enable(false);
         this.presenter.tutorial.enable(false);
         this.presenter.guide.enable(false);
         this.presenter.about.enable(false);
+
+        this.presenter.previous.show(false);
+        this.presenter.next.show(false);
     };
 
-    baltek.presenter.WhatStateShowRules.prototype.updateFromObservable = function(observable, aspect){
+    baltek.presenter.WhatStateShowTutorial.prototype.updateFromObservable = function(observable, aspect){
 
-        if ( observable === this.presenter.tutorial ) {
-            this.setState(this.superState.goToHelpStateShowTutorial);
+        if ( observable === this.presenter.rules ) {
+            this.setState(this.superState.goToHelpStateShowRules);
 
         } else if ( observable === this.presenter.guide ) {
             this.setState(this.superState.goToHelpStateShowHelp);
 
         } else if ( observable === this.presenter.about ) {
             this.setState(this.superState.goToHelpStateShowAbout);
+
+        } else if ( observable === this.presenter.next ) {
+            this.presenter.pictureSlider.moveNext();
+            this.presenter.textSlider.moveNext();
+
+        } else if ( observable === this.presenter.previous ) {
+            this.presenter.pictureSlider.movePrevious();
+            this.presenter.textSlider.movePrevious();
 
         } else {
 
@@ -71,6 +90,14 @@ baltek.presenter.WhatStateShowRules.__initClass = function(){
                 baltek.utils.assert( false, "observable not managed" );
             }
         }
+
+        this.updateMoveButtons();
     };
+
+    baltek.presenter.WhatStateShowTutorial.prototype.updateMoveButtons = function(){
+        this.presenter.previous.enable( this.presenter.pictureSlider.canMovePrevious() );
+        this.presenter.next.enable( this.presenter.pictureSlider.canMoveNext() );
+    };
+
 };
 ///////////////////////////////////////////////////////////////////////////////

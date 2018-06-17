@@ -127,6 +127,15 @@ baltek.presenter.Presenter.__initClass = function(){
         this.rules = new baltek.widget.Button( "baltek-button-rules" , this.i18nTranslator);
         this.rules.registerObserver(this);
 
+        this.tutorial = new baltek.widget.Button( "baltek-button-tutorial" , this.i18nTranslator);
+        this.tutorial.registerObserver(this);
+
+        this.previous = new baltek.widget.Button( "baltek-button-previous" , this.i18nTranslator);
+        this.previous.registerObserver(this);
+
+        this.next = new baltek.widget.Button( "baltek-button-next" , this.i18nTranslator);
+        this.next.registerObserver(this);
+
         this.guideIFrame = new baltek.widget.IFrame( "baltek-iframe-guide" , this.i18nTranslator);
         this.guide = new baltek.widget.Button( "baltek-button-guide" , this.i18nTranslator);
         this.guide.registerObserver(this);
@@ -144,7 +153,14 @@ baltek.presenter.Presenter.__initClass = function(){
         this.clearMessages = new baltek.widget.Button( "baltek-debug-clearMessages" , this.i18nTranslator);
         this.clearMessages.registerObserver(this);
 
-        this.goToSettingsZone = document.getElementById( "baltek-settingsZone" );
+        this.settingsZone = document.getElementById( "baltek-settingsZone" );
+        this.settingsZone.style.display = "none";
+
+        this.tutorialZone = document.getElementById( "baltek-tutorialZone" );
+        this.tutorialZone.style.display = "none";
+
+        this.pictureSlider = new baltek.widget.PictureSlider( "baltek-picture-slider" , this.i18nTranslator);
+        this.textSlider = new baltek.widget.TextSlider( "baltek-text-slider" , this.i18nTranslator);
 
         this.ballWatcher = new baltek.draw.BallWatcher();
         this.ballWatcher.registerObserver(this);
@@ -159,6 +175,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.initBall();
         this.initFootballers();
         this.drawField();
+        this.initTutorial();
 
         this.state = new baltek.presenter.TopState(this, null);
         this.state.enter();
@@ -204,8 +221,12 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.goToHelp.enable(false);
         this.rules.enable(false);
+        this.tutorial.enable(false);
         this.guide.enable(false);
         this.about.enable(false);
+
+        this.previous.enable(false);
+        this.next.enable(false);
     };
 
     baltek.presenter.Presenter.prototype.drawField = function(){
@@ -250,8 +271,12 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.goToHelp.show(false);
         this.rules.show(false);
+        this.tutorial.show(false);
         this.guide.show(false);
         this.about.show(false);
+
+        this.previous.show(false);
+        this.next.show(false);
     };
 
     baltek.presenter.Presenter.prototype.initBall = function(){
@@ -334,6 +359,25 @@ baltek.presenter.Presenter.__initClass = function(){
             }
         }
     };
+
+    baltek.presenter.Presenter.prototype.initTutorial = function(){
+        var slides = baltek.i18n.tutorial;
+
+        baltek.utils.assert( slides.pictures.length === slides.texts.length );
+        var n=slides.pictures.length;
+        var i=0;
+        for (i=0; i<n; i++) {
+            this.pictureSlider.add( slides.pictures[i] );
+            this.textSlider.add( slides.texts[i] );
+        }
+
+        /// Sanity checks
+        baltek.utils.assert( this.pictureSlider.count() === this.textSlider.count() );
+
+        /// Go to first slides
+        this.pictureSlider.moveFirst();
+        this.textSlider.moveFirst();
+    }
 
     baltek.presenter.Presenter.prototype.showXYLabels = function(condition){
         var ix = 0;

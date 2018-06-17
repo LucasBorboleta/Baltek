@@ -208,8 +208,18 @@ Regarding the stack overflow itself:
   7. The Presenter instance calls its current state: the GameStateIsRunning instance.
   8. The GameStateIsRunning instance calls the Presenter instance for drawing, then calls the active AI instance; let say the "AI-0".
   9. The AI instance "AI-0" makes some decision and notifies (i.e. calls) its unique observer: the Presenter instance.
-  10. The sequence is repeated at step 7, but at steps 8 and 9, the active AI instance changes for "AI-1".
-* Lesson learn: TODO
+  10. The sequence is repeated at step 7, but at steps 8 and 9, after some turns, the active AI instance changes for "AI-1".
+* Lesson learn: the implementation of "notification" as "direct call" does not scale; the "call" must be differed; also the "notification" must be the last action of an actor.
+
+## Understanding the desynchronization of two synchronized browsers mode
+
+Context: a failure occurs with the Dispatcher being periodically called in the two synchronized browsers mode, when pressing quickly and permutating the two buttons "Quit game" and "Continue game". The remote browser raises the "observable not managed" failure.
+
+The sequence is as follows:
+
+* xxx
+
+
 
 ## Thoughts for IA design
 

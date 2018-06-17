@@ -2,6 +2,10 @@
 
 ⚽🏃
 
+## v1.x (2018-06-17)
+
+- Tutorial added.
+
 ## v1.1 (2018-06-14)
 
 - New style for the interface.

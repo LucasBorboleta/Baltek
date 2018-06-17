@@ -63,12 +63,19 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
 			<span class="baltek-counter-class" id="baltek-counter-credit"></span>
 		</div>
 
-		<!-- 4) Invitation, settings and Help -->
+		<!-- 4) Tutorial -->
+		<div class="baltek-buttonGroup-class">
+			<button class="baltek-button-class" type="button" id="baltek-button-previous"></button>
+			<button class="baltek-button-class" type="button" id="baltek-button-next"></button>
+		</div>
+
+		<!-- 5) Invitation, settings and Help -->
 		<div class="baltek-buttonGroup-class">
 			<button class="baltek-button-class" type="button" id="baltek-button-invitation"></button>
 			<button class="baltek-button-class" type="button" id="baltek-button-goToSettings"></button>
 			<button class="baltek-button-class" type="button" id="baltek-button-goToHelp"></button>
-			<button class="baltek-button-class" type="button" id="baltek-button-rules"></button>
+            <button class="baltek-button-class" type="button" id="baltek-button-tutorial"></button>
+            <button class="baltek-button-class" type="button" id="baltek-button-rules"></button>
 			<button class="baltek-button-class" type="button" id="baltek-button-guide"></button>
 			<button class="baltek-button-class" type="button" id="baltek-button-about"></button>
 		</div>
@@ -81,6 +88,11 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
 		<iframe class="baltek-help-frame-class" id="baltek-iframe-rules"></iframe>
 		<iframe class="baltek-help-frame-class" id="baltek-iframe-guide"></iframe>
 		<iframe class="baltek-help-frame-class" id="baltek-iframe-about"></iframe>
+
+        <div class="baltek-tutorialZone-class" id="baltek-tutorialZone">
+            <img src="" alt="tutorial-picture" class="baltek-picture-slider-class" id="baltek-picture-slider" />
+            <p class="baltek-text-slider-class" id="baltek-text-slider"></p>
+        </div>
 
 		<div class="baltek-settingsZone-class" id="baltek-settingsZone">
 			<p>
@@ -138,7 +150,8 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
 	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-en.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-eo.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-fr.js"></script>
-	<script src="../../packages/baltek-the-program/js/baltek/i18n/translations-pt.js"></script>
+    <script src="../../packages/baltek-the-program/js/baltek/i18n/translations-pt.js"></script>
+    <script src="../../packages/baltek-the-program/js/baltek/i18n/tutorial.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/i18n/Translator.js"></script>
 
 	<script src="../../packages/baltek-the-program/js/baltek/presenter/presenter-init.js"></script>
@@ -154,7 +167,8 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
 	<script src="../../packages/baltek-the-program/js/baltek/presenter/TopState.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/presenter/WhatStateShowAbout.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/presenter/WhatStateShowGuide.js"></script>
-	<script src="../../packages/baltek-the-program/js/baltek/presenter/WhatStateShowRules.js"></script>
+    <script src="../../packages/baltek-the-program/js/baltek/presenter/WhatStateShowRules.js"></script>
+    <script src="../../packages/baltek-the-program/js/baltek/presenter/WhatStateShowTutorial.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/presenter/WhatTopState.js"></script>
 
 	<script src="../../packages/baltek-the-program/js/baltek/rules/rules-init.js"></script>
@@ -176,8 +190,10 @@ BALTEK-THE-PROGRAM-LICENSE-MD-END -->
 	<script src="../../packages/baltek-the-program/js/baltek/widget/Button.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/widget/CounterWithDecimals.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/widget/CounterWithSymbols.js"></script>
-	<script src="../../packages/baltek-the-program/js/baltek/widget/IFrame.js"></script>
+    <script src="../../packages/baltek-the-program/js/baltek/widget/IFrame.js"></script>
+    <script src="../../packages/baltek-the-program/js/baltek/widget/PictureSlider.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/widget/Selector.js"></script>
+    <script src="../../packages/baltek-the-program/js/baltek/widget/TextSlider.js"></script>
 	<script src="../../packages/baltek-the-program/js/baltek/widget/Widget.js"></script>
 
 	<!-- The "*.js" TogetherJS file must be loaded with the following pre-settings -->

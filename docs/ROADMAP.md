@@ -16,6 +16,7 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Tasks
 
+- [ ] Add a tutorial.
 - [ ] Update pictures with not rounded widgets (buttons, etc.) in HTML for "guide".
 - [ ] Redesign as necessary for implementing the simplest AI (random chooser).
   - [ ] Understand the assertion failure when using a Dispatcher in the context of two synchronized browsers.
