@@ -59,6 +59,10 @@ baltek.widget.PictureSlider.__initClass = function(){
         return this.slides.length;
     };
 
+    baltek.widget.PictureSlider.prototype.getIndex = function(){
+        return this.index;
+    };
+
     baltek.widget.PictureSlider.prototype.moveFirst = function(){
         if ( this.slides.length !== 0 ) {
             this.index = 0;

@@ -47,6 +47,7 @@ baltek.presenter.WhatStateShowTutorial.__initClass = function(){
 
         this.presenter.previous.show(true);
         this.presenter.next.show(true);
+        this.presenter.page.show(true);
 
         this.updateMoveButtons();
     };
@@ -61,6 +62,7 @@ baltek.presenter.WhatStateShowTutorial.__initClass = function(){
 
         this.presenter.previous.show(false);
         this.presenter.next.show(false);
+        this.presenter.page.show(false);
     };
 
     baltek.presenter.WhatStateShowTutorial.prototype.updateFromObservable = function(observable, aspect){
@@ -97,6 +99,8 @@ baltek.presenter.WhatStateShowTutorial.__initClass = function(){
     baltek.presenter.WhatStateShowTutorial.prototype.updateMoveButtons = function(){
         this.presenter.previous.enable( this.presenter.pictureSlider.canMovePrevious() );
         this.presenter.next.enable( this.presenter.pictureSlider.canMoveNext() );
+        this.presenter.page.setMaximum( this.presenter.pictureSlider.count() );
+        this.presenter.page.setCount( this.presenter.pictureSlider.getIndex() + 1 );
     };
 
 };

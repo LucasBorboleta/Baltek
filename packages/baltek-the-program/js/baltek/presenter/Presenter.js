@@ -133,6 +133,8 @@ baltek.presenter.Presenter.__initClass = function(){
         this.previous = new baltek.widget.Button( "baltek-button-previous" , this.i18nTranslator);
         this.previous.registerObserver(this);
 
+        this.page = new baltek.widget.CounterWithFraction( "baltek-counter-page" , this.i18nTranslator);
+
         this.next = new baltek.widget.Button( "baltek-button-next" , this.i18nTranslator);
         this.next.registerObserver(this);
 
@@ -277,6 +279,7 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.previous.show(false);
         this.next.show(false);
+        this.page.show(false);
     };
 
     baltek.presenter.Presenter.prototype.initBall = function(){

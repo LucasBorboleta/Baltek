@@ -55,6 +55,10 @@ baltek.widget.TextSlider.__initClass = function(){
         return ( this.slides.length !== 0 && this.index != 0 );
     }
 
+    baltek.widget.TextSlider.prototype.getIndex = function(){
+        return this.index;
+    };
+
     baltek.widget.TextSlider.prototype.count = function(){
         return this.slides.length;
     };

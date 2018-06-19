@@ -32,6 +32,7 @@ baltek.widget.__initModule = function(){
     // Init inner classes
     baltek.widget.Button.__initClass();
     baltek.widget.CounterWithDecimals.__initClass();
+    baltek.widget.CounterWithFraction.__initClass();
     baltek.widget.CounterWithSymbols.__initClass();
     baltek.widget.IFrame.__initClass();
     baltek.widget.PictureSlider.__initClass();
