@@ -35,7 +35,7 @@ baltek.presenter.SettingsState.__initClass = function(){
     };
 
     baltek.presenter.SettingsState.prototype.enter = function(){
-        this.presenter.settingsZone.style.display = "inherit";
+        this.presenter.settingsZone.show(true);
 
         this.presenter.hideAllButtons();
         this.presenter.goToGame.show(true);
@@ -57,7 +57,7 @@ baltek.presenter.SettingsState.__initClass = function(){
     };
 
     baltek.presenter.SettingsState.prototype.exit = function(){
-        this.presenter.settingsZone.style.display = "none";
+        this.presenter.settingsZone.show(false);
     }
 
     baltek.presenter.SettingsState.prototype.updateFromObservable = function(observable, aspect){

@@ -112,8 +112,9 @@ baltek.utils.repeatString = function(value, count){
     return text;
 };
 
-baltek.utils.sleep = function(milliseconds) {
+baltek.utils.sleep = function(milliseconds){
     var initiation = new Date().getTime();
-    while ( (new Date().getTime() - initiation) < milliseconds );
+    while ( (new Date().getTime() - initiation) < milliseconds ) {
+    };
 }
 ///////////////////////////////////////////////////////////////////////////////

@@ -17,35 +17,33 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-baltek.widget = { };
-baltek.widget.__initModuleCalled = false;
-
-baltek.widget.__initModule = function(){
-
-    if ( baltek.widget.__initModuleCalled ) return;
-    baltek.widget.__initModuleCalled = true;
-
-    // Init required modules
-    baltek.debug.__initModule();
-    baltek.utils.__initModule();
-
-    // Init inner classes
-    baltek.widget.Button.__initClass();
-    baltek.widget.CounterWithDecimals.__initClass();
-    baltek.widget.CounterWithFraction.__initClass();
-    baltek.widget.CounterWithSymbols.__initClass();
-    baltek.widget.IFrame.__initClass();
-    baltek.widget.PictureSlider.__initClass();
-    baltek.widget.Selector.__initClass();
-    baltek.widget.TextSlider.__initClass();
-    baltek.widget.Widget.__initClass();
-    baltek.widget.Zone.__initClass();
+baltek.widget.Zone = function(id){
+    this.__initObject(id);
 };
-///////////////////////////////////////////////////////////////////////////////
-baltek.widget.getStylePropertyValue = function(elementId, propertyName){
-    var element = document.getElementById(elementId);
-    var style = window.getComputedStyle(element, null);
-    var propertyValue = style.getPropertyValue(propertyName);
-    return propertyValue;
+
+baltek.widget.Zone.__initClassCalled = false;
+
+baltek.widget.Zone.__initClass = function(){
+
+    if ( baltek.widget.Zone.__initClassCalled ) return;
+    baltek.widget.Zone.__initClassCalled = true;
+
+    baltek.utils.inherit(baltek.widget.Zone, Object);
+
+    baltek.widget.Zone.prototype.__initObject = function(id){
+        this.element = document.getElementById(id);
+    };
+
+    baltek.widget.Zone.prototype.isShowed = function(){
+        return ( this.element.style.display !== "none" );
+    };
+
+    baltek.widget.Zone.prototype.show = function(condition){
+        if ( condition ) {
+            this.element.style.display = "inherit";
+        } else {
+            this.element.style.display = "none";
+        }
+    };
 };
 ///////////////////////////////////////////////////////////////////////////////

@@ -35,7 +35,7 @@ baltek.presenter.WhatStateShowTutorial.__initClass = function(){
     };
 
     baltek.presenter.WhatStateShowTutorial.prototype.enter = function(){
-        this.presenter.tutorialZone.style.display = "inherit";
+        this.presenter.tutorialZone.show(true);
 
         this.presenter.rules.enable(true);
         this.presenter.tutorial.enable(false);
@@ -53,7 +53,7 @@ baltek.presenter.WhatStateShowTutorial.__initClass = function(){
     };
 
     baltek.presenter.WhatStateShowTutorial.prototype.exit = function(){
-        this.presenter.tutorialZone.style.display = "none";
+        this.presenter.tutorialZone.show(false);
 
         this.presenter.rules.enable(false);
         this.presenter.tutorial.enable(false);

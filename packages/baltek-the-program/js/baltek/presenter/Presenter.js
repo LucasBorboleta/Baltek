@@ -62,6 +62,44 @@ baltek.presenter.Presenter.__initClass = function(){
         this.quitGame = new baltek.widget.Button( "baltek-button-quitGame" , this.i18nTranslator);
         this.quitGame.registerObserver(this);
 
+        this.team0Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team0Bonus" , this.i18nTranslator,
+            BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
+        this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
+
+        this.team0Score = new baltek.widget.CounterWithDecimals( "baltek-counter-team0Score" , this.i18nTranslator, SCORE_MAX);
+        this.team0Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
+
+        this.team1Score = new baltek.widget.CounterWithDecimals( "baltek-counter-team1Score" , this.i18nTranslator, SCORE_MAX);
+        this.team1Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
+
+        this.team1Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team1Bonus" , this.i18nTranslator,
+            BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
+        this.team1Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
+
+        this.sprint = new baltek.widget.Selector( "baltek-select-sprint", this.i18nTranslator, [ "no", "yes" ] );
+        this.sprint.registerObserver(this);
+
+        this.confirm = new baltek.widget.Button( "baltek-button-confirm" , this.i18nTranslator);
+        this.confirm.registerObserver(this);
+
+        this.undo = new baltek.widget.Button( "baltek-button-undo" , this.i18nTranslator);
+        this.undo.registerObserver(this);
+
+        this.credit = new baltek.widget.CounterWithSymbols( "baltek-counter-credit" , this.i18nTranslator,
+            CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
+
+        this.invitation = new baltek.widget.Button( "baltek-button-invitation" , this.i18nTranslator);
+        this.invitation.registerObserver(this);
+
+        this.goToSettings = new baltek.widget.Button( "baltek-button-goToSettings" , this.i18nTranslator);
+        this.goToSettings.registerObserver(this);
+
+        this.goToHelp = new baltek.widget.Button( "baltek-button-goToHelp" , this.i18nTranslator);
+        this.goToHelp.registerObserver(this);
+
+        this.settingsZone = new baltek.widget.Zone( "baltek-settingsZone" );
+        this.settingsZone.show(false);
+
         this.goToGame = new baltek.widget.Button( "baltek-button-goToGame" , this.i18nTranslator);
         this.goToGame.registerObserver(this);
 
@@ -77,58 +115,28 @@ baltek.presenter.Presenter.__initClass = function(){
         this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
         this.teamAgents[1].kind = this.team1Kind.getSelection();
 
-        this.team0Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team0Bonus" , this.i18nTranslator,
-            BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
-        this.team0Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
-
-        this.team0Score = new baltek.widget.CounterWithDecimals( "baltek-counter-team0Score" , this.i18nTranslator, SCORE_MAX);
-        this.team0Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
-
-        this.team1Score = new baltek.widget.CounterWithDecimals( "baltek-counter-team1Score" , this.i18nTranslator, SCORE_MAX);
-        this.team1Score.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
-
-        this.team1Bonus = new baltek.widget.CounterWithSymbols( "baltek-counter-team1Bonus" , this.i18nTranslator,
-            BONUS_MAX, BONUS_ZERO_SYMBOL, BONUS_ONE_SYMBOL);
-        this.team1Bonus.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
-
-        this.sprint = new baltek.widget.Selector( "baltek-select-sprint", this.i18nTranslator,
-            [ "no", "yes" ] );
-        this.sprint.registerObserver(this);
-
-        this.confirm = new baltek.widget.Button( "baltek-button-confirm" , this.i18nTranslator);
-        this.confirm.registerObserver(this);
-
-        this.undo = new baltek.widget.Button( "baltek-button-undo" , this.i18nTranslator);
-        this.undo.registerObserver(this);
-
-        this.credit = new baltek.widget.CounterWithSymbols( "baltek-counter-credit" , this.i18nTranslator,
-            CREDIT_MAX, CREDIT_ZERO_SYMBOL, CREDIT_ONE_SYMBOL);
+        this.coordinates = new baltek.widget.Selector( "baltek-select-coordinates", this.i18nTranslator, [ "no", "yes" ] );
+        this.coordinates.registerObserver(this);
+        this.coordinates.setSelection("no");
 
         this.language = new baltek.widget.Selector( "baltek-select-language", this.i18nTranslator,
             this.i18nTranslator.getAvailableLanguages() );
         this.language.registerObserver(this);
         this.language.setSelection(this.i18nTranslator.getLanguage());
 
-        this.coordinates = new baltek.widget.Selector( "baltek-select-coordinates", this.i18nTranslator,
-            [ "no", "yes" ] );
-        this.coordinates.registerObserver(this);
-        this.coordinates.setSelection("no");
+        this.debug = new baltek.widget.Selector( "baltek-select-debug", this.i18nTranslator, [ "no", "yes" ] );
+        this.debug.registerObserver(this);
+        this.debug.setSelection( "no" );
+        baltek.debug.enable( this.debug.getSelection() === "yes" );
 
-        this.invitation = new baltek.widget.Button( "baltek-button-invitation" , this.i18nTranslator);
-        this.invitation.registerObserver(this);
+        this.clearMessages = new baltek.widget.Button( "baltek-debug-clearMessages" , this.i18nTranslator);
+        this.clearMessages.registerObserver(this);
 
-        this.goToSettings = new baltek.widget.Button( "baltek-button-goToSettings" , this.i18nTranslator);
-        this.goToSettings.registerObserver(this);
+        this.tutorialZone = new baltek.widget.Zone( "baltek-tutorialZone" );
+        this.tutorialZone.show(false);
 
-        this.goToHelp = new baltek.widget.Button( "baltek-button-goToHelp" , this.i18nTranslator);
-        this.goToHelp.registerObserver(this);
-
-        this.rulesIFrame = new baltek.widget.IFrame( "baltek-iframe-rules" , this.i18nTranslator);
-        this.rules = new baltek.widget.Button( "baltek-button-rules" , this.i18nTranslator);
-        this.rules.registerObserver(this);
-
-        this.tutorial = new baltek.widget.Button( "baltek-button-tutorial" , this.i18nTranslator);
-        this.tutorial.registerObserver(this);
+        this.pictureSlider = new baltek.widget.PictureSlider( "baltek-picture-slider" , this.i18nTranslator);
+        this.textSlider = new baltek.widget.TextSlider( "baltek-text-slider" , this.i18nTranslator);
 
         this.previous = new baltek.widget.Button( "baltek-button-previous" , this.i18nTranslator);
         this.previous.registerObserver(this);
@@ -138,31 +146,20 @@ baltek.presenter.Presenter.__initClass = function(){
         this.next = new baltek.widget.Button( "baltek-button-next" , this.i18nTranslator);
         this.next.registerObserver(this);
 
+        this.tutorial = new baltek.widget.Button( "baltek-button-tutorial" , this.i18nTranslator);
+        this.tutorial.registerObserver(this);
+
         this.guideIFrame = new baltek.widget.IFrame( "baltek-iframe-guide" , this.i18nTranslator);
         this.guide = new baltek.widget.Button( "baltek-button-guide" , this.i18nTranslator);
         this.guide.registerObserver(this);
 
+        this.rulesIFrame = new baltek.widget.IFrame( "baltek-iframe-rules" , this.i18nTranslator);
+        this.rules = new baltek.widget.Button( "baltek-button-rules" , this.i18nTranslator);
+        this.rules.registerObserver(this);
+
         this.aboutIFrame = new baltek.widget.IFrame( "baltek-iframe-about" , this.i18nTranslator);
         this.about = new baltek.widget.Button( "baltek-button-about" , this.i18nTranslator);
         this.about.registerObserver(this);
-
-        this.debug = new baltek.widget.Selector( "baltek-select-debug", this.i18nTranslator,
-            [ "no", "yes" ] );
-        this.debug.registerObserver(this);
-        this.debug.setSelection("no");
-        baltek.debug.enable(false);
-
-        this.clearMessages = new baltek.widget.Button( "baltek-debug-clearMessages" , this.i18nTranslator);
-        this.clearMessages.registerObserver(this);
-
-        this.settingsZone = document.getElementById( "baltek-settingsZone" );
-        this.settingsZone.style.display = "none";
-
-        this.tutorialZone = document.getElementById( "baltek-tutorialZone" );
-        this.tutorialZone.style.display = "none";
-
-        this.pictureSlider = new baltek.widget.PictureSlider( "baltek-picture-slider" , this.i18nTranslator);
-        this.textSlider = new baltek.widget.TextSlider( "baltek-text-slider" , this.i18nTranslator);
 
         this.ballWatcher = new baltek.draw.BallWatcher();
         this.ballWatcher.registerObserver(this);
@@ -203,32 +200,30 @@ baltek.presenter.Presenter.__initClass = function(){
         this.resumeGame.enable(false);
         this.quitGame.enable(false);
 
-        this.team0Bonus.enable(false);
-        this.team0Kind.enable(false);
-        this.team1Kind.enable(false);
-        this.team1Bonus.enable(false);
-
-        this.goToGame.enable(false);
-
         this.sprint.enable(false);
         this.confirm.enable(false);
         this.undo.enable(false);
         this.credit.enable(false);
 
-        this.goToSettings.enable(false);
-        this.language.enable(false);
-        this.coordinates.enable(false);
-        this.debug.enable(false);
         this.invitation.enable(false);
-
+        this.goToSettings.enable(false);
         this.goToHelp.enable(false);
-        this.rules.enable(false);
-        this.tutorial.enable(false);
-        this.guide.enable(false);
-        this.about.enable(false);
+
+        this.goToGame.enable(false);
+
+        this.team0Kind.enable(false);
+        this.team1Kind.enable(false);
+        this.coordinates.enable(false);
+        this.language.enable(false);
+        this.debug.enable(false);
 
         this.previous.enable(false);
         this.next.enable(false);
+
+        this.tutorial.enable(false);
+        this.rules.enable(false);
+        this.guide.enable(false);
+        this.about.enable(false);
     };
 
     baltek.presenter.Presenter.prototype.drawField = function(){
@@ -253,33 +248,34 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.team0Bonus.show(false);
         this.team0Score.show(false);
-        this.team0Kind.show(false);
-        this.team1Kind.show(false);
         this.team1Score.show(false);
         this.team1Bonus.show(false);
-
-        this.goToGame.show(false);
 
         this.sprint.show(false);
         this.confirm.show(false);
         this.undo.show(false);
         this.credit.show(false);
 
-        this.language.show(false);
-        this.coordinates.show(false);
-        this.debug.show(false);
-        this.goToSettings.show(false);
         this.invitation.show(false);
-
+        this.goToSettings.show(false);
         this.goToHelp.show(false);
-        this.rules.show(false);
-        this.tutorial.show(false);
-        this.guide.show(false);
-        this.about.show(false);
+
+        this.goToGame.show(false);
+
+        this.team0Kind.show(false);
+        this.team1Kind.show(false);
+        this.coordinates.show(false);
+        this.language.show(false);
+        this.debug.show(false);
 
         this.previous.show(false);
-        this.next.show(false);
         this.page.show(false);
+        this.next.show(false);
+
+        this.tutorial.show(false);
+        this.rules.show(false);
+        this.guide.show(false);
+        this.about.show(false);
     };
 
     baltek.presenter.Presenter.prototype.initBall = function(){
@@ -349,7 +345,6 @@ baltek.presenter.Presenter.__initClass = function(){
         var footballerIndex = 0;
         var footballerForce = 0;
         var footballer = null;
-
 
         for (teamIndex=0; teamIndex<teamCount; teamIndex++) {
             footballerCount = this.rulesEngine.getFooballerCount(teamIndex);
