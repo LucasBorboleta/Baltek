@@ -2,7 +2,7 @@
 /* BALTEK-THE-PROGRAM-LICENSE-MD-BEGIN
 # LICENSE
 
-[![GNU General Public License](../packages/gnu-gpl/slides/gplv3-88x31.png)](http://www.gnu.org/licenses)
+[![GNU General Public License](../packages/gnu-gpl/pictures/gplv3-88x31.png)](http://www.gnu.org/licenses)
 
 BALTEK (the program) implements BALTEK (the rules), a turn-based board game, inspired from football.
 

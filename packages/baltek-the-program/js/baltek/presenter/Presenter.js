@@ -103,14 +103,12 @@ baltek.presenter.Presenter.__initClass = function(){
         this.goToGame = new baltek.widget.Button( "baltek-button-goToGame" , this.i18nTranslator);
         this.goToGame.registerObserver(this);
 
-        this.team0Kind = new baltek.widget.Selector( "baltek-select-team0Kind", this.i18nTranslator,
-            [ "human", "ai1", "ai2", "ai3" ] );
+        this.team0Kind = new baltek.widget.Selector( "baltek-select-team0Kind", this.i18nTranslator, [ "human", "ai1", "ai2", "ai3" ] );
         this.team0Kind.registerObserver(this);
         this.team0Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[0]);
         this.teamAgents[0].kind = this.team0Kind.getSelection();
 
-        this.team1Kind = new baltek.widget.Selector( "baltek-select-team1Kind", this.i18nTranslator,
-            [ "human", "ai1", "ai2", "ai3" ] );
+        this.team1Kind = new baltek.widget.Selector( "baltek-select-team1Kind", this.i18nTranslator, [ "human", "ai1", "ai2", "ai3" ] );
         this.team1Kind.registerObserver(this);
         this.team1Kind.setBackgroundColor(baltek.style.colors.TEAM_COLORS[1]);
         this.teamAgents[1].kind = this.team1Kind.getSelection();

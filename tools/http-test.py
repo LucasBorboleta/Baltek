@@ -4,7 +4,7 @@
 Start a simple HTTP server in order to test the behavior of the the BALTEK game
 when the HTML pages are served by a web site (e.g. a blog)
 
-Based on the receipe:
+Based on the receipe adapted from Python2:
     1) Move in the directory to be served.
     2) Execute the following command: python -m SimpleHTTPServer 8000
     3) Open the following uRL in you web browser: http://localhost:8000
@@ -38,41 +38,61 @@ import datetime
 import os
 import sys
 
-import SimpleHTTPServer
-import SocketServer
+import http.server
+import socketserver
+
+
+class Unbuffered(object):
+
+   def __init__(self, stream):
+       self.stream = stream
+
+   def write(self, data):
+       self.stream.write(data)
+       self.stream.flush()
+
+   def writelines(self, datas):
+       self.stream.writelines(datas)
+       self.stream.flush()
+
+   def __getattr__(self, attr):
+       return getattr(self.stream, attr)
+
 
 def start_server(project_home, port):
     os.chdir(project_home)
 
-    Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-    httpd = SocketServer.TCPServer(("", port), Handler)
+    Handler = http.server.SimpleHTTPRequestHandler
+    httpd = socketserver.TCPServer(("", port), Handler)
 
-    print
-    print "Serving BALTEK at port %d." % port
-    print
-    print "Open the URL http://localhost:%d in your web browser." % port
-    print
-    print "For stopping the server:"
-    print "  1) Quit your web browser."
-    print "  2) Type one or more time CTRL+C in the terminal you started this script."
-    print
+    print()
+    print( "Serving BALTEK at port %d." % port )
+    print()
+    print( "Open the URL http://localhost:%d in your web browser." % port )
+    print()
+    print( "For stopping the server:" )
+    print( "  1) Quit your web browser." )
+    print( "  2) Type one or more time CTRL+C in the terminal you started this script." )
+    print()
 
     httpd.serve_forever()
 
 port = 8080
-project_home = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
+project_home = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 tmp_path = os.path.join(project_home, "tmp")
 log_path = os.path.join(tmp_path, os.path.basename(__file__) + ".log.txt")
-sys.stdout = open(log_path, "w", buffering=0)
+log_stream = open(log_path, "w")
+sys.stdout = Unbuffered(log_stream)
 sys.stderr = sys.stdout
 
-print
-print "Hello " + datetime.datetime.now().isoformat()
+print()
+print( "Hello " + datetime.datetime.now().isoformat() )
 
 start_server(project_home, port)
 
-print
-print "Bye " + datetime.datetime.now().isoformat()
+print()
+print( "Bye " + datetime.datetime.now().isoformat() )
 
+print()
 sys.exit(0)

@@ -107,7 +107,7 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
             if ( ! this.presenter.rulesEngine.matchIsActive() ) {
                 baltek.utils.Dispatcher.getInstance().resetNotifiers();
                 this.setState(this.superState.goToGameStateIsFinished);
-                
+
             } else if ( this.presenter.teamAgents[state.activeTeamIndex].ai !== null ) {
                 this.presenter.teamAgents[state.activeTeamIndex].ai.updateFromEngineState(state);
             }

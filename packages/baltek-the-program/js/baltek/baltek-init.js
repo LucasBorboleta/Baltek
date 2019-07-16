@@ -28,8 +28,12 @@ baltek.__initModule = function(){
     // Detect the interactive context, in order to ease BALTEK loading in unit tests
     baltek.isInteractive = ( document.getElementById( "baltek-body" ) !== null );
 
+    // Use AI ?
+    baltek.useAI = true
+
     // Use a Dispatcher ?
-    baltek.useDispatcher = false;
+    // CAUTION: Dispatcher is needed when AI are used !!!
+    baltek.useDispatcher = true;
 
     // Init required packages
     baltek.debug.__initModule();

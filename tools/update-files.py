@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 """
 Automate the following tasks:
 1) Copy the LICENSE.md,  CONTRIBUTORS.md and VERSION.txt files at the root of the baltek-the-program package.
@@ -8,6 +9,8 @@ Automate the following tasks:
 4) In about HTML files, insert or update a conversion to HTML of the credits Markdown text.
 5) In HTML files, insert or update the version of baltek-the-program and of baltek-the-rules.
 """
+
+
 
 _COPYRIGHT_AND_LICENSE = """
 BALTEK-THE-PROGRAM-LICENSE-MD-BEGIN
@@ -27,6 +30,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
 BALTEK-THE-PROGRAM-LICENSE-MD-END
+
 """
 
 import datetime
@@ -35,20 +39,18 @@ import re
 import shutil
 import sys
 
-project_home = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-
+project_home = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 tmp_path = os.path.join(project_home, "tmp")
-
 log_path = os.path.join(tmp_path, os.path.basename(__file__) + ".log.txt")
-sys.stdout = open(log_path, "w")
+sys.stdout = open(log_path, "w", encoding="utf-8")
 sys.stderr = sys.stdout
 
-print
-print "Hello " + datetime.datetime.now().isoformat()
+print("")
+print("Hello " + datetime.datetime.now().isoformat())
 
 baltek_the_program_package_path = os.path.join(project_home, "packages", "baltek-the-program")
-baltek_the_program_package_html_path = os.path.join(baltek_the_program_package_path, "html")
 
+baltek_the_program_package_html_path = os.path.join(baltek_the_program_package_path, "html")
 baltek_the_program_version_txt_path = os.path.join(project_home, "docs", "VERSION.txt")
 baltek_the_rules_version_txt_path = os.path.join(project_home, "packages", "baltek-the-rules", "VERSION.txt")
 
@@ -65,12 +67,12 @@ license_html_end_rule = re.compile(r"^\W*BALTEK-THE-PROGRAM-LICENSE-HTML-END\W*$
 credits_html_begin_rule = re.compile(r"^\W*BALTEK-THE-PROGRAM-CREDITS-HTML-BEGIN\W*$")
 credits_html_end_rule = re.compile(r"^\W*BALTEK-THE-PROGRAM-CREDITS-HTML-END\W*$")
 
-baltek_the_program_version_stream = file(baltek_the_program_version_txt_path, "rU")
+baltek_the_program_version_stream = open(baltek_the_program_version_txt_path, "r", encoding="utf-8")
 baltek_the_program_version = baltek_the_program_version_stream.read()
 baltek_the_program_version = re.sub(r"\s+", "", baltek_the_program_version)
 baltek_the_program_version_stream.close()
 
-baltek_the_rules_version_stream = file(baltek_the_rules_version_txt_path, "rU")
+baltek_the_rules_version_stream = open(baltek_the_rules_version_txt_path, "r", encoding="utf-8")
 baltek_the_rules_version = baltek_the_rules_version_stream.read()
 baltek_the_rules_version = re.sub(r"\s+", "", baltek_the_rules_version)
 baltek_the_rules_version_stream.close()
@@ -103,7 +105,9 @@ excluded_file_rules.append(re.compile(r"^.*\.png$"))
 excluded_file_rules.append(re.compile(r"^.*\.tmp$"))
 excluded_file_rules.append(re.compile(r"^.*\.txt$"))
 
+
 def convert_lines_from_md_to_html(md_lines):
+
     html_lines = list()
 
     empty_line_rule = re.compile(r"^\s*$")
@@ -134,20 +138,26 @@ def convert_lines_from_md_to_html(md_lines):
     paragraph_begin_found = False
     paragraph_end_found = False
     paragraph_h2_found = False
+
     paragraph_text = ""
 
     # Add an empty line in order to treat the last paragraph like the previous ones.
+
     for md_line in md_lines + ["\n"]:
+
         if empty_line_rule.match(md_line):
             if paragraph_begin_found:
                 paragraph_end_found = True
+
         elif h1_line_rule.match(md_line):
             pass
+
         elif h2_line_rule.match(md_line):
             paragraph_h2_found = True
             paragraph_begin_found = True
             paragraph_end_found = True
             paragraph_text += md_line
+
         else:
             paragraph_begin_found = True
             paragraph_text += md_line
@@ -172,15 +182,17 @@ def convert_lines_from_md_to_html(md_lines):
             paragraph_begin_found = False
             paragraph_end_found = False
             paragraph_h2_found = False
-            paragraph_text = ""
 
+            paragraph_text = ""
     return html_lines
 
-license_md_stream = file(license_md_path, "rU")
+
+
+license_md_stream = open(license_md_path, "r", encoding="utf-8")
 license_md_lines = license_md_stream.readlines()
 license_md_stream.close()
 
-credits_md_stream = file(credits_md_path, "rU")
+credits_md_stream = open(credits_md_path, "r", encoding="utf-8")
 credits_md_lines = credits_md_stream.readlines()
 credits_md_stream.close()
 
@@ -191,30 +203,36 @@ file_paths = list()
 
 for (dir_path, dir_names, file_names) in os.walk(project_home):
     dont_walk_items = list()
+
     for item in dir_names:
         if os.path.join(dir_path, item) in excluded_dir_paths:
             dont_walk_items.append(item)
+
     for item in dont_walk_items:
         dir_names.remove(item)
 
     if not dir_path in excluded_dir_paths:
         for file_name in file_names:
             file_path = os.path.join(dir_path, file_name)
+
             if not file_path in excluded_file_paths:
                 file_rule_is_matched = False
                 for file_rule in excluded_file_rules:
                     if file_rule.match(file_path):
                         file_rule_is_matched = True
                         break
+
                 if not file_rule_is_matched:
                     file_paths.append(file_path)
 
 failed_file_paths = list()
 
 for file_path in file_paths:
-    print
-    print "updating file '%s' ..." % file_path
-    file_stream = file(file_path, "rU")
+
+    print("")
+    print("updating file '%s' ..." % file_path)
+
+    file_stream = open(file_path, "r", encoding="utf-8")
     file_lines = file_stream.readlines()
     file_stream.close()
 
@@ -248,25 +266,30 @@ for file_path in file_paths:
         if license_md_begin_match:
             if license_md_begin_found:
                 license_md_error = True
-                print "error: license_md_begin_match matched more than one time"
+                print("error: license_md_begin_match matched more than one time")
+
             elif license_md_end_found:
                 license_md_error = True
-                print "error: license_md_begin_match matched after license_md_end_match"
+                print("error: license_md_begin_match matched after license_md_end_match")
+
             else:
                 license_md_begin_found = True
                 udpated_lines.append(line)
                 udpated_lines.extend(license_md_lines)
 
         if license_html_begin_match:
+
             # the relative path of license_html_lines have been prepared for the HTML rules only !
             assert os.path.dirname(os.path.dirname(file_path)) == baltek_the_program_package_html_path
 
             if license_html_begin_found:
                 license_html_error = True
-                print "error: license_html_begin_match matched more than one time"
+                print("error: license_html_begin_match matched more than one time")
+
             elif license_html_end_found:
                 license_html_error = True
-                print "error: license_html_begin_match matched after license_html_end_match"
+                print("error: license_html_begin_match matched after license_html_end_match")
+
             else:
                 license_html_begin_found = True
                 udpated_lines.append(line)
@@ -278,10 +301,12 @@ for file_path in file_paths:
 
             if credits_html_begin_found:
                 credits_html_error = True
-                print "error: credits_html_begin_match matched more than one time"
+                print("error: credits_html_begin_match matched more than one time")
+
             elif credits_html_end_found:
                 credits_html_error = True
-                print "error: credits_html_begin_match matched after credits_html_end_match"
+                print("error: credits_html_begin_match matched after credits_html_end_match")
+
             else:
                 credits_html_begin_found = True
                 udpated_lines.append(line)
@@ -290,10 +315,12 @@ for file_path in file_paths:
         if license_md_end_match:
             if license_md_end_found:
                 license_md_error = True
-                print "error: license_md_end_match matched more than one time"
+                print("error: license_md_end_match matched more than one time")
+
             elif not license_md_begin_found:
                 license_md_error = True
-                print "error: license_md_end_match matched before license_md_begin_match"
+                print("error: license_md_end_match matched before license_md_begin_match")
+
             else:
                 license_md_end_found = True
                 udpated_lines.append(line)
@@ -301,10 +328,12 @@ for file_path in file_paths:
         if license_html_end_match:
             if license_html_end_found:
                 license_html_error = True
-                print "error: license_html_end_match matched more than one time"
+                print("error: license_html_end_match matched more than one time")
+
             elif not license_html_begin_found:
                 license_html_error = True
-                print "error: license_html_end_match matched before license_html_begin_match"
+                print("error: license_html_end_match matched before license_html_begin_match")
+
             else:
                 license_html_end_found = True
                 udpated_lines.append(line)
@@ -312,10 +341,12 @@ for file_path in file_paths:
         if credits_html_end_match:
             if credits_html_end_found:
                 credits_html_error = True
-                print "error: credits_html_end_match matched more than one time"
+                print("error: credits_html_end_match matched more than one time")
+
             elif not credits_html_begin_found:
                 credits_html_error = True
-                print "error: credits_html_end_match matched before credits_html_begin_match"
+                print("error: credits_html_end_match matched before credits_html_begin_match")
+
             else:
                 credits_html_end_found = True
                 udpated_lines.append(line)
@@ -323,6 +354,7 @@ for file_path in file_paths:
         if not (license_md_begin_match or license_md_end_match or
                 license_html_begin_match or license_html_end_match or
                 credits_html_begin_match or credits_html_end_match ):
+
             if not( (license_md_begin_found != license_md_end_found) or
                 (license_html_begin_found != license_html_end_found) or
                 (credits_html_begin_found != credits_html_end_found)  ):
@@ -330,44 +362,45 @@ for file_path in file_paths:
 
     if not (license_md_begin_found and license_md_end_found):
         license_md_error = True
-        print "error: not both license_md_begin_match and license_md_end_match"
+        print("error: not both license_md_begin_match and license_md_end_match")
 
     if not (license_html_begin_found == license_html_end_found):
         # HTML licences tags are not mandatory
         license_html_error = True
-        print "error: not both license_html_begin_match and license_html_end_match"
+        print("error: not both license_html_begin_match and license_html_end_match")
 
     if not (credits_html_begin_found == credits_html_end_found):
         # HTML credits tags are not mandatory
         credits_html_error = True
-        print "error: not both credits_html_begin_match and credits_html_end_match"
+        print("error: not both credits_html_begin_match and credits_html_end_match")
 
     if not (license_md_error or license_html_error or credits_html_error):
-        file_stream = file(file_path, "w")
+        file_stream = open(file_path, "w", encoding="utf-8")
         file_stream.writelines(udpated_lines)
         file_stream.close()
-        print "updating file '%s' done" % file_path
+        print("updating file '%s' done" % file_path)
+
     else:
         failed_file_paths.append(file_path)
-        print "updating file '%s' failed !!!" % file_path
+        print("updating file '%s' failed !!!" % file_path)
 
 if len(failed_file_paths) != 0:
-    print
-    print "Update failed for the following files:"
+    print("")
+    print("Update failed for the following files:")
     for file_path in failed_file_paths:
-        print file_path
+        print(file_path)
 
 for file_path in [license_md_path, contributors_path, baltek_the_program_version_txt_path]:
     shutil.copyfile(file_path, os.path.join(baltek_the_program_package_path, os.path.basename(file_path)))
-    print
-    print "copying file '%s' in '%s' ..." % (file_path, baltek_the_program_package_path)
-    print "copying file done"
+    print("")
+    print("copying file '%s' in '%s' ..." % (file_path, baltek_the_program_package_path))
+    print("copying file done")
 
-print
-print "Bye " + datetime.datetime.now().isoformat()
-
+print("")
+print("Bye " + datetime.datetime.now().isoformat())
 
 if len(failed_file_paths) == 0:
     sys.exit(0)
+
 else:
     sys.exit(1)
