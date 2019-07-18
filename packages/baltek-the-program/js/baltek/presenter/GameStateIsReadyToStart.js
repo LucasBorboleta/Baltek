@@ -35,6 +35,8 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsReadyToStart.prototype.enter = function(){
+        baltek.debug.writeMessage("GameStateIsReadyToStart.prototype.enter");
+
         this.presenter.hideAllButtons();
         this.presenter.startGame.show(true);
         this.presenter.goToSettings.show(true);
@@ -48,12 +50,14 @@ baltek.presenter.GameStateIsReadyToStart.__initClass = function(){
         this.presenter.goToHelp.enable(true);
 
         this.presenter.teamAgents[0].kindIsBlocked = ( ! baltek.useAI );
-        this.presenter.teamAgents[1].kindIsBlocked = ( ! baltek.useAI );         
+        this.presenter.teamAgents[1].kindIsBlocked = ( ! baltek.useAI );
         this.presenter.teamAgents[0].ai = null;
         this.presenter.teamAgents[1].ai = null;
     };
 
     baltek.presenter.GameStateIsReadyToStart.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("GameStateIsReadyToStart.prototype.updateFromObservable");
+
         if ( observable === this.presenter.startGame ) {
             this.setState(this.superState.goToGameStateIsRunning);
 

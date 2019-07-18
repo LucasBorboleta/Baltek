@@ -35,6 +35,8 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsFinished.prototype.enter = function(){
+        baltek.debug.writeMessage("GameStateIsFinished.prototype.enter");
+
         this.presenter.hideAllButtons();
         this.presenter.restartGame.show(true);
         this.presenter.team0Score.show(true);
@@ -51,6 +53,7 @@ baltek.presenter.GameStateIsFinished.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsFinished.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("GameStateIsRunning.prototype.updateFromObservable");
 
         if ( observable === this.presenter.restartGame ) {
             this.presenter.rulesEngine.matchInit();

@@ -28,15 +28,19 @@ baltek.__initModule = function(){
     // Detect the interactive context, in order to ease BALTEK loading in unit tests
     baltek.isInteractive = ( document.getElementById( "baltek-body" ) !== null );
 
+    // CAUTION-1: Dispatcher is needed when two AI are used !!!
+    // CAUTION-2: Using two browsers syncrhonized using TogetherJS does not work with a Dispatcher !!!
+
     // Use AI ?
     baltek.useAI = true
 
     // Use a Dispatcher ?
-    // CAUTION: Dispatcher is needed when AI are used !!!
-    baltek.useDispatcher = true;
+    baltek.useDispatcher = false;
 
     // Init required packages
     baltek.debug.__initModule();
+    baltek.debug.enable( false );
+
     baltek.presenter.__initModule();
 
     // Init inner classes

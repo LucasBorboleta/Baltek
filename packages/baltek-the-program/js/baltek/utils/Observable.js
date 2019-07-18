@@ -62,14 +62,14 @@ baltek.utils.Observable.__initClass = function(){
         var notifier;
 
         if ( baltek.useDispatcher ) {
-            
+
             baltek.utils.Dispatcher.getInstance().lock();
             for ( i=0; i < n ; i++ ) {
 
                 notifier = function(){
-                    var observerSaved=observers[i];
+                    var observerSaved = observers[i];
                     return function(){
-                        baltek.debug.writeMessage( "notifier: apsect=" + thisSaved.aspectNames[aspect] );
+                        baltek.debug.writeMessage( "Dispatcher: updateFromObservable for apsect=" + thisSaved.aspectNames[aspect] );
                         observerSaved.updateFromObservable(thisSaved, aspect); };
                 }();
 

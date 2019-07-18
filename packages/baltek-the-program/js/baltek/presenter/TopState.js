@@ -46,6 +46,7 @@ baltek.presenter.TopState.__initClass = function(){
     };
 
     baltek.presenter.TopState.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("TopState.prototype.updateFromObservable");
 
         if ( observable === this.presenter.clearMessages ) {
             baltek.debug.clearMessages();

@@ -87,9 +87,9 @@ baltek.ai.AI.__initClass = function(){
         }
 
         if ( squareChoices.length !== 0 ) {
-            // 0 <= Math.random() < 1
-            // 0 <= Math.random()*squareChoices.length < squareChoices.length
-            var squareChoiceIndex = Math.floor( Math.random()*squareChoices.length );
+            // 0 <= baltek.utils.random() < 1
+            // 0 <= baltek.utils.random()*squareChoices.length < squareChoices.length
+            var squareChoiceIndex = Math.floor( baltek.utils.random()*squareChoices.length );
             this.selectedSquareIndices = squareChoices[squareChoiceIndex];
             baltek.debug.writeMessage( "AI: team=" + state.activeTeamIndex + " destination square" );
             this.notifyObservers(this.squareAspect);
@@ -98,7 +98,7 @@ baltek.ai.AI.__initClass = function(){
 
         // Randomize the decision to kick
         if ( state.ball.selectable && ! state.ball.selected ) {
-            if ( Math.random() <= 0.90 )  {
+            if ( baltek.utils.random() <= 0.90 )  {
                 baltek.debug.writeMessage( "AI: team=" + state.activeTeamIndex + " select the ball" );
                 this.notifyObservers(this.ballAspect);
                 return;
@@ -107,7 +107,7 @@ baltek.ai.AI.__initClass = function(){
 
         // Randomize the decision to sprint
         if ( activeTeam.canSprint && ! state.sprint && ! state.ball.selected ) {
-            if ( Math.random() <= 0.25 )  {
+            if ( baltek.utils.random() <= 0.25 )  {
                 baltek.debug.writeMessage( "AI: team=" + state.activeTeamIndex + " sprint" );
                 this.notifyObservers(this.sprintAspect);
                 return;
@@ -125,10 +125,10 @@ baltek.ai.AI.__initClass = function(){
         }
 
         if ( footballerChoices.length !== 0 && ! state.ball.selected ) {
-            if ( Math.random() <= 0.99 ) {
-                // 0 <= Math.random() < 1
-                // 0 <= Math.random()*footballerChoices.length < footballerChoices.length
-                var footballerChoiceIndex = Math.floor( Math.random()*footballerChoices.length );
+            if ( baltek.utils.random() <= 0.99 ) {
+                // 0 <= baltek.utils.random() < 1
+                // 0 <= baltek.utils.random()*footballerChoices.length < footballerChoices.length
+                var footballerChoiceIndex = Math.floor( baltek.utils.random()*footballerChoices.length );
                 this.selectedFootballerSquareIndices = footballerChoices[footballerChoiceIndex];
                 baltek.debug.writeMessage( "AI: team=" + state.activeTeamIndex + " a footballer" );
                 this.notifyObservers(this.footballerAspect);

@@ -124,8 +124,11 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.debug = new baltek.widget.Selector( "baltek-select-debug", this.i18nTranslator, [ "no", "yes" ] );
         this.debug.registerObserver(this);
-        this.debug.setSelection( "no" );
-        baltek.debug.enable( this.debug.getSelection() === "yes" );
+        if ( baltek.debug.isEnabled ) {
+            this.debug.setSelection( "yes" );
+        } else {
+            this.debug.setSelection( "no" );
+        }
 
         this.clearMessages = new baltek.widget.Button( "baltek-debug-clearMessages" , this.i18nTranslator);
         this.clearMessages.registerObserver(this);

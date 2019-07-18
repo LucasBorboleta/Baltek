@@ -69,6 +69,7 @@ baltek.presenter.WhatTopState.__initClass = function(){
     };
 
     baltek.presenter.WhatTopState.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("WhatTopState.prototype.updateFromObservable");
 
         if ( observable === this.presenter.goToGame ) {
             this.setState(this.superState.goToGameTopState);

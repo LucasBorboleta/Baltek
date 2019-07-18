@@ -35,6 +35,7 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsRunning.prototype.enter = function(){
+        baltek.debug.writeMessage("GameStateIsRunning.prototype.enter");
 
         this.presenter.hideAllButtons();
         this.presenter.quitGame.show(true);
@@ -91,6 +92,8 @@ baltek.presenter.GameStateIsRunning.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsRunning.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("GameStateIsRunning.prototype.updateFromObservable");
+
         var ball = null;
         var footballer = null;
         var square = null;

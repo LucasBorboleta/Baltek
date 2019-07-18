@@ -53,6 +53,7 @@ baltek.presenter.WhatStateShowGuide.__initClass = function(){
     };
 
     baltek.presenter.WhatStateShowGuide.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("WhatStateShowGuide.prototype.updateFromObservable");
 
         if ( observable === this.presenter.rules ) {
             this.setState(this.superState.goToHelpStateShowRules);

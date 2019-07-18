@@ -59,6 +59,8 @@ baltek.presenter.State.__initClass = function(){
     };
 
     baltek.presenter.State.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("State.prototype.updateFromObservable");
+
         if ( this.superState !== null ) {
             this.superState.updateFromObservable(observable, aspect);
         } else {

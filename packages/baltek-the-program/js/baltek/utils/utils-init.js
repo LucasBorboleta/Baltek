@@ -31,6 +31,9 @@ baltek.utils.__initModule = function(){
     // Init inner classes
     baltek.utils.Dispatcher.__initClass();
     baltek.utils.Observable.__initClass();
+
+    baltek.utils.prngSeed = 0;
+    baltek.utils.prngInit(0);
 };
 
 baltek.utils.assert = function(condition, message){
@@ -101,6 +104,44 @@ baltek.utils.inherit = function(childConstructor, parentConstructor){
         childConstructor.super = parentConstructor.prototype;
     }
 };
+
+///////////////////////////////////////////////////////////////////////////////
+/**
+ * Creates a pseudo-random value generator. The seed must be an integer.
+ *
+ * Uses an optimized version of the Park-Miller prng.
+ * http://www.firstpr.com.au/dsp/rand31/
+ */
+
+baltek.utils.prngInit = function(seed) {
+  baltek.utils.prngSeed = seed % 2147483647;
+  if (baltek.utils.prngSeed <= 0) baltek.utils.prngSeed += 2147483646;
+};
+
+/**
+ * Returns a pseudo-random value between 1 and 2^32 - 2.
+ */
+baltek.utils.prngNext = function () {
+  return baltek.utils.prngSeed = baltek.utils.prngSeed * 16807 % 2147483647;
+};
+
+
+/**
+ * Returns a pseudo-random floating point number in range [0, 1).
+ */
+baltek.utils.prngNextFoat = function () {
+  // We know that result of next() will be 1 to 2147483646 (inclusive).
+  return (baltek.utils.prngNext() - 1) / 2147483646;
+};
+
+baltek.utils.random = function(){
+    //return Math.random();
+    var x = baltek.utils.prngNextFoat();
+    baltek.debug.writeMessage("baltek.utils.random(): " + x)
+    return x;
+};
+///////////////////////////////////////////////////////////////////////////////
+
 
 baltek.utils.repeatString = function(value, count){
     // Workaround because not support of String.repeat in Internet-Explorer-11

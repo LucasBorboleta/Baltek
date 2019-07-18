@@ -35,6 +35,9 @@ baltek.presenter.GameStateIsReadyToQuit.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsReadyToQuit.prototype.enter = function(){
+
+        baltek.debug.writeMessage("GameStateIsReadyToQuit.prototype.enter");
+
         this.presenter.hideAllButtons();
         this.presenter.resumeGame.show(true);
         this.presenter.quitGame.show(true);
@@ -55,6 +58,7 @@ baltek.presenter.GameStateIsReadyToQuit.__initClass = function(){
     };
 
     baltek.presenter.GameStateIsReadyToQuit.prototype.updateFromObservable = function(observable, aspect){
+        baltek.debug.writeMessage("GameStateIsReadyToQuit.prototype.updateFromObservable");
 
         if ( observable === this.presenter.resumeGame ) {
             this.setState(this.superState.goToGameStateIsRunning);
