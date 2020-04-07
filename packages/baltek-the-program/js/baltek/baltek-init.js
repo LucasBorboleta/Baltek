@@ -64,6 +64,12 @@ baltek.startGame = function(){
 
     // TogetherJS settings
     if ( TogetherJS !== undefined ) {
+
+        //FIXME: Together Hub server hosted by TogetherJS seems to be no longer supported !
+        //FIXME: can it be replaced by another existing server ?
+        //TogetherJSConfig_hubBase = "https://togetherjs-hub.glitch.me/";
+        //TogetherJSConfig_hubBase = "https://hub.framaestro.org";
+
         TogetherJS.hub.on( "canvas-abstract-click",
             function(msg){
                 if ( ! msg.sameUrl ) {

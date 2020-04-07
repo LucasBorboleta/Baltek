@@ -1,0 +1,10 @@
+ASSERTION FAILED: observable not managed ! STACK TRACE:
+Error
+at Object.baltek.utils.assert (http://localhost:8080/packages/baltek-the-program/js/baltek/utils/utils-init.js:48:25)
+at baltek.presenter.TopState.updateFromObservable (http://localhost:8080/packages/baltek-the-program/js/baltek/presenter/TopState.js:57:28)
+at baltek.presenter.GameTopState.updateFromObservable (http://localhost:8080/packages/baltek-the-program/js/baltek/presenter/GameTopState.js:74:33)
+at baltek.presenter.GameStateIsFinished.updateFromObservable (http://localhost:8080/packages/baltek-the-program/js/baltek/presenter/GameStateIsFinished.js:65:33)
+at baltek.presenter.Presenter.updateFromObservable (http://localhost:8080/packages/baltek-the-program/js/baltek/presenter/Presenter.js:393:20)
+at http://localhost:8080/packages/baltek-the-program/js/baltek/utils/Observable.js:73:39
+at baltek.utils.Dispatcher.callNotifiers (http://localhost:8080/packages/baltek-the-program/js/baltek/utils/Dispatcher.js:51:13)
+at thisSavedCallNotifiers (http://localhost:8080/packages/baltek-the-program/js/baltek/utils/Dispatcher.js:85:60)

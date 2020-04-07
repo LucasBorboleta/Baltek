@@ -6,18 +6,15 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Milestones
 
-- [x] BALTEK mode "_two close players sharing the same browser_".
-- [x] BALTEK mode "_two remote players using their own browser, synchronized thanks to JsTogether_"
-- [x] BALTEK ready for accepting contributions.
+- [ ] BALTEK mode "two remote players using their own browser" **manually** synchronized **without** TogetherJS.
 - [ ] BALTEK mode "_human player against an AI_".
-- [ ] BALTEK with a correct coverage by unit tests.
 - [ ] BALTEK mode "_AI against another AI_".
-- [ ] BALTEK GUI redesigned for smartphone/tactile surface.
+- [ ] BALTEK with a correct coverage by unit tests.
 
 ## Tasks
 
-- [ ] Add a tutorial.
-- [ ] Update pictures with not rounded widgets (buttons, etc.) in HTML for "guide".
+- [ ] Implement a workaround to the unavailability of the Hub server by TogetherJS.
+- [ ] In HTML pages of "guide", replace rounded pictures with squared pictures.
 - [ ] Redesign as necessary for implementing the simplest AI (random chooser).
   - [ ] Understand the assertion failure when using a Dispatcher in the context of two synchronized browsers.
   - [ ] Understand the root cause of the stack overflow when not using  a Dispatcher.
