@@ -39,9 +39,9 @@ baltek.style.__initModule = function(){
     baltek.style.widths = { };
 
     var BALTEK_FONT = baltek.widget.getStylePropertyValue( "baltek-body", "font-family" );
-    var BALTEK_YELLOW = "#F2CB05";
-    var BALTEK_GREEN_0 = "#898F39";
-    var BALTEK_GREEN_1 = "#404224"; 
+    var BALTEK_YELLOW = "#F2EA79";
+    var BALTEK_GREEN_0 = "#115259";
+    var BALTEK_GREEN_1 = "#107369";
 
     baltek.style.colors.DISK_BACKGROUND = "gray";
     baltek.style.colors.DISK_BORDER = "black";
