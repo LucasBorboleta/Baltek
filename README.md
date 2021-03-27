@@ -15,7 +15,7 @@ BALTEK is a turn-based board game, inspired from **football**. Here are its prin
 
 The name of the game is built using sounds of the words ball (BAL) and technical (TEK).
 
-The **atmosphere** of the matches is reminiscent of the game of **chess**.
+The rules series 3.x explores changes of rules in order to provide a richer set of tactics.
 
 ## Usage
 
@@ -57,7 +57,7 @@ In March 2018, two browsers can be synchronized thanks to [TogetherJS](https://t
 
 In May 2018, the design for AI implementation started
 
-In March 2020, try to increase the game drama by including more pieces in the field as well as more sprint bonus. 
+In March 2020, attempt to increase the game drama by including more pieces in the field as well as more sprint bonuses. 
 
 See also the [CHANGELOG](./docs/CHANGELOG.md).
 

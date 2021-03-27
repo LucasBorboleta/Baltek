@@ -6,6 +6,7 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Milestones
 
+- [ ] BALTEK tactics rich enough (top priority)
 - [ ] BALTEK mode "two remote players using their own browser" **manually** synchronized **without** TogetherJS.
 - [ ] BALTEK mode "_human player against an AI_".
 - [ ] BALTEK mode "_AI against another AI_".
@@ -13,6 +14,7 @@ This document collects the milestones for the **baltek-the-program** project and
 
 ## Tasks
 
+- [ ] Improve the game-play for more fun and more drama; the tactics are not rich enough!
 - [ ] Implement a workaround to the unavailability of the Hub server by TogetherJS.
 - [ ] In HTML pages of "guide", replace rounded pictures with squared pictures.
 - [ ] Redesign as necessary for implementing the simplest AI (random chooser).
