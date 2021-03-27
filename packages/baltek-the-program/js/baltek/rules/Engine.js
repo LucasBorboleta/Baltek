@@ -36,7 +36,7 @@ baltek.rules.Engine.__initClass = function(){
 
         this.SCORE_MAX = 2;
         this.CREDIT_MAX = 3;
-        this.BONUS_MAX = 1; // Sprint bonus
+        this.BONUS_MAX = 3; // Sprint bonus
 
         this.teams = [];
         this.teams[0] = new baltek.rules.Team(0);
@@ -206,8 +206,8 @@ baltek.rules.Engine.__initClass = function(){
 
         this.round.isActive = true;
 
-        this.activeTeam.canSprint = true;
-        this.passiveTeam.canSprint = true;
+        this.activeTeam.sprintCount = this.BONUS_MAX;
+        this.passiveTeam.sprintCount = this.BONUS_MAX;
 
         this.activeTeam.haveGoaled = false;
         this.passiveTeam.haveGoaled = false;
@@ -561,7 +561,7 @@ baltek.rules.Engine.__initClass = function(){
 
         baltek.utils.assert( this.move.isActive );
         if ( condition ) {
-            baltek.utils.assert( this.activeTeam.canSprint );
+            baltek.utils.assert( this.activeTeam.sprintCount !== 0);
             this.move.sprint = true;
         } else {
             this.move.sprint = false;
@@ -595,7 +595,7 @@ baltek.rules.Engine.__initClass = function(){
                     this.move.destinationSquare.setActiveFootballer(this.move.sourceSquare.getActiveFootballer());
 
                     if ( this.move.sprint ) {
-                        this.activeTeam.canSprint = false;
+                        this.activeTeam.sprintCount -= 1;
                     }
                 }
 

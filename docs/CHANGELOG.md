@@ -2,6 +2,10 @@
 
 ⚽🏃
 
+## v2.0 (2021-03-26)
+
+- Changing the rules: more pieces and more bonus.
+
 ## v1.x (2018-06-21)
 
 - Tutorial added.

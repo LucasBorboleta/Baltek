@@ -34,25 +34,35 @@ baltek.rules.Team.__initClass = function(){
         this.teamIndex = teamIndex ;
         this.goalSquare = null; // the square to be defended by the team
         this.score = 0;
-        this.canSprint = false;
+        this.sprintCount = 0;
         this.haveGoaled = false;
         this.credit = 0;
 
         // Populate the team
-        this.footballer3 = new baltek.rules.Footballer(this, 3);  // captain
-        this.footballer2t = new baltek.rules.Footballer(this, 2); // @ top
-        this.footballer2b = new baltek.rules.Footballer(this, 2); // @ bottom
-        this.footballer1t = new baltek.rules.Footballer(this, 1); // @ top
-        this.footballer1m = new baltek.rules.Footballer(this, 1); // @ middle
-        this.footballer1b = new baltek.rules.Footballer(this, 1); // @ bottom
+        this.footballer3FrontCenter = new baltek.rules.Footballer(this, 3);
+        this.footballer2FrontLeft = new baltek.rules.Footballer(this, 2);
+        this.footballer2FrontRight = new baltek.rules.Footballer(this, 2);
+
+        this.footballer1InterLeft = new baltek.rules.Footballer(this, 1);
+        this.footballer1InterCenter = new baltek.rules.Footballer(this, 1);
+        this.footballer1InterRight = new baltek.rules.Footballer(this, 1);
+
+        this.footballer3BackCenter = new baltek.rules.Footballer(this, 3);
+        this.footballer2BackLeft = new baltek.rules.Footballer(this, 2);
+        this.footballer2BackRight = new baltek.rules.Footballer(this, 2);
 
         this.footballers = [];
-        this.footballers.push(this.footballer3);
-        this.footballers.push(this.footballer2t);
-        this.footballers.push(this.footballer2b);
-        this.footballers.push(this.footballer1t);
-        this.footballers.push(this.footballer1m);
-        this.footballers.push(this.footballer1b);
+        this.footballers.push(this.footballer3FrontCenter);
+        this.footballers.push(this.footballer2FrontLeft);
+        this.footballers.push(this.footballer2FrontRight);
+
+        this.footballers.push(this.footballer1InterLeft);
+        this.footballers.push(this.footballer1InterCenter);
+        this.footballers.push(this.footballer1InterRight);
+
+        this.footballers.push(this.footballer3BackCenter);
+        this.footballers.push(this.footballer2BackLeft);
+        this.footballers.push(this.footballer2BackRight);
     };
 
     baltek.rules.Team.prototype.enableCapabilities = function(condition){
@@ -75,7 +85,7 @@ baltek.rules.Team.__initClass = function(){
         var state = {};
         state.teamIndex = this.teamIndex ;
         state.score = this.score;
-        state.canSprint = this.canSprint;
+        state.sprintCount = this.sprintCount;
         state.haveGoaled = this.haveGoaled;
         state.credit = this.credit;
         state.footballers = [];
@@ -90,7 +100,7 @@ baltek.rules.Team.__initClass = function(){
     baltek.rules.Team.prototype.getTurnState = function(){
         var state = {};
         state.score = this.score;
-        state.canSprint = this.canSprint;
+        state.sprintCount = this.sprintCount;
         state.haveGoaled = this.haveGoaled;
         state.credit = this.credit;
         state.footballers = [];
@@ -112,7 +122,7 @@ baltek.rules.Team.__initClass = function(){
 
     baltek.rules.Team.prototype.setTurnState = function(state){
         this.score = state.score ;
-        this.canSprint = state.canSprint;
+        this.sprintCount = state.sprintCount;
         this.haveGoaled = state.haveGoaled;
         this.credit = state.credit;
         var i = 0;

@@ -106,7 +106,7 @@ baltek.ai.AI.__initClass = function(){
         }
 
         // Randomize the decision to sprint
-        if ( activeTeam.canSprint && ! state.sprint && ! state.ball.selected ) {
+        if ( activeTeam.sprintCount !== 0 && ! state.sprint && ! state.ball.selected ) {
             if ( baltek.utils.random() <= 0.25 )  {
                 baltek.debug.writeMessage( "AI: team=" + state.activeTeamIndex + " sprint" );
                 this.notifyObservers(this.sprintAspect);

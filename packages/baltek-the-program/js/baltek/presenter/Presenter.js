@@ -450,8 +450,8 @@ baltek.presenter.Presenter.__initClass = function(){
 
         this.team0Bonus.show(true);
         this.team1Bonus.show(true);
-        this.team0Bonus.setCount( Number(state.teams[0].canSprint) );
-        this.team1Bonus.setCount( Number(state.teams[1].canSprint) );
+        this.team0Bonus.setCount( Number(state.teams[0].sprintCount) );
+        this.team1Bonus.setCount( Number(state.teams[1].sprintCount) );
 
         var activeTeamIndex = state.activeTeamIndex;
         this.credit.show(true);
@@ -459,7 +459,7 @@ baltek.presenter.Presenter.__initClass = function(){
         this.credit.setBackgroundColor( baltek.style.colors.TEAM_COLORS[activeTeamIndex] );
 
         this.sprint.show(true);
-        this.sprint.enable(state.teams[activeTeamIndex].canSprint);
+        this.sprint.enable(state.teams[activeTeamIndex].sprintCount !== 0);
 
         if ( state.sprint ) {
             this.sprint.setSelection( "yes" );

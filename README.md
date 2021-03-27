@@ -57,6 +57,8 @@ In March 2018, two browsers can be synchronized thanks to [TogetherJS](https://t
 
 In May 2018, the design for AI implementation started
 
+In March 2020, try to increase the game drama by including more pieces in the field as well as more sprint bonus. 
+
 See also the [CHANGELOG](./docs/CHANGELOG.md).
 
 ## Documentation
